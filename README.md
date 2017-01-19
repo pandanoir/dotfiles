@@ -3,6 +3,7 @@
 ```
 $ cd ~/
 $ git clone git://github.com/pandanoir/dotfiles dotfiles
+$ cd dotfiles
 $ sh install.sh
 ```
 
