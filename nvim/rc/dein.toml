@@ -1,0 +1,67 @@
+# GitHubリポジトリにあるプラグインを利用する
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'justmao945/vim-clang'
+filetypes  =  ['c', 'cpp']
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+# カーソル位置のコンテントの種類によってfiletypeを切り替える
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+
+[[plugins]]
+repo = 'AtsushiM/search-parent.vim'
+
+# 必須プラグイン
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'rking/ag.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add='''
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+'''
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'othree/html5.vim'
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim' # コメントアウト
+
+[[plugins]]
+repo = 'cohama/lexima.vim' # かっこの自動補完
+
+# textobj を使いたい場合必要
+[[plugins]]
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+# 末尾のスペースを可視化
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+# vim-scripts リポジトリにあるプラグインを利用する
+[[plugins]]
+repo = 'surround.vim'
+
+# # Git以外のリポジトリにあるプラグインを利用する
+# [[plugins]]
+# repo = 'https://svn.macports.org/repository/macports/contrib/mpvim'

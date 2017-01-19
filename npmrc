@@ -1,0 +1,8 @@
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+init-author-name=Naoto Ikuno
+init-author-email=moon_in_france@yahoo.co.jp
+init-license=MIT
+init-version=0.0.1
+save=true
+save-exact=true
+progress=false
