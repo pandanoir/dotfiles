@@ -19,13 +19,30 @@ repo = 'AtsushiM/search-parent.vim'
 # 必須プラグイン
 [[plugins]]
 repo = 'mattn/emmet-vim'
+hook_add = '''
+let g:user_emmet_settings = {
+\    'variables' : {
+\        'lang' : 'ja',
+\    },
+\    'html' : {
+\        'snippets'   : {
+\            'html:5': "<!DOCTYPE html>\n"
+\                    ."<html lang=\"${lang}\">\n"
+\                    ."<meta charset=\"${charset}\">\n"
+\                    ."<title></title>\n"
+\                    ."${child}|\n",
+\            'meta:ip': '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">',
+\        }
+\    }
+\}
+'''
 
 [[plugins]]
 repo = 'rking/ag.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-hook_add='''
+hook_add = '''
 call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 '''
 
@@ -46,6 +63,13 @@ repo = 'tomtom/tcomment_vim' # コメントアウト
 
 [[plugins]]
 repo = 'cohama/lexima.vim' # かっこの自動補完
+hook_add = '''
+  call lexima#add_rule({'char': '(', 'at': '\%#\w'})
+  call lexima#add_rule({'char': '[', 'at': '\%#\w'})
+  call lexima#add_rule({'char': '"', 'at': '\%#\w'})
+  call lexima#add_rule({'char': "'", 'at': '\%#\w'})
+  call lexima#add_rule({'char': '`', 'at': '\%#\w'})
+'''
 
 # textobj を使いたい場合必要
 [[plugins]]
@@ -53,6 +77,13 @@ repo = 'kana/vim-textobj-user'
 
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
+hook_add = '''
+  set background=dark
+  set cursorline
+  hi CursorLine ctermfg=0 ctermbg=243
+  hi Folded ctermfg=255 ctermbg=25
+  au MyAutoCmd VimEnter * nested colorscheme jellybeans
+'''
 
 # 末尾のスペースを可視化
 [[plugins]]

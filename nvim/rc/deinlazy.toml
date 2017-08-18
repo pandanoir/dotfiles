@@ -1,22 +1,31 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-# hook_source = '''
-#   let g:deoplete#enable_at_startup = 1
-#   inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-#         \ neosnippet#expandable_or_jumpable() ?
-#         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-# '''
+on_event = 'InsertCharPre'
 on_i = 1
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_refresh_always = 0
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
 hook_source = '''
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
+let g:neosnippet#disable_runtime_snippets = { "_": 1, }
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+if has('conceal')
+set conceallevel=2 concealcursor=niv
+endif
 '''
 on_i  = 1
 # on_ft = ['snippet']
