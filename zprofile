@@ -5,7 +5,7 @@ PATH=${JAVA_HOME}/bin:$PATH
 export PATH
 
 # VIM=/usr/share/vim/vim73
-VIM=/usr/local/Cellar/vim/8.0.0134_2/share/vim/vim80
+VIM=/usr/local/Cellar/vim/8.0.0946/share/vim/vim80
 export VIM
 
 export CPLUS_INCLUDE_PATH=/opt/local/include
