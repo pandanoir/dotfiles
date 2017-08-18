@@ -17,7 +17,9 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
-alias vim='VIM=/usr/local/Cellar/neovim/0.1.7/share/nvim nvim'
+alias ...='cd ../../'
+alias vi='\vim'
+alias vim='VIM=/usr/local/Cellar/neovim/0.2.0_1/share/nvim nvim'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/macros/less.sh'
