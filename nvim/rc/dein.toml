@@ -58,9 +58,8 @@ repo = 'nanotech/jellybeans.vim'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
-# vim-scripts リポジトリにあるプラグインを利用する
 [[plugins]]
-repo = 'surround.vim'
+repo = 'vim-scripts/surround.vim'
 
 # # Git以外のリポジトリにあるプラグインを利用する
 # [[plugins]]
