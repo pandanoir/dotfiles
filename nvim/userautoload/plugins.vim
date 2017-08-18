@@ -21,15 +21,9 @@ let g:user_emmet_settings = {
 \        'snippets'   : {
 \            'html:5': "<!DOCTYPE html>\n"
 \                    ."<html lang=\"${lang}\">\n"
-\                    ."\t<head>\n"
-\                    ."\t\t<meta charset=\"${charset}\">\n"
-\                    ."\t\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no\">\n"
-\                    ."\t\t<title></title>\n"
-\                    ."\t</head>\n"
-\                    ."\t<body>\n"
-\                    ."\t\t${child}|\n"
-\                    ."\t</body>\n"
-\                    ."</html>",
+\                    ."<meta charset=\"${charset}\">\n"
+\                    ."<title></title>\n"
+\                    ."${child}|\n",
 \            'meta:ip': '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">',
 \        }
 \    }
