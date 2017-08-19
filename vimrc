@@ -1,9 +1,13 @@
 filetype off
 filetype plugin indent off
+augroup MyAutoCmd
+    autocmd!
+augroup END
 
 let $DOTVIM = $HOME . '/.vim'
 set runtimepath+=~/.vim/
 runtime! userautoload/*.vim
+
 set timeoutlen=400 "http://calcurio.com/wordpress/?p=1076
 
 set encoding=utf-8
@@ -22,24 +26,16 @@ set incsearch ignorecase smartcase hlsearch
 nnoremap <C-k><C-k> :set nohlsearch!<CR><Esc>
 
 "自動でコメントが入るのを防ぐ
-augroup auto_comment_off
-    autocmd!
-    autocmd BufEnter * setlocal formatoptions-=r
-    autocmd BufEnter * setlocal formatoptions-=o
-augroup END
-
+autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
+autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
+" HTMLの閉じタグ補完
+autocmd MyAutoCmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+autocmd MyAutoCmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 
 set clipboard=unnamed,autoselect number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " 未保存でもバッファを切り替えられるように
 set hidden
-
-" HTMLの閉じタグ補完
-augroup MyXML
-  autocmd!
-  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
-augroup END
 
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
