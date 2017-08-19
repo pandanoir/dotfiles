@@ -8,24 +8,16 @@ set timeoutlen=400 "http://calcurio.com/wordpress/?p=1076
 
 set encoding=utf-8
 scriptencoding utf-8
-set fileencoding=utf-8
-set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別。左ほど優先される
+set fileencoding=utf-8 fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別。左ほど優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 set ambiwidth=double "◻︎や◯がくずれるのを対処
 
-set backspace=start,eol,indent
-set whichwrap=b,s,[,],,~
+set backspace=start,eol,indent whichwrap=b,s,[,],,~
 
-set wildmenu wildmode=list:full
-set autoindent
-set scrolloff=10
-set guifont=Migu\ 1m:h12
+set wildmenu wildmode=list:full autoindent scrolloff=10 guifont=Migu\ 1m:h12
 syntax on
 
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
+set incsearch ignorecase smartcase hlsearch
 nnoremap <C-k><C-k> :set nohlsearch!<CR><Esc>
 
 "自動でコメントが入るのを防ぐ
@@ -36,12 +28,7 @@ augroup auto_comment_off
 augroup END
 
 
-set clipboard=exclude:.*
-set clipboard=unnamed,autoselect
-set number
-set backupskip=/tmp/*,/private/tmp/*
-set nowritebackup
-autocmd BufRead /tmp/crontab.* :set nobackup nowritebackup
+set clipboard=unnamed,autoselect number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " 未保存でもバッファを切り替えられるように
 set hidden
@@ -54,8 +41,7 @@ augroup MyXML
 augroup END
 
 " エラー時のビープ音をミュート
-set visualbell t_vb=
-set noerrorbells
+set visualbell t_vb= noerrorbells
 
 " _gvimrc で定義する
 " 波線で表示する場合は、以下の設定を行う
@@ -65,6 +51,5 @@ let g:hier_highlight_group_qf  = "qf_error_ucurl"
 " 警告を青字の波線で
 execute "highlight qf_warning_ucurl gui=undercurl guisp=Blue"
 let g:hier_highlight_group_qfw = "qf_warning_ucurl"
-
 
 filetype plugin indent on     " Required!
