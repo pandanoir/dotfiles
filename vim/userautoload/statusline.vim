@@ -1,5 +1,6 @@
 set laststatus=2
 set statusline=%F%m%r%h%w%=[ENC=%{&fileencoding}][LOW=%l/%L]
+autocmd MyAutoCmd ColorScheme * highlight statusline ctermfg=blue ctermbg=white guifg=blue guibg=white
 
 " ファイル名表示
 " 変更チェック表示
