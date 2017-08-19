@@ -15,3 +15,8 @@ ln -sf ~/dotfiles/zprofile ~/.zprofile
 ln -sf ~/dotfiles/npmrc ~/.npmrc
 
 ln -sf ~/dotfiles/inputrc ~/.inputrc
+
+if type git >/dev/null 2>&1; then
+    git config --global alias.s status
+    git config --global alias.d diff
+fi
