@@ -82,7 +82,7 @@ hook_add = '''
   set cursorline
   hi CursorLine ctermfg=0 ctermbg=243
   hi Folded ctermfg=255 ctermbg=25
-  au MyAutoCmd VimEnter * nested colorscheme jellybeans
+  autocmd MyAutoCmd VimEnter * nested colorscheme jellybeans
 '''
 
 # 末尾のスペースを可視化
