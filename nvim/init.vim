@@ -8,6 +8,8 @@ filetype plugin indent off
 
 let g:python_host_prog  = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
 
 set encoding=utf-8
 scriptencoding utf-8
@@ -16,7 +18,7 @@ set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コー�
 set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 set ambiwidth=double "◻︎や◯がくずれるのを対処
 
-set runtimepath+=~/.config/nvim
+let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
 runtime! userautoload/*.vim
 
 set completeopt+=noinsert,noselect
@@ -24,7 +26,7 @@ set completeopt-=preview
 
 set hidden " バッファ切り替え時に保存しなくてもよくする
 
-let $DOTVIM = $HOME . '/.config/nvim'
+let $DOTVIM = $config_home . '/nvim'
 set backspace=start,eol,indent
 set whichwrap=b,s,[,],,~
 
