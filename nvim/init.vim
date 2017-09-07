@@ -13,8 +13,7 @@ let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_
 
 set encoding=utf-8
 scriptencoding utf-8
-set fileencoding=utf-8
-set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別。左ほど優先される
+set fileencoding=utf-8 fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別。左ほど優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 set ambiwidth=double "◻︎や◯がくずれるのを対処
 
@@ -27,40 +26,26 @@ set completeopt-=preview
 set hidden " バッファ切り替え時に保存しなくてもよくする
 
 let $DOTVIM = $config_home . '/nvim'
-set backspace=start,eol,indent
-set whichwrap=b,s,[,],,~
+set backspace=start,eol,indent whichwrap=b,s,[,],,~
 
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
+set incsearch ignorecase smartcase hlsearch
 nnoremap <C-k><C-k> :set nohlsearch!<CR><Esc>
 
 set timeoutlen=300
 
-set wildmenu wildmode=list:full
-set autoindent
-set scrolloff=10
-set guifont=Migu\ 1m:h12
+set wildmenu wildmode=list:full autoindent scrolloff=10 guifont=Migu\ 1m:h12
 syntax on
 " ヤンク時にクリップボードへコピー
 set clipboard+=unnamedplus
 
 
 "自動でコメントが入るのを防ぐ
-augroup auto_comment_off
-	autocmd!
-	autocmd BufEnter * setlocal formatoptions-=r
-	autocmd BufEnter * setlocal formatoptions-=o
-augroup END
+autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
+autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 
-set number
-set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.*
-set nowritebackup
+set number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " エラー時のビープ音をミュート
-set visualbell t_vb=
-set noerrorbells
 
 " _gvimrc で定義する
 " 波線で表示する場合は、以下の設定を行う
@@ -70,6 +55,7 @@ let g:hier_highlight_group_qf  = "qf_error_ucurl"
 " 警告を青字の波線で
 execute "highlight qf_warning_ucurl gui=undercurl guisp=Blue"
 let g:hier_highlight_group_qfw = "qf_warning_ucurl"
+set visualbell t_vb= noerrorbells
 
 " python3 plugins
 call remote#host#RegisterPlugin('python3', '/home/shougo/.nvim/rplugin/python3/snake.py', [{'sync': 1, 'name': 'SnakeStart', 'type': 'command', 'opts': {}},])
