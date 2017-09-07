@@ -40,13 +40,4 @@ set hidden
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
 
-" _gvimrc で定義する
-" 波線で表示する場合は、以下の設定を行う
-" エラーを赤字の波線で
-execute "highlight qf_error_ucurl gui=undercurl guisp=Red"
-let g:hier_highlight_group_qf  = "qf_error_ucurl"
-" 警告を青字の波線で
-execute "highlight qf_warning_ucurl gui=undercurl guisp=Blue"
-let g:hier_highlight_group_qfw = "qf_warning_ucurl"
-
 filetype plugin indent on     " Required!
