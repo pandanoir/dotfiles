@@ -12,3 +12,10 @@ $ sh install.sh
 1. install Neovim
 1. run `$ pip3 install neovim`
 1. run `$ vim`
+
+# install list
+
+* zsh
+* zplug
+* neovim
+* tmux
