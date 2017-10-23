@@ -16,7 +16,12 @@ RPROMPT='[%d]'
 # ビープ音を消す
 setopt no_beep
 
-alias rm='rm -i'
+setopt auto_list
+setopt auto_menu
+setopt auto_cd
+function chpwd() { ls }
+setopt hist_ignore_dups
+
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
