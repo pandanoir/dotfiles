@@ -8,6 +8,7 @@ deploy() {
     export XDG_CONFIG_HOME=~/.config
     mkdir -p $XDG_CONFIG_HOME
     ln -sf ~/dotfiles/nvim $XDG_CONFIG_HOME
+    ln -sf ~/dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
 
     ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 
