@@ -1,27 +1,32 @@
 #!/bin/sh
+# Thanks, @kaorimatz!
+set -eu
+
+has() {
+    type "$1" > /dev/null 2>&1
+}
 deploy() {
-    echo "deploy"
+    dotfiles=$HOME/dotfiles
+    symlink() {
+        [ -e ".$1" ] || ln -sf "$dotfiles/$1" "$HOME/.$1"
+    }
     mkdir -p ~/.vim
-    ln -sf ~/dotfiles/vimrc ~/.vimrc
+    symlink "vimrc"
     ln -sf ~/dotfiles/vim/userautoload ~/.vim
 
     export XDG_CONFIG_HOME=~/.config
     mkdir -p $XDG_CONFIG_HOME
-    ln -sf ~/dotfiles/nvim $XDG_CONFIG_HOME
-    ln -sf ~/dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
+    ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
+    ln -sf "$dotfiles/config.fish" $XDG_CONFIG_HOME/fish/config.fish
 
-    ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
-
-    ln -sf ~/dotfiles/zshrc ~/.zshrc
-    ln -sf ~/dotfiles/zprofile ~/.zprofile
-
-    ln -sf ~/dotfiles/npmrc ~/.npmrc
-
-    ln -sf ~/dotfiles/inputrc ~/.inputrc
+    symlink "tmux.conf"
+    symlink "zshrc"
+    symlink "zprofile"
+    symlink "npmrc"
+    symlink "inputrc"
 }
 init() {
-    echo "init"
-    if type git >/dev/null 2>&1; then
+    if has git; then
         git config --global alias.s status
         git config --global alias.d diff
     fi
