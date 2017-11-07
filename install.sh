@@ -5,6 +5,17 @@ set -eu
 has() {
     type "$1" > /dev/null 2>&1
 }
+setup() {
+    dotfiles=$HOME/dotfiles
+
+
+    if [ ! -d "$dotfiles" ]; then
+        git clone https://github.com/pandanoir/dotfiles "$dotfiles"
+    fi
+    deploy
+    init
+}
+
 deploy() {
     dotfiles=$HOME/dotfiles
     symlink() {
@@ -34,7 +45,9 @@ init() {
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     fi
 }
-if [ "$1" = "deploy" -o "$1" = "-d" ]; then
+if [ $# -eq 0 ]; then
+    setup
+elif [ "$1" = "deploy" -o "$1" = "-d" ]; then
     deploy
 elif [ "$1" = "init" -o "$1" = "-i" ]; then
     init
