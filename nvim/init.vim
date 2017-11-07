@@ -17,6 +17,13 @@ set fileencoding=utf-8 fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み�
 set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 set ambiwidth=double "◻︎や◯がくずれるのを対処
 
+set conceallevel=0 " JSONファイルにてダブルクォーテーションが消える問題を解消
+    autocmd BufNewFile,BufRead,BufReadPre *.{json} set filetype=json conceallevel=0
+augroup MyAutoCmd
+    autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
+    autocmd InsertLeave *.json setlocal conceallevel=0 concealcursor=inc
+augroup END
+
 let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
 runtime! userautoload/*.vim
 
