@@ -30,7 +30,9 @@ init() {
         git config --global alias.s status
         git config --global alias.d diff
     fi
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+    if [ ! -d "$HOME/.zplug" ]; then
+        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+    fi
 }
 if [ "$1" = "deploy" -o "$1" = "-d" ]; then
     deploy
