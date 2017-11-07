@@ -33,7 +33,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias vi='vim'
+alias vi='command vim'
 alias vim='env VIM=/usr/local/share/nvim nvim'
 alias ag='ag -m1 -l --silent'
 
