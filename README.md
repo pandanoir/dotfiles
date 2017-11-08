@@ -1,21 +1,22 @@
 # setup
 
 ```
-$ cd ~/
-$ git clone git://github.com/pandanoir/dotfiles dotfiles
-$ cd dotfiles
-$ sh install.sh
+$ curl -sL dot.pandanoir.net | sh
 ```
 
 # setup Neovim
 
-1. install Neovim
-1. run `$ pip3 install neovim`
-1. run `$ vim`
+install Neovim
+
+```
+$ pip3 install neovim
+$ vim
+```
 
 # install list
 
 * zsh
 * zplug
+* fish
 * neovim
 * tmux
