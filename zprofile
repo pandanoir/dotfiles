@@ -36,7 +36,7 @@ if type nodebrew >/dev/null 2>&1; then
     export PATH=$PATH:$HOME/.nodebrew/current/bin
 end
 
-
 export GTK_IM_MODULE=uim
 export LANG=ja_JP.UTF-8
 export XMODIFIERS=@im=uim
+export TERM=xterm-256color

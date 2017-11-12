@@ -16,15 +16,11 @@ set -x CPLUS_INCLUDE_PATH /opt/local/include
 set -x NODE_PATH $HOME/.nodebrew/current/lib/node_modules
 set -x LC_ALL en_US.UTF-8
 
-
 set -x PATH $PATH $HOME/.nodebrew/current/bin
-
 
 set -x GTK_IM_MODULE uim
 set -x LANG ja_JP.UTF-8
 set -x XMODIFIERS @im=uim
-
-set -x LANG ja_JP.UTF-8
 
 set -x TERM xterm-256color
 
