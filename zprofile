@@ -31,13 +31,6 @@ if which plenv > /dev/null; then
     eval "$(plenv init -)";
 fi
 
-# MacPorts Installer addition on 2014-03-28_at_17:22:58: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
-
 eval "$(rbenv init -)"
 if type nodebrew >/dev/null 2>&1; then
     export PATH=$PATH:$HOME/.nodebrew/current/bin
