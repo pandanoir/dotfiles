@@ -1,3 +1,23 @@
+set -x TERM xterm-256color
+
+if [ -z "$TMUX" -a -z "$STY" ]
+    if type tmuxx >/dev/null 2>&1
+        tmuxx
+    else if type tmux >/dev/null 2>&1
+        if tmux has-session; and tmux list-sessions | egrep -q '.*]$'
+            # デタッチ済みセッションが存在する
+            tmux attach
+            echo "tmux attached session "
+        else
+            tmux new-session
+            echo "tmux created new session"
+        end
+    else if type screen >/dev/null 2>&1
+        screen -rx; or screen -D -RR
+    end
+end
+
+
 set -x PATH $PATH /usr/local/bin
 set -x PATH $PATH /usr/bin
 set -x PATH $PATH /bin
@@ -22,8 +42,6 @@ set -x GTK_IM_MODULE uim
 set -x LANG ja_JP.UTF-8
 set -x XMODIFIERS @im=uim
 
-set -x TERM xterm-256color
-
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
@@ -34,21 +52,4 @@ alias ag='ag -m1 -l --silent'
 
 function my_pwd_changed --on-variable PWD
     ls
-end
-
-if [ -z "$TMUX" -a -z "$STY" ]
-    if type tmuxx >/dev/null 2>&1
-        tmuxx
-    else if type tmux >/dev/null 2>&1
-        if tmux has-session; and tmux list-sessions | egrep -q '.*]$'
-            # デタッチ済みセッションが存在する
-            tmux attach
-            echo "tmux attached session "
-        else
-            tmux new-session
-            echo "tmux created new session"
-        end
-    else if type screen >/dev/null 2>&1
-        screen -rx; or screen -D -RR
-    end
 end
