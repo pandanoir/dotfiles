@@ -1,5 +1,10 @@
+set -x PATH $PATH /usr/local/bin
+set -x PATH $PATH /usr/bin
+set -x PATH $PATH /bin
+set -x PATH $PATH /usr/sbin
+set -x PATH $PATH /sbin
 set JAVA_HOME /usr/java/jdk-9
-set -x PATH $JAVA_HOME/bin $PATH
+set -x PATH $PATH $JAVA_HOME/bin
 
 set VIM /usr/share/vim/vim74
 set -x VIM $VIM
@@ -9,12 +14,10 @@ set -x EDITOR $EDITOR
 set -x CPLUS_INCLUDE_PATH /opt/local/include
 # node_modules
 set -x NODE_PATH $HOME/.nodebrew/current/lib/node_modules
-set -x PATH $PATH /usr/local/bin
 set -x LC_ALL en_US.UTF-8
 
-set -x PATH /usr/local/bin /usr/bin /bin /usr/sbin /sbin
 
-set -x PATH $HOME/.nodebrew/current/bin $PATH
+set -x PATH $PATH $HOME/.nodebrew/current/bin
 
 
 set -x GTK_IM_MODULE uim
@@ -24,7 +27,6 @@ set -x XMODIFIERS @im=uim
 
 
 set -x LANG ja_JP.UTF-8
-set -x PATH /usr/local/bin $PATH
 set -x NPM_TOKEN 25f46656-1c38-4688-8151-b6226680a174
 
 set -x TERM xterm-256color
