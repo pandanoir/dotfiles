@@ -53,3 +53,6 @@ alias ag='ag -m1 -l --silent'
 function my_pwd_changed --on-variable PWD
     ls
 end
+if [ -f ~/.config/fish/config.local.fish ]
+    source ~/.config/fish/config.local.fish
+end

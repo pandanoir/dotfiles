@@ -95,3 +95,7 @@ function pvim {
         vim "$file"
     fi
 }
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
