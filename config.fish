@@ -24,10 +24,7 @@ set -x GTK_IM_MODULE uim
 set -x LANG ja_JP.UTF-8
 set -x XMODIFIERS @im=uim
 
-
-
 set -x LANG ja_JP.UTF-8
-set -x NPM_TOKEN 25f46656-1c38-4688-8151-b6226680a174
 
 set -x TERM xterm-256color
 
