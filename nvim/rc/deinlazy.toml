@@ -34,3 +34,7 @@ depends = ['neosnippet-snippets']
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
+
+[[plugins]]
+repo = 'dag/vim-fish'
+on_ft = ['fish']
