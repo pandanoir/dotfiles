@@ -21,14 +21,15 @@ deploy() {
     symlink() {
         [ -e ".$1" ] || ln -sf "$dotfiles/$1" "$HOME/.$1"
     }
-    mkdir -p ~/.vim
+    mkdir -p $HOME/.vim
     symlink "vimrc"
-    ln -sf ~/dotfiles/vim/userautoload ~/.vim
+    ln -sf $dotfiles/vim/userautoload $HOME/.vim
 
-    export XDG_CONFIG_HOME=~/.config
+    export XDG_CONFIG_HOME=$HOME/.config
     mkdir -p $XDG_CONFIG_HOME
+    mkdir -p $XDG_CONFIG_HOME/fish
     ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
-    ln -sf "$dotfiles/config.fish" $XDG_CONFIG_HOME/fish/config.fish
+    ln -s $dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
 
     symlink "tmux.conf"
     symlink "zshrc"
