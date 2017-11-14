@@ -42,7 +42,7 @@ init() {
         git config --global alias.s status
         git config --global alias.d diff
     fi
-    if [ ! -d "$HOME/.zplug" ]; then
+    if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     fi
 }
