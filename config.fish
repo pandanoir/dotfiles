@@ -17,6 +17,13 @@ if [ -z "$TMUX" -a -z "$STY" ]
     end
 end
 
+function post_ssh --on-event fish_postexec
+    # ssh切断時にclearする
+    if echo $argv | string match -r "ssh"
+        clear
+    end
+end
+
 
 set -x PATH $PATH /usr/local/bin
 set -x PATH $PATH /usr/bin
