@@ -55,7 +55,7 @@ alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias vi='command vim'
-alias vim='env VIM=NVIM nvim'
+alias vim='env VIM=$NVIM nvim'
 alias ag='ag -m1 -l --silent'
 
 function my_pwd_changed --on-variable PWD

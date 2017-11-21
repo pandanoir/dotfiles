@@ -25,7 +25,7 @@ alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias vi='\vim'
-alias vim='VIM=NVIM nvim'
+alias vim='VIM=$NVIM nvim'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/macros/less.sh'
