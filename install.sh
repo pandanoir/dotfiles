@@ -29,7 +29,7 @@ deploy() {
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish
     ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
-    ln -s $dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
+    ln -sf $dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
 
     symlink "tmux.conf"
     symlink "zshrc"
