@@ -38,6 +38,7 @@ set -x VIM $VIM
 set EDITOR nvim
 set -x EDITOR $EDITOR
 
+
 set -x CPLUS_INCLUDE_PATH /opt/local/include
 # node_modules
 set -x NODE_PATH $HOME/.nodebrew/current/lib/node_modules
@@ -54,12 +55,13 @@ alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias vi='command vim'
-alias vim='env VIM=/usr/local/share/nvim nvim'
+alias vim='env VIM=NVIM nvim'
 alias ag='ag -m1 -l --silent'
 
 function my_pwd_changed --on-variable PWD
     ls
 end
+
 if [ -f ~/.config/fish/config.local.fish ]
     source ~/.config/fish/config.local.fish
 end
