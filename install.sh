@@ -45,6 +45,12 @@ init() {
     if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     fi
+    {
+        echo 'set -x NODEBREW_ROOT ~/.nodebrew'
+        echo 'set NVIM /usr/share/nvim'
+        echo 'set -x NVIM $NVIM'
+    } > ~/.config/fish/config.local.fish
+    echo 'export NVIM=/usr/share/nvim' > ~/.zshrc.local
 }
 if [ $# -eq 0 ]; then
     setup
