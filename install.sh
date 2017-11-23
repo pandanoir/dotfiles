@@ -45,6 +45,9 @@ init() {
     if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     fi
+    if has git && has tmux;
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
     {
         echo 'set -x NODEBREW_ROOT ~/.nodebrew'
         echo 'set NVIM /usr/share/nvim'
