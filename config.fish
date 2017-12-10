@@ -1,3 +1,7 @@
+# scp command will be broken if tmux is running.
+# so if shell is not interactive, finish fish.
+status --is-interactive; or exit
+
 set -x TERM xterm-256color
 
 if [ -z "$TMUX" -a -z "$STY" ]
