@@ -2,13 +2,12 @@
 # Thanks, @kaorimatz!
 set -eu
 
+XDG_CONFIG_HOME=$HOME/.config
+dotfiles=$HOME/dotfiles
 has() {
     type "$1" > /dev/null 2>&1
 }
 setup() {
-    dotfiles=$HOME/dotfiles
-
-
     if [ ! -d "$dotfiles" ]; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
     fi
@@ -17,7 +16,6 @@ setup() {
 }
 
 deploy() {
-    dotfiles=$HOME/dotfiles
     symlink() {
         [ -e ".$1" ] || ln -sf "$dotfiles/$1" "$HOME/.$1"
     }
@@ -25,11 +23,12 @@ deploy() {
     symlink "vimrc"
     ln -sf $dotfiles/vim/userautoload $HOME/.vim
 
-    export XDG_CONFIG_HOME=$HOME/.config
+    export XDG_CONFIG_HOME=$XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish
     ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
     ln -sf $dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
+    ln -sf $dotfiles/fishfile $XDG_CONFIG_HOME/fish/fishfile
 
     symlink "tmux.conf"
     symlink "zshrc"
@@ -44,6 +43,9 @@ init() {
     fi
     if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+    fi
+    if has fish; then
+        curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
     if has git && has tmux;
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

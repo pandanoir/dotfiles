@@ -71,4 +71,4 @@ if [ -f ~/.config/fish/config.local.fish ]
 end
 
 set -x PATH (echo $PATH | tr ' ' '\n' | awk '!a[$0]++')
-
+set -x FZF_DEFAULT_OPTS "--reverse -m"
