@@ -28,21 +28,21 @@ export LC_ALL=en_US.UTF-8
 
 if has perl; then
     eval $(perl -I ~/perl5/lib/perl5 -Mlocal::lib)
-end
+fi
 
 if has plenv; then
     export PLENV_ROOT="${HOME}/.plenv"
     export PATH=${PLENV_ROOT}/shims:${PATH}
     eval "$(plenv init -)";
-end
+fi
 
 if has rbenv; then
     eval "$(rbenv init -)"
-end
+fi
 
 if has nodebrew; then
     export PATH=$PATH:$HOME/.nodebrew/current/bin
-end
+fi
 
 export GTK_IM_MODULE=uim
 export LANG=ja_JP.UTF-8
