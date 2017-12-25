@@ -26,9 +26,14 @@ deploy() {
     export XDG_CONFIG_HOME=$XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish
+    mkdir -p $XDG_CONFIG_HOME/fish/functions
     ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
-    ln -sf $dotfiles/config.fish $XDG_CONFIG_HOME/fish/config.fish
-    ln -sf $dotfiles/fishfile $XDG_CONFIG_HOME/fish/fishfile
+    ln -sf $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
+    ln -sf $dotfiles/fish/fishfile $XDG_CONFIG_HOME/fish/fishfile
+    {
+        cd $XDG_CONFIG_HOME/fish/functions
+        ls -1 $dotfiles/fish/functions | xargs -I{} ln -sf $dotfiles/fish/functions/{} $XDG_CONFIG_HOME/fish/functions
+    }
 
     symlink "tmux.conf"
     symlink "zshrc"
