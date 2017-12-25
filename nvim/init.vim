@@ -18,7 +18,8 @@ set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 set ambiwidth=double "◻︎や◯がくずれるのを対処
 
 set conceallevel=0 " JSONファイルにてダブルクォーテーションが消える問題を解消
-    autocmd BufNewFile,BufRead,BufReadPre *.{json} set filetype=json conceallevel=0
+let g:tex_conceal=''
+autocmd BufNewFile,BufRead,BufReadPre *.{json} set filetype=json conceallevel=0
 augroup MyAutoCmd
     autocmd InsertEnter *.json setlocal conceallevel=0 concealcursor=
     autocmd InsertLeave *.json setlocal conceallevel=0 concealcursor=inc
