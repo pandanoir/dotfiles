@@ -33,6 +33,7 @@ deploy() {
     symlink "tmux.conf"
     symlink "zshrc"
     symlink "zprofile"
+    ln -sf $dotfiles/zprofile $HOME/.bash_profile
     symlink "npmrc"
     symlink "inputrc"
 }
@@ -47,7 +48,7 @@ init() {
     if has fish; then
         curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
-    if has git && has tmux;
+    if has git && has tmux; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
     {

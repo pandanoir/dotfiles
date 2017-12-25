@@ -36,7 +36,7 @@ if [ "$(uname)" = 'Darwin' ]; then
     alias ls='ls -G'
     alias ll='ls -laG'
 else
-    eval `dircolors ~/.colorrc`
+    [ -f $HOME/.colorrc ] && eval `dircolors $HOME/.colorrc`
     alias ls='ls --color=auto'
     alias ll='ls -la --color=auto'
 fi
@@ -96,6 +96,4 @@ function pvim {
     fi
 }
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

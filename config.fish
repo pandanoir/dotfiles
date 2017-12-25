@@ -2,8 +2,6 @@
 # so if shell is not interactive, finish fish.
 status --is-interactive; or exit
 
-set -x TERM xterm-256color
-
 if [ -z "$TMUX" -a -z "$STY" ]
     if type tmuxx >/dev/null 2>&1
         tmuxx
@@ -28,47 +26,16 @@ function post_ssh --on-event fish_postexec
     end
 end
 
-
-set -x PATH $PATH /usr/local/bin
-set -x PATH $PATH /usr/bin
-set -x PATH $PATH /bin
-set -x PATH $PATH /usr/sbin
-set -x PATH $PATH /sbin
-set JAVA_HOME /usr/java/jdk-9
-set -x PATH $PATH $JAVA_HOME/bin
-
-set VIM /usr/share/vim/vim74
-set -x VIM $VIM
-set EDITOR nvim
-set -x EDITOR $EDITOR
-
-
-set -x CPLUS_INCLUDE_PATH /opt/local/include
-# node_modules
-set -x NODE_PATH $HOME/.nodebrew/current/lib/node_modules
-set -x LC_ALL en_US.UTF-8
-
-set -x PATH $PATH $HOME/.nodebrew/current/bin
-
-set -x GTK_IM_MODULE uim
-set -x LANG ja_JP.UTF-8
-set -x XMODIFIERS @im=uim
-
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias vi='command vim'
-alias vim='env VIM=$NVIM nvim'
+alias vi='env VIM=/usr/share/vim/vim74 command vim'
+alias vim='nvim'
 alias ag='ag -m1 -l --silent'
 
 function my_pwd_changed --on-variable PWD
     ls
 end
 
-if [ -f ~/.config/fish/config.local.fish ]
-    source ~/.config/fish/config.local.fish
-end
-
-set -x PATH (echo $PATH | tr ' ' '\n' | awk '!a[$0]++')
-set -x FZF_DEFAULT_OPTS "--reverse -m"
+[ -f $HOME/.config/fish/config.local.fish ]; and source $HOME/.config/fish/config.local.fish
