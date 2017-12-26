@@ -34,7 +34,7 @@ if has rbenv; then
     eval "$(rbenv init -)"
 fi
 
-if has nodebrew; then
+if [ -d "$HOME/.nodebrew" ]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
     export PATH=$PATH:$HOME/.nodebrew/current/bin
 fi
