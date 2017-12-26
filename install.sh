@@ -50,18 +50,18 @@ init() {
     if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
     fi
-    if has fish; then
+    if has fish && [ ! -f "$XDG_CONFIG_HOME/fish/functions/fisher.fish" ]; then
         curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
-    if has git && has tmux; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    if has git && has tmux && [ -d "$HOME/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
     {
-        echo 'set -x NODEBREW_ROOT ~/.nodebrew'
+        echo 'set -x NODEBREW_ROOT $HOME/.nodebrew'
         echo 'set NVIM /usr/share/nvim'
         echo 'set -x NVIM $NVIM'
-    } > ~/.config/fish/config.local.fish
-    echo 'export NVIM=/usr/share/nvim' > ~/.zshrc.local
+    } > $XDG_CONFIG_HOME/fish/config.local.fish
+    echo 'export NVIM=/usr/share/nvim' > $HOME/.zshrc.local
 }
 if [ $# -eq 0 ]; then
     setup
