@@ -12,6 +12,7 @@ repo = 'itchyny/lightline.vim'
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
 
 [[plugins]]
 repo = 'AtsushiM/search-parent.vim'
