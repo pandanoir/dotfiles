@@ -35,9 +35,6 @@ set timeoutlen=300
 
 set wildmenu wildmode=list:full autoindent scrolloff=10 guifont=Migu\ 1m:h12
 syntax on
-" ヤンク時にクリップボードへコピー
-set clipboard+=unnamedplus
-
 
 "自動でコメントが入るのを防ぐ
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
