@@ -56,39 +56,3 @@ noremap <Space>l  $
 noremap [space] <nop>
 nmap <Space> [space]
 noremap [space]c :<C-u>enew<CR>
-
-"**************************************************
-" <Space>* によるキーバインド設定
-"**************************************************
-
-" <Space>i でコードをインデント整形
-map <Space>i gg=<S-g><C-o><C-o>zz
-
-" <Space>v で1行選択(\n含まず)
-noremap <Space>v 0v$h
-
-" <Space>d で1行削除(\n含まずに dd)
-noremap <Space>d 0v$hx
-
-" <Space>y で改行なしで1行コピー(\n を含まずに yy)
-noremap <Space>y 0v$hy
-
-" <Space>s で置換
-noremap <Space>s :%s/
-
-
-command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('<args>', '<bang>')
-function! s:ChangeCurrentDir(directory, bang)
-    if a:directory == ''
-        lcd %:p:h
-    else
-        execute 'lcd' . a:directory
-    endif
-
-    if a:bang == ''
-        pwd
-    endif
-endfunction
-
-" <Space>cd で編集ファイルのカレントディレクトリへと移動
-nnoremap <silent> <Space>cd :<C-u>CD<CR>
