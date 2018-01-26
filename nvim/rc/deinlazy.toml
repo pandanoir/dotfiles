@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 on_event = 'InsertCharPre'
+on_i = 1
 hook_source = '''
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
@@ -11,10 +12,12 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
     \ neosnippet#expandable_or_jumpable() ?
     \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 '''
-on_i = 1
 
 [[plugins]]
-repo = 'Shougo/neosnippet'
+repo = 'Shougo/neosnippet.vim'
+on_ft = 'snippet'
+on_event = 'InsertCharPre'
+depends = ['neosnippet-snippets']
 hook_source = '''
 let g:neosnippet#disable_runtime_snippets = { "_": 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -23,9 +26,6 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
-on_i  = 1
-# on_ft = ['snippet']
-depends = ['neosnippet-snippets']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
