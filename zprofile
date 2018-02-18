@@ -8,9 +8,9 @@ export PATH=$PATH:/usr/bin
 export PATH=$PATH:/bin
 export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/sbin
+export PATH=$PATH:$HOME/.local/bin
 
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
-JAVA_HOME=/usr/java/jdk-9
+JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME
 export PATH=$PATH:${JAVA_HOME}/bin
 
@@ -37,6 +37,7 @@ fi
 if [ -d "$HOME/.nodebrew" ]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
     export PATH=$PATH:$HOME/.nodebrew/current/bin
+    export PATH=$PATH:$HOME/.yarn/bin
 fi
 export LC_ALL=en_US.UTF-8
 
