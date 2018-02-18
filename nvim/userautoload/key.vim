@@ -34,10 +34,6 @@ nnoremap x "_x
 nnoremap X "_X
 "削除時にヤンクしない
 
-nnoremap <silent> ,f :<C-u>Denite file_rec -mode=normal<CR>
-nnoremap <silent> ,b :<C-u>Denite buffer -mode=normal<CR>
-nnoremap <silent> ,r :<C-u>Denite register -mode=normal<CR>
-
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
