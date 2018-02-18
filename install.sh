@@ -53,7 +53,7 @@ init() {
     if has fish && [ ! -f "$XDG_CONFIG_HOME/fish/functions/fisher.fish" ]; then
         curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
-    if has git && has tmux && [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    if has git && has tmux && [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
         git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
     {
