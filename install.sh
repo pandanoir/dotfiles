@@ -46,6 +46,7 @@ init() {
     if has git; then
         git config --global alias.s status
         git config --global alias.d diff
+        git config --global alias.unstage "reset HEAD"
     fi
     if has zsh && [ ! -d "$HOME/.zplug" ]; then
         curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
