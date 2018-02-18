@@ -6,8 +6,8 @@ augroup END
 filetype off
 filetype plugin indent off
 
-let g:python_host_prog  = system('echo -n $(which python)')
-let g:python3_host_prog = system('echo -n $(which python3)')
+let g:python_host_prog  = system('echo -n $(type -p python)')
+let g:python3_host_prog = system('echo -n $(type -p python3 || type -p python3.6)')
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
 
