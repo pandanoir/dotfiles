@@ -19,9 +19,8 @@ deploy() {
     symlink() {
         [ -e ".$1" ] || ln -sf "$dotfiles/$1" "$HOME/.$1"
     }
-    mkdir -p $HOME/.vim
     symlink "vimrc"
-    ln -sf $dotfiles/vim/userautoload $HOME/.vim
+    symlink "vim"
 
     export XDG_CONFIG_HOME=$XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME
