@@ -46,3 +46,5 @@ export LANG=ja_JP.UTF-8
 export XMODIFIERS=@im=uim
 export PATH=`echo $PATH | tr ' ' '\n' | awk '!a[$0]++'`
 export FZF_DEFAULT_OPTS="--reverse -m"
+
+[ -f ~/.zprofile.local ] && source ~/.zprofile.local
