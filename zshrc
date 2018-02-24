@@ -1,3 +1,4 @@
+bindkey -e
 
 # 補完
 autoload -U compinit
@@ -5,11 +6,8 @@ compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' menu select=1
 
-autoload predict-on
-predict-on
-
-PROMPT='[%n@%m]# '
-RPROMPT='[%d]'
+PROMPT='%F{074}[%n@%m]%f# '
+RPROMPT='%F{048}[%d]%f'
 
 # ビープ音を消す
 setopt no_beep
@@ -80,7 +78,7 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
-zplug load --verbose
+zplug load
 
 function pcd {
     local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco --select-1)"
@@ -97,3 +95,21 @@ function pvim {
 }
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+function tinify() {
+    if [ "$1" = "" -o "$2" = "" ]; then
+        echo 'Usage: tinify [input] [output]'
+        return 1
+    fi
+
+    echo "$1 -> $2"
+    local input=$1
+    local output=$2
+    local api="fquVRYDzurzVbD8lbeZ7AFeOKUbAlG9W"
+    echo "uploading..."
+    local uploaded=$(curl -s https://api.tinify.com/shrink --user api:$api --dump-header /dev/stdout --data-binary @$input | grep Location | cut -d' ' -f2 | tr -d '\r\n')
+    echo "uploaded!"
+    echo "tinifying..."
+    curl -s $uploaded --user api:$api --output $output
+    echo "tinified!"
+}
