@@ -17,6 +17,9 @@ setopt auto_menu
 setopt auto_cd
 function chpwd() { ls }
 setopt hist_ignore_dups
+setopt share_history
+SAVEHIST=100
+HISTFILE=$HOME/.zsh_history
 
 alias mv='mv -i'
 alias cp='cp -i'
@@ -79,6 +82,7 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug load
+ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 function pcd {
     local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco --select-1)"
