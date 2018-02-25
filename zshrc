@@ -117,3 +117,6 @@ function tinify() {
     curl -s $uploaded --user api:$api --output $output
     echo "tinified!"
 }
+precmd() {
+    [[ $(history|tail -1|sed -e "s/^ *//"|cut -f 3- -d " ") =~ "^ssh" ]] && clear
+}
