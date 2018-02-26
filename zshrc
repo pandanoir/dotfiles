@@ -7,7 +7,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' menu select=1
 
 PROMPT='%F{074}[%n@%m]%f# '
-RPROMPT='%F{048}[%d]%f'
+RPROMPT='%F{048}[%~]%f'
 
 # ビープ音を消す
 setopt no_beep
