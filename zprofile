@@ -10,6 +10,8 @@ export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/sbin
 export PATH=$PATH:$HOME/.local/bin
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME
 export PATH=$PATH:${JAVA_HOME}/bin

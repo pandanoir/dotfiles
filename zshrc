@@ -1,8 +1,12 @@
 bindkey -e
 
+fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
+
 # 補完
 autoload -U compinit
 compinit
+setopt auto_list
+setopt auto_menu
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:default' menu select=1
 
@@ -12,10 +16,10 @@ RPROMPT='%F{048}[%~]%f'
 # ビープ音を消す
 setopt no_beep
 
-setopt auto_list
-setopt auto_menu
 setopt auto_cd
 function chpwd() { ls }
+
+# コマンド履歴関連
 setopt hist_ignore_dups
 setopt share_history
 SAVEHIST=100
@@ -42,6 +46,7 @@ else
     alias ll='ls -la --color=auto'
 fi
 
+# tmux
 if [ -z "$TMUX" -a -z "$STY" ]; then
     if type tmuxx >/dev/null 2>&1; then
         tmuxx
@@ -74,7 +79,6 @@ if is-at-least 4.3.10; then
     bindkey '^@' zaw-cdr
 fi
 
-
 if ! zplug check --verbose; then
     printf 'Install? [y/N]: '
     if read -q; then
@@ -82,41 +86,12 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug load
+
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
-function pcd {
-    local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco --select-1)"
-    if [ ! -z "$dir" ] ; then
-        cd "$dir"
-    fi
-}
+# 自作関数の読み込み
+autoload -Uz precmd tinify
 
-function pvim {
-    local file="$( ag $@ | peco --select-1)"
-    if [ ! -z "$file" ] ; then
-        vim "$file"
-    fi
-}
+# ローカルファイルの読み込み
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-function tinify() {
-    if [ "$1" = "" -o "$2" = "" ]; then
-        echo 'Usage: tinify [input] [output]'
-        return 1
-    fi
-
-    echo "$1 -> $2"
-    local input=$1
-    local output=$2
-    local api="fquVRYDzurzVbD8lbeZ7AFeOKUbAlG9W"
-    echo "uploading..."
-    local uploaded=$(curl -s https://api.tinify.com/shrink --user api:$api --dump-header /dev/stdout --data-binary @$input | grep Location | cut -d' ' -f2 | tr -d '\r\n')
-    echo "uploaded!"
-    echo "tinifying..."
-    curl -s $uploaded --user api:$api --output $output
-    echo "tinified!"
-}
-precmd() {
-    [[ $(history|tail -1|sed -e "s/^ *//"|cut -f 3- -d " ") =~ "^ssh" ]] && clear
-}
