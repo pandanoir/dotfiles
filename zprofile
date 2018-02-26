@@ -2,13 +2,16 @@ has() {
     type "$1" > /dev/null 2>&1
 }
 export TERM=xterm-256color
-export PATH=/opt/local/bin
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/bin
-export PATH=$PATH:/bin
-export PATH=$PATH:/usr/sbin
-export PATH=$PATH:/sbin
-export PATH=$PATH:$HOME/.local/bin
+path=(
+    $path
+    "/opt/local/bin"
+    "/usr/local/bin"
+    "/usr/bin"
+    "/bin"
+    "/usr/sbin"
+    "/sbin"
+    "$HOME/.local/bin"
+)
 
 export XDG_CONFIG_HOME=$HOME/.config
 
