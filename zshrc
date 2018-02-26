@@ -17,7 +17,7 @@ RPROMPT='%F{048}[%~]%f'
 setopt no_beep
 
 setopt auto_cd
-function chpwd() { ls }
+function chpwd() { ls --color=always }
 
 # コマンド履歴関連
 setopt hist_ignore_dups
