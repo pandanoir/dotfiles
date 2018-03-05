@@ -46,9 +46,10 @@ let mapleader = ","
 " ,のデフォルトの機能は、\で使えるように退避
 noremap \  ,
 
-noremap <Space>h  ^
-noremap <Space>l  $
 
 noremap [space] <nop>
 nmap <Space> [space]
 noremap [space]c :<C-u>enew<CR>
+noremap [space]d :<C-u>bd<CR>
+noremap [space]h  ^
+noremap [space]l  $
