@@ -31,6 +31,7 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias vi='\vim'
 alias vim='VIM=$NVIM nvim'
+alias cdb='cd-bookmark'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/macros/less.sh'
@@ -69,6 +70,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zaw"
 zplug "peco/peco", as:command, from:gh-r, use:'*amd64*'
+zplug "mollifier/cd-bookmark"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
