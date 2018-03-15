@@ -17,17 +17,21 @@ setup() {
 
 deploy() {
     symlink() {
-        [ -e ".$1" ] || ln -sf "$dotfiles/$1" "$HOME/.$1"
+        [ -e "$2" ] || ln -sf "$1" "$2"
     }
-    symlink "vimrc"
-    symlink "vim"
+    dotlink() {
+        symlink "$dotfiles/$1" "$HOME/.$1"
+    }
+    dotlink "vimrc"
+    dotlink "vim"
 
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish/functions
     mkdir -p $XDG_CONFIG_HOME/zsh/functions
-    ln -sf "$dotfiles/nvim" $XDG_CONFIG_HOME
-    ln -sf $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
-    ln -sf $dotfiles/fish/fishfile $XDG_CONFIG_HOME/fish/fishfile
+
+    symlink "$dotfiles/nvim" $XDG_CONFIG_HOME
+    symlink $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
+    symlink $dotfiles/fish/fishfile $XDG_CONFIG_HOME/fish/fishfile
     {
         cd $XDG_CONFIG_HOME/fish/functions
         ls -1 $dotfiles/fish/functions | xargs -I{} ln -sf $dotfiles/fish/functions/{} $XDG_CONFIG_HOME/fish/functions
@@ -37,12 +41,12 @@ deploy() {
         ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $XDG_CONFIG_HOME/zsh/functions
     }
 
-    symlink "tmux.conf"
-    symlink "zshrc"
-    symlink "zprofile"
-    ln -sf $dotfiles/zprofile $HOME/.bash_profile
-    symlink "npmrc"
-    symlink "inputrc"
+    dotlink "tmux.conf"
+    dotlink "zshrc"
+    dotlink "zprofile"
+    symlink $dotfiles/zprofile $HOME/.bash_profile
+    dotlink "npmrc"
+    dotlink "inputrc"
 }
 init() {
     if has git; then
