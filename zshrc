@@ -69,8 +69,8 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zaw"
-zplug "peco/peco", as:command, from:gh-r, use:'*amd64*'
 zplug "mollifier/cd-bookmark"
+
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
