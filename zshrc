@@ -79,10 +79,12 @@ if is-at-least 4.3.10; then
     bindkey '^@' zaw-cdr
 fi
 
-if ! zplug check --verbose; then
-    printf 'Install? [y/N]: '
-    if read -q; then
-        echo; zplug install
+if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/interface ]]; then
+    if ! zplug check --verbose; then
+        printf 'Install? [y/N]: '
+        if read -q; then
+            echo; zplug install
+        fi
     fi
 fi
 zplug load
