@@ -42,3 +42,11 @@ on_ft = ['cpp']
 [[plugins]]
 repo = 'octol/vim-cpp-enhanced-highlight'
 on_ft = ['cpp']
+
+[[plugins]]
+repo = 'chr4/nginx.vim'
+on_ft = ['nginx']
+hook_source = '''
+autocmd MyAutoCmd BufRead,BufNewFile /etc/nginx/* set ft=nginx
+autocmd MyAutoCmd BufRead,BufNewFile nginx.conf set ft=nginx
+'''
