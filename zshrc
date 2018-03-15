@@ -29,8 +29,6 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias vi='\vim'
-alias vim='VIM=$NVIM nvim'
 alias cdb='cd-bookmark'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
