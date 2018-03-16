@@ -40,6 +40,8 @@ syntax on
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 
+autocmd MyAutoCmd BufRead,BufNewFile zprofile,zshrc set ft=zsh
+
 set number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " エラー時のビープ音をミュート
