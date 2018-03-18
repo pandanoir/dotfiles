@@ -1,13 +1,13 @@
 tinify() {
-    if [ "$1" = "" -o "$2" = "" ]; then
-        echo 'Usage: tinify [input] [output]'
+    if [ "$1" = "" ]; then
+        echo 'Usage: tinify [input]'
         return 1
     fi
 
-    echo "$1 -> $2"
-    local input=$1
-    local output=$2
+    local input="orig/"$1
+    local output=$1
     local api="fquVRYDzurzVbD8lbeZ7AFeOKUbAlG9W"
+    echo "$input -> $output"
     echo "uploading..."
     local uploaded=$(curl -s https://api.tinify.com/shrink --user api:$api --dump-header /dev/stdout --data-binary @$input | grep Location | cut -d' ' -f2 | tr -d '\r\n')
     echo "uploaded!"
