@@ -10,7 +10,8 @@ nnoremap s= <C-w>=
 nnoremap sw <C-w>w
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
-nnoremap sQ :<C-u>bd<CR>
+nnoremap s- :<C-u>sp<CR>
+nnoremap s\| :<C-u>vs<CR>
 
 nnoremap 1<CR> :<C-u>w !sudo tee %<CR>
 
