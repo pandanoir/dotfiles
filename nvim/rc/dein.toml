@@ -102,6 +102,5 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'vim-scripts/surround.vim'
 
-# # Git以外のリポジトリにあるプラグインを利用する
-# [[plugins]]
-# repo = 'https://svn.macports.org/repository/macports/contrib/mpvim'
+[[plugins]]
+repo = 'tpope/vim-eunuch'
