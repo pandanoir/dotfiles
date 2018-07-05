@@ -24,6 +24,7 @@ deploy() {
     }
     dotlink "vimrc"
     dotlink "vim"
+    dotlink "spacemacs"
 
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish/functions
@@ -77,6 +78,10 @@ init() {
     if [ ! -f  $HOME/.zshrc.local ]; then
         echo 'export NVIM=/usr/share/nvim' > $HOME/.zshrc.local
     fi
+    if has git && [ ! -d "$HOME/.emacs.d" ]; then
+        git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+    fi
+
 }
 if [ $# -eq 0 ]; then
     setup
