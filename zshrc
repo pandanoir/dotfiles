@@ -33,6 +33,8 @@ alias cdb='cd-bookmark'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/macros/less.sh'
+alias emacs='emacs -nw'
+alias e='emacs'
 
 # coloring directory in ls
 if [ "$(uname)" = 'Darwin' ]; then
