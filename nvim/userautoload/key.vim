@@ -41,6 +41,10 @@ nnoremap gj j
 nnoremap gk k
 
 inoremap <silent> jj <Esc>
+inoremap <silent> fd <Esc>
+
+inoremap <silent> <C-f> <Right>
+inoremap <silent> <C-b> <Left>
 
 let mapleader = ","
 
