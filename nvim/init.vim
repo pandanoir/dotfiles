@@ -40,7 +40,7 @@ syntax on
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 
-autocmd MyAutoCmd BufRead,BufNewFile {,.}{zprofile,zshrc}{,.local} set ft=zsh
+autocmd MyAutoCmd BufRead,BufNewFile */zsh/functions/*,{,.}{zprofile,zshrc}{,.local} set ft=zsh
 
 set number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
