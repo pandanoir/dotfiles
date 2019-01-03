@@ -54,3 +54,26 @@ autocmd MyAutoCmd BufRead,BufNewFile /etc/nginx/* set ft=nginx
 autocmd MyAutoCmd BufRead,BufNewFile nginx.conf set ft=nginx
 '''
 
+[[plugins]] # goコマンド補完
+repo = 'fatih/vim-go'
+on_ft = 'go'
+hook_source = '''
+let g:go_highlight_functions = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+'''
+
+# [[plugins]] # vim-go代替
+# repo = 'zchee/nvim-go'
+# build = 'make'
+# on_ft = 'go'
+
+[[plugins]] # コード補完（Golang用）
+repo = 'zchee/deoplete-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'mxw/vim-jsx'
+on_ft = 'jsx'

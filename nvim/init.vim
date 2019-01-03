@@ -53,9 +53,12 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
+let g:jsx_ext_required = 1
+
 " python3 plugins
 call remote#host#RegisterPlugin('python3', '/home/shougo/.nvim/rplugin/python3/snake.py', [{'sync': 1, 'name': 'SnakeStart', 'type': 'command', 'opts': {}},])
 call remote#host#RegisterPlugin('python3', '/home/shougo/work/deoplete.nvim/rplugin/python3/deoplete.py', [{'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},])
 
 " python plugins
 filetype plugin indent on     " Required!
+autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
