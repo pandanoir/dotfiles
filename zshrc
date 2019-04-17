@@ -69,21 +69,6 @@ else
     alias ll='ls -la --color=auto'
 fi
 
-# tmux
-if [ -z "$TMUX" -a -z "$STY" ]; then
-    if type tmuxx >/dev/null 2>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session && tmux list-sessions | egrep -q '.*]$'; then
-            # デタッチ済みセッションが存在する
-            exec tmux attach && echo "tmux attached session "
-        else
-            exec tmux new-session && echo "tmux created new session"
-        fi
-    elif type screen >/dev/null 2>&1; then
-        screen -rx || screen -D -RR
-    fi
-fi
 
 # zplug
 source ~/.zplug/init.zsh
@@ -119,4 +104,22 @@ ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 # ローカルファイルの読み込み
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# tmux
+if [ -z "$TMUX" -a -z "$STY" ]; then
+    if type tmuxx >/dev/null 2>&1; then
+        tmuxx
+    elif type tmux >/dev/null 2>&1; then
+        if tmux has-session && tmux list-sessions | egrep -q '.*]$'; then
+            # デタッチ済みセッションが存在する
+            exec tmux attach && echo "tmux attached session "
+        else
+            # exec tmux new-session \; source-file ~/.tmux/new-session && echo "tmux created new session"
+            exec tmux new-session && echo "tmux created new session"
+        fi
+    elif type screen >/dev/null 2>&1; then
+        screen -rx || screen -D -RR
+    fi
+fi
 alias fuck="fuck -y"
+
