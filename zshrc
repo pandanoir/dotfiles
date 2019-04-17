@@ -90,7 +90,8 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zaw"
 zplug "mollifier/cd-bookmark"
-
+zplug "mollifier/zload"
+zplug "plugins/thefuck", from:oh-my-zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
@@ -113,9 +114,7 @@ zplug load
 
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
-# 自作関数の読み込み
-autoload -Uz precmd tinify
-
 # ローカルファイルの読み込み
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+alias fuck="fuck -y"
