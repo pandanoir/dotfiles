@@ -20,6 +20,11 @@ JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME
 export PATH=$PATH:${JAVA_HOME}/bin
 
+#go
+GOPATH=$HOME/go
+export GOPATH
+export PATH=$PATH:$GOPATH/bin
+
 # VIM=/usr/local/Cellar/vim/8.0.0946/share/vim/vim80
 export VIM=/usr/share/nvim
 export EDITOR='emacsclient -nw -a "" 2>/dev/null'
@@ -50,6 +55,7 @@ fi
 # export GTK_IM_MODULE=uim
 export LANG=ja_JP.UTF-8
 # export XMODIFIERS=@im=uim
+
 
 export PATH=`echo $PATH | tr ' ' '\n' | awk '!a[$0]++'`
 # export FZF_DEFAULT_OPTS="--reverse -m"
