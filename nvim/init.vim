@@ -41,6 +41,8 @@ autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 
 autocmd MyAutoCmd BufRead,BufNewFile */zsh/functions/*,{,.}{zprofile,zshrc}{,.local} set ft=zsh
+autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
+autocmd MyAutoCmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx
 
 set number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
@@ -61,4 +63,4 @@ call remote#host#RegisterPlugin('python3', '/home/shougo/work/deoplete.nvim/rplu
 
 " python plugins
 filetype plugin indent on     " Required!
-autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
+

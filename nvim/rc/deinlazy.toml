@@ -77,3 +77,11 @@ on_ft = 'go'
 [[plugins]]
 repo = 'mxw/vim-jsx'
 on_ft = 'jsx'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript', 'tsx']
+
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['tsx']
