@@ -1,7 +1,9 @@
 bindkey -e
 
-fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
+# 自作関数の読み込み
+autoload -Uz precmd tinify estart
 
+estart
 # 補完
 autoload -U compinit
 compinit
@@ -52,9 +54,9 @@ alias -g L='| less -R'
 alias -g X='| xargs'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
-alias less=$VIM'/macros/less.sh'
+alias less=$VIM'/runtime/macros/less.sh'
 alias emacs='emacs -nw'
-alias e='emacs'
+alias e='emacsclient -nw -a "" 2>/dev/null'
 
 # coloring directory in ls
 if [ "$(uname)" = 'Darwin' ]; then
