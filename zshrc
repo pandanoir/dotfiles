@@ -30,6 +30,26 @@ alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias cdb='cd-bookmark'
+alias ekill="emacsclient -e '(kill-emacs)'"
+alias erestart="ekill && estart"
+alias copy='xsel --clipboard --input'
+
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gs='git status'
+alias gp='git push'
+alias gst='git status'
+alias gc='git commit'
+
+alias -g A='| awk'
+alias -g C='| pbcopy' # copy
+alias -g G='| grep --color=auto' # 鉄板
+alias -g H='| head' # 当然tailもね
+alias -g T='| tail' # 当然tailもね
+alias -g L='| less -R'
+alias -g X='| xargs'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/macros/less.sh'
