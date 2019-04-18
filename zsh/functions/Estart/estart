@@ -1,0 +1,9 @@
+function estart() {
+  if ! emacsclient -e 0 > /dev/null 2>&1; then
+    ({
+    cd
+    emacs --daemon
+    cd -
+    } > /dev/null  2>&1 &)
+  fi
+}
