@@ -35,6 +35,9 @@ alias cdb='cd-bookmark'
 alias ekill="emacsclient -e '(kill-emacs)'"
 alias erestart="ekill && estart"
 alias copy='xsel --clipboard --input'
+alias cl='clear'
+alias cle='clear'
+alias clea='clear'
 
 alias g='git'
 alias ga='git add'
@@ -49,8 +52,10 @@ alias -g A='| awk'
 alias -g C='| pbcopy' # copy
 alias -g G='| grep --color=auto' # 鉄板
 alias -g H='| head' # 当然tailもね
-alias -g T='| tail' # 当然tailもね
 alias -g L='| less -R'
+alias -g S='| sort'
+alias -g T='| tail' # 当然tailもね
+alias -g U='| uniq'
 alias -g X='| xargs'
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
