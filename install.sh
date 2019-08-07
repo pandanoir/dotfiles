@@ -1,5 +1,8 @@
 #!/bin/sh
 # Thanks, @kaorimatz!
+
+# curl -sL dot.pandanoir.net | sh
+
 set -eu
 
 XDG_CONFIG_HOME=$HOME/.config
@@ -81,7 +84,6 @@ init() {
     if has git && [ ! -d "$HOME/.emacs.d" ]; then
         git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
     fi
-
 }
 if [ $# -eq 0 ]; then
     setup
