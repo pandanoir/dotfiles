@@ -27,7 +27,8 @@ export PATH=$PATH:$GOPATH/bin
 
 # VIM=/usr/local/Cellar/vim/8.0.0946/share/vim/vim80
 export VIM=/usr/share/nvim
-export EDITOR='emacsclient -nw -a "" 2>/dev/null'
+# export EDITOR='emacsclient -nw -a "" 2>/dev/null'
+export EDITOR='vim'
 
 export CPLUS_INCLUDE_PATH=/opt/local/include
 # node_modules
