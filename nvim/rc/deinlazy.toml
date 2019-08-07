@@ -49,10 +49,6 @@ on_ft = ['vue']
 [[plugins]]
 repo = 'chr4/nginx.vim'
 on_ft = ['nginx']
-hook_source = '''
-autocmd MyAutoCmd BufRead,BufNewFile /etc/nginx/* set ft=nginx
-autocmd MyAutoCmd BufRead,BufNewFile nginx.conf set ft=nginx
-'''
 
 [[plugins]] # goコマンド補完
 repo = 'fatih/vim-go'
@@ -75,13 +71,14 @@ repo = 'zchee/deoplete-go'
 on_ft = 'go'
 
 [[plugins]]
-repo = 'mxw/vim-jsx'
-on_ft = 'jsx'
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['javascript', 'javascript.jsx']
+
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript', 'tsx']
+on_ft = ['typescript', 'typescript.tsx']
 
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
-on_ft = ['tsx']
+on_ft = ['typescript.tsx']
