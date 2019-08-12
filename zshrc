@@ -83,7 +83,6 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zaw"
 zplug "mollifier/cd-bookmark"
 zplug "mollifier/zload"
-zplug "plugins/thefuck", from:oh-my-zsh
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
@@ -126,5 +125,4 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
         screen -rx || screen -D -RR
     fi
 fi
-alias fuck="fuck -y"
 
