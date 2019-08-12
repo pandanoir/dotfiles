@@ -1,3 +1,6 @@
+# emacsのtrampがタイムアウトするのに対応
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
+
 bindkey -e
 
 # 自作関数の読み込み
@@ -45,11 +48,10 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'
 alias gp='git push'
-alias gst='git status'
 alias gc='git commit'
 
 alias -g A='| awk'
-alias -g C='| pbcopy' # copy
+alias -g C='| copy' # copy
 alias -g G='| grep --color=auto' # 鉄板
 alias -g H='| head' # 当然tailもね
 alias -g L='| less -R'
