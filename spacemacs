@@ -31,16 +31,30 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     python
+     ruby
+     octave
+     rust
+     ocaml
+     lua
+     elixir
+     php
+     go
+     javascript
+     html
      markdown
+     typescript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
-     ;; auto-completion
+     auto-completion
+     ;; auto-complete
      ;; better-defaults
      emacs-lisp
+     coq
      ;; git
      ;; markdown
      ;; org
@@ -55,7 +69,13 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     vue-mode
+     lsp-ui
+     lsp-vue
+     company-lsp
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -277,7 +297,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -292,6 +312,10 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
+
+   ;; If non-nil, start an Emacs server if one is not already running.
+   ;; (default nil)
+   dotspacemacs-enable-server t
    ))
 
 (defun dotspacemacs/user-init ()
@@ -310,6 +334,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq exec-path-from-shell-arguments '("-i"))
   (set-locale-environment nil)
   (set-language-environment "Japanese")
   (set-terminal-coding-system 'utf-8)
@@ -319,8 +344,15 @@ you should place your code here."
   (set-default-coding-systems 'utf-8)
   (prefer-coding-system 'utf-8)
   (setq inhibit-startup-message t)
+  (setq inhibit-splash-screen t)
+  (setq inhibit-startup-screen nil)
   (global-linum-mode t)
   (setq x-select-enable-clipboard t)
+  (turn-on-undo-tree-mode)
+
+  ;; シンボリックリンクの読み込みを許可しない
+  (setq vc-follow-symlinks nil)
+  (setq auto-revert-check-vc-info nil)
 
   (defun evil-swap-key (map key1 key2)
     ;; MAP中のKEY1とKEY2を入れ替え
@@ -361,7 +393,64 @@ you should place your code here."
     )
   (evil-leader/set-key "o y" 'copy-to-clipboard)
   (evil-leader/set-key "o p" 'paste-from-clipboard)
-  )
+  (add-to-list 'auto-mode-alist '("\\.mjs$" . js-mode))
+  ;; golang
+  (setq gofmt-command "goimports")
+  (go :variables go-tab-width 4)
+  ;; ocaml
+  (load-file "/home/naoto/.opam/4.06.1/share/emacs/site-lisp/ocp-indent.el")
+  (load-file "/home/naoto/.opam/4.06.1/share/emacs/site-lisp/tuareg-site-file.el")
+  (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+  (autoload 'tuareg-mode "tuareg" "Major mode for editing OCaml code" t)
+  (autoload 'tuareg-run-ocaml "tuareg" "Run an inferior OCaml process." t)
+  (autoload 'ocamldebug "ocamldebug" "Run the OCaml debugger" t)
+
+  ;; vue
+  (require 'vue-mode)
+  (add-to-list 'vue-mode-hook #'smartparens-mode)
+
+  (require 'lsp-ui)
+  (require 'lsp-vue)
+  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
+  (with-eval-after-load 'lsp-ui
+    (require 'lsp-ui-flycheck))
+
+  (require 'company-lsp)
+  (push 'company-lsp company-backends)
+
+  (setq tramp-default-method "ssh")
+  (setq tramp-shell-prompt-pattern "^.*[#$%>] *")
+  (setq tramp-chunksize 500)
+
+  ;; company
+  (global-company-mode t) ; 全バッファで有効にする
+  (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+  (setq company-idle-delay 0) ; デフォルトは0.5
+  (setq company-minimum-prefix-length 3) ; デフォルトは4
+  (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+  (setq completion-ignore-case t)
+  (setq company-dabbrev-downcase nil)
+  (global-set-key (kbd "C-M-i") 'company-complete)
+  (define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-search-map (kbd "C-n") 'company-select-next)
+  (define-key company-search-map (kbd "C-p") 'company-select-previous)
+  (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+  (define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
+  (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+  (define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
+  (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+
+  ;; yasnippetとの連携
+  (defvar company-mode/enable-yas t
+    "Enable yasnippet for all backends.")
+  (defun company-mode/backend-with-yas (backend)
+    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+        backend
+      (append (if (consp backend) backend (list backend))
+              '(:with company-yasnippet))))
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -370,9 +459,13 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
+    (yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode cython-mode company-anaconda anaconda-mode pythonic rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby proof-general company-coq company-math math-symbol-lists toml-mode racer pos-tip cargo rust-mode vue-mode edit-indirect ssass-mode vue-html-mode lsp-vue lsp-ui company-lsp lsp-mode ht utop tuareg caml ocp-indent merlin lua-mode ob-elixir flycheck-mix flycheck-credo alchemist elixir-mode tide typescript-mode flycheck php-auto-yasnippets go-guru go-eldoc drupal-mode company-go go-mode phpunit phpcbf php-extras php-mode tern-auto-complete fuzzy company-web web-completion-data company-tern dash-functional company-statistics company auto-yasnippet ac-ispell auto-complete tern web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
