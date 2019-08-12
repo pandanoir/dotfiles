@@ -82,3 +82,6 @@ on_ft = ['typescript', 'typescript.tsx']
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
 on_ft = ['typescript.tsx']
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+on_ft = 'pug'
