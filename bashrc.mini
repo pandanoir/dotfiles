@@ -1,0 +1,31 @@
+alias mv='mv -i'
+alias cp='cp -i'
+alias ..='cd ../'
+alias ...='cd ../../'
+alias cdb='cd-bookmark'
+alias ekill="emacsclient -e '(kill-emacs)'"
+alias erestart="ekill && estart"
+alias copy='xsel --clipboard --input'
+alias cl='clear'
+alias cle='clear'
+alias clea='clear'
+
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gs='git status'
+alias gp='git push'
+alias gc='git commit'
+
+if [ "$(uname)" = 'Darwin' ]; then
+    export LSCOLORS=egfxcxdxbxegedabagacad
+    alias ls='ls -G'
+    alias ll='ls -laG'
+else
+    [ -f $HOME/.colorrc ] && eval `dircolors $HOME/.colorrc`
+    alias ls='ls --color=auto'
+    alias ll='ls -la --color=auto'
+fi
+
+
