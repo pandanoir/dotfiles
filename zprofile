@@ -50,13 +50,16 @@ fi
 if [ -d "$HOME/.nodebrew" ]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
     export PATH=$PATH:$HOME/.nodebrew/current/bin
-    export PATH=$PATH:$HOME/.yarn/bin
+    export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 fi
 
 # export GTK_IM_MODULE=uim
 export LANG=ja_JP.UTF-8
 # export XMODIFIERS=@im=uim
 
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 
 export PATH=`echo $PATH | tr ' ' '\n' | awk '!a[$0]++'`
 # export FZF_DEFAULT_OPTS="--reverse -m"
@@ -65,3 +68,5 @@ export FZF_CTRL_T_COMMAND="ag -g ''"
 
 
 [ -f ~/.zprofile.local ] && source ~/.zprofile.local
+
+export PATH="$HOME/.cargo/bin:$PATH"
