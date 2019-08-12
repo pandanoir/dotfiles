@@ -1,9 +1,0 @@
-TRAPWINCH() {
-    CURRENT_PANE=$(tmux display -pt "${TMUX_PANE:?}" "#{pane_index}")
-    LAST_PANE=$(tmux list-panes | wc -l)
-    tmux resize-pane -x 30 -y 10 -t $LAST_PANE
-    # tmux select-pane -t $CURRENT_PANE
-    # tmux select-pane -t $LAST_PANE
-    # tmux clock
-    # tmux select-pane -t $CURRENT_PANE
-}
