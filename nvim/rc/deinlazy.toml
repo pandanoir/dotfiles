@@ -82,6 +82,29 @@ on_ft = ['typescript', 'typescript.tsx']
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
 on_ft = ['typescript.tsx']
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = ['markdown']
+hook_source = '''
+" todoリストを簡単に入力する
+abbreviate tl - [ ]
+
+" todoリストのon/offを切り替える
+nnoremap <buffer> <Space><Space> :call ToggleCheckbox()<CR>
+
+function! ToggleCheckbox()
+  let l:line = getline('.')
+  if l:line =~ '^\-\s\[\s\]'
+    let l:result = substitute(l:line, '^-\s\[\s\]', '- [x]', '')
+    call setline('.', l:result)
+  elseif l:line =~ '^\-\s\[x\]'
+    let l:result = substitute(l:line, '^-\s\[x\]', '- [ ]', '')
+    call setline('.', l:result)
+  end
+endfunction
+'''
+
 [[plugins]]
 repo = 'digitaltoad/vim-pug'
 on_ft = 'pug'
