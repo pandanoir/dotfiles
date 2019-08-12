@@ -20,3 +20,11 @@ $ vim
 * fish
 * neovim
 * tmux
+
+# vimrc and bashrc
+you can download minimal vimrc and bashrc from pandanoir.net
+
+```
+$ curl https://pandanoir.net/vimrc
+$ curl https://pandanoir.net/bashrc
+```
