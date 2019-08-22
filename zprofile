@@ -3,6 +3,7 @@ has() {
 }
 export TERM=xterm-256color
 export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
 path=(
     $path
     "/opt/local/bin"
@@ -12,6 +13,7 @@ path=(
     "/usr/sbin"
     "/sbin"
     "$HOME/.local/bin"
+    "$HOME/local/nvim/bin"
 )
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
