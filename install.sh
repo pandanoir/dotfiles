@@ -6,6 +6,7 @@
 set -eu
 
 XDG_CONFIG_HOME=$HOME/.config
+ZDOTDIR=$XDG_CONFIG_HOME/zsh
 dotfiles=$HOME/dotfiles
 has() {
     type "$1" > /dev/null 2>&1
@@ -20,10 +21,10 @@ setup() {
 
 deploy() {
     symlink() {
-        [ -e "$2" ] || ln -sf "$1" "$2"
+        [ -e $2 ] || ln -sf $1 $2
     }
     dotlink() {
-        symlink "$dotfiles/$1" "$HOME/.$1"
+        symlink $dotfiles/$1 $HOME/.$1
     }
     dotlink "vimrc"
     dotlink "vim"
@@ -31,7 +32,7 @@ deploy() {
 
     mkdir -p $XDG_CONFIG_HOME
     mkdir -p $XDG_CONFIG_HOME/fish/functions
-    mkdir -p $XDG_CONFIG_HOME/zsh/functions
+    mkdir -p $ZDOTDIR/functions
 
     symlink "$dotfiles/nvim" $XDG_CONFIG_HOME
     symlink $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
@@ -45,12 +46,13 @@ deploy() {
         ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $XDG_CONFIG_HOME/zsh/functions
     }
 
-    dotlink "tmux.conf"
-    dotlink "zshrc"
-    dotlink "zprofile"
+    dotlink tmux.conf
+    symlink $dotfiles/zshrc $ZDOTDIR/.zshrc
+    symlink $dotfiles/zprofile $ZDOTDIR/.zprofile
+    dotlink zshenv
     symlink $dotfiles/zprofile $HOME/.bash_profile
-    dotlink "npmrc"
-    dotlink "inputrc"
+    dotlink npmrc
+    dotlink inputrc
 }
 init() {
     if has git; then

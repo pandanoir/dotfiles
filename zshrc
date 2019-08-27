@@ -6,7 +6,6 @@ bindkey -e
 # 自作関数の読み込み
 autoload -Uz precmd tinify estart
 
-estart
 # 補完
 autoload -U compinit
 compinit
@@ -109,7 +108,7 @@ ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 # ローカルファイルの読み込み
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 
 # tmux
 if [ -z "$TMUX" -a -z "$STY" ]; then
@@ -127,4 +126,5 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
         screen -rx || screen -D -RR
     fi
 fi
+
 
