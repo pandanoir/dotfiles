@@ -50,7 +50,12 @@ fi
 if [ -d $HOME/.nodebrew ]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
     export PATH=$PATH:$HOME/.nodebrew/current/bin
-    export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
+fi
+if [ -d $HOME/.yarn ]; then
+    export PATH=$HOME/.yarn/bin:$PATH
+fi
+if [ -d $HOME/.config/yarn ]; then
+    export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
 fi
 
 if [ -d $HOME/.cargo ]; then
