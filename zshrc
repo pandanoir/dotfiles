@@ -118,10 +118,10 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
     elif type tmux >/dev/null 2>&1; then
         if tmux has-session && tmux list-sessions | egrep -q '.*]$'; then
             # デタッチ済みセッションが存在する
-            exec tmux attach && echo "tmux attached session "
+            exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf attach && echo "tmux attached session "
         else
             # exec tmux new-session \; source-file ~/.tmux/new-session && echo "tmux created new session"
-            exec tmux new-session && echo "tmux created new session"
+            exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf new-session && echo "tmux created new session"
         fi
     elif type screen >/dev/null 2>&1; then
         screen -rx || screen -D -RR
