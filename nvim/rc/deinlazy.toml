@@ -13,6 +13,18 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 '''
 
 [[plugins]]
+repo = "zchee/deoplete-clang"
+on_ft = "cpp"
+depends = "deoplete.nvim"
+hook_add = """
+let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
+let g:deoplete#sources#clang#clang_header='/usr/include/clang'
+let g:deoplete#sources#clang#sort_algo='priority'
+
+"""
+
+
+[[plugins]]
 repo = 'Shougo/neosnippet.vim'
 on_ft = 'snippet'
 on_event = 'InsertEnter'
@@ -108,3 +120,25 @@ endfunction
 [[plugins]]
 repo = 'digitaltoad/vim-pug'
 on_ft = 'pug'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_source = '''
+let g:rustfmt_autosave = 1
+let g:rust_doc#define_map_K = 0
+'''
+
+[[plugins]]
+repo = 'sebastianmarkow/deoplete-rust'
+on_ft = 'rust'
+depends = ['deoplete.nvim']
+hook_source = '''
+" let g:deoplete#sources#rust#racer_binary='{racerバイナリのフルパス}'
+" let g:deoplete#sources#rust#rust_source_path=$(rustc --print sysroot)/lib/rustlib/src/rust/
+" let $RUST_SRC_PATH='{$(rustc --print sysroot)/lib/rustlib/src/rust/srcをここに書く}'
+let g:deoplete#sources#rust#show_duplicates=1
+let g:deoplete#sources#rust#disable_keymap=1
+nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+nmap <buffer> K  <plug>DeopleteRustShowDocumentation
+'''
