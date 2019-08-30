@@ -5,8 +5,13 @@ augroup MyAutoCmd
 augroup END
 
 let $DOTVIM = $HOME . '/.vim'
-set runtimepath+=~/.vim/
+set runtimepath+=~/.vim/,$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 runtime! userautoload/*.vim
+
+set directory=$XDG_CACHE_HOME/vim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
+set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath+=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
 
 set timeoutlen=400 "http://calcurio.com/wordpress/?p=1076
 

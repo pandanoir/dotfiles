@@ -15,26 +15,33 @@ path=(
 )
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 
+
+# Java
 JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME
 export PATH=$PATH:${JAVA_HOME}/bin
 
-#go
+# go
 GOPATH=$HOME/go
 export GOPATH
 export PATH=$PATH:$GOPATH/bin
 
-# VIM=/usr/local/Cellar/vim/8.0.0946/share/vim/vim80
+# rust
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+
 export VIM=/usr/share/nvim
-# export EDITOR='emacsclient -nw -a "" 2>/dev/null'
 export EDITOR=$(which nvim)
 
+# cpp
 export CPLUS_INCLUDE_PATH=/opt/local/include
+
 # node_modules
 export NODE_PATH=/usr/local/lib/node_modules
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export PATH=$PATH:/usr/local/share/npm/bin
-# export LC_ALL=en_US.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
 if has plenv; then
@@ -62,9 +69,7 @@ if [ -d $HOME/.cargo ]; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi
 
-# export GTK_IM_MODULE=uim
 export LANG=ja_JP.UTF-8
-# export XMODIFIERS=@im=uim
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
@@ -75,6 +80,4 @@ export PATH=`echo -n $PATH | tr : '\n' | awk '!a[$0]++' | xargs | tr ' ' :`
 export FZF_DEFAULT_COMMAND="ag -g ''"
 export FZF_CTRL_T_COMMAND="ag -g ''"
 
-
 [ -f $ZDOTDIR/.zprofile.local ] && source $ZDOTDIR/.zprofile.local
-

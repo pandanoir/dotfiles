@@ -26,13 +26,17 @@ deploy() {
     dotlink() {
         symlink $dotfiles/$1 $HOME/.$1
     }
-    dotlink "vimrc"
-    dotlink "vim"
-    dotlink "spacemacs"
+    mkdir -p $XDG_CONFIG_HOME/{tmux,vim,npm,zsh/functions,fish/functions}
+    mkdir -p $XDG_CACHE_HOME/{vim,npm}
+    mkdir -p $XDG_DATA_HOME/{npm,rustup,zsh}
 
-    mkdir -p $XDG_CONFIG_HOME
-    mkdir -p $XDG_CONFIG_HOME/fish/functions
-    mkdir -p $ZDOTDIR/functions
+    symlink $dotfiles/vimrc $XDG_CONFIG_HOME/vim/vimrc
+    dotlink "spacemacs"
+    {
+        cd $XDG_CACHE_HOME/vim
+        ls -1 $dotfiles/vim | xargs -I{} ln -sf $dotfiles/vim/{} $XDG_CONFIG_HOME/vim
+    }
+
 
     symlink "$dotfiles/nvim" $XDG_CONFIG_HOME
     symlink $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
@@ -46,13 +50,13 @@ deploy() {
         ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $XDG_CONFIG_HOME/zsh/functions
     }
 
-    dotlink tmux.conf
+    symlink $dotfiles/tmux.conf $XDG_CONFIG_HOME/tmux/tmux.conf
     symlink $dotfiles/zshrc $ZDOTDIR/.zshrc
     symlink $dotfiles/zprofile $ZDOTDIR/.zprofile
     dotlink zshenv
     symlink $dotfiles/zprofile $HOME/.bash_profile
-    dotlink npmrc
-    dotlink inputrc
+    symlink $dotfiles/npmrc $XDG_CONFIG_HOME/npm/npmrc
+    symlink $dotfiles/inputrc $XDG_CONFIG_HOME/readline/inputrc
 }
 init() {
     if has git; then

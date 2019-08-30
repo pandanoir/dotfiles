@@ -40,6 +40,7 @@ alias copy='xsel --clipboard --input'
 alias cl='clear'
 alias cle='clear'
 alias clea='clear'
+alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias g='git'
 alias ga='git add'
