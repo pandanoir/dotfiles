@@ -26,7 +26,7 @@ deploy() {
     dotlink() {
         symlink $dotfiles/$1 $HOME/.$1
     }
-    mkdir -p $XDG_CONFIG_HOME/{tmux,vim,npm,zsh/functions,fish/functions}
+    mkdir -p $XDG_CONFIG_HOME/{tmux,vim,npm,readline,zsh/functions,fish/functions}
     mkdir -p $XDG_CACHE_HOME/{vim,npm}
     mkdir -p $XDG_DATA_HOME/{npm,rustup,zsh}
 
