@@ -6,8 +6,9 @@ augroup END
 filetype off
 filetype plugin indent off
 
-let g:python_host_prog  = system('echo -n $(which python)')
+let g:loaded_python_provider = 0
 let g:python3_host_prog = system('echo -n $(if which python3 &>/dev/null; then which python3; else which python3.6; fi)')
+
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
 
@@ -22,6 +23,8 @@ runtime! userautoload/*.vim
 
 set completeopt+=noinsert,noselect
 set completeopt-=preview
+
+set iskeyword-=_
 
 set hidden " バッファ切り替え時に保存しなくてもよくする
 
