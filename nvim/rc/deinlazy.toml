@@ -20,8 +20,17 @@ hook_add = """
 let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header='/usr/include/clang'
 let g:deoplete#sources#clang#sort_algo='priority'
-
 """
+
+# Rubyの自動補完
+[[plugins]]
+repo = 'Shougo/deoplete-rct'
+on_ft = ['ruby']
+
+# Rubyの自動補完
+[[plugins]]
+repo = 'fishbullet/deoplete-ruby'
+on_ft = ['ruby']
 
 
 [[plugins]]

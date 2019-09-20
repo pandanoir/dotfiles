@@ -7,6 +7,9 @@ repo = 'Shougo/neosnippet-snippets'
 # filetypes  =  ['c', 'cpp']
 
 [[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
@@ -130,6 +133,9 @@ nnoremap <silent> ,m :<C-u>Denite file_mru<CR>
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
 
 [[plugins]]
 repo = 'othree/html5.vim'
