@@ -57,6 +57,7 @@ fi
 if [ -d $HOME/.nodebrew ]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
     export PATH=$PATH:$HOME/.nodebrew/current/bin
+    export PATH=$PATH:$XDG_DATA_HOME/npm/bin
 fi
 if [ -d $HOME/.yarn ]; then
     export PATH=$HOME/.yarn/bin:$PATH
