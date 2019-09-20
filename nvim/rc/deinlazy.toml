@@ -13,6 +13,10 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 '''
 
 [[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+build = './install.sh'
+
+[[plugins]]
 repo = "zchee/deoplete-clang"
 on_ft = "cpp"
 depends = "deoplete.nvim"
