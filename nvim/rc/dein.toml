@@ -177,12 +177,12 @@ endfunction
 
 " 第二引数に無視する条件の rule を渡す
 call lexima#add_rule({'at': '\[\%#\]', 'char': '<Space>', 'leave': ' '})
-call s:add_rule({'char': '(', 'input_after': ')'},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': '[', 'input_after': ']'},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': '{', 'input_after': '}'},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': '"', 'input_after': '"'},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': "'", 'input_after': "'"},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': '`', 'input_after': '`'},[{'at': '\%#)'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': '(', 'input_after': ')'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': '[', 'input_after': ']'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': '{', 'input_after': '}'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': '"', 'input_after': '"'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': "'", 'input_after': "'"},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+call s:add_rule({'char': '`', 'input_after': '`'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 '''
 
 # textobj を使いたい場合必要
