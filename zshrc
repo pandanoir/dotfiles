@@ -17,8 +17,9 @@ zstyle ':completion:*:default' menu select=1
 PROMPT='%F{074}[%n@%m]%f# '
 RPROMPT='%F{048}[%~]%f'
 
-# ビープ音を消す
-setopt no_beep
+setopt no_beep # ビープ音を消す
+setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
+
 
 setopt auto_cd
 function chpwd() { ls --color=always }
