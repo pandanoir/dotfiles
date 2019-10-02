@@ -78,7 +78,7 @@ fi
 
 
 # zplug
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"

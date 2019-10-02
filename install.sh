@@ -84,8 +84,8 @@ init() {
             echo 'set -x NVIM $NVIM'
         } > $XDG_CONFIG_HOME/fish/config.local.fish
     fi
-    if [ ! -f  $HOME/.zshrc.local ]; then
-        echo 'export NVIM=/usr/share/nvim' > $HOME/.zshrc.local
+    if [ ! -f  $ZDOTDIR/.zshrc.local ]; then
+        echo 'export NVIM=/usr/share/nvim' > $ZDOTDIR/.zshrc.local
     fi
     if has git && [ ! -d "$HOME/.emacs.d" ]; then
         git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d

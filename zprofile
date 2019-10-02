@@ -15,8 +15,10 @@ path=(
 )
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
-export HISTFILE="$XDG_DATA_HOME"/zsh/history
-export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+export ZPLUG_HOME=$XDG_CACHE_HOME/zplug
+export HISTFILE=$XDG_DATA_HOME/zsh/history
+export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
+export CD_BOOKMARK_FILE=$XDG_DATA_HOME/zsh/cdbookmark
 
 
 # Java
@@ -68,6 +70,11 @@ fi
 
 if [ -d $HOME/.cargo ]; then
     export PATH=$HOME/.cargo/bin:$PATH
+fi
+if [ -d $XDG_DATA_HOME/cargo ]; then
+    CARGO_HOME="$XDG_DATA_HOME"/cargo
+    export CARGO_HOME=$CARGO_HOME
+    export PATH=$CARGO_HOME/bin:$PATH
 fi
 
 export LANG=ja_JP.UTF-8
