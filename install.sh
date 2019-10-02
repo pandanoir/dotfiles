@@ -14,6 +14,7 @@ has() {
 setup() {
     if [ ! -d "$dotfiles" ]; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
+        git clone https://github.com/arcticicestudio/nord-gnome-terminal "$dotfiles/nord-gnome-terminal"
     fi
     deploy
     init
@@ -57,6 +58,7 @@ deploy() {
     symlink $dotfiles/zprofile $HOME/.bash_profile
     symlink $dotfiles/npmrc $XDG_CONFIG_HOME/npm/npmrc
     symlink $dotfiles/inputrc $XDG_CONFIG_HOME/readline/inputrc
+    bash $dotfiles/nord-gnome-terminal/src/nord.sh
 }
 init() {
     if has git; then
