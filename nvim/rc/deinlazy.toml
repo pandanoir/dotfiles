@@ -135,6 +135,10 @@ repo = 'digitaltoad/vim-pug'
 on_ft = 'pug'
 
 [[plugins]]
+repo = 'GutenYe/json5.vim'
+on_ft = 'json5'
+
+[[plugins]]
 repo = 'rust-lang/rust.vim'
 on_ft = 'rust'
 hook_source = '''
