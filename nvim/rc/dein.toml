@@ -192,10 +192,14 @@ repo = 'kana/vim-textobj-user'
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
-  set background=dark
   set cursorline
-  hi CursorLine ctermfg=0 ctermbg=243
-  hi Folded ctermfg=255 ctermbg=25
+  let g:jellybeans_overrides = {
+              \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+              \    'CursorLine': { 'guibg': '2f2f2f' },
+              \}
+  if has('termguicolors') && &termguicolors
+      let g:jellybeans_overrides['background']['guibg'] = 'none'
+  endif
   autocmd MyAutoCmd VimEnter * nested colorscheme jellybeans
 '''
 
