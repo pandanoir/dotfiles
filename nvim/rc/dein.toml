@@ -124,7 +124,7 @@ call denite#custom#option('default', {
 
 
 
-nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
+nnoremap <silent> ,f :<C-u>Denite file/rec -start-filter<CR>
 nnoremap <silent> ,b :<C-u>Denite buffer<CR>
 nnoremap <silent> ,r :<C-u>Denite register<CR>
 nnoremap <silent> ,m :<C-u>Denite file_mru<CR>
