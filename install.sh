@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Thanks, @kaorimatz!
 
 # curl -sL dot.pandanoir.net | sh
@@ -14,6 +14,8 @@ has() {
 setup() {
     if [ ! -d "$dotfiles" ]; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
+    fi
+    if [ ! -d "$dotfiles/nord-gnome-terminal" ]; then
         git clone https://github.com/arcticicestudio/nord-gnome-terminal "$dotfiles/nord-gnome-terminal"
     fi
     deploy
@@ -33,23 +35,14 @@ deploy() {
 
     symlink $dotfiles/vimrc $XDG_CONFIG_HOME/vim/vimrc
     dotlink "spacemacs"
-    {
-        cd $XDG_CACHE_HOME/vim
-        ls -1 $dotfiles/vim | xargs -I{} ln -sf $dotfiles/vim/{} $XDG_CONFIG_HOME/vim
-    }
+    ls -1 $dotfiles/vim | xargs -I{} ln -sf $dotfiles/vim/{} $XDG_CONFIG_HOME/vim/
 
 
     symlink "$dotfiles/nvim" $XDG_CONFIG_HOME
     symlink $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
     symlink $dotfiles/fish/fishfile $XDG_CONFIG_HOME/fish/fishfile
-    {
-        cd $XDG_CONFIG_HOME/fish/functions
-        ls -1 $dotfiles/fish/functions | xargs -I{} ln -sf $dotfiles/fish/functions/{} $XDG_CONFIG_HOME/fish/functions
-    }
-    {
-        cd $XDG_CONFIG_HOME/zsh/functions
-        ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $XDG_CONFIG_HOME/zsh/functions
-    }
+    ls -1 $dotfiles/fish/functions | xargs -I{} ln -sf $dotfiles/fish/functions/{} $XDG_CONFIG_HOME/fish/functions/
+    ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $ZDOTDIR/functions/
 
     symlink $dotfiles/tmux.conf $XDG_CONFIG_HOME/tmux/tmux.conf
     symlink $dotfiles/zshrc $ZDOTDIR/.zshrc
@@ -67,16 +60,16 @@ init() {
         git config --global alias.unstage "reset HEAD"
     fi
 
-    if has zsh && [ ! -d "$HOME/.zplug" ]; then
-        curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+    if has zsh && [ ! -d "$XDG_CACHE_HOME/zplug" ]; then
+        git clone https://github.com/zplug/zplug $ZPLUG_HOME
     fi
 
     if has fish && [ ! -f "$XDG_CONFIG_HOME/fish/functions/fisher.fish" ]; then
         curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
 
-    if has git && has tmux && [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-        git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    if has git && has tmux && [ ! -d "$XDG_CONFIG_HOME/tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
     fi
 
     if [ ! -f  $XDG_CONFIG_HOME/fish/config.local.fish ]; then
