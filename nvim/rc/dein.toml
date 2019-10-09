@@ -11,14 +11,17 @@ repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+hook_add = '''
+let g:lightline = { 'colorscheme': 'wombat' }
+let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
+let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
+'''
+
 
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
-
-[[plugins]]
-repo = 'AtsushiM/search-parent.vim'
 
 # 必須プラグイン
 [[plugins]]
@@ -41,8 +44,8 @@ let g:user_emmet_settings = {
 \}
 '''
 
-[[plugins]]
-repo = 'rking/ag.vim'
+# [[plugins]]
+# repo = 'rking/ag.vim'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
@@ -135,18 +138,6 @@ nnoremap <silent> ,m :<C-u>Denite file_mru<CR>
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'vim-ruby/vim-ruby'
-
-[[plugins]]
-repo = 'othree/html5.vim'
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-
-[[plugins]]
-repo = 'jelera/vim-javascript-syntax'
-
-[[plugins]]
 repo = 'tomtom/tcomment_vim' # コメントアウト
 
 [[plugins]]
@@ -180,8 +171,8 @@ call lexima#add_rule({'at': '\[\%#\]', 'char': '<Space>', 'leave': ' '})
 call s:add_rule({'char': '(', 'input_after': ')'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 call s:add_rule({'char': '[', 'input_after': ']'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 call s:add_rule({'char': '{', 'input_after': '}'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': '"', 'input_after': '"'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
-call s:add_rule({'char': "'", 'input_after': "'"},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+" call s:add_rule({'char': '"', 'input_after': '"'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
+" call s:add_rule({'char': "'", 'input_after': "'"},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 call s:add_rule({'char': '`', 'input_after': '`'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 '''
 
