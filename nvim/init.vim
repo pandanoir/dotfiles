@@ -16,7 +16,7 @@ set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8 fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別。左ほど優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
-set ambiwidth=double "◻︎や◯がくずれるのを対処
+" set ambiwidth=double "◻︎や◯がくずれるのを対処
 
 let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
 runtime! userautoload/*.vim
@@ -24,9 +24,10 @@ runtime! userautoload/*.vim
 set completeopt+=noinsert,noselect
 set completeopt-=preview
 
-set iskeyword-=_
+" set iskeyword-=_
 
 set hidden " バッファ切り替え時に保存しなくてもよくする
+set autoread
 
 let $DOTVIM = $config_home . '/nvim'
 set backspace=start,eol,indent whichwrap=b,s,[,],,~
@@ -45,7 +46,8 @@ autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 
 autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
 
-set number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
+" set number
+set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
