@@ -202,4 +202,7 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'vim-scripts/surround.vim'
 
 [[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
 repo = 'tpope/vim-eunuch'
