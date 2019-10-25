@@ -17,35 +17,16 @@ let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
 let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
 '''
 
-
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
 
 # 必須プラグイン
-[[plugins]]
-repo = 'mattn/emmet-vim'
-hook_add = '''
-let g:user_emmet_settings = {
-\    'variables' : {
-\        'lang' : 'ja',
-\    },
-\    'html' : {
-\        'snippets'   : {
-\            'html:5': "<!DOCTYPE html>\n"
-\                    ."<html lang=\"${lang}\">\n"
-\                    ."<meta charset=\"${charset}\">\n"
-\                    ."<title></title>\n"
-\                    ."${child}|\n",
-\            'meta:ip': '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">',
-\        }
-\    }
-\}
-'''
 
 # [[plugins]]
 # repo = 'rking/ag.vim'
+
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
