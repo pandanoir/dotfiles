@@ -30,14 +30,16 @@ vnoremap : ;
 "削除時にヤンクしない
 nnoremap x "_x
 nnoremap X "_X
+nnoremap gy "+y
+vnoremap gy "+y
 
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-inoremap <silent> jj <Esc>
-inoremap <silent> fd <Esc>
+imap <silent> jj <Esc>
+imap <silent> fd <Esc>
 
 inoremap <silent> <C-f> <Right>
 inoremap <silent> <C-b> <Left>
