@@ -118,9 +118,6 @@ nnoremap <silent> ,m :<C-u>Denite file_mru<CR>
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'tomtom/tcomment_vim' # コメントアウト
-
-[[plugins]]
 repo = 'cohama/lexima.vim' # かっこの自動補完
 hook_add = '''
 function! s:as_list(a)
@@ -186,3 +183,10 @@ repo = 'tpope/vim-repeat'
 
 [[plugins]]
 repo = 'tpope/vim-eunuch'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+hook_add = '''
+au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>
+au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
+'''
