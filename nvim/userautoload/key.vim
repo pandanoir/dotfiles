@@ -13,8 +13,6 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap s- :<C-u>sp<CR>
 nnoremap s\| :<C-u>vs<CR>
 
-nnoremap 1<CR> :<C-u>w !sudo tee %<CR>
-
 nnoremap J gJ
 
 " for masui special.
@@ -23,17 +21,15 @@ nnoremap <CR> :<C-u>w<CR>
 nnoremap q :<C-u>q<CR>
 nnoremap Q q
 
-nnoremap <C-q> <C-w><C-w>:<C-u>q<CR>
-
 nnoremap ; :
 nnoremap : ;
 
 vnoremap ; :
 vnoremap : ;
 
+"削除時にヤンクしない
 nnoremap x "_x
 nnoremap X "_X
-"削除時にヤンクしない
 
 nnoremap j gj
 nnoremap k gk
@@ -51,11 +47,8 @@ let mapleader = ","
 " ,のデフォルトの機能は、\で使えるように退避
 noremap \  ,
 
-" d<Space>hを有効化するために下にまとめない
-noremap <Space>h ^
-noremap <Space>l $
-
 noremap [space] <nop>
 nmap <Space> [space]
 noremap [space]c :<C-u>enew<CR>
 noremap [space]d :<C-u>bd<CR>
+
