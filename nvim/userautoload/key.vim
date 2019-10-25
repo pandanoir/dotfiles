@@ -42,6 +42,14 @@ inoremap <silent> fd <Esc>
 inoremap <silent> <C-f> <Right>
 inoremap <silent> <C-b> <Left>
 
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
+
 let mapleader = ","
 
 " ,のデフォルトの機能は、\で使えるように退避
