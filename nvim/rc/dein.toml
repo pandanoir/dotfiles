@@ -160,15 +160,24 @@ repo = 'kana/vim-textobj-user'
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
 hook_add = '''
-  set cursorline
-  let g:jellybeans_overrides = {
-              \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-              \    'CursorLine': { 'guibg': '2f2f2f' },
-              \}
-  if has('termguicolors') && &termguicolors
-      let g:jellybeans_overrides['background']['guibg'] = 'none'
-  endif
-  autocmd MyAutoCmd VimEnter * nested colorscheme jellybeans
+set cursorline
+set termguicolors
+set pumblend=10
+hi NormalFloat guibg=#2e3440
+
+augroup transparent-windows
+  autocmd!
+  autocmd FileType denite set winblend=10
+  autocmd FileType denite-filter set winblend=10
+augroup END
+let g:jellybeans_overrides = {
+          \    'background': { 'ctermbg': '2e3440', '256ctermbg': '2e3440' },
+          \    'CursorLine': { 'guibg': '2f2f2f' },
+          \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = '#2e3440'
+endif
+autocmd MyAutoCmd VimEnter * nested colorscheme jellybeans
 '''
 
 # 末尾のスペースを可視化
