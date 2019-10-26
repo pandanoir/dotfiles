@@ -129,7 +129,8 @@ hook_source = '''
 abbreviate tl - [ ]
 
 " todoリストのon/offを切り替える
-nnoremap <buffer> <Space><Space> :call ToggleCheckbox()<CR>
+nnoremap <Plug>ToggleCheckbox :<C-u>call ToggleCheckbox() \| silent! call repeat#set("\<Plug>ToggleCheckbox")<CR>
+nmap <buffer> <Space><Space> <Plug>ToggleCheckbox
 
 function! ToggleCheckbox()
   let l:line = getline('.')
