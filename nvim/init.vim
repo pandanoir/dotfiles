@@ -19,7 +19,11 @@ set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 " set ambiwidth=double "◻︎や◯がくずれるのを対処
 
 let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
-runtime! userautoload/*.vim
+runtime! userautoload/stopdefaultplugins.vim
+runtime! userautoload/dein.vim
+runtime! userautoload/cpp.vim
+runtime! userautoload/indent.vim
+runtime! userautoload/key.vim
 
 set completeopt+=noinsert,noselect
 set completeopt-=preview
@@ -60,13 +64,6 @@ endif
 
 let g:jsx_ext_required = 1
 
-" python3 plugins
-call remote#host#RegisterPlugin('python3', '/home/shougo/.nvim/rplugin/python3/snake.py', [{'sync': 1, 'name': 'SnakeStart', 'type': 'command', 'opts': {}},])
-call remote#host#RegisterPlugin('python3', '/home/shougo/work/deoplete.nvim/rplugin/python3/deoplete.py', [{'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},])
-
 runtime! userautoload/filetype.vim
 
-
-" python plugins
 filetype plugin indent on     " Required!
-
