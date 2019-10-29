@@ -89,6 +89,28 @@ init() {
         git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
     fi
 }
+if ! has git; then
+    echo "you must install git!"
+fi
+if ! has zsh; then
+    echo "you must install zsh!"
+fi
+if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
+    echo "you must install zplug!"
+    echo '$ git clone https://github.com/zplug/zplug $ZPLUG_HOME'
+    read -p "ok? (Y/n): " yn
+    case "$yn" in [yY]*) ;; *) exit ;; esac
+    git clone https://github.com/zplug/zplug $XDG_CACHE_HOME/zplug
+    zsh $XDG_CACHE_HOME/zplug/init.zsh
+fi
+if ! has nvim; then
+    echo "you must install neovim!"
+    echo "please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
+fi
+if ! has tmux; then
+    echo "you must install tmux!"
+fi
+
 if [ $# -eq 0 ]; then
     setup
 elif [ "$1" = "deploy" -o "$1" = "-d" ]; then
