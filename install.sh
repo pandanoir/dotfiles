@@ -5,17 +5,20 @@
 
 set -eu
 
-XDG_CONFIG_HOME=$HOME/.config
-ZDOTDIR=$XDG_CONFIG_HOME/zsh
+if [[ -z "$XDG_CONFIG_HOME" ]]; then XDG_CONFIG_HOME=$HOME/.config fi
+if [[ -z "$XDG_CACHE_HOME" ]]; then XDG_CACHE_HOME=$HOME/.cache fi
+if [[ -z "$XDG_DATA_HOME" ]]; then XDG_DATA_HOME=$HOME/.local/share fi
+if [[ -z "$ZDOTDIR" ]]; then ZDOTDIR=$XDG_CONFIG_HOME/zsh fi
 dotfiles=$HOME/dotfiles
-has() {
-    type "$1" > /dev/null 2>&1
-}
+has() { type "$1" > /dev/null 2>&1 }
+file_exists() { [ -f $1 ] }
+dir_exists() { [ -d $1 ] }
+
 setup() {
-    if [ ! -d "$dotfiles" ]; then
+    if ! dir_exists "$dotfiles"; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
     fi
-    if [ ! -d "$dotfiles/nord-gnome-terminal" ]; then
+    if ! dir_exists "$dotfiles/nord-gnome-terminal"; then
         git clone https://github.com/arcticicestudio/nord-gnome-terminal "$dotfiles/nord-gnome-terminal"
     fi
     deploy
@@ -27,20 +30,20 @@ deploy() {
         [ -e $2 ] || ln -sf $1 $2
     }
     dotlink() {
-        symlink $dotfiles/$1 $HOME/.$1
+        symlink "$dotfiles/$1" "$HOME/.$1"
     }
     mkdir -p $XDG_CONFIG_HOME/{tmux,vim,npm,readline,zsh/functions,fish/functions}
     mkdir -p $XDG_CACHE_HOME/{vim,npm}
     mkdir -p $XDG_DATA_HOME/{npm,rustup,zsh}
 
-    symlink $dotfiles/vimrc $XDG_CONFIG_HOME/vim/vimrc
+    symlink "$dotfiles/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
     dotlink "spacemacs"
-    ls -1 $dotfiles/vim | xargs -I{} ln -sf $dotfiles/vim/{} $XDG_CONFIG_HOME/vim/
+    ls -1 "$dotfiles/vim" | xargs -I{} ln -sf $dotfiles/vim/{} $XDG_CONFIG_HOME/vim/
 
 
-    symlink "$dotfiles/nvim" $XDG_CONFIG_HOME
-    symlink $dotfiles/fish/config.fish $XDG_CONFIG_HOME/fish/config.fish
-    symlink $dotfiles/fish/fishfile $XDG_CONFIG_HOME/fish/fishfile
+    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME"
+    symlink "$dotfiles/fish/config.fish" "$XDG_CONFIG_HOME/fish/config.fish"
+    symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
     ls -1 $dotfiles/fish/functions | xargs -I{} ln -sf $dotfiles/fish/functions/{} $XDG_CONFIG_HOME/fish/functions/
     ls -1 $dotfiles/zsh/functions | xargs -I{} ln -sf $dotfiles/zsh/functions/{} $ZDOTDIR/functions/
 
@@ -60,29 +63,29 @@ init() {
         git config --global alias.unstage "reset HEAD"
     fi
 
-    if has zsh && [ ! -d "$XDG_CACHE_HOME/zplug" ]; then
+    if has zsh && ! dir_exists "$XDG_CACHE_HOME/zplug"; then
         git clone https://github.com/zplug/zplug $ZPLUG_HOME
     fi
 
-    if has fish && [ ! -f "$XDG_CONFIG_HOME/fish/functions/fisher.fish" ]; then
+    if has fish && ! file_exists "$XDG_CONFIG_HOME/fish/functions/fisher.fish"; then
         curl -Lo $XDG_CONFIG_HOME/fish/functions/fisher.fish --create-dirs https://git.io/fisher
     fi
 
-    if has git && has tmux && [ ! -d "$XDG_CONFIG_HOME/tmux/plugins/tpm" ]; then
+    if has git && has tmux && ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
         git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
     fi
 
-    if [ ! -f  $XDG_CONFIG_HOME/fish/config.local.fish ]; then
+    if ! file_exists "$XDG_CONFIG_HOME/fish/config.local.fish"; then
         {
             echo 'set -x NODEBREW_ROOT $HOME/.nodebrew'
             echo 'set NVIM /usr/share/nvim'
             echo 'set -x NVIM $NVIM'
         } > $XDG_CONFIG_HOME/fish/config.local.fish
     fi
-    if [ ! -f  $ZDOTDIR/.zshrc.local ]; then
+    if ! file_exists "$ZDOTDIR/.zshrc.local"; then
         echo 'export NVIM=/usr/share/nvim' > $ZDOTDIR/.zshrc.local
     fi
-    if has git && [ ! -d "$HOME/.emacs.d" ]; then
+    if has git && ! dir_exists "$HOME/.emacs.d"; then
         git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
     fi
 }
