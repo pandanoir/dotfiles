@@ -37,7 +37,7 @@ autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
 autocmd MyAutoCmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
 autocmd MyAutoCmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 
-set clipboard=unnamed,autoselect number backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
+set clipboard=unnamed,autoselect backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " 未保存でもバッファを切り替えられるように
 set hidden
