@@ -1,7 +1,6 @@
 has() {
     type "$1" > /dev/null 2>&1
 }
-export TERM=xterm-256color
 path=(
     $path
     "/opt/local/bin"
