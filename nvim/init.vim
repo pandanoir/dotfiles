@@ -6,6 +6,7 @@ augroup END
 filetype off
 filetype plugin indent off
 
+set termguicolors
 let g:loaded_python_provider = 0
 let g:python3_host_prog = system('echo -n $(if which python3 &>/dev/null; then which python3; else which python3.6; fi)')
 
