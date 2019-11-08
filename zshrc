@@ -32,8 +32,6 @@ HISTFILE=$HOME/.zsh_history
 
 alias mv='mv -i'
 alias cp='cp -i'
-alias ..='cd ../'
-alias ...='cd ../../'
 alias cdb='cd-bookmark'
 alias ekill="emacsclient -e '(kill-emacs)'"
 alias erestart="ekill && estart"
@@ -86,6 +84,7 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zaw"
 zplug "mollifier/cd-bookmark"
 zplug "mollifier/zload"
+zplug "momo-lab/zsh-replace-multiple-dots"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
