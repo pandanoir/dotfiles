@@ -9,10 +9,16 @@ autoload -Uz precmd tinify estart
 # 補完
 autoload -U compinit
 compinit
-setopt auto_list
-setopt auto_menu
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/cache
+setopt auto_list
+setopt IGNOREEOF
+setopt auto_menu
+setopt menu_complete
 
 PROMPT='%F{074}[%n@%m]%f# '
 RPROMPT='%F{048}[%~]%f'
