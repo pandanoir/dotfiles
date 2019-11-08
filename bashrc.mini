@@ -1,3 +1,5 @@
+# curl pandanoir.net/bashrc -o ~/.bashrc.mini
+# echo "source ~/.bashrc.mini >> ~/.bashrc"
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
@@ -9,6 +11,7 @@ alias copy='xsel --clipboard --input'
 alias cl='clear'
 alias cle='clear'
 alias clea='clear'
+alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias g='git'
 alias ga='git add'
@@ -17,6 +20,8 @@ alias gdc='git diff --cached'
 alias gs='git status'
 alias gp='git push'
 alias gc='git commit'
+
+alias less=$VIM'/runtime/macros/less.sh'
 
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=egfxcxdxbxegedabagacad
