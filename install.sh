@@ -5,14 +5,14 @@
 
 set -eu
 
-if [[ -z "$XDG_CONFIG_HOME" ]]; then XDG_CONFIG_HOME=$HOME/.config fi
-if [[ -z "$XDG_CACHE_HOME" ]]; then XDG_CACHE_HOME=$HOME/.cache fi
-if [[ -z "$XDG_DATA_HOME" ]]; then XDG_DATA_HOME=$HOME/.local/share fi
-if [[ -z "$ZDOTDIR" ]]; then ZDOTDIR=$XDG_CONFIG_HOME/zsh fi
+if [[ -z "$XDG_CONFIG_HOME" ]]; then XDG_CONFIG_HOME=$HOME/.config; fi
+if [[ -z "$XDG_CACHE_HOME" ]]; then XDG_CACHE_HOME=$HOME/.cache; fi
+if [[ -z "$XDG_DATA_HOME" ]]; then XDG_DATA_HOME=$HOME/.local/share; fi
+if [[ -z "$ZDOTDIR" ]]; then ZDOTDIR=$XDG_CONFIG_HOME/zsh; fi
 dotfiles=$HOME/dotfiles
-has() { type "$1" > /dev/null 2>&1 }
-file_exists() { [ -f $1 ] }
-dir_exists() { [ -d $1 ] }
+has() { type "$1" > /dev/null 2>&1; }
+file_exists() { [ -f $1 ]; }
+dir_exists() { [ -d $1 ]; }
 
 setup() {
     if ! dir_exists "$dotfiles"; then
