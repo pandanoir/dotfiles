@@ -26,7 +26,7 @@ setopt IGNOREEOF
 setopt auto_menu
 setopt menu_complete
 
-PROMPT='%F{074}[%n@%m]%f$ '
+PROMPT="%F{074}[%n@%m]%f# "
 RPROMPT='%F{048}[%~]%f'
 
 setopt no_beep # ビープ音を消す
