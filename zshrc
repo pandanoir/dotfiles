@@ -65,7 +65,11 @@ alias -g T='| tail' # 当然tailもね
 alias -g U='| uniq'
 alias -g X='| xargs'
 alias -g .zshrc="$ZDOTDIR/.zshrc"
+alias -g .zsh="$ZDOTDIR/.zshrc"
 alias -g .zprofile="$ZDOTDIR/.zprofile"
+alias -g .zp="$ZDOTDIR/.zprofile"
+alias -g .zpr="$ZDOTDIR/.zprofile"
+alias -g .zpro="$ZDOTDIR/.zprofile"
 
 expand-alias() {
     zle _expand_alias
