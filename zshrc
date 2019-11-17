@@ -1,3 +1,9 @@
+# utility func
+file_exists() {
+    [ -f $1 ]
+}
+command_exists() { type "$1" > /dev/null 2>&1; }
+
 # emacsのtrampがタイムアウトするのに対応
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
 
@@ -129,10 +135,14 @@ zplug load
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 # ローカルファイルの読み込み
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
+if file_exists ~/.fzf.zsh; then
+    source ~/.fzf.zsh;
+fi
+if file_exists "$ZDOTDIR/.zshrc.local"; then
+    source $ZDOTDIR/.zshrc.local;
+fi
 
-if [ -z "$TMUX" -a -z "$STY" ]; then
+if [ `whoami` != 'root' -a -z "$TMUX" -a -z "$STY" ]; then
     if type tmuxx >/dev/null 2>&1; then
         tmuxx
     elif type tmux >/dev/null 2>&1; then
