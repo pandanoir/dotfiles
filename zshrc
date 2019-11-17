@@ -92,16 +92,6 @@ alias less=$VIM'/runtime/macros/less.sh'
 alias emacs='emacs -nw'
 alias e='emacsclient -nw -a "" 2>/dev/null'
 
-# coloring directory in ls
-if [ "$(uname)" = 'Darwin' ]; then
-    export LSCOLORS=egfxcxdxbxegedabagacad
-    alias ls='ls -G'
-    alias ll='ls -laG'
-else
-    [ -f $HOME/.colorrc ] && eval `dircolors $HOME/.colorrc`
-    alias ls='ls --color=auto'
-    alias ll='ls -la --color=auto'
-fi
 if command_exists nvim; then
     alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vi"
     alias vim="nvim"
