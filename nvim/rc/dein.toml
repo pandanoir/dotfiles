@@ -12,7 +12,7 @@ repo = 'editorconfig/editorconfig-vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-let g:lightline = { 'colorscheme': 'wombat' }
+let g:lightline = { 'colorscheme': 'nord', }
 let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
 let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
 '''
