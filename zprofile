@@ -14,24 +14,24 @@ path=(
 )
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
-export ZPLUG_HOME=$XDG_CACHE_HOME/zplug
-export HISTFILE=$XDG_DATA_HOME/zsh/history
-export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
-export CD_BOOKMARK_FILE=$XDG_DATA_HOME/zsh/cdbookmark
+export ZPLUG_HOME="$XDG_CACHE_HOME/zplug"
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
 
 
 # Java
 JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME
-export PATH=$PATH:${JAVA_HOME}/bin
+export PATH="$PATH:${JAVA_HOME}/bin"
 
 # go
-GOPATH=$HOME/go
+GOPATH="$HOME/go"
 export GOPATH
-export PATH=$PATH:$GOPATH/bin
+export PATH="$PATH:$GOPATH/bin"
 
 # rust
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 if type nvim > /dev/null 2>&1; then
     export VIM=$HOME/local/nvim/share/nvim
@@ -45,13 +45,13 @@ export CPLUS_INCLUDE_PATH=/opt/local/include
 
 # node_modules
 export NODE_PATH=/usr/local/lib/node_modules
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-export PATH=$PATH:/usr/local/share/npm/bin
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export PATH="$PATH:/usr/local/share/npm/bin"
 export LC_ALL=ja_JP.UTF-8
 
 if has plenv; then
-    export PLENV_ROOT=$HOME/.plenv
-    export PATH=${PLENV_ROOT}/shims:${PATH}
+    export PLENV_ROOT="$HOME/.plenv"
+    export PATH="${PLENV_ROOT}/shims:${PATH}"
     eval "$(plenv init -)";
 fi
 
@@ -60,24 +60,23 @@ if has rbenv; then
 fi
 
 if [ -d $HOME/.nodebrew ]; then
-    export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules
-    export PATH=$PATH:$HOME/.nodebrew/current/bin
-    export PATH=$PATH:$XDG_DATA_HOME/npm/bin
+    export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
+    export PATH="$PATH:$HOME/.nodebrew/current/bin:$XDG_DATA_HOME/npm/bin"
 fi
 if [ -d $HOME/.yarn ]; then
-    export PATH=$HOME/.yarn/bin:$PATH
+    export PATH="$HOME/.yarn/bin:$PATH"
 fi
 if [ -d $HOME/.config/yarn ]; then
-    export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
+    export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
 
 if [ -d $HOME/.cargo ]; then
-    export PATH=$HOME/.cargo/bin:$PATH
+    export PATH="$HOME/.cargo/bin:$PATH"
 fi
 if [ -d $XDG_DATA_HOME/cargo ]; then
     CARGO_HOME="$XDG_DATA_HOME"/cargo
     export CARGO_HOME=$CARGO_HOME
-    export PATH=$CARGO_HOME/bin:$PATH
+    export PATH="$CARGO_HOME/bin:$PATH"
 fi
 
 export LANG=ja_JP.UTF-8
