@@ -64,8 +64,18 @@ alias -g S='| sort'
 alias -g T='| tail' # 当然tailもね
 alias -g U='| uniq'
 alias -g X='| xargs'
-alias -g zshrc="$ZDOTDIR/.zshrc"
-alias -g zprofile="$ZDOTDIR/.zprofile"
+alias -g .zshrc="$ZDOTDIR/.zshrc"
+alias -g .zprofile="$ZDOTDIR/.zprofile"
+
+expand-alias() {
+    zle _expand_alias
+    zle expand-word
+}
+
+zle -N expand-alias
+
+bindkey ' '   magic-space
+bindkey '^ '    expand-alias
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/runtime/macros/less.sh'
@@ -100,7 +110,6 @@ if is-at-least 4.3.10; then
     zstyle ':chpwd:*' recent-dirs-max 5000
     zstyle ':chpwd:*' recent-dirs-default yes
     zstyle ':filter-select' case-insensitive yes
-    bindkey '^@' zaw-cdr
 fi
 
 if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/interface ]]; then
