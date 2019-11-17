@@ -92,8 +92,8 @@ alias less=$VIM'/runtime/macros/less.sh'
 alias emacs='emacs -nw'
 alias e='emacsclient -nw -a "" 2>/dev/null'
 
+alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
 if command_exists nvim; then
-    alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vi"
     alias vim="nvim"
 fi
 if command_exists exa; then
