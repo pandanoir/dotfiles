@@ -33,8 +33,12 @@ export PATH=$PATH:$GOPATH/bin
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
-export VIM=/usr/share/nvim
-export EDITOR=$(which nvim)
+if type nvim > /dev/null 2>&1; then
+    export VIM=$HOME/local/nvim/share/nvim
+    export EDITOR=$(which nvim)
+else
+    export EDITOR=$(which vim)
+fi
 
 # cpp
 export CPLUS_INCLUDE_PATH=/opt/local/include

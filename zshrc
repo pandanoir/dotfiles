@@ -102,6 +102,16 @@ else
     alias ls='ls --color=auto'
     alias ll='ls -la --color=auto'
 fi
+if command_exists nvim; then
+    alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vi"
+    alias vim="nvim"
+fi
+if command_exists exa; then
+    alias ls="exa"
+    alias ll='exa -algh --git'
+    function chpwd() { exa }
+fi
+if command_exists bat; then alias cat='bat'; fi
 
 
 # zplug
