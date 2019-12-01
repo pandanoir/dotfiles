@@ -70,6 +70,7 @@ alias -g S='| sort'
 alias -g T='| tail' # 当然tailもね
 alias -g U='| uniq'
 alias -g X='| xargs'
+alias -g bgh=">/dev/null"
 alias -g .zshrc="$ZDOTDIR/.zshrc"
 alias -g .zsh="$ZDOTDIR/.zshrc"
 alias -g .zprofile="$ZDOTDIR/.zprofile"
