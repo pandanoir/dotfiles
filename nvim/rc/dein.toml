@@ -171,11 +171,12 @@ augroup transparent-windows
   autocmd FileType denite-filter set winblend=10
 augroup END
 let g:jellybeans_overrides = {
-          \    'background': { 'ctermbg': '0', '256ctermbg': '0' },
+          " \    'background': { 'ctermbg': '0', '256ctermbg': '0' },
+          \    'background': { 'ctermbg': 'NONE', '256ctermbg': 'NONE' },
           \    'CursorLine': { 'guibg': '2f2f2f' },
           \}
 if has('termguicolors') && &termguicolors
-  let g:jellybeans_overrides['background']['guibg'] = '2e3440'
+  let g:jellybeans_overrides['background']['guibg'] = 'NONE'
 endif
 
 autocmd MyAutoCmd VimEnter * nested colorscheme jellybeans
