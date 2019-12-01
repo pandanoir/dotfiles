@@ -39,7 +39,7 @@ deploy() {
     ls -1 "$dotfiles/vim" | xargs -I{} ln -sf "$dotfiles/vim/{}" "$XDG_CONFIG_HOME/vim/"
 
 
-    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME"
+    ln -sf "$dotfiles/nvim" "$XDG_CONFIG_HOME"
     symlink "$dotfiles/fish/config.fish" "$XDG_CONFIG_HOME/fish/config.fish"
     symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
     ls -1 "$dotfiles/fish/functions" | xargs -I{} ln -sf "$dotfiles/fish/functions/{}" "$XDG_CONFIG_HOME/fish/functions/"
@@ -52,22 +52,26 @@ deploy() {
     symlink "$dotfiles/zprofile" "$HOME/.bash_profile"
     symlink "$dotfiles/npmrc" "$XDG_CONFIG_HOME/npm/npmrc"
     symlink "$dotfiles/inputrc" "$XDG_CONFIG_HOME/readline/inputrc"
+    ln -sf "$dotfiles/ranger" "$XDG_CONFIG_HOME"
+    if has ranger && ! dir_exists "$dotfiles/ranger/plugins/ranger_devicons"; then
+        git clone https://github.com/alexanderjeurissen/ranger_devicons "$dotfiles/ranger/plugins/ranger_devicons"
+        cd "$dotfiles/ranger/plugins/ranger_devicons"
+        make install
+    fi
     if file_exists "$dotfiles/nord-gnome-terminal/src/nord.sh"; then
         bash "$dotfiles/nord-gnome-terminal/src/nord.sh"
     fi
 }
 init() {
-    if has git; then
-        git config --global alias.s status
-        git config --global alias.d diff
-        git config --global alias.unstage "reset HEAD"
-    fi
+    git config --global alias.s status
+    git config --global alias.d diff
+    git config --global alias.unstage "reset HEAD"
 
     if has fish && ! file_exists "$XDG_CONFIG_HOME/fish/functions/fisher.fish"; then
         curl -Lo "$XDG_CONFIG_HOME/fish/functions/fisher.fish" --create-dirs https://git.io/fisher
     fi
 
-    if has git && has tmux && ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
+    if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
         git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
     fi
 
@@ -81,9 +85,10 @@ init() {
     if ! file_exists "$ZDOTDIR/.zshrc.local"; then
         echo 'export NVIM=/usr/share/nvim' > "$ZDOTDIR/.zshrc.local"
     fi
-    if has git && ! dir_exists "$HOME/.emacs.d"; then
+    if ! dir_exists "$HOME/.emacs.d"; then
         git clone https://github.com/syl20bnr/spacemacs "$HOME/.emacs.d"
     fi
+
 }
 # check the requirements
 if ! has git; then
