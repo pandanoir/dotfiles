@@ -84,9 +84,7 @@ expand-alias() {
 }
 
 zle -N expand-alias
-
-bindkey ' '   magic-space
-bindkey '^ '    expand-alias
+bindkey '^O'    expand-alias
 
 # vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
 alias less=$VIM'/runtime/macros/less.sh'
@@ -133,6 +131,21 @@ if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/in
     fi
 fi
 zplug load
+
+function _double_space_to_fzf() {
+    if [[ "${BUFFER}" =~ " $" ]]; then
+        LBUFFER="${LBUFFER}$(__fsel)"
+        local ret=$?
+        zle redisplay
+        return $ret
+    else
+        zle self-insert
+    fi
+}
+zle -N _double_space_to_fzf
+bindkey ' ' _double_space_to_fzf
+bindkey '^ ' magic-space
+
 
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
