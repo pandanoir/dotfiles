@@ -191,6 +191,20 @@ repo = 'vim-scripts/surround.vim'
 
 [[plugins]]
 repo = 'tpope/vim-repeat'
+hook_add = '''
+" function s:execute_repeatable_macro(name) abort
+function! Execute_repeatable_macro(name)
+  const name = '@' .. a:name
+
+  execute 'normal!' name
+  silent! call repeat#set("\<Plug>macro_" .. a:name)
+endfunction
+
+for x in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  execute 'nnoremap' '<silent>' ("<Plug>macro_" .. x) (":\<C-u>call Execute_repeatable_macro('" .. x .. "')\<CR>")
+  execute 'nmap' ('@' .. x) ("<Plug>macro_" .. x)
+endfor
+'''
 
 [[plugins]]
 repo = 'tpope/vim-eunuch'
