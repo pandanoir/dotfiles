@@ -145,7 +145,7 @@ fi
 zplug load
 
 function _double_space_to_fzf() {
-    if [[ "${BUFFER}" =~ " $" ]]; then
+    if [[ "${LBUFFER}" =~ " $" ]]; then
         LBUFFER="${LBUFFER}$(__fsel)"
         local ret=$?
         zle redisplay
