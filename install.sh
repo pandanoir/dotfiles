@@ -107,14 +107,22 @@ init() {
 
 }
 # check the requirements
-if ! has git; then
-    echo "you must install git!"
+if ! has git || ! has zsh || ! has nvim || ! has tmux; then
+    if ! has git; then
+        echo "you must install git!"
+    fi
+    if ! has zsh; then
+        echo "you must install zsh!"
+    fi
+    if ! has nvim; then
+        echo "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
+    fi
+    if ! has tmux; then
+        echo "you must install tmux!"
+    fi
     exit 1
 fi
-if ! has zsh; then
-    echo "you must install zsh!"
-    exit 1
-fi
+
 if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
     echo "you must install zplug!"
     echo '$ git clone https://github.com/zplug/zplug $ZPLUG_HOME'
@@ -122,15 +130,6 @@ if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
     case "$yn" in [yY]*) ;; *) exit ;; esac
     git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
     zsh "$XDG_CACHE_HOME/zplug/init.zsh"
-fi
-if ! has nvim; then
-    echo "you must install neovim!"
-    echo "please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
-    exit 1
-fi
-if ! has tmux; then
-    echo "you must install tmux!"
-    exit 1
 fi
 
 if [ $# -eq 0 ]; then
