@@ -1,3 +1,0 @@
-precmd() {
-    [[ $(history|tail -1|sed -e "s/^ *//"|cut -f 3- -d " ") =~ "^ssh" ]] && clear
-}

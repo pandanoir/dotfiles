@@ -10,7 +10,7 @@ command_exists() { type "$1" > /dev/null 2>&1; }
 bindkey -e
 
 # 自作関数の読み込み
-autoload -Uz precmd tinify estart
+autoload -Uz tinify estart
 
 # 補完
 autoload -U compinit
