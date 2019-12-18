@@ -126,8 +126,6 @@ fi
 if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
     echo "you must install zplug!"
     echo '$ git clone https://github.com/zplug/zplug $ZPLUG_HOME'
-    read -p "ok? (Y/n): " yn
-    case "$yn" in [yY]*) ;; *) exit ;; esac
     git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
     zsh "$XDG_CACHE_HOME/zplug/init.zsh"
 fi
