@@ -35,12 +35,11 @@ deploy() {
         fi
     }
     dir_symlink() {
-        if ! [ -e $2 ]; then
-            echo "[INFO] create symlink from $1 to $2"
-            ln -sf $1 $2
-        fi
         for file in `ls -1 "$1"`; do
-            symlink "$1/$file" "$2"
+            if ! [ -e "$2/$file" ]; then
+                echo "[INFO] create symlink from $1/$file to $2/$file"
+                ln -sf "$1/$file" "$2"
+            fi
         done
     }
     mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions,fish/functions}
@@ -52,13 +51,13 @@ deploy() {
     dir_symlink "$dotfiles/vim" "$XDG_CONFIG_HOME/vim"
 
 
-    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME"
+    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME/nvim"
     symlink "$dotfiles/fish/config.fish" "$XDG_CONFIG_HOME/fish/config.fish"
     symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
     dir_symlink "$dotfiles/fish/functions" "$XDG_CONFIG_HOME/fish/functions"
     dir_symlink "$dotfiles/zsh/functions" "$ZDOTDIR/functions"
-    for file in `ls -1 "$dotfiles/zsh/" | grep .zsh$`; do
-        symlink "$dotfiles/zsh/$file" "$ZDOTDIR/"
+    for file in `ls -1 "$dotfiles/zsh/" | grep \.zsh$`; do
+        symlink "$dotfiles/zsh/$file" "$ZDOTDIR/$file"
     done
 
     symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
@@ -68,7 +67,7 @@ deploy() {
     symlink "$dotfiles/zprofile" "$HOME/.bash_profile"
     symlink "$dotfiles/npmrc" "$XDG_CONFIG_HOME/npm/npmrc"
     symlink "$dotfiles/inputrc" "$XDG_CONFIG_HOME/readline/inputrc"
-    symlink "$dotfiles/ranger" "$XDG_CONFIG_HOME"
+    symlink "$dotfiles/ranger" "$XDG_CONFIG_HOME/ranger"
     if has ranger && ! dir_exists "$dotfiles/ranger/plugins/ranger_devicons"; then
         git clone https://github.com/alexanderjeurissen/ranger_devicons "$dotfiles/ranger/plugins/ranger_devicons"
         cd "$dotfiles/ranger/plugins/ranger_devicons"
