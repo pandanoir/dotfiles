@@ -44,6 +44,7 @@ deploy() {
     symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
     ls -1 "$dotfiles/fish/functions" | xargs -I{} ln -sf "$dotfiles/fish/functions/{}" "$XDG_CONFIG_HOME/fish/functions/"
     ls -1 "$dotfiles/zsh/functions" | xargs -I{} ln -sf "$dotfiles/zsh/functions/{}" "$ZDOTDIR/functions/"
+    ls -1 "$dotfiles/zsh/" | grep .zsh$ | xargs -I{} ln -sf "$dotfiles/zsh/{}" "$ZDOTDIR/"
 
     symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
     symlink "$dotfiles/zshrc" "$ZDOTDIR/.zshrc"
