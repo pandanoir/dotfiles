@@ -19,7 +19,7 @@ setup() {
     if ! dir_exists "$dotfiles"; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
     fi
-    if ! dir_exists "$dotfiles/nord-gnome-terminal"; then
+    if ! dir_exists "$dotfiles/nord-gnome-terminal" && has "gnome-terminal"; then
         git clone https://github.com/arcticicestudio/nord-gnome-terminal "$dotfiles/nord-gnome-terminal"
     fi
     deploy
@@ -27,8 +27,21 @@ setup() {
 }
 
 deploy() {
+    echo "[INFO] start deploy"
     symlink() {
-        [ -e $2 ] || ln -sf $1 $2
+        if ! [ -e $2 ]; then
+            echo "[INFO] create symlink from $1 to $2"
+            ln -sf $1 $2
+        fi
+    }
+    dir_symlink() {
+        if ! [ -e $2 ]; then
+            echo "[INFO] create symlink from $1 to $2"
+            ln -sf $1 $2
+        fi
+        for file in `ls -1 "$1"`; do
+            symlink "$1/$file" "$2"
+        done
     }
     mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions,fish/functions}
     mkdir -p "$XDG_CACHE_HOME/"{vim,npm}
@@ -36,15 +49,17 @@ deploy() {
 
     symlink "$dotfiles/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
     symlink "$dotfiles/spacemacs" "$HOME/.spacemacs"
-    ls -1 "$dotfiles/vim" | xargs -I{} ln -sf "$dotfiles/vim/{}" "$XDG_CONFIG_HOME/vim/"
+    dir_symlink "$dotfiles/vim" "$XDG_CONFIG_HOME/vim"
 
 
-    ln -sf "$dotfiles/nvim" "$XDG_CONFIG_HOME"
+    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME"
     symlink "$dotfiles/fish/config.fish" "$XDG_CONFIG_HOME/fish/config.fish"
     symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
-    ls -1 "$dotfiles/fish/functions" | xargs -I{} ln -sf "$dotfiles/fish/functions/{}" "$XDG_CONFIG_HOME/fish/functions/"
-    ls -1 "$dotfiles/zsh/functions" | xargs -I{} ln -sf "$dotfiles/zsh/functions/{}" "$ZDOTDIR/functions/"
-    ls -1 "$dotfiles/zsh/" | grep .zsh$ | xargs -I{} ln -sf "$dotfiles/zsh/{}" "$ZDOTDIR/"
+    dir_symlink "$dotfiles/fish/functions" "$XDG_CONFIG_HOME/fish/functions"
+    dir_symlink "$dotfiles/zsh/functions" "$ZDOTDIR/functions"
+    for file in `ls -1 "$dotfiles/zsh/" | grep .zsh$`; do
+        symlink "$dotfiles/zsh/$file" "$ZDOTDIR/"
+    done
 
     symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
     symlink "$dotfiles/zshrc" "$ZDOTDIR/.zshrc"
@@ -53,7 +68,7 @@ deploy() {
     symlink "$dotfiles/zprofile" "$HOME/.bash_profile"
     symlink "$dotfiles/npmrc" "$XDG_CONFIG_HOME/npm/npmrc"
     symlink "$dotfiles/inputrc" "$XDG_CONFIG_HOME/readline/inputrc"
-    ln -sf "$dotfiles/ranger" "$XDG_CONFIG_HOME"
+    symlink "$dotfiles/ranger" "$XDG_CONFIG_HOME"
     if has ranger && ! dir_exists "$dotfiles/ranger/plugins/ranger_devicons"; then
         git clone https://github.com/alexanderjeurissen/ranger_devicons "$dotfiles/ranger/plugins/ranger_devicons"
         cd "$dotfiles/ranger/plugins/ranger_devicons"
@@ -64,6 +79,7 @@ deploy() {
     fi
 }
 init() {
+    echo "[INFO] start init"
     git config --global alias.s status
     git config --global alias.d diff
     git config --global alias.unstage "reset HEAD"
