@@ -63,10 +63,7 @@ fi
 
 if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/interface ]]; then
     if ! zplug check --verbose; then
-        printf 'Install? [y/N]: '
-        if read -q; then
-            echo; zplug install
-        fi
+        zplug install
     fi
 fi
 zplug load
