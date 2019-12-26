@@ -20,7 +20,8 @@ depends = ['deoplete.nvim']
 [[plugins]]
 repo = 'zchee/deoplete-clang'
 on_ft = 'cpp'
-depends = 'deoplete.nvim'
+on_event = 'InsertEnter'
+on_source = ['deoplete.nvim']
 hook_add = """
 " let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
 let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-9/lib/libclang-9.so.1'
@@ -28,20 +29,19 @@ let g:deoplete#sources#clang#clang_header='/usr/include/clang'
 let g:deoplete#sources#clang#sort_algo='priority'
 """
 
-# Rubyの自動補完
 [[plugins]]
-repo = 'Shougo/deoplete-rct'
-on_ft = ['ruby']
-
-# Rubyの自動補完
-[[plugins]]
-repo = 'fishbullet/deoplete-ruby'
-on_ft = ['ruby']
-
-[[plugins]]
-repo = 'vim-ruby/vim-ruby'
-on_ft = ['ruby']
-
+repo = 'sebastianmarkow/deoplete-rust'
+on_ft = 'rust'
+on_source = ['deoplete.nvim']
+hook_add = '''
+" let g:deoplete#sources#rust#racer_binary='{racerバイナリのフルパス}'
+" let g:deoplete#sources#rust#rust_source_path=$(rustc --print sysroot)/lib/rustlib/src/rust/
+" let $RUST_SRC_PATH='{$(rustc --print sysroot)/lib/rustlib/src/rust/srcをここに書く}'
+let g:deoplete#sources#rust#show_duplicates=1
+let g:deoplete#sources#rust#disable_keymap=1
+" nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+" nmap <buffer> K  <plug>DeopleteRustShowDocumentation
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -58,148 +58,89 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
-
-[[plugins]]
-repo = 'dag/vim-fish'
-on_ft = ['fish']
-
-[[plugins]]
-repo = 'vim-jp/cpp-vim'
-on_ft = ['cpp']
-
-[[plugins]]
-repo = 'octol/vim-cpp-enhanced-highlight'
-on_ft = ['cpp']
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = ['vue']
-
-[[plugins]]
-repo = 'chr4/nginx.vim'
-on_ft = ['nginx']
-
-[[plugins]] # goコマンド補完
-repo = 'fatih/vim-go'
-on_ft = 'go'
-hook_source = '''
-let g:go_highlight_functions = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-'''
-
-# [[plugins]] # vim-go代替
-# repo = 'zchee/nvim-go'
-# build = 'make'
-# on_ft = 'go'
-
-[[plugins]] # コード補完（Golang用）
-repo = 'zchee/deoplete-go'
-on_ft = 'go'
-
-[[plugins]]
-repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'jelera/vim-javascript-syntax'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript', 'typescript.tsx']
-
-[[plugins]]
-repo = 'peitalin/vim-jsx-typescript'
-on_ft = ['typescript.tsx']
-
-[[plugins]]
-repo = 'tpope/vim-markdown'
-on_ft = ['markdown']
-hook_source = '''
-" todoリストを簡単に入力する
-abbreviate tl - [ ]
-
-" todoリストのon/offを切り替える
-nnoremap <Plug>ToggleCheckbox :<C-u>call ToggleCheckbox() \| silent! call repeat#set("\<Plug>ToggleCheckbox")<CR>
-nmap <buffer> <Space><Space> <Plug>ToggleCheckbox
-
-function! ToggleCheckbox()
-  let l:line = getline('.')
-  if l:line =~ '^\-\s\[\s\]'
-    let l:result = substitute(l:line, '^-\s\[\s\]', '- [x]', '')
-    call setline('.', l:result)
-  elseif l:line =~ '^\-\s\[x\]'
-    let l:result = substitute(l:line, '^-\s\[x\]', '- [ ]', '')
-    call setline('.', l:result)
-  end
+repo = 'Shougo/denite.nvim'
+on_cmd = ['Denite', 'DeniteProjectDir']
+hook_add = '''
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+  hi NormalFloat guibg=#2a2a2a
 endfunction
 
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+endfunction
+
+nnoremap <silent> ,f :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <silent> ,b :<C-u>Denite buffer<CR>
+nnoremap <silent> ,r :<C-u>Denite register<CR>
+nnoremap <silent> ,m :<C-u>Denite file_mru<CR>
+'''
+hook_post_source = '''
+" Change file/rec command.
+call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+" Add custom menus
+let s:menus = {}
+
+let s:menus.zsh = { 'description': 'Edit your import zsh configuration' }
+let s:menus.zsh.file_candidates = [
+    \ ['zshrc', '~/.zshrc'],
+    \ ['zshenv', '~/.zshenv'],
+    \ ]
+
+let s:menus.my_commands = { 'description': 'Example commands' }
+let s:menus.my_commands.command_candidates = [
+    \ ['Split the window', 'vnew'],
+    \ ['Open zsh menu', 'Denite menu:zsh'],
+    \ ['Format code', 'FormatCode', 'go,python'],
+    \ ]
+
+call denite#custom#var('menu', 'menus', s:menus)
+
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+" Define alias
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+
+call denite#custom#alias('source', 'file/rec/py', 'file/rec')
+call denite#custom#var('file/rec/py', 'command', ['scantree.py'])
+
+" Change ignore_globs
+call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', ['.git/', '.ropeproject/', '__pycache__/', 'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
+" Custom action
+" Note: lambda function is not supported in Vim8.
+call denite#custom#action('file', 'test', {context -> execute('let g:foo = 1')})
+call denite#custom#action('file', 'test2', {context -> denite#do_action(context, 'open', context['targets'])})
+
+" enable floating window
+let s:denite_win_width_percent = 0.85
+let s:denite_win_height_percent = 0.7
+call denite#custom#option('default', {
+    \ 'split': 'floating',
+    \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
+    \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+    \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
+    \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
+    \ })
 '''
 
 [[plugins]]
-repo = 'othree/html5.vim'
-on_ft = 'html'
+repo = 'Shougo/neomru.vim'
+on_source = ['denite.nvim']
 
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = 'html'
-hook_source = '''
-let g:user_emmet_settings = {
-\    'variables' : {
-\        'lang' : 'ja',
-\    },
-\    'html' : {
-\        'snippets'   : {
-\            'html:5': "<!DOCTYPE html>\n"
-\                    ."<html lang=\"${lang}\">\n"
-\                    ."<meta charset=\"${charset}\">\n"
-\                    ."<title></title>\n"
-\                    ."${child}|\n",
-\            'meta:ip': '<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">',
-\        }
-\    }
-\}
-'''
-
-[[plugins]]
-repo = 'digitaltoad/vim-pug'
-on_ft = 'pug'
-
-[[plugins]]
-repo = 'GutenYe/json5.vim'
-on_ft = 'json5'
-
-[[plugins]]
-repo = 'itchyny/vim-haskell-indent'
-on_ft = 'haskell'
-
-[[plugins]]
-repo = 'rust-lang/rust.vim'
-on_ft = 'rust'
-hook_source = '''
-let g:rustfmt_autosave = 1
-let g:rust_doc#define_map_K = 0
-'''
-
-[[plugins]]
-repo = 'sebastianmarkow/deoplete-rust'
-on_ft = 'rust'
-depends = ['deoplete.nvim']
-hook_source = '''
-" let g:deoplete#sources#rust#racer_binary='{racerバイナリのフルパス}'
-" let g:deoplete#sources#rust#rust_source_path=$(rustc --print sysroot)/lib/rustlib/src/rust/
-" let $RUST_SRC_PATH='{$(rustc --print sysroot)/lib/rustlib/src/rust/srcをここに書く}'
-let g:deoplete#sources#rust#show_duplicates=1
-let g:deoplete#sources#rust#disable_keymap=1
-nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-nmap <buffer> K  <plug>DeopleteRustShowDocumentation
-'''
