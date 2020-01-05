@@ -146,7 +146,6 @@ on_source = ['denite.nvim']
 
 [[plugins]]
 repo = 'junegunn/fzf'
-build = './install --no-key-bindings --no-completion --no-update-rc --no-bash'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
