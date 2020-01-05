@@ -52,13 +52,18 @@ HISTFILE=$HOME/.zsh_history
 
 # zplug
 source $ZPLUG_HOME/init.zsh
+
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zaw"
 zplug "mollifier/cd-bookmark"
 zplug "mollifier/zload"
 zplug "momo-lab/zsh-replace-multiple-dots"
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*linux*amd64*"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
