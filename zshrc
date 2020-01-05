@@ -26,8 +26,15 @@ setopt IGNOREEOF
 setopt auto_menu
 setopt menu_complete
 
-PROMPT="%F{074}[%n@%m]%f# "
-RPROMPT='%F{048}[%~]%f'
+prompt-set(){
+    PROMPT="%F{074}[%n@%m]%f# "
+    RPROMPT='%F{048}[%~]%f'
+}
+prompt-reset() {
+    PROMPT="# "
+    RPROMPT=''
+}
+prompt-set
 
 setopt no_beep # ビープ音を消す
 setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
