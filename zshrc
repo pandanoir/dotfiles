@@ -24,7 +24,7 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/cache
 setopt auto_list
 setopt IGNOREEOF
 setopt auto_menu
-setopt menu_complete
+# setopt menu_complete
 
 prompt-set(){
     PROMPT="%F{074}[%n@%m]%f# "
