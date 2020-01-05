@@ -86,8 +86,11 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
 export PATH=`echo -n $PATH | tr : '\n' | awk '!a[$0]++' | xargs | tr ' ' :`
-# export FZF_DEFAULT_OPTS="--reverse -m"
-export FZF_DEFAULT_COMMAND="ag -g ''"
-export FZF_CTRL_T_COMMAND="ag -g ''"
+export FZF_DEFAULT_OPTS="--reverse -m --color fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
+export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
+FZF_DEFAULT_COMMAND="ag -g ''; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
+export FZF_COMPLETION_TRIGGER=",,"
+export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
 [ -f $ZDOTDIR/.zprofile.local ] && source $ZDOTDIR/.zprofile.local
