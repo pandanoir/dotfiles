@@ -124,10 +124,14 @@ if ! has git || ! has zsh || ! has nvim || ! has tmux; then
 fi
 
 if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
-    echo "you must install zplug!"
-    echo '$ git clone https://github.com/zplug/zplug $ZPLUG_HOME'
+    echo "[INFO] install zplug"
     git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
     zsh "$XDG_CACHE_HOME/zplug/init.zsh"
+fi
+if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
+    echo "[INFO] install fzf"
+    git clone https://github.com/junegunn/fzf "$XDG_CACHE_HOME/fzf"
+    bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
 fi
 
 if [ $# -eq 0 ]; then

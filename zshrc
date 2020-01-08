@@ -59,11 +59,6 @@ zplug "zsh-users/zsh-completions"
 zplug "mollifier/cd-bookmark"
 zplug "mollifier/zload"
 zplug "momo-lab/zsh-replace-multiple-dots"
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*linux*amd64*"
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
 if is-at-least 4.3.10; then
@@ -83,13 +78,11 @@ zplug load
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 # ローカルファイルの読み込み
-if file_exists ~/.fzf.zsh; then
-    source ~/.fzf.zsh;
-fi
-if file_exists "$ZDOTDIR/.zshrc.local"; then
-    source $ZDOTDIR/.zshrc.local;
-fi
-
+for file in "$XDG_CACHE_HOME/fzf/shell/completion.zsh" "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" "$ZDOTDIR/.zshrc.local"; do
+    if file_exists "$file"; then
+        source "$file"
+    fi
+done
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 

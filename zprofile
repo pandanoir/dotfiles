@@ -78,6 +78,10 @@ if [ -d $XDG_DATA_HOME/cargo ]; then
     export CARGO_HOME=$CARGO_HOME
     export PATH="$CARGO_HOME/bin:$PATH"
 fi
+if [ -d $XDG_CACHE_HOME/fzf/bin ]; then
+    export PATH="$XDG_CACHE_HOME/fzf/bin:$PATH"
+fi
+
 
 export LANG=ja_JP.UTF-8
 
