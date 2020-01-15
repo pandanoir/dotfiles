@@ -107,7 +107,7 @@ init() {
 
 }
 # check the requirements
-if ! has git || ! has zsh || ! has nvim || ! has tmux; then
+if ! has git || ! has zsh || (! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim") || ! has tmux; then
     if ! has git; then
         echo "you must install git!"
     fi
