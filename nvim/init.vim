@@ -57,8 +57,6 @@ set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
 
-set rtp+=~/.fzf
-
 if &shell =~# 'fish$'
     set shell=sh
 endif

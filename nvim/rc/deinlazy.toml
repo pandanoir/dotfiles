@@ -144,8 +144,8 @@ call denite#custom#option('default', {
 repo = 'Shougo/neomru.vim'
 on_source = ['denite.nvim']
 
-[[plugins]]
-repo = 'junegunn/fzf'
+# [[plugins]]
+# repo = 'junegunn/fzf'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -154,6 +154,7 @@ on_cmd = [
     'ProjectFiles',
     'Buffers',
     'BLines',
+    'History',
     'Tags',
     'BTags',
     'GFiles',
@@ -163,6 +164,8 @@ hook_add = '''
 nnoremap <silent> ,a :<C-u>Ag<CR>
 nnoremap <silent> ,f :<C-u>ProjectFiles<CR>
 nnoremap <silent> ,b :<C-u>Buffers<CR>
+nnoremap <silent> ,m :<C-u>History<CR>
+set rtp+=$XDG_CACHE_HOME/fzf
 '''
 hook_source = '''
 function! s:find_git_root()
