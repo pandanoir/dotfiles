@@ -19,11 +19,8 @@ alias gc='git commit'
 
 alias -g A='| awk'
 alias -g C='| copy' # copy
-alias -g G='| grep --color=auto' # 鉄板
-alias -g H='| head' # 当然tailもね
 alias -g L='| less -R'
 alias -g S='| sort'
-alias -g T='| tail' # 当然tailもね
 alias -g U='| uniq'
 alias -g X='| xargs'
 alias -g bgh=">/dev/null"
