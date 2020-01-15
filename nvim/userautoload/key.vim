@@ -52,6 +52,9 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
+nnoremap <C-n>       :bnext<CR>
+nnoremap <C-p>       :bprev<CR>
+
 let mapleader = ","
 
 " ,のデフォルトの機能は、\で使えるように退避
