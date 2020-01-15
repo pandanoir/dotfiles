@@ -25,19 +25,22 @@ setup() {
     deploy
     init
 }
+info() {
+    echo -e "\033[0;34m[INFO]\033[0;39m $1"
+}
 
 deploy() {
-    echo "[INFO] start deploy"
+    info "start deploy"
     symlink() {
         if ! [ -e $2 ]; then
-            echo "[INFO] create symlink from $1 to $2"
+            info "create symlink from $1 to $2"
             ln -sf $1 $2
         fi
     }
     dir_symlink() {
         for file in `ls -1 "$1"`; do
             if ! [ -e "$2/$file" ]; then
-                echo "[INFO] create symlink from $1/$file to $2/$file"
+                info "create symlink from $1/$file to $2/$file"
                 ln -sf "$1/$file" "$2"
             fi
         done
@@ -78,7 +81,7 @@ deploy() {
     fi
 }
 init() {
-    echo "[INFO] start init"
+    info "start init"
     git config --global alias.s status
     git config --global alias.d diff
     git config --global alias.unstage "reset HEAD"
@@ -124,12 +127,12 @@ if ! has git || ! has zsh || (! has nvim && ! file_exists "$HOME/local/nvim/bin/
 fi
 
 if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
-    echo "[INFO] install zplug"
+    info "install zplug"
     git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
     zsh "$XDG_CACHE_HOME/zplug/init.zsh"
 fi
 if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
-    echo "[INFO] install fzf"
+    info "install fzf"
     git clone https://github.com/junegunn/fzf "$XDG_CACHE_HOME/fzf"
     bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
 fi
