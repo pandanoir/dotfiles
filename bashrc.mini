@@ -4,7 +4,6 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
 alias ...='cd ../../'
-alias cdb='cd-bookmark'
 alias ekill="emacsclient -e '(kill-emacs)'"
 alias erestart="ekill && estart"
 alias copy='xsel --clipboard --input'
