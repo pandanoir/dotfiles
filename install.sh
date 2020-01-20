@@ -45,7 +45,7 @@ deploy() {
             fi
         done
     }
-    mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions,fish/functions}
+    mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions}
     mkdir -p "$XDG_CACHE_HOME/"{vim,npm}
     mkdir -p "$XDG_DATA_HOME/"{npm,rustup,zsh}
 
@@ -55,9 +55,6 @@ deploy() {
 
 
     symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME/nvim"
-    symlink "$dotfiles/fish/config.fish" "$XDG_CONFIG_HOME/fish/config.fish"
-    symlink "$dotfiles/fish/fishfile" "$XDG_CONFIG_HOME/fish/fishfile"
-    dir_symlink "$dotfiles/fish/functions" "$XDG_CONFIG_HOME/fish/functions"
     dir_symlink "$dotfiles/zsh/functions" "$ZDOTDIR/functions"
     for file in `ls -1 "$dotfiles/zsh/" | grep \.zsh$`; do
         symlink "$dotfiles/zsh/$file" "$ZDOTDIR/$file"
@@ -86,20 +83,8 @@ init() {
     git config --global alias.d diff
     git config --global alias.unstage "reset HEAD"
 
-    if has fish && ! file_exists "$XDG_CONFIG_HOME/fish/functions/fisher.fish"; then
-        curl -Lo "$XDG_CONFIG_HOME/fish/functions/fisher.fish" --create-dirs https://git.io/fisher
-    fi
-
     if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
         git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
-    fi
-
-    if ! file_exists "$XDG_CONFIG_HOME/fish/config.local.fish"; then
-        {
-            echo 'set -x NODEBREW_ROOT $HOME/.nodebrew'
-            echo 'set NVIM /usr/share/nvim'
-            echo 'set -x NVIM $NVIM'
-        } > "$XDG_CONFIG_HOME/fish/config.local.fish"
     fi
     if ! file_exists "$ZDOTDIR/.zshrc.local"; then
         echo 'export NVIM=/usr/share/nvim' > "$ZDOTDIR/.zshrc.local"
