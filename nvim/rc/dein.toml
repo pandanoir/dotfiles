@@ -10,12 +10,16 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-let g:lightline = { 'colorscheme': 'nord', }
+let g:lightline = { 'colorscheme': 'iceberg' }
 let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
 let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
 '''
+
 
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
 [[plugins]]
