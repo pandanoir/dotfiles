@@ -3,6 +3,11 @@
 repo = 'Shougo/deoplete-rct'
 on_ft = ['ruby']
 
+
+[[plugins]]
+repo = 'amdt/vim-niji'
+on_ft = ['scheme']
+
 # Rubyの自動補完
 [[plugins]]
 repo = 'fishbullet/deoplete-ruby'
