@@ -78,6 +78,7 @@ nnoremap <silent> ,a :<C-u>Ag<CR>
 nnoremap <silent> ,f :<C-u>ProjectFiles<CR>
 nnoremap <silent> ,b :<C-u>Buffers<CR>
 nnoremap <silent> ,m :<C-u>History<CR>
+nnoremap <silent> ,l :<C-u>Files ~/Documents/library<CR>
 set rtp+=$XDG_CACHE_HOME/fzf
 '''
 hook_source = '''
