@@ -49,73 +49,16 @@ setopt share_history
 SAVEHIST=100
 HISTFILE=$HOME/.zsh_history
 
-
-# zplug
-source $ZPLUG_HOME/init.zsh
+eval "$(fasd --init auto)"
 
 
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-completions"
-zplug "mollifier/cd-bookmark"
-zplug "mollifier/zload"
-zplug "momo-lab/zsh-replace-multiple-dots"
-zplug "changyuheng/fz", defer:1
-zplug "rupa/z", use:z.sh
-
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
-if is-at-least 4.3.10; then
-    add-zsh-hook chpwd chpwd_recent_dirs
-    zstyle ':chpwd:*' recent-dirs-max 5000
-    zstyle ':chpwd:*' recent-dirs-default yes
-    zstyle ':filter-select' case-insensitive yes
-fi
-
-if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/interface ]]; then
-    if ! zplug check --verbose; then
-        zplug install
-    fi
-fi
-zplug load
-
-ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+source "$ZDOTDIR/zplug.zsh"
 
 # ローカルファイルの読み込み
-for file in "$XDG_CACHE_HOME/fzf/shell/completion.zsh" "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" "$ZDOTDIR/.zshrc.local"; do
-    if file_exists "$file"; then
-        source "$file"
-    fi
-done
+file_exists "$XDG_CACHE_HOME/fzf/shell/completion.zsh" && source "$XDG_CACHE_HOME/fzf/shell/completion.zsh"
+file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh"
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
+file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
+source "$ZDOTDIR/launch_tmux.zsh"
 
-# 挙動:
-# 1. 何もセッションが存在しない -> new-session
-# 1. SSH先にすでにattachしたセッションが存在する -> detach済みセッションがあればattach、なければnew-session
-# 1. ローカルで新しく端末を立ち上げる(=すでにattachしたセッションが存在する) -> tmuxを起動したくない
-# -> ローカルとSSH先を区別する必要がある
-if [ `whoami` != 'root' -a -z "$TMUX" -a -z "$STY" ]; then
-    if type tmuxx >/dev/null 2>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session; then
-            if [[ -n `tmux list-sessions | grep '(attached)'` ]]; then
-                # アタッチ済み
-                if [ ! -v NOT_NEW_SESSION_TMUX ]; then
-                    if [[ -n `tmux list-sessions | grep -v '(attached)'` ]]; then
-                        # デタッチ済みセッションがある
-                        exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf attach && echo "tmux attached session"
-                    else
-                        exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf new-session && echo "tmux created new session"
-                    fi
-                fi
-            else
-                exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf attach && echo "tmux attached session"
-            fi
-        else
-            exec tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf new-session && echo "tmux created new session"
-        fi
-    elif type screen >/dev/null 2>&1; then
-        screen -rx || screen -D -RR
-    fi
-fi
