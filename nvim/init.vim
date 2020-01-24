@@ -46,8 +46,8 @@ set wildmenu wildmode=list:full autoindent scrolloff=10 guifont=Migu\ 1m:h12
 syntax on
 
 "自動でコメントが入るのを防ぐ
-autocmd MyAutoCmd BufEnter * setlocal formatoptions-=r
-autocmd MyAutoCmd BufEnter * setlocal formatoptions-=o
+autocmd MyAutoCmd BufEnter,FileType * setlocal formatoptions-=ro
+
 
 autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
 
