@@ -2,6 +2,15 @@
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
+[[plugins]]
+repo = 'neovim/nvim-lsp'
+hook_add = '''
+lua << EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.cssls.setup{}
+EOF
+'''
+
 # [[plugins]]
 # repo = 'justmao945/vim-clang'
 # filetypes  =  ['c', 'cpp']
