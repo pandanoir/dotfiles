@@ -61,6 +61,7 @@ deploy() {
     done
 
     symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
+    symlink "$dotfiles/tmux/respawn" "$XDG_CONFIG_HOME/tmux/respawn"
     symlink "$dotfiles/zsh/zshrc" "$ZDOTDIR/.zshrc"
     symlink "$dotfiles/zsh/zprofile" "$ZDOTDIR/.zprofile"
     symlink "$dotfiles/zshenv" "$HOME/.zshenv"

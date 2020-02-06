@@ -1,0 +1,2 @@
+#!/bin/bash
+tmux list-panes -as -F '#{pane_id}' | xargs -I{} tmux respawn-pane -t {} -k $SHELL
