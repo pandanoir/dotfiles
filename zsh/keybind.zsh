@@ -18,16 +18,4 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-_double_space_to_fzf() {
-    if [[ "${LBUFFER}" =~ " $" ]]; then
-        LBUFFER="${LBUFFER}$(__fsel)"
-        local ret=$?
-        zle redisplay
-        return $ret
-    else
-        zle self-insert
-    fi
-}
-zle -N _double_space_to_fzf
-bindkey ' ' _double_space_to_fzf
-bindkey '^ ' magic-space
+bindkey '^W' fzf-file-widget
