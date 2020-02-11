@@ -25,8 +25,12 @@ repo = 'cocopon/iceberg.vim'
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = { 'colorscheme': 'iceberg' }
-let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
-let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
+" let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
+" let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
+
+let g:lightline.separator = {'left': "\ue0bc", 'right': "\ue0ba"}
+let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
+
 '''
 
 
