@@ -1,29 +1,22 @@
-# zplug
-source $ZPLUG_HOME/init.zsh
+# zinit
+# mkdir -p "$ZDOTDIR/.zinit/completions"
 
+# declare -A ZINIT
+# ZINIT[BIN_DIR]="$XDG_CACHE_HOME/zinit/bin"
+# ZINIT[HOME_DIR]="$XDG_CACHE_HOME/zinit"
+# ZINIT[PLUGINS_DIR]="$ZDOTDIR/.zinit/plugins"
+# ZINIT[COMPLETIONS_DIR]="$ZDOTDIR/.zinit/completions"
+#
+# source "$XDG_CACHE_HOME/zinit/bin/zinit.zsh"
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-completions"
-zplug "mollifier/cd-bookmark"
-zplug "mollifier/zload"
-zplug "momo-lab/zsh-replace-multiple-dots"
-zplug "changyuheng/fz", defer:1
-zplug "rupa/z", use:z.sh
-
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook is-at-least
-if is-at-least 4.3.10; then
-    add-zsh-hook chpwd chpwd_recent_dirs
-    zstyle ':chpwd:*' recent-dirs-max 5000
-    zstyle ':chpwd:*' recent-dirs-default yes
-    zstyle ':filter-select' case-insensitive yes
-fi
-
-if [[ $ZPLUG_LOADFILE -nt $ZPLUG_CACHE_DIR/interface || ! -f $ZPLUG_CACHE_DIR/interface ]]; then
-    if ! zplug check --verbose; then
-        zplug install
-    fi
-fi
-zplug load
-
-ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+zinit ice wait lucid blockf atload"zpcompinit"; zinit light "mollifier/cd-bookmark"
+zinit ice wait lucid atload"_zsh_autosuggest_start"; zinit light "zsh-users/zsh-autosuggestions"
+zinit ice wait lucid; zinit light "zsh-users/zsh-syntax-highlighting"
+zinit ice wait lucid blockf atpull"zinit creinstall -q ."; zinit light "zsh-users/zsh-completions"
+zinit ice wait lucid; zinit light "mollifier/zload"
+zinit ice wait lucid; zinit light "momo-lab/zsh-replace-multiple-dots"
+zinit ice wait lucid; zinit light "changyuheng/fz"
+zinit ice wait lucid pick"z.sh"; zinit light "rupa/z"

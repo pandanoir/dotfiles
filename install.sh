@@ -117,6 +117,10 @@ if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
     git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
     zsh "$XDG_CACHE_HOME/zplug/init.zsh"
 fi
+if ! dir_exists "$XDG_CACHE_HOME/zinit"; then
+    info "install zinit"
+    git clone https://github.com/zdharma/zinit.git "$XDG_CACHE_HOME/zinit/bin"
+fi
 if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
     info "install fzf"
     git clone https://github.com/junegunn/fzf "$XDG_CACHE_HOME/fzf"
