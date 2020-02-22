@@ -3,16 +3,17 @@ has() {
 }
 path=(
     $path
+    "$HOME/.local/bin"
+    "$HOME/local/nvim/bin"
     "/opt/local/bin"
     "/usr/local/bin"
     "/usr/bin"
     "/bin"
     "/usr/sbin"
     "/sbin"
-    "$HOME/.local/bin"
-    "$HOME/local/nvim/bin"
 )
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
+
 
 export ZPLUG_HOME="$XDG_CACHE_HOME/zplug"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
@@ -33,8 +34,9 @@ export PATH="$PATH:$GOPATH/bin"
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
-if type nvim > /dev/null 2>&1; then
+if has nvim; then
     export VIM=$HOME/local/nvim/share/nvim
+    export MANPAGER="$HOME/local/nvim/share/nvim/runtime/macros/less.sh -c 'setf man'"
     export EDITOR=$(which nvim)
 else
     export EDITOR=$(which vim)
