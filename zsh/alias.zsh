@@ -39,6 +39,7 @@ alias e='emacsclient -nw -a "" 2>/dev/null'
 
 alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
 alias vim="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
+
 if command_exists nvim; then
     alias vim="nvim"
 fi
