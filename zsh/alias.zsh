@@ -15,6 +15,7 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'
 alias gp='git push'
+alias gpl="git pull"
 alias gc='git commit'
 
 alias -g A='| awk'
@@ -50,3 +51,7 @@ if command_exists exa; then
     function chpwd() { exa }
 fi
 if command_exists bat; then alias cat='bat'; fi
+if command_exists ranger; then
+    alias ra="ranger"
+    alias rang="ranger"
+fi
