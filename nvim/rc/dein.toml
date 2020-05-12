@@ -1,8 +1,5 @@
 # GitHubリポジトリにあるプラグインを利用する
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
