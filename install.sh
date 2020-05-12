@@ -78,6 +78,7 @@ init() {
     git config --global alias.s status
     git config --global alias.d diff
     git config --global alias.unstage "reset HEAD"
+    git config --global rebase.autostash true
 
     if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
         git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
