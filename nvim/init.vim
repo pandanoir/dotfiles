@@ -47,9 +47,15 @@ syntax on
 
 "自動でコメントが入るのを防ぐ
 autocmd MyAutoCmd BufEnter,FileType * setlocal formatoptions-=ro
-
-
 autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
+
+
+" Save fold settings.
+autocmd MyAutoCmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd MyAutoCmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif
+" Don't save options.
+set viewoptions-=options
+
 
 " set number
 set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
