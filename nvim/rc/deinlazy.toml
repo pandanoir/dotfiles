@@ -57,9 +57,6 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
-# [[plugins]]
-# repo = 'junegunn/fzf'
-
 [[plugins]]
 repo = 'pbogut/fzf-mru.vim'
 on_source = [ 'fzf.vim' ]

@@ -22,10 +22,6 @@ repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
 [[plugins]]
-repo = 'dag/vim-fish'
-on_ft = ['fish']
-
-[[plugins]]
 repo = 'vim-jp/cpp-vim'
 on_ft = ['cpp']
 

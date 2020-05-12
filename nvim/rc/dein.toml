@@ -3,19 +3,6 @@
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
-repo = 'neovim/nvim-lsp'
-hook_add = '''
-lua << EOF
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.cssls.setup{}
-EOF
-'''
-
-# [[plugins]]
-# repo = 'justmao945/vim-clang'
-# filetypes  =  ['c', 'cpp']
-
-[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
@@ -33,17 +20,20 @@ let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
 
 '''
 
-
 # カーソル位置のコンテントの種類によってfiletypeを切り替える
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
-
-# 必須プラグイン
-
-# [[plugins]]
-# repo = 'rking/ag.vim'
-
+hook_add = '''
+let g:precious_enable_switchers = {
+            \	"*" : {
+            \		"setfiletype" : 1
+            \	},
+            \	"vue" : {
+            \		"setfiletype" : 0
+            \	},
+            \}
+'''
 
 
 [[plugins]]
@@ -85,7 +75,6 @@ call s:add_rule({'char': '{', 'input_after': '}'},[{'at': '\%#\w'},{'syntax' : '
 call s:add_rule({'char': '`', 'input_after': '`'},[{'at': '\%#\w'},{'syntax' : 'Comment'},{'syntax' : 'String'}])
 '''
 
-# textobj を使いたい場合必要
 [[plugins]]
 repo = 'kana/vim-textobj-user'
 
