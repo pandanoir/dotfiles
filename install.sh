@@ -19,9 +19,6 @@ setup() {
     if ! dir_exists "$dotfiles"; then
         git clone https://github.com/pandanoir/dotfiles "$dotfiles"
     fi
-    if ! dir_exists "$dotfiles/nord-gnome-terminal" && has "gnome-terminal"; then
-        git clone https://github.com/arcticicestudio/nord-gnome-terminal "$dotfiles/nord-gnome-terminal"
-    fi
     deploy
     init
 }
@@ -50,7 +47,6 @@ deploy() {
     mkdir -p "$XDG_DATA_HOME/"{npm,rustup,zsh}
 
     symlink "$dotfiles/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
-    symlink "$dotfiles/spacemacs" "$HOME/.spacemacs"
     dir_symlink "$dotfiles/vim" "$XDG_CONFIG_HOME/vim"
 
 
@@ -61,7 +57,6 @@ deploy() {
     done
 
     symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
-    symlink "$dotfiles/tmux/respawn" "$XDG_CONFIG_HOME/tmux/respawn"
     symlink "$dotfiles/zsh/zshrc" "$ZDOTDIR/.zshrc"
     symlink "$dotfiles/zsh/zprofile" "$ZDOTDIR/.zprofile"
     symlink "$dotfiles/zshenv" "$HOME/.zshenv"
@@ -89,9 +84,6 @@ init() {
     fi
     if ! file_exists "$ZDOTDIR/.zshrc.local"; then
         echo 'export NVIM=/usr/share/nvim' > "$ZDOTDIR/.zshrc.local"
-    fi
-    if ! dir_exists "$HOME/.emacs.d"; then
-        git clone https://github.com/syl20bnr/spacemacs "$HOME/.emacs.d"
     fi
 
 }
