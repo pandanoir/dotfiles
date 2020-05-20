@@ -1,7 +1,4 @@
-# utility func
-file_exists() {
-    [ -f $1 ]
-}
+source "$ZDOTDIR/utils.zsh"
 command_exists() { type "$1" > /dev/null 2>&1; }
 
 # emacsのtrampがタイムアウトするのに対応

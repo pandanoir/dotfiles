@@ -1,6 +1,4 @@
-has() {
-    type "$1" > /dev/null 2>&1
-}
+source "$ZDOTDIR/utils.zsh"
 path=(
     $path
     "$HOME/.local/bin"
@@ -61,26 +59,26 @@ if has rbenv; then
     eval "$(rbenv init -)"
 fi
 
-if [ -d $HOME/.nodebrew ]; then
+if dir_exists $HOME/.nodebrew; then
     export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
     export PATH="$PATH:$HOME/.nodebrew/current/bin:$XDG_DATA_HOME/npm/bin"
 fi
-if [ -d $HOME/.yarn ]; then
+if dir_exists $HOME/.yarn; then
     export PATH="$HOME/.yarn/bin:$PATH"
 fi
-if [ -d $HOME/.config/yarn ]; then
+if dir_exists $HOME/.config/yarn; then
     export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
 
-if [ -d $HOME/.cargo ]; then
+if dir_exists $HOME/.cargo; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
-if [ -d $XDG_DATA_HOME/cargo ]; then
+if dir_exists $XDG_DATA_HOME/cargo; then
     CARGO_HOME="$XDG_DATA_HOME"/cargo
     export CARGO_HOME=$CARGO_HOME
     export PATH="$CARGO_HOME/bin:$PATH"
 fi
-if [ -d $XDG_CACHE_HOME/fzf/bin ]; then
+if dir_exists $XDG_CACHE_HOME/fzf/bin; then
     export PATH="$XDG_CACHE_HOME/fzf/bin:$PATH"
 fi
 
@@ -107,7 +105,7 @@ else
 fi
 export FZF_COMPLETION_TRIGGER=",,"
 
-if [ -n "$FZF_DEFAULT_COMMAND" ]; then
+if ! is_empty_string "$FZF_DEFAULT_COMMAND"; then
     FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
     export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
     export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
