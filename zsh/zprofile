@@ -96,10 +96,22 @@ export FZF_DEFAULT_OPTS="--reverse -m --color"
 # export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
 
-export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
-FZF_DEFAULT_COMMAND="ag -g ''; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
+if has rg; then
+    export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+    FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+elif has ag; then
+    export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
+    FZF_DEFAULT_COMMAND="ag -g ''"
+else
+    FZF_DEFAULT_COMMAND=
+fi
 export FZF_COMPLETION_TRIGGER=",,"
-export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
-[ -f $ZDOTDIR/.zprofile.local ] && source $ZDOTDIR/.zprofile.local
+if [ -n "$FZF_DEFAULT_COMMAND" ]; then
+    FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
+    export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
+    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+else
+    unset FZF_DEFAULT_COMMAND
+    unset FZF_CTRL_T_COMMAND
+fi
