@@ -1,13 +1,7 @@
 alias mv='mv -i'
 alias cp='cp -i'
 alias cdb='cd-bookmark'
-alias ekill="emacsclient -e '(kill-emacs)'"
-alias erestart="ekill && estart"
 alias copy='xsel --clipboard --input'
-alias cl='clear'
-alias cle='clear'
-alias clea='clear'
-alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias g='git'
 alias ga='git add'
@@ -33,10 +27,6 @@ alias -g .zprofile="$ZDOTDIR/.zprofile"
 alias -g .zp="$ZDOTDIR/.zprofile"
 alias -g .zpr="$ZDOTDIR/.zprofile"
 alias -g .zpro="$ZDOTDIR/.zprofile"
-
-# vim_version=`vim --version | head -1 | sed 's/^.*\ \([0-9]\)\.\([0-9]\)\ .*$/\1\2/'`
-alias emacs='emacs -nw'
-alias e='emacsclient -nw -a "" 2>/dev/null'
 
 alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
 alias vim="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
