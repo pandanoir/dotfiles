@@ -12,7 +12,7 @@ source "$XDG_CACHE_HOME/zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-zinit ice wait"1" lucid blockf atload"zpcompinit";          zinit light "mollifier/cd-bookmark"
+zinit ice wait"1" lucid blockf atload"zicompinit; zicdreplay";          zinit light "mollifier/cd-bookmark"
 zinit ice wait lucid atload"_zsh_autosuggest_start";        zinit light "zsh-users/zsh-autosuggestions"
 zinit ice wait lucid blockf atpull"zinit creinstall -q .";  zinit light "zsh-users/zsh-completions"
 zinit ice wait lucid;               zinit light "zsh-users/zsh-syntax-highlighting"
