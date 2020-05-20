@@ -89,19 +89,20 @@ init() {
 
 }
 # check the requirements
-if ! has git || ! has zsh || (! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim") || ! has tmux; then
-    if ! has git; then
-        echo "you must install git!"
-    fi
-    if ! has zsh; then
-        echo "you must install zsh!"
-    fi
-    if ! has nvim; then
-        echo "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
-    fi
-    if ! has tmux; then
-        echo "you must install tmux!"
-    fi
+if ! has git; then
+    echo "you must install git!"
+    exit 1
+fi
+if ! has zsh; then
+    echo "you must install zsh!"
+    exit 1
+fi
+if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
+    echo "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
+    exit 1
+fi
+if ! has tmux; then
+    echo "you must install tmux!"
     exit 1
 fi
 
