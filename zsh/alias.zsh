@@ -39,9 +39,9 @@ if command_exists nvim; then
     alias vim="nvim"
 fi
 if command_exists exa; then
-    alias ls="exa"
-    alias ll='exa -algh --git'
-    alias lg='exa --git-ignore'
+    alias ls="exa --group-directories-first"
+    alias ll='exa --group-directories-first -algh --git'
+    alias lg='exa --group-directories-first --git-ignore'
     function chpwd() { exa }
 else
     if [ "$(uname)" = 'Darwin' ]; then
