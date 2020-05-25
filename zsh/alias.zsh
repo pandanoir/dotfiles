@@ -1,7 +1,11 @@
 alias mv='mv -i'
 alias cp='cp -i'
 alias cdb='cd-bookmark'
-alias copy='xsel --clipboard --input'
+if has pbcopy; then
+    alias copy="pbcopy"
+else
+    alias copy='xsel --clipboard --input'
+fi
 
 alias g='git'
 alias ga='git add'
@@ -13,7 +17,7 @@ alias gpl="git pull"
 alias gc='git commit'
 
 alias -g A='| awk'
-alias -g C='| copy' # copy
+alias -g C='| copy'
 alias -g L='| $VIM/runtime/macros/less.sh -R'
 alias -g S='| sort'
 alias -g U='| uniq'
@@ -39,6 +43,13 @@ if command_exists exa; then
     alias ll='exa -algh --git'
     alias lg='exa --git-ignore'
     function chpwd() { exa }
+else
+    if [ "$(uname)" = 'Darwin' ]; then
+        alias ll='ls -l -G'
+    else
+        alias ll='ls -l --color=always'
+    fi
+    alias lg='exa --git-ignore'
 fi
 if command_exists bat; then alias cat='bat'; fi
 if command_exists ranger; then
