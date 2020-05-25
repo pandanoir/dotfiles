@@ -10,3 +10,7 @@ file_exists() {
 is_empty_string() {
     [ -z "$1" ]
 }
+is_mac() {
+    [ "$(uname)" = 'Darwin' ]
+}
+

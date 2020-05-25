@@ -44,7 +44,7 @@ if command_exists exa; then
     alias lg='exa --group-directories-first --git-ignore'
     function chpwd() { exa --group-directories-first }
 else
-    if [ "$(uname)" = 'Darwin' ]; then
+    if is_mac; then
         alias ll='ls -l -G'
     else
         alias ll='ls -l --color=always'

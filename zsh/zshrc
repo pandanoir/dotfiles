@@ -24,7 +24,7 @@ setopt globdots # 明確なドットの指定なしで.から始まるファイ�
 
 setopt auto_cd
 function chpwd() {
-    if [ "$(uname)" = 'Darwin' ]; then
+    if is_mac; then
         ls -G
     else
         ls --color=auto
