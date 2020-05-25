@@ -29,9 +29,9 @@ info() {
 deploy() {
     info "start deploy"
     symlink() {
-        if ! [ -e $2 ]; then
-            info "create symlink from $1 to $2"
-            ln -sf $1 $2
+        if ! [ -e "$2" ]; then
+            info "create symlink from $dotfiles/$1 to $2"
+            ln -sf "$dotfiles/$1" "$2"
         fi
     }
     dir_symlink() {
@@ -42,36 +42,34 @@ deploy() {
             fi
         done
     }
-    mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions}
-    mkdir -p "$XDG_CACHE_HOME/"{vim,npm}
-    mkdir -p "$XDG_DATA_HOME/"{npm,rustup,zsh}
+    mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions} \
+        "$XDG_CACHE_HOME/"{vim,npm} \
+        "$XDG_DATA_HOME/"{npm,rustup,zsh}
 
-    symlink "$dotfiles/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
-    dir_symlink "$dotfiles/vim" "$XDG_CONFIG_HOME/vim"
+    symlink nvim  "$XDG_CONFIG_HOME/nvim"
+    symlink vimrc "$XDG_CONFIG_HOME/vim/vimrc"
+    dir_symlink   "$dotfiles/vim" "$XDG_CONFIG_HOME/vim"
 
-
-    symlink "$dotfiles/nvim" "$XDG_CONFIG_HOME/nvim"
     dir_symlink "$dotfiles/zsh/functions" "$ZDOTDIR/functions"
     for file in `ls -1 "$dotfiles/zsh/" | grep \.zsh$`; do
-        symlink "$dotfiles/zsh/$file" "$ZDOTDIR/$file"
+        symlink zsh/"$file" "$ZDOTDIR/$file"
     done
+    symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
+    symlink zsh/zprofile "$ZDOTDIR/.zprofile"
+    symlink zshenv       "$HOME/.zshenv"
+    symlink zprofile     "$HOME/.bash_profile"
 
-    symlink "$dotfiles/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
-    symlink "$dotfiles/zsh/zshrc" "$ZDOTDIR/.zshrc"
-    symlink "$dotfiles/zsh/zprofile" "$ZDOTDIR/.zprofile"
-    symlink "$dotfiles/zshenv" "$HOME/.zshenv"
-    symlink "$dotfiles/zprofile" "$HOME/.bash_profile"
-    symlink "$dotfiles/npmrc" "$XDG_CONFIG_HOME/npm/npmrc"
-    symlink "$dotfiles/inputrc" "$XDG_CONFIG_HOME/readline/inputrc"
-    symlink "$dotfiles/ranger" "$XDG_CONFIG_HOME/ranger"
+    symlink tmux.conf "$XDG_CONFIG_HOME/tmux/tmux.conf"
+    symlink npmrc     "$XDG_CONFIG_HOME/npm/npmrc"
+    symlink inputrc   "$XDG_CONFIG_HOME/readline/inputrc"
+    symlink ranger    "$XDG_CONFIG_HOME/ranger"
+
     if has ranger && ! dir_exists "$dotfiles/ranger/plugins/ranger_devicons"; then
         git clone https://github.com/alexanderjeurissen/ranger_devicons "$dotfiles/ranger/plugins/ranger_devicons"
         cd "$dotfiles/ranger/plugins/ranger_devicons"
         make install
     fi
-    if file_exists "$dotfiles/nord-gnome-terminal/src/nord.sh"; then
-        bash "$dotfiles/nord-gnome-terminal/src/nord.sh"
-    fi
+    info "finish deploy"
 }
 init() {
     info "start init"
@@ -86,6 +84,7 @@ init() {
     if ! file_exists "$ZDOTDIR/.zshrc.local"; then
         echo 'export NVIM=/usr/share/nvim' > "$ZDOTDIR/.zshrc.local"
     fi
+    info "finish init"
 
 }
 # check the requirements
