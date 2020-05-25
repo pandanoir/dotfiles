@@ -42,7 +42,7 @@ if command_exists exa; then
     alias ls="exa --group-directories-first"
     alias ll='exa --group-directories-first -algh --git'
     alias lg='exa --group-directories-first --git-ignore'
-    function chpwd() { exa }
+    function chpwd() { exa --group-directories-first }
 else
     if [ "$(uname)" = 'Darwin' ]; then
         alias ll='ls -l -G'
