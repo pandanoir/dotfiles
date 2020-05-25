@@ -10,8 +10,8 @@ path=(
     "/usr/sbin"
     "/sbin"
 )
-fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
+fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
 
 export ZPLUG_HOME="$XDG_CACHE_HOME/zplug"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
@@ -20,14 +20,18 @@ export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
 
 
 # Java
-JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-export JAVA_HOME
-export PATH="$PATH:${JAVA_HOME}/bin"
+if dir_exists /usr/bin/javac; then
+    JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+    export JAVA_HOME
+    export PATH="$PATH:${JAVA_HOME}/bin"
+fi
 
 # go
 GOPATH="$HOME/go"
-export GOPATH
-export PATH="$PATH:$GOPATH/bin"
+if dir_exists "$GOPATH"; then
+    export GOPATH
+    export PATH="$PATH:$GOPATH/bin"
+fi
 
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
