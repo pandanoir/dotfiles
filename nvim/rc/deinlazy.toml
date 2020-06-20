@@ -32,10 +32,9 @@ on_cmd = [
 hook_add = '''
 nnoremap <silent> ,a :<C-u>Ag<CR>
 nnoremap <silent> ,f :<C-u>ProjectFiles<CR>
-nnoremap <silent> ,F :<C-u>Files<CR>
+nnoremap <silent> ,g :<C-u>Files<CR>
 nnoremap <silent> ,b :<C-u>Buffers<CR>
 nnoremap <silent> ,m :<C-u>FZFMru<CR>
-nnoremap <silent> ,l :<C-u>Files ~/Documents/library<CR>
 set rtp+=$XDG_CACHE_HOME/fzf
 '''
 hook_source = '''
