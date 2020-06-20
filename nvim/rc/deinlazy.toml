@@ -1,49 +1,4 @@
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertEnter'
-hook_source = '''
-let g:deoplete#enable_at_startup = 1
-call g:deoplete#custom#option('auto_complete_delay', 0)
-call g:deoplete#custom#option('auto_complete_start_length', 1)
-call g:deoplete#custom#option('enable_refresh_always', 0)
-call g:deoplete#custom#var('file', 'enable_buffer_path', 1)
-inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-[[plugins]]
-repo = 'tbodt/deoplete-tabnine'
-build = './install.sh'
-depends = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'zchee/deoplete-clang'
-on_ft = 'cpp'
-on_event = 'InsertEnter'
-on_source = ['deoplete.nvim']
-hook_add = """
-" let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-6.0/lib/libclang-6.0.so.1'
-let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-10/lib/libclang-10.so.1'
-let g:deoplete#sources#clang#clang_header='/usr/include/clang'
-let g:deoplete#sources#clang#sort_algo='priority'
-"""
-
-[[plugins]]
-repo = 'sebastianmarkow/deoplete-rust'
-on_ft = 'rust'
-on_source = ['deoplete.nvim']
-hook_add = '''
-" let g:deoplete#sources#rust#racer_binary='{racerバイナリのフルパス}'
-" let g:deoplete#sources#rust#rust_source_path=$(rustc --print sysroot)/lib/rustlib/src/rust/
-" let $RUST_SRC_PATH='{$(rustc --print sysroot)/lib/rustlib/src/rust/srcをここに書く}'
-let g:deoplete#sources#rust#show_duplicates=1
-let g:deoplete#sources#rust#disable_keymap=1
-" nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-" nmap <buffer> K  <plug>DeopleteRustShowDocumentation
-'''
-
-[[plugins]]
 repo = 'Shougo/neosnippet.vim'
 on_ft = 'snippet'
 on_event = 'InsertEnter'
@@ -105,8 +60,9 @@ if has('nvim')
     let buf = nvim_create_buf(v:false, v:true)
     let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
     let win = nvim_open_win(buf, v:true, opts)
-    call setwinvar(win, '&winhighlight', 'NormalFloat:'.a:hl)
-    call setwinvar(win, '&colorcolumn', '')
+    call nvim_win_set_option(win, 'winhighlight', 'NormalFloat:'.a:hl)
+    call nvim_win_set_option(win, 'colorcolumn', '')
+    call nvim_win_set_option(win, 'winblend', 0)
     return buf
   endfunction
 
