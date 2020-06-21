@@ -15,6 +15,8 @@ alias gs='git status'
 alias gp='git push'
 alias gpl="git pull"
 alias gc='git commit'
+alias gco='git checkout'
+alias gb='git branch'
 
 alias -g A='| awk'
 alias -g C='| copy'
