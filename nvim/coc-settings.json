@@ -1,17 +1,38 @@
 {
- "languageserver": {
+  "languageserver": {
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": ["~/.ccls", ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": [
+        "~/.ccls",
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
       "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         },
-         "clang": {
-             "extraArgs": ["-std=gnu++17", "-Wall", "-Wextra", "-O2", "-DLOCAL", "-I/opt/boost/gcc/include", "-L/opt/boost/gcc/lib"]
-         }
-       }
+        "cache": {
+          "directory": "/tmp/ccls"
+        },
+        "clang": {
+          "extraArgs": [
+            "-std=gnu++17",
+            "-Wall",
+            "-Wextra",
+            "-O2",
+            "-DLOCAL",
+            "-I/opt/boost/gcc/include",
+            "-L/opt/boost/gcc/lib"
+          ]
+        }
+      }
     }
-  }
+  },
+  "eslint.filetypes": ["javascript", "javascript.jsx", "vue", "typescript", "typescriptreact"],
+  "eslint.autoFixOnSave": true,
+  "prettier.disableLanguages": [],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
+  "vetur.format.enable": false
 }
+
