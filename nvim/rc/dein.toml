@@ -31,7 +31,7 @@ call defx#custom#option('_', {
             \ 'preview_width': 80,
             \ })
 
-nnoremap <silent> ,f :Defx -resume<CR>
+nnoremap <silent> ,s :Defx -resume<CR>
 
 
 function! s:previewWindowOpened() abort
