@@ -114,6 +114,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <C-k><C-g> :CocCommand eslint.executeAutofix
+nmap <space>f <Plug>(coc-fix-current)
+
+
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 set termguicolors
