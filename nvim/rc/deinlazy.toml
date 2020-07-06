@@ -91,3 +91,8 @@ if has('nvim')
   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 endif
 '''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
