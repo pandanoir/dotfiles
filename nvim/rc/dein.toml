@@ -217,6 +217,16 @@ endfor
 '''
 
 [[plugins]]
+repo = 'justinmk/vim-sneak'
+hook_add = '''
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+nmap : <Plug>Sneak_;
+'''
+
+[[plugins]]
 repo = 'tpope/vim-eunuch'
 
 [[plugins]]
