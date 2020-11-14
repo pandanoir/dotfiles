@@ -1,8 +1,4 @@
 [[plugins]]
-repo = 'pbogut/fzf-mru.vim'
-on_source = [ 'fzf.vim' ]
-
-[[plugins]]
 repo = 'junegunn/fzf.vim'
 on_cmd = [
   'Files',
@@ -15,14 +11,12 @@ on_cmd = [
   'GFiles',
   'Ag',
   'Rg',
-  'FZFMru',
 ]
 hook_add = '''
 nnoremap <silent> ,r :<C-u>Rg<CR>
 nnoremap <silent> ,f :<C-u>ProjectFiles<CR>
 nnoremap <silent> ,g :<C-u>Files<CR>
 nnoremap <silent> ,b :<C-u>Buffers<CR>
-nnoremap <silent> ,m :<C-u>FZFMru<CR>
 set rtp+=$XDG_CACHE_HOME/fzf
 '''
 hook_source = '''
