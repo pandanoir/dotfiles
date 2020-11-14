@@ -19,6 +19,19 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
+git-rm-merged-branch() {
+  git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
+}
+git-set-upstream-branch() {
+  git branch --set-upstream-to="origin/$(git branch --show-current)"
+}
+
+fcs() {
+  local commits commit
+  commits=$(git --no-pager log --color=always --all --oneline --abbrev-commit --decorate=full 2>&1) &&
+  commit=$(echo "$commits" | fzf +s +m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
+}
 
 alias -g A='| awk'
 alias -g C='| copy'
