@@ -22,10 +22,8 @@ nnoremap q :<C-u>q<CR>
 nnoremap Q q
 
 nnoremap ; :
-nnoremap : ;
 
-vnoremap ; :
-vnoremap : ;
+vmap ; :
 
 "削除時にヤンクしない
 nnoremap x "_x
