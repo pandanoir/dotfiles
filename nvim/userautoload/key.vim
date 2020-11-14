@@ -1,5 +1,3 @@
-imap <C-d> <C-y>,
-
 nnoremap s <Nop>
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k

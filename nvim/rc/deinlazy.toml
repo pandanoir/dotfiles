@@ -1,34 +1,21 @@
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_ft = 'snippet'
-on_event = 'InsertEnter'
-hook_source = '''
-let g:neosnippet#disable_runtime_snippets = { "_": 1, }
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory = g:config_home . '/nvim/snippets'
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-'''
-
-[[plugins]]
 repo = 'pbogut/fzf-mru.vim'
 on_source = [ 'fzf.vim' ]
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 on_cmd = [
-    'Files',
-    'ProjectFiles',
-    'Buffers',
-    'BLines',
-    'History',
-    'Tags',
-    'BTags',
-    'GFiles',
-    'Ag',
-    'Rg',
-    'FZFMru',
+  'Files',
+  'ProjectFiles',
+  'Buffers',
+  'BLines',
+  'History',
+  'Tags',
+  'BTags',
+  'GFiles',
+  'Ag',
+  'Rg',
+  'FZFMru',
 ]
 hook_add = '''
 nnoremap <silent> ,r :<C-u>Rg<CR>
@@ -44,12 +31,8 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-" command! -bang -nargs=? -complete=dir Files
-"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'head -20 {}']}, <bang>0)
-
-
+  \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'head -20 {}']}, <bang>0)
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
