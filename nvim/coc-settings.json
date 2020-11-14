@@ -29,10 +29,13 @@
       }
     }
   },
-  "eslint.filetypes": ["javascript", "javascript.jsx", "vue", "typescript", "typescriptreact"],
+  "eslint.filetypes": ["javascript", "javascript.jsx", "vue", "typescript", "typescript.tsx", "typescriptreact"],
   "eslint.autoFixOnSave": true,
-  "prettier.disableLanguages": [],
+  "tsserver.enableJavascript": false,
+  "prettier.disableLanguages": ["json"],
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
-  "vetur.format.enable": false
+  "vetur.format.enable": false,
+  "json.enable": true,
+  "json.format.enable": true
 }
 
