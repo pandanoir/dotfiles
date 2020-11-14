@@ -1,6 +1,6 @@
 " reset augroup
 augroup MyAutoCmd
-    autocmd!
+  autocmd!
 augroup END
 
 filetype off
@@ -49,13 +49,11 @@ syntax on
 autocmd MyAutoCmd BufEnter,FileType * setlocal formatoptions-=ro
 autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
 
-
 " Save fold settings.
 autocmd MyAutoCmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd MyAutoCmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif
 " Don't save options.
 set viewoptions-=options
-
 
 " set number
 set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
@@ -63,12 +61,9 @@ set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
 
-if &shell =~# 'fish$'
-    set shell=sh
-endif
-
 let g:jsx_ext_required = 1
 
 runtime! userautoload/filetype.vim
 
 filetype plugin indent on     " Required!
+
