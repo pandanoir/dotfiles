@@ -50,6 +50,10 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/cache
 setopt auto_list
 setopt IGNOREEOF
 setopt auto_menu
+_ssh() {
+  compadd `grep '^Host ' ~/.ssh/config | awk '$0=$2' | sort`
+}
+compdef _ssh ssh
 # setopt menu_complete
 
 if command_exists fasd; then
