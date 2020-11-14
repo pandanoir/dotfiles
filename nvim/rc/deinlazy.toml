@@ -96,3 +96,7 @@ endif
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
+[[plugins]]
+repo = 'chr4/nginx.vim'
+on_ft = ['nginx']
+
