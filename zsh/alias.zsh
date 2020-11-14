@@ -13,10 +13,12 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'
 alias gp='git push'
+alias gpo='git push origin HEAD'
 alias gpl="git pull"
 alias gc='git commit'
 alias gco='git checkout'
 alias gb='git branch'
+alias gl='git log --graph --oneline --abbrev-commit'
 
 alias -g A='| awk'
 alias -g C='| copy'
