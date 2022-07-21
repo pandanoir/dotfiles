@@ -152,3 +152,11 @@ on_ft = ['toml']
 repo = 'chr4/nginx.vim'
 on_ft = ['nginx']
 
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
+hook_source = '''
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+'''
