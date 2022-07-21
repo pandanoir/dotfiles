@@ -6,6 +6,7 @@ if has pbcopy; then
 else
     alias copy='xsel --clipboard --input'
 fi
+alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias g='git'
 alias ga='git add'
@@ -19,6 +20,8 @@ alias gc='git commit'
 alias gco='git checkout'
 alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
+alias gtr='git log --color=always --graph --abbrev-commit --oneline'
+alias gsw='git switch'
 git-rm-merged-branch() {
   git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
 }
