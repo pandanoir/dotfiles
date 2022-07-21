@@ -10,19 +10,27 @@ alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias g='git'
 alias ga='git add'
+alias gbr='git branch'
 alias gd='git diff'
+alias gdw='git diff -w'
 alias gdc='git diff --cached'
+alias gdcw='git diff --cached -w'
 alias gs='git status'
 alias gp='git push'
-alias gpo='git push origin HEAD'
+alias gpo='git push origin HEAD -u'
 alias gpl="git pull"
 alias gc='git commit'
 alias gco='git checkout'
+alias gcp='git cherry-pick'
+alias gsw='git switch'
 alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 alias gsw='git switch'
 alias gre='git restore'
+gro() {
+  git rebase origin/$(git symbolic-ref --short HEAD)
+}
 git-rm-merged-branch() {
   git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
 }
@@ -36,6 +44,20 @@ fcs() {
   commit=$(echo "$commits" | fzf +s +m -e --ansi --reverse) &&
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
+fbr() {
+  git branch | fzf +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //'
+}
+
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+  fi
+  zle self-insert
+}
+
+zle -N globalias
+
+bindkey " " globalias
 
 alias -g A='| awk'
 alias -g C='| copy'
@@ -66,8 +88,10 @@ if command_exists exa; then
     function chpwd() { exa --group-directories-first }
 else
     if is_mac; then
+        alias ls='ls -G'
         alias ll='ls -l -G'
     else
+        alias ls='ls --color=always'
         alias ll='ls -l --color=always'
     fi
     alias lg='exa --git-ignore'
