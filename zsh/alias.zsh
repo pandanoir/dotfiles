@@ -22,6 +22,7 @@ alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 alias gsw='git switch'
+alias gre='git restore'
 git-rm-merged-branch() {
   git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
 }
