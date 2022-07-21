@@ -1,6 +1,8 @@
 #profile
 # zmodload zsh/zprof && zprof
 
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
 # XDG
 if [[ -z "$XDG_CONFIG_HOME" ]]; then
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -27,3 +29,5 @@ fi
 
 # load local .zshenv
 source "$ZDOTDIR/.zprofile"
+source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
