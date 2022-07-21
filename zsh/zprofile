@@ -25,6 +25,11 @@ if dir_exists /usr/bin/javac; then
     export JAVA_HOME
     export PATH="$PATH:${JAVA_HOME}/bin"
 fi
+if dir_exists /usr/bin/java; then
+    JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
+    export JAVA_HOME
+    export PATH="$PATH:${JAVA_HOME}"
+fi
 
 # go
 GOPATH="$HOME/go"
@@ -47,6 +52,10 @@ fi
 # cpp
 export CPLUS_INCLUDE_PATH=/opt/local/include
 
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 # node_modules
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
@@ -59,14 +68,23 @@ if has plenv; then
     eval "$(plenv init -)";
 fi
 
-if has rbenv; then
+RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+if file_exists "$RBENV_ROOT/bin/rbenv"; then
+    export RBENV_ROOT
+    export PATH="$RBENV_ROOT/bin:$PATH"
     eval "$(rbenv init -)"
 fi
 
 if dir_exists $HOME/.nodebrew; then
     export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
-    export PATH="$PATH:$HOME/.nodebrew/current/bin:$XDG_DATA_HOME/npm/bin"
+    export PATH="$PATH:$HOME/.nodebrew/current/bin"
 fi
+export PATH="$PATH:$XDG_DATA_HOME/npm/bin"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 if dir_exists $HOME/.yarn; then
     export PATH="$HOME/.yarn/bin:$PATH"
 fi
