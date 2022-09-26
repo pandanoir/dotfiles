@@ -79,6 +79,7 @@ init() {
     git config --global alias.br branch
     git config --global alias.b branch
     git config --global alias.unstage "reset HEAD"
+    git config --global alias.un "reset HEAD"
     git config --global rebase.autostash true
 
     if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
