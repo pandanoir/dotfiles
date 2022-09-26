@@ -44,11 +44,29 @@ end
 
 local nvim_lsp = require('lspconfig')
 nvim_lsp.tsserver.setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+  on_attach = on_attach,
+  flags = lsp_flags,
+  root_dir = nvim_lsp.util.root_pattern("package.json"),
 }
 nvim_lsp.rust_analyzer.setup{
-    on_attach = on_attach,
+  on_attach = on_attach,
+}
+nvim_lsp.denols.setup{
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern("deno.json"),
+  init_options = {
+    lint = true,
+    unstable = true,
+    suggest = {
+      imports = {
+        hosts = {
+          ["https://deno.land"] = true,
+          ["https://cdn.nest.land"] = true,
+          ["https://crux.land"] = true,
+        },
+      },
+    },
+  },
 }
 EOF
 '''
