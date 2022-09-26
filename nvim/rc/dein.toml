@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 hook_add = '''
+set signcolumn=yes
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -33,12 +34,21 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', bufopts)
+
+  
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+  )
 end
 
-require('lspconfig')['tsserver'].setup{
+local nvim_lsp = require('lspconfig')
+nvim_lsp.tsserver.setup{
     on_attach = on_attach,
     flags = lsp_flags,
+}
+nvim_lsp.rust_analyzer.setup{
+    on_attach = on_attach,
 }
 EOF
 '''
@@ -149,5 +159,65 @@ repo = 'tomtom/tcomment_vim'
 hook_add = '''
 au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>
 au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-nvim-lsp'
+
+[[plugins]]
+repo = 'Shougo/deoppet.nvim'
+do = ':UpdateRemotePlugins'
+hook_add = '''
+call deoppet#initialize()
+call deoppet#custom#option('snippets',
+\ map(globpath(&runtimepath, 'neosnippets', 1, 1),
+\     { _, val -> { 'path': val } }))
+
+imap <C-k>  <Plug>(deoppet_expand)
+imap <C-f>  <Plug>(deoppet_jump_forward)
+imap <C-b>  <Plug>(deoppet_jump_backward)
+smap <C-f>  <Plug>(deoppet_jump_forward)
+smap <C-b>  <Plug>(deoppet_jump_backward)
+'''
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+hook_add = '''
+" Change source options
+call ddc#custom#patch_global('sources', ['around', 'nvim-lsp', 'deoppet'])
+call ddc#custom#patch_global('sourceOptions', {
+      \ '_': { 'matchers': ['matcher_head'] },
+      \ 'deoppet': {'dup': v:true, 'mark': 'dp'},
+      \ 'nvim-lsp': {
+      \   'mark': 'L',
+      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
+      \ })
+
+" Use Customized labels
+call ddc#custom#patch_global('sourceParams', {
+      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+      \ })
+
+
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+\ ddc#map#pum_visible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+
+call ddc#enable()
 '''
 
