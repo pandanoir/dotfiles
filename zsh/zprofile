@@ -117,7 +117,11 @@ export FZF_DEFAULT_OPTS="--reverse -m --color"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
 
 if has rg; then
-    export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+    if has bat; then
+        export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+    else
+        export FZF_CTRL_T_OPTS='--preview cat'
+    fi
     FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 elif has ag; then
     export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
