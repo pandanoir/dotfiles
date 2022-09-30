@@ -180,62 +180,6 @@ au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
 '''
 
 [[plugins]]
-repo = 'Shougo/ddc-nvim-lsp'
-
-[[plugins]]
-repo = 'Shougo/deoppet.nvim'
-do = ':UpdateRemotePlugins'
-hook_add = '''
-call deoppet#initialize()
-call deoppet#custom#option('snippets',
-\ map(globpath(&runtimepath, 'neosnippets', 1, 1),
-\     { _, val -> { 'path': val } }))
-
-imap <C-k>  <Plug>(deoppet_expand)
-imap <C-f>  <Plug>(deoppet_jump_forward)
-imap <C-b>  <Plug>(deoppet_jump_backward)
-smap <C-f>  <Plug>(deoppet_jump_forward)
-smap <C-b>  <Plug>(deoppet_jump_backward)
-'''
-
-[[plugins]]
 repo = 'vim-denops/denops.vim'
 
-[[plugins]]
-repo = 'Shougo/ddc-matcher_head'
-
-[[plugins]]
-repo = 'Shougo/ddc-around'
-
-[[plugins]]
-repo = 'Shougo/ddc.vim'
-hook_add = '''
-" Change source options
-call ddc#custom#patch_global('sources', ['around', 'nvim-lsp', 'deoppet'])
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': { 'matchers': ['matcher_head'] },
-      \ 'deoppet': {'dup': v:true, 'mark': 'dp'},
-      \ 'nvim-lsp': {
-      \   'mark': 'L',
-      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
-      \ })
-
-" Use Customized labels
-call ddc#custom#patch_global('sourceParams', {
-      \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
-      \ })
-
-
-
-" <TAB>: completion.
-inoremap <silent><expr> <TAB>
-\ ddc#map#pum_visible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#map#manual_complete()
-
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-
-call ddc#enable()
-'''
 
