@@ -50,6 +50,8 @@ autocmd MyAutoCmd BufEnter,FileType * setlocal formatoptions-=ro
 autocmd MyAutoCmd BufRead,BufNewFile *.c set foldmethod=marker
 
 " Save fold settings.
+set foldmethod=indent
+set foldlevel=99 " 最初は全部開いておく
 autocmd MyAutoCmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd MyAutoCmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif
 " Don't save options.
