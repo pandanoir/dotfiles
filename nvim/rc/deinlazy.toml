@@ -36,15 +36,15 @@ endfunction
 '''
 hook_source = '''
 call defx#custom#option('_', {
-  \ 'winwidth': 40,
-  \ 'split': 'vertical',
-  \ 'direction': 'topleft',
-  \ 'show_ignored_files': 1,
-  \ 'buffer_name': 'explorer',
-  \ 'floating_preview': 1,
-  \ 'vertical_preview': 1,
-  \ 'preview_width': 80,
-  \ })
+      \ 'winwidth': 40,
+      \ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 1,
+      \ 'buffer_name': 'explorer',
+      \ 'floating_preview': 1,
+      \ 'vertical_preview': 1,
+      \ 'preview_width': 80,
+      \ })
 augroup MyAutoCmd
   autocmd!
   autocmd VimEnter * Defx `system('git rev-parse --show-toplevel 2> /dev/null')[:-2]` -search=`expand('%:p')`
@@ -56,13 +56,13 @@ augroup END
 
 function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <CR>
-    \ defx#is_directory() ?
-    \  defx#do_action('open_or_close_tree') :
-    \  defx#do_action('multi', ['drop', 'quit'])
+        \ defx#is_directory() ?
+        \  defx#do_action('open_or_close_tree') :
+        \  defx#do_action('multi', ['drop', 'quit'])
   nnoremap <silent><buffer><expr> l
-    \ defx#is_directory() ?
-    \  defx#do_action('open_or_close_tree') :
-    \  defx#do_action('multi', ['drop', 'quit'])
+        \ defx#is_directory() ?
+        \  defx#do_action('open_or_close_tree') :
+        \  defx#do_action('multi', ['drop', 'quit'])
   nnoremap <silent><buffer><expr> c defx#do_action('copy')
   nnoremap <silent><buffer><expr> m defx#do_action('move')
   nnoremap <silent><buffer><expr> p defx#do_action('paste')
