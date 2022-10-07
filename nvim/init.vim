@@ -38,7 +38,6 @@ let $DOTVIM = $config_home . '/nvim'
 set backspace=start,eol,indent whichwrap=b,s,[,],,~
 
 set incsearch ignorecase smartcase hlsearch
-nnoremap <C-k><C-k> :set nohlsearch!<CR><Esc>
 
 set timeoutlen=300
 
