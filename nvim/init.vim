@@ -20,11 +20,8 @@ set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 " set ambiwidth=double "◻︎や◯がくずれるのを対処
 
 let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
-runtime! userautoload/stopdefaultplugins.vim
-runtime! userautoload/dein.vim
-runtime! userautoload/cpp.vim
-runtime! userautoload/indent.vim
-runtime! userautoload/key.vim
+runtime! userautoload/*.vim
+runtime! keymappings/*.vim
 
 set completeopt+=noinsert,noselect
 set completeopt-=preview
