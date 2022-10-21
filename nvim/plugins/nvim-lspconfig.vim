@@ -1,4 +1,5 @@
 set signcolumn=yes
+autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>
 lua << EOF
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
