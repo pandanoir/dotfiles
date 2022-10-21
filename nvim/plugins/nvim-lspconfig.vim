@@ -47,9 +47,6 @@ nvim_lsp.tsserver.setup{
   flags = lsp_flags,
   root_dir = nvim_lsp.util.root_pattern("package.json"),
 }
-nvim_lsp.rust_analyzer.setup{
-  on_attach = on_attach,
-}
 nvim_lsp.denols.setup{
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("deno.json"),
@@ -67,7 +64,16 @@ nvim_lsp.denols.setup{
     },
   },
 }
+nvim_lsp.eslint.setup{
+  on_attach = on_attach,
+}
+nvim_lsp.jsonls.setup{
+  on_attach = on_attach,
+}
 nvim_lsp.vimls.setup{
+  on_attach = on_attach,
+}
+nvim_lsp.rust_analyzer.setup{
   on_attach = on_attach,
 }
 EOF
