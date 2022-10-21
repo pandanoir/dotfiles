@@ -1,14 +1,14 @@
 source "$ZDOTDIR/utils.zsh"
 path=(
-    $path
-    "$HOME/.local/bin"
-    "$HOME/local/nvim/bin"
-    "/opt/local/bin"
-    "/usr/local/bin"
-    "/usr/bin"
-    "/bin"
-    "/usr/sbin"
-    "/sbin"
+  $path
+  "$HOME/.local/bin"
+  "$HOME/local/nvim/bin"
+  "/opt/local/bin"
+  "/usr/local/bin"
+  "/usr/bin"
+  "/bin"
+  "/usr/sbin"
+  "/sbin"
 )
 
 fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
@@ -21,32 +21,32 @@ export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
 
 # Java
 if dir_exists /usr/bin/javac; then
-    JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-    export JAVA_HOME
-    export PATH="$PATH:${JAVA_HOME}/bin"
+  JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+  export JAVA_HOME
+  export PATH="$PATH:${JAVA_HOME}/bin"
 fi
 if dir_exists /usr/bin/java; then
-    JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
-    export JAVA_HOME
-    export PATH="$PATH:${JAVA_HOME}"
+  JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
+  export JAVA_HOME
+  export PATH="$PATH:${JAVA_HOME}"
 fi
 
 # go
 GOPATH="$HOME/go"
 if dir_exists "$GOPATH"; then
-    export GOPATH
-    export PATH="$PATH:$GOPATH/bin"
+  export GOPATH
+  export PATH="$PATH:$GOPATH/bin"
 fi
 
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 if has nvim; then
-    export VIM=$HOME/local/nvim/share/nvim
-    export MANPAGER="$HOME/local/nvim/share/nvim/runtime/macros/less.sh -c 'setf man'"
-    export EDITOR=$(which nvim)
+  export VIM=$HOME/local/nvim/share/nvim
+  export MANPAGER="$HOME/local/nvim/share/nvim/runtime/macros/less.sh -c 'setf man'"
+  export EDITOR=$(which nvim)
 else
-    export EDITOR=$(which vim)
+  export EDITOR=$(which vim)
 fi
 
 # cpp
@@ -63,21 +63,21 @@ export PATH="$PATH:/usr/local/share/npm/bin"
 export LC_ALL=ja_JP.UTF-8
 
 if has plenv; then
-    export PLENV_ROOT="$HOME/.plenv"
-    export PATH="${PLENV_ROOT}/shims:${PATH}"
-    eval "$(plenv init -)";
+  export PLENV_ROOT="$HOME/.plenv"
+  export PATH="${PLENV_ROOT}/shims:${PATH}"
+  eval "$(plenv init -)";
 fi
 
 RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 if file_exists "$RBENV_ROOT/bin/rbenv"; then
-    export RBENV_ROOT
-    export PATH="$RBENV_ROOT/bin:$PATH"
-    eval "$(rbenv init -)"
+  export RBENV_ROOT
+  export PATH="$RBENV_ROOT/bin:$PATH"
+  eval "$(rbenv init -)"
 fi
 
 if dir_exists $HOME/.nodebrew; then
-    export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
-    export PATH="$PATH:$HOME/.nodebrew/current/bin"
+  export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
+  export PATH="$PATH:$HOME/.nodebrew/current/bin"
 fi
 export PATH="$PATH:$XDG_DATA_HOME/npm/bin"
 
@@ -86,22 +86,22 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if dir_exists $HOME/.yarn; then
-    export PATH="$HOME/.yarn/bin:$PATH"
+  export PATH="$HOME/.yarn/bin:$PATH"
 fi
 if dir_exists $HOME/.config/yarn; then
-    export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
 
 if dir_exists $HOME/.cargo; then
-    export PATH="$HOME/.cargo/bin:$PATH"
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 if dir_exists $XDG_DATA_HOME/cargo; then
-    CARGO_HOME="$XDG_DATA_HOME"/cargo
-    export CARGO_HOME=$CARGO_HOME
-    export PATH="$CARGO_HOME/bin:$PATH"
+  CARGO_HOME="$XDG_DATA_HOME"/cargo
+  export CARGO_HOME=$CARGO_HOME
+  export PATH="$CARGO_HOME/bin:$PATH"
 fi
 if dir_exists $XDG_CACHE_HOME/fzf/bin; then
-    export PATH="$XDG_CACHE_HOME/fzf/bin:$PATH"
+  export PATH="$XDG_CACHE_HOME/fzf/bin:$PATH"
 fi
 
 
@@ -117,25 +117,25 @@ export FZF_DEFAULT_OPTS="--reverse -m --color"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
 
 if has rg; then
-    if has bat; then
-        export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
-    else
-        export FZF_CTRL_T_OPTS='--preview cat'
-    fi
-    FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+  if has bat; then
+    export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+  else
+    export FZF_CTRL_T_OPTS='--preview cat'
+  fi
+  FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 elif has ag; then
-    export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
-    FZF_DEFAULT_COMMAND="ag -g ''"
+  export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
+  FZF_DEFAULT_COMMAND="ag -g ''"
 else
-    FZF_DEFAULT_COMMAND=
+  FZF_DEFAULT_COMMAND=
 fi
 export FZF_COMPLETION_TRIGGER=",,"
 
 if ! is_empty_string "$FZF_DEFAULT_COMMAND"; then
-    FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
-    export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
-    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
+  export FZF_DEFAULT_COMMAND=$FZF_DEFAULT_COMMAND
+  export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 else
-    unset FZF_DEFAULT_COMMAND
-    unset FZF_CTRL_T_COMMAND
+  unset FZF_DEFAULT_COMMAND
+  unset FZF_CTRL_T_COMMAND
 fi
