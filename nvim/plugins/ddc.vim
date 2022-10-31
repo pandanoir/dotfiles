@@ -1,4 +1,5 @@
 " Change source options
+call ddc#custom#patch_global('ui', 'native')
 call ddc#custom#patch_global('sources', ['around', 'nvim-lsp', 'deoppet'])
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': { 'matchers': ['matcher_head'], 'ignoreCase': v:true },
@@ -15,11 +16,11 @@ call ddc#custom#patch_global('sourceParams', {
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
-      \ ddc#map#pum_visible() ? '<C-n>' :
+      \ pumvisible() ? '<C-n>' :
       \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
       \ '<TAB>' : ddc#map#manual_complete()
 
 " <S-TAB>: completion back.
-inoremap <expr><S-TAB> ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+inoremap <expr><S-TAB> pumvisible() ? '<C-p>' : '<C-h>'
 
 call ddc#enable()

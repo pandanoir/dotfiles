@@ -22,6 +22,10 @@ repo = 'Shougo/ddc-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
+repo = 'Shougo/ddc-ui-native'
+on_source = 'ddc.vim'
+
+[[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = 'denops.vim'
 on_event = ['InsertEnter', 'CursorHold']
