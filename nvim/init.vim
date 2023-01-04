@@ -59,6 +59,9 @@ set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 " エラー時のビープ音をミュート
 set visualbell t_vb= noerrorbells
 
+" 対応するhtmlタグに % で移動できるようにする
+packadd! matchit
+
 let g:jsx_ext_required = 1
 
 runtime! userautoload/filetype.vim
