@@ -3,17 +3,6 @@ repo = 'Shougo/ddc-nvim-lsp'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/deoppet.nvim'
-do = ':UpdateRemotePlugins'
-on_source = 'ddc.vim'
-hook_source = '''
-call deoppet#initialize()
-call deoppet#custom#option('snippets',
-\ map(globpath(&runtimepath, 'neosnippets', 1, 1),
-\     { _, val -> { 'path': val } }))
-'''
-
-[[plugins]]
 repo = 'Shougo/ddc-matcher_head'
 on_source = 'ddc.vim'
 

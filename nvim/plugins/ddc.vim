@@ -1,9 +1,8 @@
 " Change source options
 call ddc#custom#patch_global('ui', 'native')
-call ddc#custom#patch_global('sources', ['around', 'nvim-lsp', 'deoppet'])
+call ddc#custom#patch_global('sources', ['around', 'nvim-lsp'])
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': { 'matchers': ['matcher_head'], 'ignoreCase': v:true },
-      \ 'deoppet': {'dup': v:true, 'mark': 'dp'},
       \ 'nvim-lsp': {
       \   'mark': 'L',
       \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
