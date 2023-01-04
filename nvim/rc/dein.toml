@@ -3,6 +3,9 @@ repo = 'neovim/nvim-lspconfig'
 hook_add = 'runtime! plugins/nvim-lspconfig.vim'
 
 [[plugins]]
+repo = 'kkharji/lspsaga.nvim'
+
+[[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
 lua_add = '''
 require("nvim-lsp-installer").setup({
