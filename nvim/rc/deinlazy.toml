@@ -122,7 +122,7 @@ on_ft = ['nginx']
 
 [[plugins]]
 repo = 'prettier/vim-prettier'
-on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
+on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx','typescriptreact']
 hook_source = '''
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
