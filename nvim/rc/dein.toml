@@ -109,4 +109,10 @@ require'nvim-treesitter.configs'.setup {
 '''
 
 [[plugins]]
+repo = 'pseewald/vim-anyfold'
+hook_add = '''
+autocmd Filetype * AnyFoldActivate
+'''
+
+[[plugins]]
 repo = 'lambdalisue/fern-hijack.vim'
