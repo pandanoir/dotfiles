@@ -108,3 +108,5 @@ require'nvim-treesitter.configs'.setup {
 }
 '''
 
+[[plugins]]
+repo = 'lambdalisue/fern-hijack.vim'

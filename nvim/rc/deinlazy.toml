@@ -23,6 +23,13 @@ on_cmd = ['Fern']
 hook_add = '''
 nmap <silent> ,s <Cmd>Fern . -drawer -reveal=%<CR>
 '''
+hook_source='''
+let g:fern#default_hidden=1
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+on_source = ['fern.vim']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
