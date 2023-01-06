@@ -111,7 +111,8 @@ require'nvim-treesitter.configs'.setup {
 [[plugins]]
 repo = 'pseewald/vim-anyfold'
 hook_add = '''
-autocmd Filetype * AnyFoldActivate
+" fern は除く
+autocmd Filetype * if &ft != "fern" | execute 'AnyFoldActivate' | endif
 '''
 
 [[plugins]]
