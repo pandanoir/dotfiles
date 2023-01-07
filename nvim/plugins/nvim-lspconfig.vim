@@ -50,15 +50,18 @@ local on_attach = function(client, bufnr)
   )
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local nvim_lsp = require('lspconfig')
 nvim_lsp.tsserver.setup{
   on_attach = on_attach,
   flags = lsp_flags,
   root_dir = nvim_lsp.util.root_pattern("package.json"),
+  capabilities = capabilities,
 }
 nvim_lsp.denols.setup{
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("deno.json"),
+  capabilities = capabilities,
   init_options = {
     lint = true,
     unstable = true,
@@ -75,14 +78,22 @@ nvim_lsp.denols.setup{
 }
 nvim_lsp.eslint.setup{
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 nvim_lsp.jsonls.setup{
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 nvim_lsp.vimls.setup{
   on_attach = on_attach,
+  capabilities = capabilities,
 }
 nvim_lsp.rust_analyzer.setup{
   on_attach = on_attach,
+  capabilities = capabilities,
+}
+nvim_lsp.sumneko_lua.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
 }
 EOF
