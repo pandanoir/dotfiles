@@ -42,8 +42,6 @@ repo = 'hrsh7th/cmp-buffer'
 [[plugins]]
 repo = 'hrsh7th/cmp-path'
 
-
-
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 hook_add = 'runtime! plugins/nvim-lspconfig.vim'
@@ -84,76 +82,6 @@ let g:lightline = {
 
 let g:lightline.separator = {'left': "\ue0bc", 'right': "\ue0ba"}
 let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
-'''
-
-[[plugins]]
-repo = 'cohama/lexima.vim' # かっこの自動補完
-hook_add = 'runtime! plugins/lexima.vim'
-
-[[plugins]]
-repo = 'kana/vim-textobj-user'
-
-[[plugins]]
-repo = 'machakann/vim-sandwich'
-
-[[plugins]]
-repo = 'tpope/vim-repeat'
-hook_add = '''
-" function s:execute_repeatable_macro(name) abort
-function! Execute_repeatable_macro(name)
-  const name = '@' .. a:name
-
-  execute 'normal!' name
-  silent! call repeat#set("\<Plug>macro_" .. a:name)
-endfunction
-
-for x in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-  execute 'nnoremap' '<silent>' ("<Plug>macro_" .. x) (":\<C-u>call Execute_repeatable_macro('" .. x .. "')\<CR>")
-  execute 'nmap' ('@' .. x) ("<Plug>macro_" .. x)
-endfor
-'''
-
-[[plugins]]
-repo = 'justinmk/vim-sneak'
-
-[[plugins]]
-repo = 'tomtom/tcomment_vim'
-hook_add = '''
-au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>
-au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
-'''
-
-[[plugins]]
-repo = 'vim-denops/denops.vim'
-
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-hook_post_update = 'TSUpdate'
-lua_source = '''
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-    'javascript',
-    'typescript',
-    'tsx',
-    'json',
-    'html',
-    'markdown',
-    'toml',
-    'vim'
-  },
-  additional_vim_regex_highlighting = false,
-  highlight = {
-    enable = true,
-    disable = {'c', 'help'},
-  },
-}
-'''
-
-[[plugins]]
-repo = 'pseewald/vim-anyfold'
-hook_add = '''
-" fern は除く
-autocmd Filetype * if &ft != "fern" | execute 'AnyFoldActivate' | endif
 '''
 
 [[plugins]]
