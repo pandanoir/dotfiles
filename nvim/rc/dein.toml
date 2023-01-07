@@ -53,17 +53,6 @@ repo = 'kkharji/lspsaga.nvim'
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
-lua_add = '''
-require("nvim-lsp-installer").setup({
-  automatic_installation = true,
-  ensure_installed = {
-    'eslint',
-    'html',
-    'jsonls',
-    'tsserver',
-  }
-})
-'''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'

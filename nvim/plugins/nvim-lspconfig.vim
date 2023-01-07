@@ -1,6 +1,12 @@
 set signcolumn=yes
 autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>
 lua << EOF
+local ensure_installed_ls = {'eslint', 'html', 'jsonls', 'tsserver'}
+require("nvim-lsp-installer").setup({
+  automatic_installation = true,
+  ensure_installed = ensure_installed_ls,
+})
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -76,24 +82,19 @@ nvim_lsp.denols.setup{
     },
   },
 }
-nvim_lsp.eslint.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-nvim_lsp.jsonls.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-nvim_lsp.vimls.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-nvim_lsp.rust_analyzer.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-nvim_lsp.sumneko_lua.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+local local_installed_ls = {'vimls', 'rust_analyzer', 'sumneko_lua'}
+for _,lsp in pairs(local_installed_ls) do
+  nvim_lsp[lsp].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
+for _,lsp in pairs(ensure_installed_ls) do
+  if lsp ~= 'tsserver' then
+    nvim_lsp[lsp].setup{
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end
+end
 EOF
