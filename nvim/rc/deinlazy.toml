@@ -79,15 +79,15 @@ hook_source = 'runtime! plugins/lexima.vim'
 
 [[plugins]]
 repo = 'kana/vim-textobj-user'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'machakann/vim-sandwich'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'tpope/vim-repeat'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 hook_source = '''
 " function s:execute_repeatable_macro(name) abort
 function! Execute_repeatable_macro(name)
@@ -105,11 +105,11 @@ endfor
 
 [[plugins]]
 repo = 'justinmk/vim-sneak'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
-on_event = 'BufRead'
+on_event = 'VimEnter'
 hook_source = '''
 au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>
 au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
