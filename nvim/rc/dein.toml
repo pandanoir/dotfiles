@@ -58,15 +58,21 @@ repo = 'williamboman/nvim-lsp-installer'
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
-repo = 'ghifarit53/tokyonight-vim'
-hook_add = '''
+repo = 'folke/tokyonight.nvim'
+hook_source = 'colorscheme tokyonight'
+hook_add='''
 let g:tokyonight_style = 'night'
 let g:tokyonight_transparent_background = 1
-autocmd MyAutoCmd VimEnter * nested colorscheme tokyonight
+colorscheme tokyonight
 '''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+hook_source = '''
+let g:lightline = {'colorscheme': 'tokyonight'}
+let g:lightline.separator = {'left': "\ue0bc", 'right': "\ue0ba"}
+let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
+'''
 hook_add = '''
 let g:lightline = {
   \'colorscheme': 'tokyonight',
