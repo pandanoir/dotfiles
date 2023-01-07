@@ -1,16 +1,3 @@
-nnoremap s <Nop>
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-nnoremap sc <C-w>c<CR>
-nnoremap s= <C-w>=
-nnoremap sw <C-w>w
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
-nnoremap s- :<C-u>sp<CR>
-nnoremap s\| :<C-u>vs<CR>
-
 nnoremap J gJ
 
 " for masui special.

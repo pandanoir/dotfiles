@@ -9,7 +9,7 @@ filetype plugin indent off
 set termguicolors
 let g:loaded_python_provider = 0
 let g:python3_host_prog = system('echo -n $(if which python3 &>/dev/null; then which python3; else which python3.6; fi)')
-
+"
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
 
@@ -63,8 +63,6 @@ set visualbell t_vb= noerrorbells
 packadd! matchit
 
 let g:jsx_ext_required = 1
-
-runtime! userautoload/filetype.vim
 
 filetype plugin indent on     " Required!
 
