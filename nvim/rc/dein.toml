@@ -57,7 +57,6 @@ repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'folke/tokyonight.nvim'
-hook_source = 'colorscheme tokyonight'
 hook_add='''
 let g:tokyonight_style = 'night'
 let g:tokyonight_transparent_background = 1
@@ -74,9 +73,8 @@ let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
 hook_add = '''
 let g:lightline = {
   \'colorscheme': 'tokyonight',
-  \'component_function': {'coc': 'coc#status'},
   \ 'active': {
-  \   'right': [['lineinfo', 'coc'], ['percent'],[ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
+  \   'right': [['lineinfo'], ['percent'],[ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
   \ }
 \}
 
