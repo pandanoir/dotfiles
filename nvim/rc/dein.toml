@@ -1,4 +1,20 @@
 [[plugins]]
+repo = 'anuvyklack/pretty-fold.nvim'
+lua_add = '''
+require('pretty-fold').setup()
+'''
+
+[[plugins]]
+repo = 'anuvyklack/keymap-amend.nvim'
+
+[[plugins]]
+repo = 'anuvyklack/fold-preview.nvim'
+depends = ['keymap-amend.nvim']
+lua_add = '''
+require('fold-preview').setup()
+'''
+
+[[plugins]]
 repo = 'hrsh7th/nvim-cmp'
 lua_add = '''
 local cmp = require'cmp'
