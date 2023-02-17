@@ -94,8 +94,11 @@ repo = 'kana/vim-textobj-user'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'machakann/vim-sandwich'
+repo = 'vim-scripts/surround.vim'
 on_event = 'VimEnter'
+hook_source = '''
+nmap s ys
+'''
 
 [[plugins]]
 repo = 'tpope/vim-repeat'
