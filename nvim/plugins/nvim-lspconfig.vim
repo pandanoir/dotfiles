@@ -45,12 +45,11 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>r', require('lspsaga.rename').rename, bufopts)
-  vim.keymap.set('n', '<space>a', require('lspsaga.codeaction').code_action, bufopts)
+  vim.keymap.set('n', '<space>r', '<cmd>Lspsaga rename<CR>', bufopts)
+  vim.keymap.set('n', '<space>a',  '<cmd>Lspsaga code_action<CR>', bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', bufopts)
-
-  
+  vim.keymap.set('n', '<space>o',  '<cmd>Lspsaga outline<CR>', bufopts)
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
   )

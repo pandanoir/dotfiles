@@ -63,7 +63,14 @@ repo = 'neovim/nvim-lspconfig'
 hook_add = 'runtime! plugins/nvim-lspconfig.vim'
 
 [[plugins]]
-repo = 'kkharji/lspsaga.nvim'
+repo = 'nvim-tree/nvim-web-devicons'
+
+[[plugins]]
+repo = 'glepnir/lspsaga.nvim'
+lua_add = '''
+require("lspsaga").setup({})
+'''
+depends = ['nvim-web-devicons', 'nvim-treesitter']
 
 [[plugins]]
 repo = 'williamboman/nvim-lsp-installer'
