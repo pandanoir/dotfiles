@@ -53,9 +53,11 @@ on_ft = ['nginx']
 
 [[plugins]]
 repo = 'sbdchd/neoformat'
+on_cmd = ['Neoformat']
 on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx','typescriptreact']
 hook_source = '''
 let g:neoformat_try_node_exe = 1
+let g:neoformat_enabled_javascript = ['prettier', 'jsbeautify']
 command! -range=% Fmt :mkview | :<line1>,<line2>Neoformat | :loadview
 augroup fmt
   autocmd!
