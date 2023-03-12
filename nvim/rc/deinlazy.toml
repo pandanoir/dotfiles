@@ -134,3 +134,13 @@ hook_source = '''
 au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>
 au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment
 '''
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+on_event = 'BufRead'
+hook_source = '''
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=none ctermbg=none
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2e3248 ctermbg=0
+'''
