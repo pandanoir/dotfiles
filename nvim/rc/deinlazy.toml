@@ -76,6 +76,7 @@ require'nvim-treesitter.configs'.setup {
     'json',
     'html',
     'markdown',
+    'markdown_inline',
     'toml',
     'vim'
   },
