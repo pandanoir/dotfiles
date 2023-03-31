@@ -16,6 +16,7 @@ alias gdw='git diff -w'
 alias gdc='git diff --cached'
 alias gdcw='git diff --cached -w'
 alias gs='git status'
+alias gsp='git status --porcelain'
 alias gp='git push'
 alias gpo='git push origin HEAD -u'
 alias gpl="git pull"
