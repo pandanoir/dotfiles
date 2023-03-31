@@ -1,1 +1,1 @@
-../../nvim/userautoload/key.vim
+../../nvim/keymappings/basic.vim
