@@ -60,6 +60,8 @@ zle -N globalias
 
 bindkey " " globalias
 
+alias s="npm start"
+
 alias -g A='| awk'
 alias -g C='| copy'
 alias -g L='| $VIM/runtime/macros/less.sh -R'
