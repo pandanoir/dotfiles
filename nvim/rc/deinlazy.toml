@@ -1,4 +1,12 @@
 [[plugins]]
+repo = 'glepnir/lspsaga.nvim'
+on_event = 'BufRead'
+lua_add = '''
+require("lspsaga").setup({})
+'''
+depends = ['nvim-web-devicons', 'nvim-treesitter']
+
+[[plugins]]
 repo = 'junegunn/fzf.vim'
 on_cmd = [
   'Files',
@@ -75,8 +83,11 @@ require'nvim-treesitter.configs'.setup {
     'javascript',
     'typescript',
     'tsx',
+    'vue',
     'json',
     'html',
+    'css',
+    'scss',
     'markdown',
     'markdown_inline',
     'toml',
