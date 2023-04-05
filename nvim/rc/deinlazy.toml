@@ -29,7 +29,7 @@ hook_source = 'runtime! plugins/fzf.vim'
 repo = 'lambdalisue/fern.vim'
 on_cmd = ['Fern']
 hook_add = '''
-nmap <silent> ,s <Cmd>Fern . -drawer -reveal=% -toggle<CR>
+nnoremap <silent> <leader>s <Cmd>Fern . -drawer -reveal=% -toggle<CR>
 
 function! s:init_fern() abort
   nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
