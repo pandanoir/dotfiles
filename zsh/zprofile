@@ -123,6 +123,7 @@ if has rg; then
     export FZF_CTRL_T_OPTS='--preview cat'
   fi
   FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+  export RIPGREP_CONFIG_PATH="$HOME/dotfiles/ripgreprc"
 elif has ag; then
   export FZF_CTRL_T_OPTS="--preview 'head -n 20 {}'"
   FZF_DEFAULT_COMMAND="ag -g ''"
