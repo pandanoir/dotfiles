@@ -1,3 +1,4 @@
+let mapleader = ","
 nnoremap J gJ
 
 " for masui special.
@@ -18,6 +19,8 @@ nnoremap x "_x
 nnoremap X "_X
 nnoremap gy "+y
 vnoremap gy "+y
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
 
 nnoremap j gj
 nnoremap k gk
@@ -39,8 +42,6 @@ cnoremap <C-d> <Del>
 
 nnoremap <C-n>       :bnext<CR>
 nnoremap <C-p>       :bprev<CR>
-
-let mapleader = ","
 
 " ,のデフォルトの機能は、\で使えるように退避
 noremap \  ,
