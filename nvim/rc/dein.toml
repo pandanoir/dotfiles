@@ -15,10 +15,6 @@ require('fold-preview').setup()
 '''
 
 [[plugins]]
-repo = 'neovim/nvim-lspconfig'
-hook_add = 'runtime! plugins/nvim-lspconfig.vim'
-
-[[plugins]]
 repo = 'nvim-tree/nvim-web-devicons'
 
 [[plugins]]
@@ -57,81 +53,3 @@ let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
 [[plugins]]
 repo = 'lambdalisue/fern-hijack.vim'
 
-# nvim-cmp は lazy に入れると require'cmp_nvim_lsp' not found みたいにエラーが出るので dein.toml に書く必要があるっぽい
-[[plugins]]
-repo = 'hrsh7th/nvim-cmp'
-lua_add = '''
-local cmp = require'cmp'
-
-cmp.setup({
-  enabled = true,
-  mapping = cmp.mapping.preset.insert({
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end
-  }),
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-  }),
-  formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
-  },
-})
-'''
-
-[[plugins]]
-repo = 'hrsh7th/cmp-nvim-lsp'
-
-[[plugins]]
-repo = 'hrsh7th/cmp-buffer'
-
-[[plugins]]
-repo = 'hrsh7th/cmp-path'
-
-
-[[plugins]]
-repo = 'glepnir/lspsaga.nvim'
-lua_add = '''
-require("lspsaga").setup({})
-'''
-
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-hook_post_update = ':TSUpdate'
-lua_add = '''
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-    'javascript',
-    'typescript',
-    'tsx',
-    'vue',
-    'json',
-    'html',
-    'css',
-    'scss',
-    'markdown',
-    'markdown_inline',
-    'toml',
-    'vim'
-  },
-  additional_vim_regex_highlighting = false,
-  highlight = {
-    enable = true,
-    disable = {'c', 'help'},
-  },
-}
-'''
