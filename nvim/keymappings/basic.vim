@@ -27,6 +27,10 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" クリップボードへコピー
+nnoremap <leader>y "*y
+vnoremap <leader>y "*y
+
 imap <silent> fd <Esc>
 
 inoremap <silent> <C-f> <Right>
