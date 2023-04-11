@@ -36,8 +36,6 @@ set backspace=start,eol,indent whichwrap=b,s,[,],,~
 
 set incsearch ignorecase smartcase hlsearch
 
-set timeoutlen=300
-
 set wildmenu wildmode=longest:full,full autoindent scrolloff=10 guifont=Migu\ 1m:h12
 syntax on
 
