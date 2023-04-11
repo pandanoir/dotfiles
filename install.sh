@@ -116,7 +116,7 @@ if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
 fi
 if ! dir_exists "$XDG_CACHE_HOME/zinit"; then
     info "install zinit"
-    git clone https://github.com/zdharma/zinit.git "$XDG_CACHE_HOME/zinit/bin"
+    git clone https://github.com/zdharma-continuum/zinit.git "$XDG_CACHE_HOME/zinit/bin"
 fi
 if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
     info "install fzf"
