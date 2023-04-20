@@ -1,22 +1,27 @@
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+on_cmd = ['Telescope']
+hook_add = '''
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>; <cmd>Telescope resume<cr>
+'''
+lua_source = '''
+require'telescope'.setup({
+  defaults = {
+    mappings = {
+      n = {
+        q = "close",
+      },
+    },
+  },
+})
+'''
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
-on_cmd = [
-  'Files',
-  'ProjectFiles',
-  'Buffers',
-  'BLines',
-  'History',
-  'Tags',
-  'BTags',
-  'GFiles',
-  'Ag',
-  'Rg',
-]
-hook_add = '''
-set rtp+=$XDG_CACHE_HOME/fzf
-'''
-hook_source = 'runtime! plugins/fzf.vim'
+repo = 'nvim-lua/plenary.nvim'
+on_source = ['telescope.nvim']
 
 [[plugins]]
 repo = 'nvim-tree/nvim-tree.lua'
