@@ -1,8 +1,12 @@
 [[plugins]]
+repo = 'williamboman/mason-lspconfig.nvim'
+on_event = 'BufRead'
+
+[[plugins]]
 repo = 'neovim/nvim-lspconfig'
 on_event = 'BufRead'
-hook_source = 'runtime! plugins/nvim-lspconfig.vim'
-depends = ['lspsaga.nvim']
+hook_source = 'runtime! plugins/lspconfig.vim'
+depends = ['lspsaga.nvim', 'nvim-cmp', 'mason-lspconfig.nvim']
 
 [[plugins]]
 repo = 'glepnir/lspsaga.nvim'
@@ -71,12 +75,13 @@ require'nvim-treesitter.configs'.setup {
     'typescript',
     'tsx',
     'vue',
-    'json',
-    'html',
     'css',
-    'scss',
-    'markdown',
+    'html',
+    'json',
+    'lua',
     'markdown_inline',
+    'markdown',
+    'scss',
     'toml',
     'vim'
   },

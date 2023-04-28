@@ -18,7 +18,7 @@ require('fold-preview').setup()
 repo = 'nvim-tree/nvim-web-devicons'
 
 [[plugins]]
-repo = 'williamboman/nvim-lsp-installer'
+repo = 'williamboman/mason.nvim'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'

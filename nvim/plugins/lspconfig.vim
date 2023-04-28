@@ -1,11 +1,12 @@
 set signcolumn=yes
 autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>
 lua << EOF
-local ensure_installed_ls = {'eslint', 'html', 'jsonls', 'tsserver'}
-require("nvim-lsp-installer").setup({
+local ensure_installed_ls = {'eslint', 'html', 'jsonls', 'tsserver', 'volar'}
+require("mason").setup()
+require("mason-lspconfig").setup{
   automatic_installation = true,
   ensure_installed = ensure_installed_ls,
-})
+}
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
