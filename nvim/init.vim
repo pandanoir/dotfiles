@@ -20,6 +20,7 @@ set fileformats=unix,dos,mac " 改行コードの自動判別。左ほど優先
 " set ambiwidth=double "◻︎や◯がくずれるのを対処
 
 let &runtimepath=$config_home . '/nvim' . ',' . &runtimepath
+lua require('plugins')
 runtime! keymappings/*.vim
 runtime! userautoload/*.vim
 
