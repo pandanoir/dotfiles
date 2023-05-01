@@ -225,7 +225,7 @@ return require 'packer'.startup(function(use)
   use { 'hrsh7th/cmp-path', requires = { 'hrsh7th/nvim-cmp' } }
   use {
     'neovim/nvim-lspconfig',
-    config = function() vim.cmd [[runtime! plugins/lspconfig.vim]] end,
+    config = function() require 'plugins.lspconfig' end,
     requires = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   }
 
