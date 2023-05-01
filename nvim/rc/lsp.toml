@@ -12,7 +12,15 @@ depends = ['lspsaga.nvim', 'nvim-cmp', 'mason-lspconfig.nvim']
 repo = 'glepnir/lspsaga.nvim'
 on_event = 'BufRead'
 lua_source = '''
-require("lspsaga").setup({})
+require("lspsaga").setup{
+  finder = {
+    keys = {
+      jump_to = '<CR>',
+      expand_or_jump = '<CR>',
+      quit = { 'q', '<ESC>' },
+    },
+  },
+}
 '''
 
 [[plugins]]
