@@ -16,7 +16,6 @@ vim.scriptencoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.fileencodings = 'ucs-boms,utf-8,euc-jp,cp932' -- 読み込み時の文字コードの自動判別。左ほど優先される
 vim.opt.fileformats = 'unix,dos,mac'                  -- 改行コードの自動判別。左ほど優先
-vim.opt.ambiwidth = 'double'                          -- ◻︎や◯がくずれるのを対処
 
 require('plugins')
 require('keymappings.basic')

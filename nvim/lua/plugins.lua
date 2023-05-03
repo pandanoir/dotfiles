@@ -38,18 +38,19 @@ return require 'packer'.startup(function(use)
   }
 
   use {
-    'itchyny/lightline.vim',
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
-      vim.g.lightline = {
-        colorscheme = 'tokyonight',
-        active = {
-          right = { { 'lineinfo' }, { 'percent' }, { 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' } }
+      require 'lualine'.setup {
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diagnostics' },
+          lualine_c = { 'filename' },
+          lualine_x = { 'encoding', 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' }
         },
       }
-      vim.cmd [[
-        let g:lightline.separator = {'left': "\ue0bc", 'right': "\ue0ba"}
-        let g:lightline.subseparator = {'left': "\ue0bd", 'right': "\ue0bb"}
-      ]]
     end
   }
   use {
