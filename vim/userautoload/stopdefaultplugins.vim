@@ -1,1 +1,0 @@
-../../nvim/userautoload/stopdefaultplugins.vim
