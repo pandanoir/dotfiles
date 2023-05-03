@@ -2,7 +2,9 @@ vim.cmd [[set signcolumn=yes]]
 vim.cmd [[autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>]]
 
 local ensure_installed_ls = { 'eslint', 'html', 'jsonls', 'tsserver', 'volar' }
-require 'mason'.setup()
+require 'mason'.setup {
+  log_level = vim.log.levels.DEBUG,
+}
 require 'mason-lspconfig'.setup {
   automatic_installation = true,
   ensure_installed = ensure_installed_ls,

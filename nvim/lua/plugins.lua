@@ -115,10 +115,18 @@ return require 'packer'.startup(function(use)
     end
   }
   use {
-    'cohama/lexima.vim',
-    event = 'InsertEnter',
-    config = function() vim.cmd 'runtime! plugins/lexima.vim' end
+    -- 'jiangmiao/auto-pairs',
+    'LunarWatcher/auto-pairs',
+    config = function()
+      vim.api.nvim_set_var("AutoPairsCompleteOnlyOnSpace", 1)
+      vim.g.AutoPairsCompleteOnlyOnSpace = 1
+    end
   }
+  -- use {
+  --   'cohama/lexima.vim',
+  --   event = 'InsertEnter',
+  --   -- config = function() vim.cmd 'runtime! plugins/lexima.vim' end
+  -- }
 
   use { 'kana/vim-textobj-user', event = 'VimEnter' }
   use {
