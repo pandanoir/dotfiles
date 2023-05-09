@@ -20,6 +20,12 @@ augroup end
 
 return require 'packer'.startup(function(use)
   use 'wbthomason/packer.nvim'
+  use {
+    'rbtnn/vim-ambiwidth',
+    config = function()
+      vim.g.ambiwidth_cica_enabled = false
+    end
+  }
   use 'anuvyklack/keymap-amend.nvim'
   use 'nvim-tree/nvim-web-devicons'
   use { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup() end }
