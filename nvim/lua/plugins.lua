@@ -48,6 +48,9 @@ return require 'packer'.startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
       require 'lualine'.setup {
+        options = {
+          theme = 'onedark',
+        },
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diagnostics' },
