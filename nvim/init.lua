@@ -29,6 +29,7 @@ vim.opt.iskeyword:append('_')
 
 vim.opt.hidden = true -- バッファ切り替え時に保存しなくてもよくする
 vim.opt.autoread = true
+vim.opt.mouse = ''
 
 vim.env.DOTVIM = vim.g.config_home .. '/nvim'
 vim.opt.backspace = 'start,eol,indent'
