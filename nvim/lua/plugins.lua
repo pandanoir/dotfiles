@@ -130,6 +130,9 @@ return require 'packer'.startup(function(use)
     config = function()
       vim.api.nvim_set_var("AutoPairsCompleteOnlyOnSpace", 1)
       vim.g.AutoPairsCompleteOnlyOnSpace = 1
+      vim.g.AutoPairsShortcutJump = ''
+      vim.g.AutoPairsShortcutToggle = ''
+      vim.g.AutoPairsShortcutToggleMultilineClose = ''
     end
   }
   -- use {
