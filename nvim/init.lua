@@ -47,20 +47,15 @@ vim.opt.scrolloff = 10
 vim.opt.guifont = 'Migu 1m:h12'
 vim.cmd [[syntax on]]
 
--- 自動でコメントが入るのを防ぐ
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   group = 'MyAutoCmd',
   pattern = '*',
-  command = "setlocal formatoptions-=ro"
+  callback = function()
+    -- 自動でコメントが入るのを防ぐ
+    vim.opt_local.formatoptions:remove('ro')
+    vim.opt_local.foldmethod = 'indent'
+  end
 })
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = 'MyAutoCmd',
-  pattern = '*',
-  command = "set foldmethod=marker"
-})
-
--- Save fold settings.
-vim.opt.foldmethod = 'indent'
 vim.opt.foldenable = false
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   group = 'MyAutoCmd',
