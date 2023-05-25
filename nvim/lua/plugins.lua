@@ -64,13 +64,7 @@ return require 'packer'.startup(function(use)
   }
   use {
     'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
-    setup = function()
-      vim.keymap.set('n', '<leader>ff', ':<C-u>Telescope find_files<CR>')
-      vim.keymap.set('n', '<leader>fg', ':<C-u>Telescope live_grep<CR>')
-      vim.keymap.set('n', '<leader>fb', ':<C-u>Telescope buffers<CR>')
-      vim.keymap.set('n', '<leader>;', ':<C-u>Telescope resume<CR>')
-    end,
+    event = 'VimEnter',
     config = function()
       require 'telescope'.setup {
         defaults = {
@@ -79,6 +73,15 @@ return require 'packer'.startup(function(use)
           },
         },
       }
+      local builtin = require('telescope.builtin')
+      local map = vim.keymap.set
+      map('n', '<leader>ff', builtin.find_files)
+      map('n', '<leader>fg', builtin.live_grep)
+      map('n', '<leader>fb', builtin.buffers)
+      map('n', '<leader>;', builtin.resume)
+      map('n', '<leader>fG', function()
+        builtin.live_grep { default_text = vim.fn.expand('<cword>') }
+      end)
     end,
   }
   use { 'nvim-lua/plenary.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
