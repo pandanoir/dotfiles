@@ -1,4 +1,5 @@
 ---@diagnostic disable-next-line: undefined-global
+if vim.loader then vim.loader.enable() end
 vim.api.nvim_create_augroup('MyAutoCmd', { clear = true })
 vim.cmd [[filetype off]]
 vim.cmd [[filetype plugin indent off]]
