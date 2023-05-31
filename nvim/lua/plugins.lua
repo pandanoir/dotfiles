@@ -20,6 +20,7 @@ augroup end
 
 return require 'packer'.startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'Shougo/context_filetype.vim'
   use {
     'rbtnn/vim-ambiwidth',
     config = function()
@@ -173,13 +174,21 @@ return require 'packer'.startup(function(use)
 
   use { 'justinmk/vim-sneak', event = 'VimEnter' }
   use {
-    'tomtom/tcomment_vim',
-    event = 'VimEnter',
-    setup = function()
-      vim.cmd [[au MyAutoCmd VimEnter * nnoremap <silent> <Plug>RepeatTComment :TComment \| silent! call repeat#set("\<Plug>RepeatTComment")<CR>]]
-      vim.cmd [[au MyAutoCmd VimEnter * nmap <c-_><c-_> <Plug>RepeatTComment]]
+    'echasnovski/mini.comment',
+    config = function()
+      require 'mini.comment'.setup {
+        hooks = {
+          pre = function()
+            vim.cmd('noa setfiletype ' .. vim.fn['context_filetype#get_filetypes']()[1])
+          end,
+          post = function()
+            vim.cmd 'filetype detect'
+          end
+        }
+      }
     end
   }
+
 
   use {
     'nathanaelkane/vim-indent-guides',
