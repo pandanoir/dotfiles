@@ -68,6 +68,16 @@ vim.api.nvim_create_autocmd({ 'BufRead' }, {
   pattern = '*',
   command = "if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif"
 })
+vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+  group = 'MyAutoCmd',
+  pattern = '*',
+  command = "set timeoutlen=200"
+})
+vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+  group = 'MyAutoCmd',
+  pattern = '*',
+  command = "set timeoutlen&"
+})
 -- Don't save options.
 vim.opt.viewoptions:remove({ options = true })
 
