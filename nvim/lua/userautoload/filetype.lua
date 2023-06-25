@@ -1,4 +1,4 @@
-function addFiletypeAutocmd(pattern, command)
+local function add_filetype_autocmd(pattern, command)
   vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     group = 'MyAutoCmd',
     pattern = pattern,
@@ -6,9 +6,9 @@ function addFiletypeAutocmd(pattern, command)
   })
 end
 
-addFiletypeAutocmd('nginx.conf', 'setf nginx')
-addFiletypeAutocmd('/etc/nginx/*', 'setf nginx')
-addFiletypeAutocmd('*/zsh/functions/*,{,.}{zprofile,zshrc}{,.local}', 'setf zsh')
-addFiletypeAutocmd('{,.}{bash_profile,bashrc}{,.local}', 'setf bash')
-addFiletypeAutocmd('*.scss', 'set autoindent noexpandtab tabstop=4 shiftwidth=4')
-addFiletypeAutocmd('*.vue', 'setlocal commentstring=<!--%s-->')
+add_filetype_autocmd('nginx.conf', 'setf nginx')
+add_filetype_autocmd('/etc/nginx/*', 'setf nginx')
+add_filetype_autocmd('*/zsh/functions/*,{,.}{zprofile,zshrc}{,.local}', 'setf zsh')
+add_filetype_autocmd('{,.}{bash_profile,bashrc}{,.local}', 'setf bash')
+add_filetype_autocmd('*.scss', 'set autoindent noexpandtab tabstop=4 shiftwidth=4')
+add_filetype_autocmd('*.vue', 'setlocal commentstring=<!--%s-->')

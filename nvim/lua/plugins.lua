@@ -29,7 +29,7 @@ return require 'packer'.startup(function(use)
   }
   use 'anuvyklack/keymap-amend.nvim'
   use 'nvim-tree/nvim-web-devicons'
-  use { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup() end }
+  use { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup {} end }
   use {
     'anuvyklack/fold-preview.nvim',
     requires = { 'anuvyklack/keymap-amend.nvim' },
@@ -228,7 +228,7 @@ return require 'packer'.startup(function(use)
         mapping = cmp.mapping.preset.insert {
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-Space>'] = cmp.mapping.complete {},
           ['<CR>'] = cmp.mapping.confirm { select = true },
           ['<Tab>'] = function(fallback)
             if cmp.visible() then
@@ -261,6 +261,7 @@ return require 'packer'.startup(function(use)
     config = function() require 'plugins.lspconfig' end,
     requires = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   }
+  use { 'folke/neodev.nvim', config = function() require 'neodev'.setup {} end }
 
   use {
     'nvim-treesitter/nvim-treesitter',
