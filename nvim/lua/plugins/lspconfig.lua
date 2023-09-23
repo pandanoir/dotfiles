@@ -7,10 +7,10 @@ vim.cmd [[autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>]]
 
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
-map('n', '<space>e', vim.diagnostic.open_float, opts)
+map('n', '<leader>e', vim.diagnostic.open_float, opts)
 map('n', '[d', vim.diagnostic.goto_prev, opts)
 map('n', ']d', vim.diagnostic.goto_next, opts)
-map('n', '<space>q', vim.diagnostic.setloclist, opts)
+map('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -25,19 +25,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
     map('n', 'gi', vim.lsp.buf.implementation, bufopts)
     map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    map('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    map('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    map('n', '<space>wl', function()
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    map('n', '<leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    map('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    map('n', '<space>r', '<cmd>Lspsaga rename<CR>', bufopts)
-    map('n', '<space>a', '<cmd>Lspsaga code_action<CR>', bufopts)
+    map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
+    map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
     map('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
-    map('n', '<space>f', function()
+    map('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, bufopts)
-    map('n', '<space>o', '<cmd>Lspsaga outline<CR>', bufopts)
+    map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
     vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
     )

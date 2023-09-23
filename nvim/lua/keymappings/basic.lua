@@ -1,6 +1,6 @@
 local keymap = vim.keymap.set
 
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 keymap('n', 'J', 'gJ')
 
 -- for masui special.
@@ -54,5 +54,15 @@ keymap('', [[\]], ',')
 keymap('n', '[space]', '<nop>')
 keymap('n', '<Space>', '[space]', { remap = true })
 keymap('', '[space]c', ':<C-u>enew<CR>')
+keymap('', '<leader><Space>', '<C-v>')
 
-keymap('', '[space]d', ':<C-u>bd<CR>')
+-- keymap('', '<leader>d', ':<C-u>bd<CR>')
+keymap('', 'gv', '`[v`]') -- 貼り付けたテキストを素早く選択する
+
+-- 貼り付けたテキストの末尾へ自動的に移動する
+keymap('v', 'y', 'y`]', { silent = true })
+keymap('v', 'p', 'p`]', { silent = true })
+keymap('n', 'p', 'p`]', { silent = true })
+
+-- :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
+vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's']]
