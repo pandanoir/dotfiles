@@ -20,6 +20,10 @@ alias gsp='git status --porcelain'
 alias gp='git push'
 alias gpo='git push origin HEAD -u'
 alias gpl="git pull"
+alias gf='git fetch'
+alias gfs='git fetch && git switch'
+alias gfsw='git fetch && git switch'
+alias gfw='git fetch && git switch'
 alias gc='git commit'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
@@ -28,6 +32,7 @@ alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 alias gsw='git switch'
+alias gswm='git switch master'
 alias gre='git restore'
 gro() {
   git rebase origin/$(git symbolic-ref --short HEAD)
@@ -64,7 +69,7 @@ alias s="npm start"
 
 alias -g A='| awk'
 alias -g C='| copy'
-alias -g L='| $VIM/runtime/macros/less.sh -R'
+alias -g L="| $VIM/runtime/macros/less.sh -R"
 alias -g S='| sort'
 alias -g U='| uniq'
 alias -g X='| xargs'
@@ -84,7 +89,13 @@ alias vim="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
 if command_exists nvim; then
   alias vim="nvim"
 fi
-if command_exists exa; then
+
+if command_exists eza; then
+  alias ls="eza --group-directories-first"
+  alias ll='eza --group-directories-first -algh --git'
+  alias lg='eza --group-directories-first --git-ignore'
+  function chpwd() { eza --group-directories-first }
+elif command_exists exa; then
   alias ls="exa --group-directories-first"
   alias ll='exa --group-directories-first -algh --git'
   alias lg='exa --group-directories-first --git-ignore'
@@ -105,5 +116,6 @@ if command_exists ranger; then
   alias rang="ranger"
 fi
 if command_exists rg; then
-  alias rgf="rg --files | rg"
+  alias rgf="rg --files | sort | rg"
 fi
+
