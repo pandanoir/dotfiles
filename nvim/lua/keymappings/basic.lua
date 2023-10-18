@@ -1,6 +1,9 @@
 local keymap = vim.keymap.set
 
 vim.g.mapleader = ' '
+keymap('n', '[space]', '<nop>')
+keymap('n', '<Space>', '[space]', { remap = true })
+
 keymap('n', 'J', 'gJ')
 
 -- for masui special.
@@ -51,12 +54,10 @@ keymap('n', '<C-p>', ':bprev<CR>')
 -- ,のデフォルトの機能は、\で使えるように退避
 keymap('', [[\]], ',')
 
-keymap('n', '[space]', '<nop>')
-keymap('n', '<Space>', '[space]', { remap = true })
-keymap('', '[space]c', ':<C-u>enew<CR>')
+keymap('', '<leader>c', ':<C-u>enew<CR>')
+keymap('', '<leader>q', ':<C-u>bd<CR>')
 keymap('', '<leader><Space>', '<C-v>')
 
--- keymap('', '<leader>d', ':<C-u>bd<CR>')
 keymap('', 'gv', '`[v`]') -- 貼り付けたテキストを素早く選択する
 
 -- 貼り付けたテキストの末尾へ自動的に移動する

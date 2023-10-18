@@ -10,7 +10,6 @@ local map = vim.keymap.set
 map('n', '<leader>e', vim.diagnostic.open_float, opts)
 map('n', '[d', vim.diagnostic.goto_prev, opts)
 map('n', ']d', vim.diagnostic.goto_next, opts)
-map('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -34,7 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
     map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
     map('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
-    map('n', '<leader>f', function()
+    map('n', '<leader>F', function()
       vim.lsp.buf.format { async = true }
     end, bufopts)
     map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
