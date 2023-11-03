@@ -20,6 +20,17 @@ jobs:
     - name: exists fzf?
       run: ~/.cache/fzf/bin/fzf --version
 
+  udpate-test:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - uses: actions/checkout@v2
+    - run: curl -sL dot.pandanoir.net | bash
+    - run: rm ~/.config/zsh/.zshrc
+    - run: curl -sL dot.pandanoir.net | bash
+    - name: exists ~/.config/zsh/.zshrc?
+      run: if ! [ -f ~/.config/zsh/.zshrc ]; then exit 1; fi
+
   neovim-setup-test:
     runs-on: ubuntu-latest
     steps:
