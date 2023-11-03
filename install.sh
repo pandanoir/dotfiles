@@ -11,9 +11,6 @@ DOTDIR="$HOME/dotfiles"
 [ ! -v XDG_DATA_HOME ] && XDG_DATA_HOME="$HOME/.local/share"
 [ ! -v ZDOTDIR ] && ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-source "$DOTDIR/install/deploy.sh"
-source "$DOTDIR/install/init.sh"
-
 if ! has git; then
   warn "you must install git!"
   exit 1
@@ -47,6 +44,9 @@ elif ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
 fi
 
 info "requirements are met"
+
+source "$DOTDIR/install/deploy.sh"
+source "$DOTDIR/install/init.sh"
 
 if [ $# -eq 0 ]; then
   deploy
