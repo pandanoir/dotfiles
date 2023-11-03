@@ -11,8 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run install.sh
-      run: ${GITHUB_WORKSPACE}/install.sh
-
+      run: |
+        ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
+        ${GITHUB_WORKSPACE}/install.sh
     - name: exists $HOME/dotfiles?
       run: |
         if ! [ -d $HOME/dotfiles ]; then exit 1; fi
@@ -28,8 +29,9 @@ jobs:
       run: sudo snap install --beta nvim --classic
     - run: nvim --version
     - name: Run install.sh
-      run: ${GITHUB_WORKSPACE}/install.sh
-
+      run: |
+        ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
+        ${GITHUB_WORKSPACE}/install.sh
     - name: check health of neovim
       run: |
         nvim --headless "+checkhealth" "+w!health.log" +qa
@@ -39,15 +41,33 @@ jobs:
         vim +'redir > map.log' +'map' +'redir END' +'qa!'
         cat map.log
 
+  with-zsh:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install zsh
+      run: sudo apt update; sudo apt install zsh
+    - name: Run install.sh
+      run: |
+        ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
+        ${GITHUB_WORKSPACE}/install.sh
+      shell: zsh {0}
+    - name: zsh
+      run: |
+        source $HOME/.zshenv
+        source $ZDOTDIR/.zshrc
+        zinit version
+      shell: zsh {0}
+
   run-install-command:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: curl -sL dot.pandanoir.net | bash
-
     - name: exists $HOME/dotfiles?
       run: |
         if ! [ -d $HOME/dotfiles ]; then exit 1; fi
         echo $HOME/dotfiles exists
     - name: exists fzf?
       run: ~/.cache/fzf/bin/fzf --version
+
