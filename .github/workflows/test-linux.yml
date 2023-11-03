@@ -38,3 +38,16 @@ jobs:
       run: |
         vim +'redir > map.log' +'map' +'redir END' +'qa!'
         cat map.log
+
+  run-install-command:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: curl -sL dot.pandanoir.net | bash
+
+    - name: exists $HOME/dotfiles?
+      run: |
+        if ! [ -d $HOME/dotfiles ]; then exit 1; fi
+        echo $HOME/dotfiles exists
+    - name: exists fzf?
+      run: ~/.cache/fzf/bin/fzf --version
