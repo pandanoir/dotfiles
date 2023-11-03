@@ -7,14 +7,11 @@ on:
       - test/**
 
 jobs:
-  plain:
+  one-liner-setup-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Run install.sh
-      run: |
-        ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
-        ${GITHUB_WORKSPACE}/install.sh
+    - run: curl -sL dot.pandanoir.net | bash
     - name: exists $HOME/dotfiles?
       run: |
         if ! [ -d $HOME/dotfiles ]; then exit 1; fi
@@ -22,7 +19,7 @@ jobs:
     - name: exists fzf?
       run: ~/.cache/fzf/bin/fzf --version
 
-  with-neovim:
+  neovim-setup-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -42,7 +39,7 @@ jobs:
         vim +'redir > map.log' +'map' +'redir END' +'qa!'
         cat map.log
 
-  with-zsh:
+  zsh-setup-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -60,16 +57,4 @@ jobs:
         zinit version
         zinit report
       shell: zsh {0}
-
-  run-install-command:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: curl -sL dot.pandanoir.net | bash
-    - name: exists $HOME/dotfiles?
-      run: |
-        if ! [ -d $HOME/dotfiles ]; then exit 1; fi
-        echo $HOME/dotfiles exists
-    - name: exists fzf?
-      run: ~/.cache/fzf/bin/fzf --version
 
