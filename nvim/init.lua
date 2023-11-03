@@ -86,7 +86,6 @@ vim.opt.writebackup = false
 
 -- エラー時のビープ音をミュート
 vim.opt.visualbell = true
-vim.o.t_vb = nil
 
 -- " 対応するhtmlタグに % で移動できるようにする
 vim.cmd [[packadd! matchit]]
