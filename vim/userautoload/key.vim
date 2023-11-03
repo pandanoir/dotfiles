@@ -1,4 +1,4 @@
-let mapleader = ","
+let mapleader = " "
 nnoremap J gJ
 
 " for masui special.
@@ -48,10 +48,20 @@ nnoremap <C-n>       :bnext<CR>
 nnoremap <C-p>       :bprev<CR>
 
 " ,のデフォルトの機能は、\で使えるように退避
-noremap \  ,
 
 noremap [space] <nop>
 nmap <Space> [space]
-noremap [space]c :<C-u>enew<CR>
-noremap [space]d :<C-u>bd<CR>
+noremap <leader>c :<C-u>enew<CR>
+noremap <leader>q :<C-u>bd<CR>
+noremap <leader><Space> <C-v>
 
+" 貼り付けたテキストを素早く選択する
+noremap gv `[v`] 
+
+" 貼り付けたテキストの末尾へ自動的に移動する
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+" :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
+cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's'
