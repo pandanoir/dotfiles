@@ -1,0 +1,40 @@
+name: linux
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  plain:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run install.sh
+      run: ${GITHUB_WORKSPACE}/install.sh
+
+    - name: exists $HOME/dotfiles?
+      run: |
+        if ! [ -d $HOME/dotfiles ]; then exit 1; fi
+        echo $HOME/dotfiles exists
+    - name: exists fzf?
+      run: ~/.cache/fzf/bin/fzf --version
+
+  with-neovim:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install neovim
+      run: sudo snap install --beta nvim --classic
+    - run: nvim --version
+    - name: Run install.sh
+      run: ${GITHUB_WORKSPACE}/install.sh
+
+    - name: check health of neovim
+      run: |
+        nvim --headless "+checkhealth" "+w!health.log" +qa
+        cat health.log
+    - name: check mapping of vim
+      run: |
+        vim +'redir > map.log' +'map' +'redir END' +'qa!'
+        cat map.log
