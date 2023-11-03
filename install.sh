@@ -14,16 +14,15 @@ DOTDIR="$HOME/dotfiles"
 source "$DOTDIR/install/deploy.sh"
 source "$DOTDIR/install/init.sh"
 
+if ! has git; then
+  warn "you must install git!"
+  exit 1
+fi
 if ! dir_exists "$DOTDIR"; then
   git clone https://github.com/pandanoir/dotfiles "$DOTDIR"
 fi
 
 # check the requirements
-if ! has git; then
-  warn "you must install git!"
-  exit 1
-fi
-
 if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
   warn "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
 fi
