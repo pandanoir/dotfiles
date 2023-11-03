@@ -17,7 +17,7 @@ $ vim
 # install list
 
 * zsh
-* zplug
+* zinit
 * neovim
 * tmux
 

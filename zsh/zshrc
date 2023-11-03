@@ -71,7 +71,7 @@ if command_exists fasd; then
     eval "$(fasd --init auto)"
 fi
 
-source "$ZDOTDIR/zplug.zsh"
+source "$ZDOTDIR/zinit.zsh"
 
 # ローカルファイルの読み込み
 file_exists "$XDG_CACHE_HOME/fzf/shell/completion.zsh" && source "$XDG_CACHE_HOME/fzf/shell/completion.zsh"
