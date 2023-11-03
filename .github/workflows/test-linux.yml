@@ -57,6 +57,7 @@ jobs:
         source $HOME/.zshenv
         source $ZDOTDIR/.zshrc
         zinit version
+        zinit report
       shell: zsh {0}
 
   run-install-command:
