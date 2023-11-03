@@ -1,4 +1,11 @@
-source "$DOTDIR/install/utils.sh"
+symlink() {
+  # すでにシンボリックリンクが存在する場合は作成しない
+  if [ -e "$2" ]; then
+    return
+  fi
+  info "create symlink from $DOTDIR/$1 to $2"
+  ln -sf "$DOTDIR/$1" "$2"
+}
 
 deploy() {
   info "start deploy"
@@ -23,7 +30,7 @@ deploy() {
   symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile "$ZDOTDIR/.zprofile"
   symlink zshenv       "$HOME/.zshenv"
-  symlink zprofile     "$HOME/.bash_profile"
+  symlink zsh/zprofile     "$HOME/.bash_profile"
 
   # other
   mkdir -p "$XDG_CONFIG_HOME/"{tmux,npm,readline} \

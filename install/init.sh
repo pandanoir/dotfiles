@@ -1,5 +1,3 @@
-source "$DOTDIR/install/utils.sh"
-
 init() {
   info "start init"
   git config --global alias.s status

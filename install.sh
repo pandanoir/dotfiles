@@ -5,6 +5,12 @@
 
 set -eu
 
+has() { type "$1" > /dev/null 2>&1; }
+file_exists() { [ -f $1 ]; }
+dir_exists() { [ -d $1 ]; }
+info() { echo -e "\033[0;34m[INFO]\033[0;39m $1"; }
+warn() { echo -e "\033[0;33m[WARN]\033[0;39m $1"; }
+
 DOTDIR="$HOME/dotfiles"
 [ ! -v XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 [ ! -v XDG_CACHE_HOME ] && XDG_CACHE_HOME="$HOME/.cache"
@@ -18,6 +24,9 @@ fi
 if ! dir_exists "$DOTDIR"; then
   git clone https://github.com/pandanoir/dotfiles "$DOTDIR"
 fi
+
+source "$DOTDIR/install/deploy.sh"
+source "$DOTDIR/install/init.sh"
 
 # check the requirements
 if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
@@ -44,9 +53,6 @@ elif ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
 fi
 
 info "requirements are met"
-
-source "$DOTDIR/install/deploy.sh"
-source "$DOTDIR/install/init.sh"
 
 if [ $# -eq 0 ]; then
   deploy
