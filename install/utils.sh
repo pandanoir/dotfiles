@@ -13,13 +13,4 @@ symlink() {
   info "create symlink from $DOTDIR/$1 to $2"
   ln -sf "$DOTDIR/$1" "$2"
 }
-dir_symlink() {
-  for file in `ls -1 "$1"`; do
-    # すでにシンボリックリンクが存在する場合は作成しない
-    if [ -e "$2/$file" ]; then
-      continue
-    fi
-    info "create symlink from $1/$file to $2/$file"
-    ln -sf "$1/$file" "$2"
-  done
-}
+

@@ -2,19 +2,23 @@ source "$DOTDIR/install/utils.sh"
 
 deploy() {
   info "start deploy"
-  mkdir -p "$XDG_CONFIG_HOME/"{tmux,vim,npm,readline,zsh/functions} \
-    "$XDG_CACHE_HOME/"{vim,npm} \
-    "$XDG_DATA_HOME/"{npm,rustup,zsh}
 
   # vim/neovim
+  mkdir -p "$XDG_CONFIG_HOME/vim" "$XDG_CACHE_HOME/vim"
   symlink nvim  "$XDG_CONFIG_HOME/nvim"
   symlink vimrc "$XDG_CONFIG_HOME/vim/vimrc"
-  dir_symlink   "$DOTDIR/vim" "$XDG_CONFIG_HOME/vim"
+  for file in `ls -1 "$DOTDIR/vim"`; do
+    symlink "vim/$file" "$XDG_CONFIG_HOME/vim/$file"
+  done
 
   # zsh
-  dir_symlink "$DOTDIR/zsh/functions" "$ZDOTDIR/functions"
-  for file in `ls -1 "$DOTDIR/zsh/" | grep \.zsh$`; do
-    symlink zsh/"$file" "$ZDOTDIR/$file"
+  mkdir -p "$XDG_CONFIG_HOME/zsh/functions" "$XDG_DATA_HOME/zsh"
+
+  for file in `ls -1 "$DOTDIR/zsh/" | grep '.zsh$'`; do
+    symlink "zsh/$file" "$ZDOTDIR/$file"
+  done
+  for file in `ls -1 "$DOTDIR/zsh/functions"`; do
+    symlink "zsh/functions/$file" "$ZDOTDIR/functions/$file"
   done
   symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile "$ZDOTDIR/.zprofile"
@@ -22,6 +26,9 @@ deploy() {
   symlink zprofile     "$HOME/.bash_profile"
 
   # other
+  mkdir -p "$XDG_CONFIG_HOME/"{tmux,npm,readline} \
+    "$XDG_CACHE_HOME/npm" \
+    "$XDG_DATA_HOME/"{npm,rustup}
   symlink tmux.conf "$XDG_CONFIG_HOME/tmux/tmux.conf"
   symlink npmrc     "$XDG_CONFIG_HOME/npm/npmrc"
   symlink inputrc   "$XDG_CONFIG_HOME/readline/inputrc"
