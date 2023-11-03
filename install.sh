@@ -25,6 +25,9 @@ setup() {
 info() {
   echo -e "\033[0;34m[INFO]\033[0;39m $1"
 }
+warn() {
+  echo -e "\033[0;33m[WARN]\033[0;39m $1"
+}
 
 deploy() {
   info "start deploy"
@@ -90,11 +93,11 @@ init() {
 
 # check the requirements
 if ! has git; then
-  echo "you must install git!"
+  warn "you must install git!"
   exit 1
 fi
 if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
-  echo "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
+  warn "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
 fi
 if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
   info "install fzf"
@@ -102,23 +105,23 @@ if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
   bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
 fi
 
-if has zsh; then
-  if ! dir_exists "$XDG_CACHE_HOME/zplug"; then
-    info "install zplug"
-    git clone https://github.com/zplug/zplug "$XDG_CACHE_HOME/zplug"
-    zsh "$XDG_CACHE_HOME/zplug/init.zsh"
-  fi
+if ! has zsh; then
+  warn "zsh isn't installed"
+else
   if ! dir_exists "$XDG_CACHE_HOME/zinit"; then
     info "install zinit"
     git clone https://github.com/zdharma-continuum/zinit.git "$XDG_CACHE_HOME/zinit/bin"
   fi
 fi
-if has tmux; then
+if ! has tmux; then
+  warn "tmux isn't installed"
+else
   if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
     git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
   fi
-  exit 1
 fi
+
+info "requirements are met"
 
 
 if [ $# -eq 0 ]; then
