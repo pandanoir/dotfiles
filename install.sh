@@ -24,6 +24,7 @@ if ! has git; then
   exit 1
 fi
 if ! dir_exists "$DOTDIR"; then
+  info "download dotfiles"
   git clone https://github.com/pandanoir/dotfiles "$DOTDIR"
 fi
 
