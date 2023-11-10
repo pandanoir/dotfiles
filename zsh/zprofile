@@ -139,3 +139,5 @@ else
   unset FZF_DEFAULT_COMMAND
   unset FZF_CTRL_T_COMMAND
 fi
+
+file_exists "$ZDOTDIR/.zprofile.local" && source "$ZDOTDIR/.zprofile.local"
