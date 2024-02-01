@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
     map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
-    map('n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', bufopts)
+    map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
     map('n', '<leader>F', function()
       vim.lsp.buf.format { async = true }
     end, bufopts)

@@ -1,52 +1,44 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-vim.cmd [[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-]]
-
-return require 'packer'.startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'Shougo/context_filetype.vim'
-  use {
+require 'lazy'.setup {
+  'Shougo/context_filetype.vim',
+  {
     'rbtnn/vim-ambiwidth',
     config = function()
       vim.g.ambiwidth_cica_enabled = false
     end
-  }
-  use 'anuvyklack/keymap-amend.nvim'
-  use 'nvim-tree/nvim-web-devicons'
-  use { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup {} end }
-  use {
+  },
+  'anuvyklack/keymap-amend.nvim',
+  'nvim-tree/nvim-web-devicons',
+  { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup {} end },
+  {
     'anuvyklack/fold-preview.nvim',
-    requires = { 'anuvyklack/keymap-amend.nvim' },
+    dependencies = { 'anuvyklack/keymap-amend.nvim' },
     config = function() require 'fold-preview'.setup() end,
-  }
-  use {
+  },
+  {
     'folke/tokyonight.nvim',
     config = function()
-      vim.g.tokyonight_style = "night"
+      vim.g.tokyonight_style = 'night'
       vim.g.tokyonight_transparent_background = 1
       vim.cmd [[colorscheme tokyonight]]
     end
-  }
+  },
 
-  use {
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
     config = function()
       require 'lualine'.setup {
         options = {
@@ -62,34 +54,38 @@ return require 'packer'.startup(function(use)
         },
       }
     end
-  }
-  use {
+  },
+  {
     'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     event = 'VimEnter',
+    keys = {
+      { '<leader>ff', '<cmd>Telescope find_files<cr>' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>' },
+      { '<leader>fb', '<cmd>Telescope buffers<cr>' },
+      { '<leader>;',  '<cmd>Telescope resume<cr>' },
+      {
+        '<leader>fG',
+        function()
+          require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') }
+        end
+      }
+    },
     config = function()
       require 'telescope'.setup {
         defaults = {
           mappings = {
-            n = { q = "close" },
+            n = { q = 'close' },
           },
         },
       }
-      local builtin = require('telescope.builtin')
-      local map = vim.keymap.set
-      map('n', '<leader>ff', builtin.find_files)
-      map('n', '<leader>fg', builtin.live_grep)
-      map('n', '<leader>fb', builtin.buffers)
-      map('n', '<leader>;', builtin.resume)
-      map('n', '<leader>fG', function()
-        builtin.live_grep { default_text = vim.fn.expand('<cword>') }
-      end)
     end,
-  }
-  use { 'nvim-lua/plenary.nvim', requires = { 'nvim-telescope/telescope.nvim' } }
-  use {
+  },
+  'nvim-lua/plenary.nvim',
+  {
     'nvim-tree/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
-    setup = function()
+    init = function()
       vim.keymap.set('n', '<leader>s', ':<C-u>NvimTreeToggle<CR>')
     end,
     config = function()
@@ -111,8 +107,8 @@ return require 'packer'.startup(function(use)
         },
       }
     end
-  }
-  use {
+  },
+  {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
     ft = { 'javascript', 'javascript.jsx', 'typescript', 'typescript.tsx', 'typescriptreact', 'vue' },
@@ -120,60 +116,49 @@ return require 'packer'.startup(function(use)
       vim.g.neoformat_try_node_exe = 1
       vim.g.neoformat_enabled_javascript = { 'prettier', 'jsbeautify' }
       vim.cmd 'command! -range=% Fmt :mkview | :<line1>,<line2>Neoformat | :loadview'
-      vim.cmd [[
-      augroup fmt
-        autocmd!
-        autocmd BufWritePre * Fmt
-      augroup END
-      ]]
+      vim.cmd [[augroup fmt autocmd! autocmd BufWritePre * Fmt augroup END]]
     end
-  }
-  use {
-    -- 'jiangmiao/auto-pairs',
+  },
+  {
     'LunarWatcher/auto-pairs',
     config = function()
-      vim.api.nvim_set_var("AutoPairsCompleteOnlyOnSpace", 1)
+      vim.api.nvim_set_var('AutoPairsCompleteOnlyOnSpace', 1)
       vim.g.AutoPairsCompleteOnlyOnSpace = 1
       vim.g.AutoPairsShortcutJump = ''
       vim.g.AutoPairsShortcutToggle = ''
       vim.g.AutoPairsShortcutToggleMultilineClose = ''
     end
-  }
-  -- use {
-  --   'cohama/lexima.vim',
-  --   event = 'InsertEnter',
-  --   -- config = function() vim.cmd 'runtime! plugins/lexima.vim' end
-  -- }
+  },
 
-  use { 'kana/vim-textobj-user', event = 'VimEnter' }
-  use {
+  { 'kana/vim-textobj-user',       event = 'VimEnter' },
+  {
     'vim-scripts/surround.vim',
     event = 'VimEnter',
-    setup = function() vim.keymap.set('n', 's', 'ys', { remap = true }) end
-  }
+    init = function() vim.keymap.set('n', 's', 'ys', { remap = true }) end
+  },
 
-  use {
+  {
     'tpope/vim-repeat',
     event = 'VimEnter',
     config = function()
       vim.cmd [[
-        function! Execute_repeatable_macro(name)
-          const name = '@' .. a:name
+              function! Execute_repeatable_macro(name)
+              const name = '@' .. a:name
 
-          execute 'normal!' name
-          silent! call repeat#set("\<Plug>macro_" .. a:name)
-        endfunction
+              execute 'normal!' name
+              silent! call repeat#set('\<Plug>macro_' .. a:name)
+              endfunction
 
-        for x in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-          execute 'nnoremap' '<silent>' ("<Plug>macro_" .. x) (":\<C-u>call Execute_repeatable_macro('" .. x .. "')\<CR>")
-          execute 'nmap' ('@' .. x) ("<Plug>macro_" .. x)
-        endfor
-      ]]
+              for x in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+                execute 'nnoremap' '<silent>' ('<Plug>macro_' .. x) ("'\<C-u>call Execute_repeatable_macro('" .. x .. "')\<CR>")
+                execute 'nmap' ('@' .. x) ('<Plug>macro_' .. x)
+                endfor
+                ]]
     end
-  }
+  },
 
-  use { 'justinmk/vim-sneak', event = 'VimEnter' }
-  use {
+  { 'justinmk/vim-sneak', event = 'VimEnter' },
+  {
     'echasnovski/mini.comment',
     config = function()
       require 'mini.comment'.setup {
@@ -187,39 +172,39 @@ return require 'packer'.startup(function(use)
         }
       }
     end
-  }
+  },
 
-
-  use {
+  {
     'nathanaelkane/vim-indent-guides',
     event = 'VimEnter',
-    setup = function()
+    init = function()
       vim.g.indent_guides_enable_on_vim_startup = 1
       vim.g.indent_guides_auto_colors = 0
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=none ctermbg=none]]
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2e3248 ctermbg=0]]
+      vim.cmd [[autocmd FileType alpha autocmd BufEnter,TextChanged,InsertLeave <buffer> IndentGuidesDisable]]
+      vim.cmd [[autocmd FileType alpha autocmd BufLeave <buffer> IndentGuidesEnable]]
     end
-  }
+  },
 
   -- lsp
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use {
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
     config = function()
       require 'lspsaga'.setup {
         finder = {
           keys = {
-            jump_to = '<CR>',
-            expand_or_jump = '<CR>',
+            toggle_or_open = '<CR>',
             quit = { 'q', '<ESC>' },
           },
         },
       }
     end
-  }
-  use {
+  },
+  {
     'hrsh7th/nvim-cmp',
     config = function()
       local cmp = require 'cmp'
@@ -252,21 +237,21 @@ return require 'packer'.startup(function(use)
         },
       }
     end,
-  }
-  use { 'hrsh7th/cmp-nvim-lsp', requires = { 'hrsh7th/nvim-cmp' } }
-  use { 'hrsh7th/cmp-buffer', requires = { 'hrsh7th/nvim-cmp' } }
-  use { 'hrsh7th/cmp-path', requires = { 'hrsh7th/nvim-cmp' } }
-  use {
+  },
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  {
     'neovim/nvim-lspconfig',
     config = function() require 'plugins.lspconfig' end,
-    requires = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
-  }
-  use { 'folke/neodev.nvim', config = function() require 'neodev'.setup {} end }
+    dependencies = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
+  },
+  { 'folke/neodev.nvim', config = function() require 'neodev'.setup {} end },
 
-  use {
+  {
     'nvim-treesitter/nvim-treesitter',
     event = 'VimEnter',
-    run = function()
+    build = function()
       local ts_update = require 'nvim-treesitter.install'.update { with_sync = true }
       ts_update()
     end,
@@ -294,7 +279,4 @@ return require 'packer'.startup(function(use)
       end, 50)
     end
   }
-  if packer_bootstrap then
-    require 'packer'.sync()
-  end
-end)
+}

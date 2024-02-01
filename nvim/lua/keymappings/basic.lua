@@ -1,6 +1,5 @@
 local keymap = vim.keymap.set
 
-vim.g.mapleader = ' '
 keymap('n', '[space]', '<nop>')
 keymap('n', '<Space>', '[space]', { remap = true })
 
