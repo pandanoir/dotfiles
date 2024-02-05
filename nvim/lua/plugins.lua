@@ -56,7 +56,7 @@ require 'lazy'.setup {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    event = 'VimEnter',
+    cmd = { 'Telescope' },
     keys = {
       { '<leader>ff', '<cmd>Telescope find_files<cr>' },
       { '<leader>fg', '<cmd>Telescope live_grep<cr>' },
@@ -174,10 +174,9 @@ require 'lazy'.setup {
     init = function()
       vim.g.indent_guides_enable_on_vim_startup = 1
       vim.g.indent_guides_auto_colors = 0
+      vim.g.indent_guides_exclude_filetypes = { 'alpha' }
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=none ctermbg=none]]
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2e3248 ctermbg=0]]
-      vim.cmd [[autocmd FileType alpha autocmd BufEnter,TextChanged,InsertLeave <buffer> IndentGuidesDisable]]
-      vim.cmd [[autocmd FileType alpha autocmd BufLeave <buffer> IndentGuidesEnable]]
     end
   },
 
