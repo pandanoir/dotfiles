@@ -21,11 +21,11 @@ require 'lazy'.setup {
   },
   'anuvyklack/keymap-amend.nvim',
   'nvim-tree/nvim-web-devicons',
-  { 'anuvyklack/pretty-fold.nvim', config = function() require 'pretty-fold'.setup {} end },
+  { 'anuvyklack/pretty-fold.nvim', config = true },
   {
     'anuvyklack/fold-preview.nvim',
     dependencies = { 'anuvyklack/keymap-amend.nvim' },
-    config = function() require 'fold-preview'.setup() end,
+    config = true,
   },
   {
     'folke/tokyonight.nvim',
@@ -39,21 +39,19 @@ require 'lazy'.setup {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-    config = function()
-      require 'lualine'.setup {
-        options = {
-          theme = 'onedark',
-        },
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diagnostics' },
-          lualine_c = { 'filename' },
-          lualine_x = { 'encoding', 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location' }
-        },
-      }
-    end
+    opts = {
+      options = {
+        theme = 'onedark',
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+    },
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -71,15 +69,13 @@ require 'lazy'.setup {
         end
       }
     },
-    config = function()
-      require 'telescope'.setup {
-        defaults = {
-          mappings = {
-            n = { q = 'close' },
-          },
+    opts = {
+      defaults = {
+        mappings = {
+          n = { q = 'close' },
         },
-      }
-    end,
+      },
+    },
   },
   'nvim-lua/plenary.nvim',
   {
@@ -160,18 +156,16 @@ require 'lazy'.setup {
   { 'justinmk/vim-sneak', event = 'VimEnter' },
   {
     'echasnovski/mini.comment',
-    config = function()
-      require 'mini.comment'.setup {
-        hooks = {
-          pre = function()
-            vim.cmd('noa setfiletype ' .. vim.fn['context_filetype#get_filetypes']()[1])
-          end,
-          post = function()
-            vim.cmd 'filetype detect'
-          end
-        }
+    opts = {
+      hooks = {
+        pre = function()
+          vim.cmd('noa setfiletype ' .. vim.fn['context_filetype#get_filetypes']()[1])
+        end,
+        post = function()
+          vim.cmd 'filetype detect'
+        end
       }
-    end
+    },
   },
 
   {
@@ -193,16 +187,14 @@ require 'lazy'.setup {
   {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
-    config = function()
-      require 'lspsaga'.setup {
-        finder = {
-          keys = {
-            toggle_or_open = '<CR>',
-            quit = { 'q', '<ESC>' },
-          },
+    opts = {
+      finder = {
+        keys = {
+          toggle_or_open = '<CR>',
+          quit = { 'q', '<ESC>' },
         },
-      }
-    end
+      },
+    },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -246,7 +238,7 @@ require 'lazy'.setup {
     config = function() require 'plugins.lspconfig' end,
     dependencies = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   },
-  { 'folke/neodev.nvim', config = function() require 'neodev'.setup {} end },
+  { 'folke/neodev.nvim',  config = true },
 
   {
     'nvim-treesitter/nvim-treesitter',
