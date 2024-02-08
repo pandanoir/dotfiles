@@ -11,6 +11,8 @@ alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 alias reitou='tar -zcvf'
 alias kaitou='tar -xvf'
 
+alias ts-node-esm='TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\"}" npx ts-node'
+
 alias g='git'
 alias ga='git add'
 alias gbr='git branch'
