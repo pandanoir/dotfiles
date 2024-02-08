@@ -15,7 +15,7 @@ require 'lazy'.setup {
   'Shougo/context_filetype.vim',
   {
     'rbtnn/vim-ambiwidth',
-    config = function()
+    init = function()
       vim.g.ambiwidth_cica_enabled = false
     end
   },
@@ -29,7 +29,7 @@ require 'lazy'.setup {
   },
   {
     'folke/tokyonight.nvim',
-    config = function()
+    init = function()
       vim.g.tokyonight_style = 'night'
       vim.g.tokyonight_transparent_background = 1
       vim.cmd [[colorscheme tokyonight]]
@@ -61,6 +61,7 @@ require 'lazy'.setup {
       { '<leader>ff', '<cmd>Telescope find_files<cr>' },
       { '<leader>fg', '<cmd>Telescope live_grep<cr>' },
       { '<leader>fb', '<cmd>Telescope buffers<cr>' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>' },
       { '<leader>;',  '<cmd>Telescope resume<cr>' },
       {
         '<leader>fG',
@@ -81,34 +82,31 @@ require 'lazy'.setup {
   {
     'nvim-tree/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
+    keys = { { '<leader>s', ':<C-u>NvimTreeToggle<CR>' } },
     init = function()
-      vim.keymap.set('n', '<leader>s', ':<C-u>NvimTreeToggle<CR>')
-    end,
-    config = function()
       -- disable netrw at the very start of your init.lua (strongly advised)
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
 
       -- set termguicolors to enable highlight groups
       vim.opt.termguicolors = true
-
-      require 'nvim-tree'.setup {
-        update_focused_file = {
-          enable = true,
+    end,
+    opts = {
+      update_focused_file = {
+        enable = true,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = true,
         },
-        actions = {
-          open_file = {
-            quit_on_open = true,
-          },
-        },
-      }
-    end
+      },
+    },
   },
   {
     'sbdchd/neoformat',
     cmd = 'Neoformat',
     ft = { 'javascript', 'javascript.jsx', 'typescript', 'typescript.tsx', 'typescriptreact', 'vue' },
-    config = function()
+    init = function()
       vim.g.neoformat_try_node_exe = 1
       vim.g.neoformat_enabled_javascript = { 'prettier', 'jsbeautify' }
       vim.cmd 'command! -range=% Fmt :mkview | :<line1>,<line2>Neoformat | :loadview'
@@ -117,7 +115,7 @@ require 'lazy'.setup {
   },
   {
     'LunarWatcher/auto-pairs',
-    config = function()
+    init = function()
       vim.api.nvim_set_var('AutoPairsCompleteOnlyOnSpace', 1)
       vim.g.AutoPairsCompleteOnlyOnSpace = 1
       vim.g.AutoPairsShortcutJump = ''
@@ -136,7 +134,7 @@ require 'lazy'.setup {
   {
     'tpope/vim-repeat',
     event = 'VimEnter',
-    config = function()
+    init = function()
       vim.cmd [[
               function! Execute_repeatable_macro(name)
               const name = '@' .. a:name
@@ -197,9 +195,9 @@ require 'lazy'.setup {
   },
   {
     'hrsh7th/nvim-cmp',
-    config = function()
+    opts = function()
       local cmp = require 'cmp'
-      cmp.setup {
+      return {
         enabled = true,
         mapping = cmp.mapping.preset.insert {
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
@@ -227,14 +225,14 @@ require 'lazy'.setup {
           fields = { 'abbr', 'kind', 'menu' },
         },
       }
-    end,
+    end
   },
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-path',
   {
     'neovim/nvim-lspconfig',
-    config = function() require 'plugins.lspconfig' end,
+    init = function() require 'plugins.lspconfig' end,
     dependencies = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   },
   { 'folke/neodev.nvim',  config = true },
@@ -246,28 +244,28 @@ require 'lazy'.setup {
       local ts_update = require 'nvim-treesitter.install'.update { with_sync = true }
       ts_update()
     end,
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
-        ensure_installed = {
-          'javascript',
-          'typescript',
-          'tsx',
-          'vue',
-          'css',
-          'html',
-          'json',
-          'lua',
-          'markdown_inline',
-          'markdown',
-          'scss',
-          'toml',
-          'vim'
-        },
-        additional_vim_regex_highlighting = false,
-      }
+    init = function()
       vim.defer_fn(function()
         vim.cmd [[TSEnable highlight]]
       end, 50)
-    end
+    end,
+    opts = {
+      ensure_installed = {
+        'javascript',
+        'typescript',
+        'tsx',
+        'vue',
+        'css',
+        'html',
+        'json',
+        'lua',
+        'markdown_inline',
+        'markdown',
+        'scss',
+        'toml',
+        'vim'
+      },
+      additional_vim_regex_highlighting = false,
+    },
   }
 }
