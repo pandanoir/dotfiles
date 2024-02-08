@@ -63,3 +63,6 @@ keymap('n', 'p', 'p`]', { silent = true })
 
 -- :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
 vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's']]
+
+-- %% でアクティブなファイルが含まれているディレクトリを手早く展開
+keymap('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
