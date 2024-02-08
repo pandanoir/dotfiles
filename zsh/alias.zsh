@@ -8,6 +8,9 @@ else
 fi
 alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
+alias reitou='tar -zcvf'
+alias kaitou='tar -xvf'
+
 alias g='git'
 alias ga='git add'
 alias gbr='git branch'
@@ -118,4 +121,3 @@ fi
 if command_exists rg; then
   alias rgf="rg --files | sort | rg"
 fi
-
