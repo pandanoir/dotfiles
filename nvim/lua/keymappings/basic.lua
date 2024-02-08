@@ -13,9 +13,6 @@ keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
 -- qでウインドウを閉じて Qでマクロ
 keymap('n', 'q', ':<C-u>q<CR>')
 keymap('n', 'Q', 'q')
-keymap('n', ';', ':')
-
-keymap('v', ';', ':', { remap = true })
 
 -- 削除時にヤンクしない
 keymap('n', 'x', '"_x')
