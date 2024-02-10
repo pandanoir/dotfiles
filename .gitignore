@@ -6,5 +6,4 @@ tmp
 nord-gnome-terminal
 ranger/plugins
 nvim/plugin
-nvim/lazy-lock.json
 nvim/lua/.luarc.json
