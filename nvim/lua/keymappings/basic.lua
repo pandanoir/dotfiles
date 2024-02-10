@@ -5,7 +5,6 @@ keymap('n', '<Space>', '[space]', { remap = true })
 
 keymap('n', 'J', 'gJ')
 
--- for masui special.
 keymap('n', '<CR>', ':<C-u>w<CR>')
 
 keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
@@ -14,13 +13,8 @@ keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
 keymap('n', 'q', ':<C-u>q<CR>')
 keymap('n', 'Q', 'q')
 
--- 削除時にヤンクしない
-keymap('n', 'x', '"_x')
-keymap('n', 'X', '"_X')
 keymap('n', 'gy', '"+y')
--- vnoremap gy "+y
 keymap('n', '<leader>d', '"_d')
--- vnoremap <leader>d "_d
 
 keymap('n', 'j', 'gj')
 keymap('n', 'k', 'gk')
@@ -29,7 +23,7 @@ keymap('n', 'gk', 'k')
 
 -- クリップボードへコピー
 keymap('n', '<leader>y', '"*y')
-keymap('v', '<leader>y', '"*y')
+keymap('n', '<leader>p', '"0p')
 
 keymap('i', 'fd', '<Esc>', { remap = true, silent = true })
 
