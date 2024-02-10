@@ -33,9 +33,6 @@ keymap('i', '<C-b>', '<Left>', { silent = true })
 keymap('n', '<C-n>', ':bnext<CR>')
 keymap('n', '<C-p>', ':bprev<CR>')
 
--- ,のデフォルトの機能は、\で使えるように退避
-keymap('', [[\]], ',')
-
 keymap('', '<leader>c', ':<C-u>enew<CR>')
 keymap('', '<leader>q', ':<C-u>bd<CR>')
 keymap('', '<leader><Space>', '<C-v>')
