@@ -30,14 +30,6 @@ keymap('i', 'fd', '<Esc>', { remap = true, silent = true })
 keymap('i', '<C-f>', '<Right>', { silent = true })
 keymap('i', '<C-b>', '<Left>', { silent = true })
 
-keymap('c', '<C-b>', '<Left>')
-keymap('c', '<C-f>', '<Right>')
-keymap('c', '<C-n>', '<Down>')
-keymap('c', '<C-p>', '<Up>')
-keymap('c', '<C-a>', '<Home>')
-keymap('c', '<C-e>', '<End>')
-keymap('c', '<C-d>', '<Del>')
-
 keymap('n', '<C-n>', ':bnext<CR>')
 keymap('n', '<C-p>', ':bprev<CR>')
 
