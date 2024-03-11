@@ -73,6 +73,11 @@ if file_exists "$RBENV_ROOT/bin/rbenv"; then
   eval "$(rbenv init -)"
 fi
 
+VOLTA_HOME="$HOME/.volta"
+if file_exists "$VOLTA_HOME/bin/volta"; then
+  export VOLTA_HOME
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
 if dir_exists $HOME/.nodebrew; then
   export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
   export PATH="$PATH:$HOME/.nodebrew/current/bin"
