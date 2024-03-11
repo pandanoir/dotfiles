@@ -6,14 +6,6 @@
 
 source "$ZDOTDIR/utils.zsh"
 launch_tmux() {
-    if [ `whoami` = 'root' ] || ! is_empty_string "$TMUX" || ! is_empty_string "$STY" || [ -v IS_VSCODE ] || [ -v GITHUB_ACTIONS ]; then
-        return
-    fi
-
-    if ! has tmux; then
-        # そもそもtmuxがない
-        return
-    fi
     if ! tmux has-session; then
         exec tmux new-session # セッションがない
     fi
