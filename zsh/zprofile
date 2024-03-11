@@ -97,6 +97,8 @@ fi
 
 if dir_exists $HOME/.cargo; then
   export PATH="$HOME/.cargo/bin:$PATH"
+  source "$HOME/.cargo/env"
+  . "$HOME/.cargo/env"
 fi
 if dir_exists $XDG_DATA_HOME/cargo; then
   CARGO_HOME="$XDG_DATA_HOME"/cargo

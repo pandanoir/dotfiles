@@ -29,5 +29,3 @@ fi
 
 # load local .zshenv
 source "$ZDOTDIR/.zprofile"
-source "$HOME/.cargo/env"
-. "$HOME/.cargo/env"
