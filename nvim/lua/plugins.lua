@@ -195,7 +195,7 @@ require 'lazy'.setup {
 
   {
     'chentoast/marks.nvim',
-    config = { builtin_marks = { ".", "^" } },
+    opts = { builtin_marks = { ".", "^" } },
   },
 
   { 'justinmk/vim-sneak', event = 'VimEnter' },
