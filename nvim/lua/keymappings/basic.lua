@@ -22,7 +22,8 @@ keymap('n', 'gj', 'j')
 keymap('n', 'gk', 'k')
 
 -- クリップボードへコピー
-keymap('n', '<leader>y', '"*y')
+keymap('n', '<leader>y', '"+y')
+keymap('v', '<leader>y', '"+y')
 keymap('n', '<leader>p', '"0p')
 
 keymap('i', 'fd', '<Esc>', { remap = true, silent = true })
