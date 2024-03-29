@@ -21,12 +21,12 @@ require 'lazy'.setup {
 
       dashboard.section.buttons.val = {
         dashboard.button('t', '  nvim-tree', ':NvimTreeToggle<cr>'),
-        dashboard.button('f', ' ' .. ' Find file',       '<cmd> Telescope find_files <cr>'),
-        dashboard.button('n', ' ' .. ' New file',        '<cmd> ene <BAR> startinsert <cr>'),
-        dashboard.button('r', ' ' .. ' Recent files',    '<cmd> Telescope oldfiles <cr>'),
-        dashboard.button('g', ' ' .. ' Find text',       '<cmd> Telescope live_grep <cr>'),
-        dashboard.button('l', '󰒲 ' .. ' Lazy',            '<cmd> Lazy <cr>'),
-        dashboard.button('q', ' ' .. ' Quit',            '<cmd> qa <cr>'),
+        dashboard.button('f', ' ' .. ' Find file', '<cmd> Telescope find_files <cr>'),
+        dashboard.button('n', ' ' .. ' New file', '<cmd> ene <BAR> startinsert <cr>'),
+        dashboard.button('r', ' ' .. ' Recent files', '<cmd> Telescope oldfiles <cr>'),
+        dashboard.button('g', ' ' .. ' Find text', '<cmd> Telescope live_grep <cr>'),
+        dashboard.button('l', '󰒲 ' .. ' Lazy', '<cmd> Lazy <cr>'),
+        dashboard.button('q', ' ' .. ' Quit', '<cmd> qa <cr>'),
       }
 
       local function footer()
@@ -50,7 +50,10 @@ require 'lazy'.setup {
   },
   'anuvyklack/keymap-amend.nvim',
   'nvim-tree/nvim-web-devicons',
-  { 'anuvyklack/pretty-fold.nvim', config = true },
+  {
+    'anuvyklack/pretty-fold.nvim',
+    config = true,
+  },
   {
     'anuvyklack/fold-preview.nvim',
     dependencies = { 'anuvyklack/keymap-amend.nvim' },
@@ -183,8 +186,14 @@ require 'lazy'.setup {
     opts = { builtin_marks = { ".", "^" } },
   },
 
-  { 'justinmk/vim-sneak', event = 'VimEnter' },
-  { 'JoosepAlviste/nvim-ts-context-commentstring', config = true },
+  {
+    'justinmk/vim-sneak',
+    event = 'VimEnter',
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    config = true,
+  },
   {
     'echasnovski/mini.comment',
     opts = {
@@ -265,7 +274,10 @@ require 'lazy'.setup {
     init = function() require 'plugins.lspconfig' end,
     dependencies = { 'folke/neodev.nvim', 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   },
-  { 'folke/neodev.nvim',  config = true },
+  {
+    'folke/neodev.nvim',
+    config = true,
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',
