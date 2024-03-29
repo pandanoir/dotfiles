@@ -199,18 +199,16 @@ require 'lazy'.setup {
   },
 
   { 'justinmk/vim-sneak', event = 'VimEnter' },
+  { 'JoosepAlviste/nvim-ts-context-commentstring', config = true },
   {
     'echasnovski/mini.comment',
     opts = {
-      hooks = {
-        pre = function()
-          vim.cmd('noa setfiletype ' .. vim.fn['context_filetype#get_filetypes']()[1])
+      options = {
+        custom_commentstring = function()
+          return require 'ts_context_commentstring'.calculate_commentstring() or vim.bo.commentstring
         end,
-        post = function()
-          vim.cmd 'filetype detect'
-        end
       }
-    },
+    }
   },
 
   {
