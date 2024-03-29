@@ -176,21 +176,6 @@ require 'lazy'.setup {
   {
     'tpope/vim-repeat',
     event = 'VimEnter',
-    init = function()
-      vim.cmd [[
-              function! Execute_repeatable_macro(name)
-              const name = '@' .. a:name
-
-              execute 'normal!' name
-              silent! call repeat#set('\<Plug>macro_' .. a:name)
-              endfunction
-
-              for x in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-                execute 'nnoremap' '<silent>' ('<Plug>macro_' .. x) ("'\<C-u>call Execute_repeatable_macro('" .. x .. "')\<CR>")
-                execute 'nmap' ('@' .. x) ('<Plug>macro_' .. x)
-                endfor
-                ]]
-    end
   },
 
   {
