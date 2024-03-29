@@ -153,7 +153,20 @@ require 'lazy'.setup {
     end
   },
 
-  { 'kana/vim-textobj-user',       event = 'VimEnter' },
+  {
+    'kana/vim-textobj-user',
+    event = 'VimEnter',
+    config = function()
+      ---@diagnostic disable-next-line: param-type-mismatch
+      vim.call('textobj#user#plugin', 'braces', {
+        angle = {
+          pattern = { "\\[", "\\]" },
+          ["select-a"] = 'ar',
+          ["select-i"] = 'ir',
+        },
+      })
+    end
+  },
   {
     'vim-scripts/surround.vim',
     event = 'VimEnter',
