@@ -267,7 +267,7 @@ require 'lazy'.setup {
   {
     'neovim/nvim-lspconfig',
     init = function() require 'plugins.lspconfig' end,
-    dependencies = { 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
+    dependencies = { 'folke/neodev.nvim', 'glepnir/lspsaga.nvim', 'hrsh7th/nvim-cmp', 'williamboman/mason-lspconfig.nvim' },
   },
   { 'folke/neodev.nvim',  config = true },
 
