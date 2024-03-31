@@ -20,7 +20,7 @@ vim.opt.fileformats = 'unix,dos,mac'                  -- 改行コードの自�
 vim.g.mapleader = ' '
 
 require('plugins')
-require('keymappings.basic')
+require('keymappings')
 require('userautoload.indent')
 require('userautoload.filetype')
 
