@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set('n', '<leader>l', ':Lazy<CR>', { remap = true })
 require 'lazy'.setup {
   -- ui
   {
