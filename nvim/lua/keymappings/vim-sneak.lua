@@ -1,5 +1,0 @@
-vim.keymap.set('n', 'f', '<Plug>Sneak_f', { remap = true })
-vim.keymap.set('n', 'F', '<Plug>Sneak_F', { remap = true })
-vim.keymap.set('n', 't', '<Plug>Sneak_t', { remap = true })
-vim.keymap.set('n', 'T', '<Plug>Sneak_T', { remap = true })
-vim.keymap.set('n', ';', '<Plug>Sneak_;', { remap = true })

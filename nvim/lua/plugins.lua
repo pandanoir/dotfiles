@@ -139,6 +139,12 @@ require 'lazy'.setup {
   {
     'justinmk/vim-sneak',
     event = 'VimEnter',
+    init = function()
+      vim.keymap.set('n', 'f', '<Plug>Sneak_f', { remap = true })
+      vim.keymap.set('n', 'F', '<Plug>Sneak_F', { remap = true })
+      vim.keymap.set('n', 't', '<Plug>Sneak_t', { remap = true })
+      vim.keymap.set('n', 'T', '<Plug>Sneak_T', { remap = true })
+    end,
   },
 
   -- others

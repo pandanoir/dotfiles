@@ -21,7 +21,6 @@ vim.g.mapleader = ' '
 
 require('plugins')
 require('keymappings.basic')
-require('keymappings.vim-sneak')
 require('userautoload.indent')
 require('userautoload.filetype')
 
