@@ -60,6 +60,25 @@ fcs() {
 fbr() {
   git branch | fzf +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //'
 }
+__fsel3() {
+  local item
+  git branch | fzf +s +m -e --ansi --reverse --height 40% | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+fzf-branch-widget() {
+  LBUFFER="${LBUFFER}$(__fsel3)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle     -N   fzf-branch-widget
+bindkey -M emacs '^S' fzf-branch-widget
+bindkey -M vicmd '^S' fzf-branch-widget
+bindkey -M viins '^S' fzf-branch-widget
 
 globalias() {
   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
