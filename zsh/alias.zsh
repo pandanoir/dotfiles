@@ -39,6 +39,8 @@ alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 alias gsw='git switch'
 alias gswm='git switch master'
 alias gre='git restore'
+alias git-soft-reset="git reset --soft HEAD^"
+alias git-hard-reset="git reset --hard HEAD^"
 gro() {
   git rebase origin/$(git symbolic-ref --short HEAD)
 }
