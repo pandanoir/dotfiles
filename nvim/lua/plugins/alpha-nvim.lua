@@ -8,7 +8,7 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button('t', '  nvim-tree', ':NvimTreeToggle<cr>'),
       dashboard.button('f', ' ' .. ' Find file', '<cmd> Telescope find_files <cr>'),
-      dashboard.button('n', ' ' .. ' New file', '<cmd> ene <BAR> startinsert <cr>'),
+      dashboard.button('i', ' ' .. ' New file', '<cmd> ene <BAR> startinsert <cr>'),
       dashboard.button('r', ' ' .. ' Recent files', '<cmd> Telescope oldfiles <cr>'),
       dashboard.button('g', ' ' .. ' Find text', '<cmd> Telescope live_grep <cr>'),
       dashboard.button('l', '󰒲 ' .. ' Lazy', '<cmd> Lazy <cr>'),
