@@ -72,7 +72,14 @@ zle -N globalias
 
 bindkey " " globalias
 
-alias s="npm start"
+# start development server
+function s() {
+  if command_exists jq && jq '.scripts|keys[]' -r < package.json | grep dev$; then
+    npm run dev
+  else
+    npm start
+  fi
+}
 
 alias -g A='| awk'
 alias -g C='| copy'
