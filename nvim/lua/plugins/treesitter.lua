@@ -1,15 +1,8 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   event = 'VimEnter',
-  build = function()
-    local ts_update = require 'nvim-treesitter.install'.update { with_sync = true }
-    ts_update()
-  end,
-  init = function()
-    vim.defer_fn(function()
-      vim.cmd [[TSEnable highlight]]
-    end, 50)
-  end,
+  build = ":TSUpdate",
+  main = 'nvim-treesitter.configs',
   opts = {
     ensure_installed = {
       'javascript',
@@ -20,6 +13,7 @@ return {
       'html',
       'json',
       'lua',
+      'bash',
       'markdown_inline',
       'markdown',
       'scss',
@@ -27,5 +21,6 @@ return {
       'vim'
     },
     additional_vim_regex_highlighting = false,
+    highlight = { enable = true },
   },
 }
