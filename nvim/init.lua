@@ -18,6 +18,7 @@ require('userautoload.filetype')
 vim.opt.completeopt:append({ insert = false, select = false })
 vim.opt.completeopt:remove({ preview = true })
 
+vim.opt.bg='dark'
 vim.opt.signcolumn = 'yes:2'
 vim.opt.mouse = ''
 vim.opt.whichwrap = 'b,s,[,],,~'
