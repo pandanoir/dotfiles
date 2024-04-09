@@ -3,7 +3,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
   opts = {
     options = {
-      theme = 'onedark',
+      theme = 'tokyonight',
     },
     sections = {
       lualine_a = { 'mode' },
