@@ -2,7 +2,6 @@ local nvim_lsp = require 'lspconfig'
 local mason = require 'mason'
 local mason_lspconfig = require 'mason-lspconfig'
 
-vim.cmd [[set signcolumn=yes]]
 vim.cmd [[autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>]]
 
 local opts = { noremap = true, silent = true }
