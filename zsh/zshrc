@@ -1,5 +1,5 @@
 source "$ZDOTDIR/utils.zsh"
-command_exists() { type "$1" > /dev/null 2>&1; }
+command_exists() { type "$1" >/dev/null 2>&1; }
 
 # emacsのtrampがタイムアウトするのに対応
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
@@ -9,37 +9,38 @@ bindkey -e
 # 自作関数の読み込み
 autoload -Uz tinify estart
 
-autoload -U colors; colors
+autoload -U colors
+colors
 
 git-prompt() {
   local branchname
-  branchname=`git symbolic-ref --short HEAD 2> /dev/null`
+  branchname=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [ -z $branchname ]; then
     return
   fi
   echo "%{${fg[magenta]}%}${branchname}%{${reset_color}%}"
 }
-prompt-set(){
-    PROMPT="%F{074}[%n@%m]%f# "
-    RPROMPT='`git-prompt`%F{048}[%~]%f'
+prompt-set() {
+  PROMPT="%F{074}[%n@%m]%f# "
+  RPROMPT='`git-prompt`%F{048}[%~]%f'
 }
 prompt-reset() {
-    PROMPT="# "
-    RPROMPT=''
+  PROMPT="# "
+  RPROMPT=''
 }
 prompt-set
 setopt prompt_subst #表示毎にPROMPTで設定されている文字列を評価する
 
-setopt no_beep # ビープ音を消す
+setopt no_beep  # ビープ音を消す
 setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
 
 setopt auto_cd
 function chpwd() {
-    if is_mac; then
-        ls -G
-    else
-        ls --color=auto
-    fi
+  if is_mac; then
+    ls -G
+  else
+    ls --color=auto
+  fi
 }
 
 # コマンド履歴関連
@@ -62,14 +63,14 @@ if compinit; then
   setopt IGNOREEOF
   setopt auto_menu
   _ssh() {
-    compadd `grep '^Host ' ~/.ssh/config | awk '$0=$2' | sort`
+    compadd $(grep '^Host ' ~/.ssh/config | awk '$0=$2' | sort)
   }
   compdef _ssh ssh
 fi
 # setopt menu_complete
 
 if command_exists fasd; then
-    eval "$(fasd --init auto)"
+  eval "$(fasd --init auto)"
 fi
 
 source "$ZDOTDIR/zinit.zsh"
@@ -80,11 +81,10 @@ file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_H
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
-if has tmux && [ `whoami` != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMUX" && is_empty_string "$TMUX" && is_empty_string "$STY" && is_empty_string $IS_VSCODE && is_empty_string $GITHUB_ACTIONS; then
-    source "$ZDOTDIR/launch_tmux.zsh"
+if has tmux && [ $(whoami) != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMUX" && is_empty_string "$TMUX" && is_empty_string "$STY" && is_empty_string $IS_VSCODE && is_empty_string $GITHUB_ACTIONS; then
+  source "$ZDOTDIR/launch_tmux.zsh"
 fi
 
 if command_exists starship; then
   eval "$(starship init zsh)"
 fi
-

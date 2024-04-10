@@ -1,18 +1,17 @@
 tinify() {
-    if [ "$1" = "" ]; then
-        echo 'Usage: tinify [input]'
-        return 1
-    fi
+  if [ "$1" = "" ]; then
+    echo 'Usage: tinify [input]'
+    return 1
+  fi
 
-    local input="orig/"$1
-    local output=$1
-    local api="fquVRYDzurzVbD8lbeZ7AFeOKUbAlG9W"
-    echo "$input -> $output"
-    echo "uploading..."
-    local uploaded=$(curl -s https://api.tinify.com/shrink --user api:$api --dump-header /dev/stdout --data-binary @$input | grep Location | cut -d' ' -f2 | tr -d '\r\n')
-    echo "uploaded!"
-    echo "tinifying..."
-    curl -s $uploaded --user api:$api --output $output
-    echo "tinified!"
+  local input="orig/"$1
+  local output=$1
+  local api="fquVRYDzurzVbD8lbeZ7AFeOKUbAlG9W"
+  echo "$input -> $output"
+  echo "uploading..."
+  local uploaded=$(curl -s https://api.tinify.com/shrink --user api:$api --dump-header /dev/stdout --data-binary @$input | grep Location | cut -d' ' -f2 | tr -d '\r\n')
+  echo "uploaded!"
+  echo "tinifying..."
+  curl -s $uploaded --user api:$api --output $output
+  echo "tinified!"
 }
-

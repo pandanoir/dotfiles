@@ -6,19 +6,19 @@
 
 source "$ZDOTDIR/utils.zsh"
 launch_tmux() {
-    if ! tmux has-session; then
-        exec tmux new-session # セッションがない
-    fi
-    if is_empty_string "$(tmux list-sessions | grep '(attached)')"; then
-        exec tmux attach # アタッチされていないセッションがある
-    fi
+  if ! tmux has-session; then
+    exec tmux new-session # セッションがない
+  fi
+  if is_empty_string "$(tmux list-sessions | grep '(attached)')"; then
+    exec tmux attach # アタッチされていないセッションがある
+  fi
 
-    if [ -v NOT_NEW_SESSION_TMUX ]; then
-        # 新しいセッションを立ち上げたくない
-        echo "detached tmux session doesn't exist"
-        return
-    fi
+  if [ -v NOT_NEW_SESSION_TMUX ]; then
+    # 新しいセッションを立ち上げたくない
+    echo "detached tmux session doesn't exist"
+    return
+  fi
 
-    exec tmux new-session
+  exec tmux new-session
 }
 launch_tmux

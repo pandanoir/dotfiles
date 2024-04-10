@@ -45,10 +45,10 @@ gro() {
   git rebase origin/$(git symbolic-ref --short HEAD)
 }
 git-rm-merged-branch() {
-git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
+  git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
 }
 git-set-upstream-branch() {
-git branch --set-upstream-to="origin/$(git branch --show-current)"
+  git branch --set-upstream-to="origin/$(git branch --show-current)"
 }
 
 fcs() {
@@ -75,7 +75,7 @@ fzf-branch-widget() {
   zle reset-prompt
   return $ret
 }
-zle     -N   fzf-branch-widget
+zle -N fzf-branch-widget
 bindkey -M emacs '^S' fzf-branch-widget
 bindkey -M vicmd '^S' fzf-branch-widget
 bindkey -M viins '^S' fzf-branch-widget
@@ -93,7 +93,7 @@ bindkey " " globalias
 
 # start development server
 function s() {
-  if command_exists jq && jq '.scripts|keys[]' -r < package.json | grep dev$; then
+  if command_exists jq && jq '.scripts|keys[]' -r <package.json | grep dev$; then
     npm run dev
   else
     npm start
