@@ -84,3 +84,7 @@ if has tmux && [ `whoami` != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMU
     source "$ZDOTDIR/launch_tmux.zsh"
 fi
 
+if command_exists starship; then
+  eval "$(starship init zsh)"
+fi
+
