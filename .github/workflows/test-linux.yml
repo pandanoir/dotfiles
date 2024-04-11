@@ -44,10 +44,12 @@ jobs:
         ${GITHUB_WORKSPACE}/install.sh
     - name: check health of neovim
       run: |
-        nvim --headless "+checkhealth" "+w!health.log" +qa
+        nvim --headless "+sleep 10" "+checkhealth" "+w!health.log" +qa
         cat health.log
         echo '=============================='
-        cat health.log | grep ERROR
+        if cat health.log | grep ERROR 2>&1; then
+          false
+        fi
     - name: check mapping of vim
       run: |
         vim +'redir > map.log' +'map' +'redir END' +'qa!'
