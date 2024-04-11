@@ -18,7 +18,8 @@ return {
       'markdown',
       'scss',
       'toml',
-      'vim'
+      'vim',
+      'vimdoc'
     },
     additional_vim_regex_highlighting = false,
     highlight = { enable = true },
