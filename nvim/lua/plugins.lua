@@ -40,7 +40,6 @@ require 'lazy'.setup {
       vim.g.indent_guides_enable_on_vim_startup = 1
       vim.g.indent_guides_auto_colors = 0
       vim.g.indent_guides_exclude_filetypes = { 'alpha' }
-      vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=none ctermbg=none]]
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2e3248 ctermbg=0]]
     end
   },
