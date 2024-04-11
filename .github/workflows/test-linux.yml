@@ -46,6 +46,8 @@ jobs:
       run: |
         nvim --headless "+checkhealth" "+w!health.log" +qa
         cat health.log
+        echo '=============================='
+        cat health.log | grep ERROR
     - name: check mapping of vim
       run: |
         vim +'redir > map.log' +'map' +'redir END' +'qa!'
