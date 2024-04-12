@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
 require 'lazy'.setup {
   -- ui
+  'bronson/vim-trailing-whitespace',
   {
     'rbtnn/vim-ambiwidth',
     init = function()
