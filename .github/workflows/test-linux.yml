@@ -6,6 +6,9 @@ on:
       - master
       - test/**
 
+env:
+  TERM: xterm-256color
+
 jobs:
   one-liner-setup-test:
     runs-on: ubuntu-latest
@@ -44,7 +47,8 @@ jobs:
         ${GITHUB_WORKSPACE}/install.sh
     - name: check health of neovim
       run: |
-        nvim --headless "+sleep 10" "+checkhealth" "+w!health.log" +qa
+        nvim --headless "+sleep 10" +q
+        nvim --headless "+checkhealth" "+w!health.log" +qa
         cat health.log
         echo '=============================='
         if cat health.log | grep ERROR 2>&1; then
