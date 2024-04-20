@@ -9,7 +9,7 @@ launch_tmux() {
   if ! tmux has-session; then
     exec tmux new-session # セッションがない
   fi
-  if is_empty_string "$(tmux list-sessions | grep '(attached)')"; then
+  if ! is_empty_string "$(tmux list-sessions | grep -v popup | grep -v '(attached)')"; then
     exec tmux attach # アタッチされていないセッションがある
   fi
 
