@@ -12,6 +12,7 @@ return {
       dashboard.button('r', ' ' .. ' Recent files', '<cmd> Telescope oldfiles <cr>'),
       dashboard.button('g', ' ' .. ' Find text', '<cmd> Telescope live_grep <cr>'),
       dashboard.button('l', '󰒲 ' .. ' Lazy', '<cmd> Lazy <cr>'),
+      dashboard.button('h', ' ' .. ' Check health', '<cmd> checkhealth <cr>'),
       dashboard.button('q', ' ' .. ' Quit', '<cmd> qa <cr>'),
     }
 
