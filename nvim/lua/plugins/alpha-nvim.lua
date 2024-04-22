@@ -6,7 +6,7 @@ return {
     local dashboard = require 'alpha.themes.dashboard'
 
     dashboard.section.buttons.val = {
-      dashboard.button('t', '  nvim-tree', ':NvimTreeToggle<cr>'),
+      dashboard.button('o', ' ' .. ' Oil', ':Oil --float<cr>'),
       dashboard.button('f', ' ' .. ' Find file', '<cmd> Telescope find_files <cr>'),
       dashboard.button('i', ' ' .. ' New file', '<cmd> ene <BAR> startinsert <cr>'),
       dashboard.button('r', ' ' .. ' Recent files', '<cmd> Telescope oldfiles <cr>'),

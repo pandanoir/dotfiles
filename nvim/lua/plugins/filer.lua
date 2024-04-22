@@ -1,17 +1,9 @@
 return {
-  'nvim-tree/nvim-tree.lua',
+  'stevearc/oil.nvim',
+  opts = { float = { padding = 4, max_width = 150 } },
   init = function()
-    vim.keymap.set('n', '<leader>s', ':<C-u>NvimTreeToggle<CR>')
+    vim.keymap.set('n', '<leader>s', ':<C-u>Oil --float<CR>')
+    vim.cmd [[autocmd FileType oil nnoremap <buffer> <leader><cr> :w<CR>]]
   end,
-  opts = {
-    hijack_netrw = true,
-    update_focused_file = {
-      enable = true,
-    },
-    actions = {
-      open_file = {
-        quit_on_open = true,
-      },
-    },
-  },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
