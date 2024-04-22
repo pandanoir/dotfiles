@@ -19,7 +19,7 @@ vim.opt.completeopt:append({ insert = false, select = false })
 vim.opt.completeopt:remove({ preview = true })
 
 vim.opt.bg='dark'
-vim.opt.signcolumn = 'yes:2'
+vim.opt.signcolumn = 'yes:3'
 vim.opt.mouse = ''
 vim.opt.whichwrap = 'b,s,[,],,~'
 vim.opt.ignorecase = true
@@ -72,3 +72,4 @@ vim.opt.visualbell = true
 vim.cmd [[packadd! matchit]]
 --
 vim.cmd [[filetype plugin indent on]]
+

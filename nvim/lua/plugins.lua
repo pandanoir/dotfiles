@@ -34,8 +34,12 @@ require 'lazy'.setup {
     'chentoast/marks.nvim',
     opts = {
       builtin_marks = { ".", "^" },
-      excluded_buftypes = {"nofile"},
+      excluded_buftypes = { "nofile" },
     },
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = true,
   },
   {
     'nathanaelkane/vim-indent-guides',
