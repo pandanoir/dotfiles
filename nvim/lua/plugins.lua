@@ -57,6 +57,15 @@ require 'lazy'.setup {
     opts = {},
   },
   {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    opts = {
+      provider_selector = function()
+        return { 'treesitter', 'indent' }
+      end
+    },
+  },
+  {
     'nathanaelkane/vim-indent-guides',
     event = 'VimEnter',
     init = function()
