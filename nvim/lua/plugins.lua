@@ -14,7 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
 require 'lazy'.setup {
   -- ui
-  'bronson/vim-trailing-whitespace',
+  {
+    'bronson/vim-trailing-whitespace',
+    event = 'BufRead',
+  },
   {
     'rbtnn/vim-ambiwidth',
     init = function()
@@ -32,6 +35,7 @@ require 'lazy'.setup {
   },
   {
     'chentoast/marks.nvim',
+    event = 'BufRead',
     opts = {
       builtin_marks = { ".", "^" },
       excluded_buftypes = { "nofile" },
@@ -39,6 +43,7 @@ require 'lazy'.setup {
   },
   {
     'lewis6991/gitsigns.nvim',
+    event = 'BufRead',
     config = true,
   },
   {
