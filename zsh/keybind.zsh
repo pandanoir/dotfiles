@@ -1,10 +1,22 @@
-expand-alias() {
-  zle _expand_alias
-  zle expand-word
+# コマンドラインをエディタで編集する関数
+edit-command-line() {
+  # 現在のコマンドラインを一時ファイルに書き出す
+  local tmpfile=$(mktemp)
+  print -rl -- $BUFFER > $tmpfile
+
+  $EDITOR $tmpfile < /dev/tty
+
+  # エディタが正常に終了した場合、一時ファイルの内容でコマンドラインを置き換え
+  if [[ $? -eq 0 ]]; then
+    BUFFER=$(<$tmpfile)
+    zle reset-prompt
+  fi
+
+  rm -f $tmpfile
 }
 
-zle -N expand-alias
-bindkey '^O' expand-alias
+zle -N edit-command-line
+bindkey "^O" edit-command-line
 
 fancy-ctrl-z() {
   if [[ $#BUFFER -eq 0 ]]; then
