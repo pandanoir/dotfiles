@@ -106,7 +106,7 @@ require 'lazy'.setup {
       'folke/neodev.nvim',
       'glepnir/lspsaga.nvim',
       'hrsh7th/nvim-cmp',
-      'williamboman/mason.nvim',
+      { 'williamboman/mason.nvim', config = true, build = ':MasonUpdate' },
       'williamboman/mason-lspconfig.nvim'
     },
   },

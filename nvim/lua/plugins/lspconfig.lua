@@ -87,4 +87,3 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
-vim.cmd 'MasonUpdate'
