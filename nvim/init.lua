@@ -25,7 +25,6 @@ vim.opt.smartcase = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.scrolloff = 10
 vim.opt.guifont = 'Migu 1m:h12'
-vim.cmd [[syntax on]]
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   group = 'MyAutoCmd',
