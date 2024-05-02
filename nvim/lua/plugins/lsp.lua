@@ -1,18 +1,5 @@
 return {
   {
-    'glepnir/lspsaga.nvim',
-    event = 'BufRead',
-    opts = {
-      finder = {
-        keys = {
-          toggle_or_open = '<CR>',
-          quit = { 'q', '<ESC>' },
-        },
-      },
-    },
-  },
-  require 'plugins.completion',
-  {
     'neovim/nvim-lspconfig',
     init = function()
       local nvim_lsp = require 'lspconfig'
@@ -108,7 +95,18 @@ return {
     event = 'BufRead',
     dependencies = {
       { 'folke/neodev.nvim', config = true, },
-      'glepnir/lspsaga.nvim',
+      {
+        'glepnir/lspsaga.nvim',
+        event = 'BufRead',
+        opts = {
+          finder = {
+            keys = {
+              toggle_or_open = '<CR>',
+              quit = { 'q', '<ESC>' },
+            },
+          },
+        },
+      },
       'hrsh7th/nvim-cmp',
       { 'williamboman/mason.nvim', config = true, build = ':MasonUpdate' },
       'williamboman/mason-lspconfig.nvim'

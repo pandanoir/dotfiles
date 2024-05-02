@@ -61,7 +61,4 @@ return {
       vim.cmd [[autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2e3248 ctermbg=0]]
     end
   },
-  require 'plugins.treesitter',
-  require 'plugins.colorscheme',
-  require 'plugins.lualine',
-  }
+}

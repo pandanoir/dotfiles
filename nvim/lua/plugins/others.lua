@@ -23,7 +23,6 @@ return {
       }
     }
   },
-  require 'plugins.formatter',
   {
     'LunarWatcher/auto-pairs',
     init = function()
@@ -66,5 +65,4 @@ return {
   -- others
   'Shougo/context_filetype.vim',
   { 'bronson/vim-visual-star-search', event = 'VeryLazy' },
-  require 'plugins.alpha-nvim',
 }
