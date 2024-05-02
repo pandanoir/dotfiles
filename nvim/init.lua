@@ -10,7 +10,7 @@ vim.opt.fileencodings = 'ucs-boms,utf-8,euc-jp,cp932' -- 読み込み時の文�
 vim.opt.fileformats = 'unix,dos,mac'                  -- 改行コードの自動判別。左ほど優先
 vim.g.mapleader = ' '
 
-require('plugins')
+require('lazynvim')
 require('keymappings')
 require('userautoload.indent')
 require('userautoload.filetype')
