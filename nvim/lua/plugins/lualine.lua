@@ -11,4 +11,11 @@ return {
       lualine_z = { 'location' }
     },
   },
+  init = function()
+    vim.o.cmdheight = 0
+    vim.cmd [[
+    autocmd RecordingEnter * set cmdheight=1
+    autocmd RecordingLeave * set cmdheight=0
+    ]]
+  end
 }
