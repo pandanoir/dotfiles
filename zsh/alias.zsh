@@ -116,10 +116,8 @@ alias -g .zp="$ZDOTDIR/.zprofile"
 alias -g .zpr="$ZDOTDIR/.zprofile"
 alias -g .zpro="$ZDOTDIR/.zprofile"
 
-alias vi="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
-alias vim="env -u VIM env VIMINIT=':source $XDG_CONFIG_HOME'/vim/vimrc vim"
-
 if command_exists nvim; then
+  alias vi="\\vim"
   alias vim="nvim"
 fi
 

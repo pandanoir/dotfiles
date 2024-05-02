@@ -13,8 +13,8 @@ deploy() {
   # vim/neovim
   mkdir -p "$XDG_CONFIG_HOME/vim" "$XDG_CACHE_HOME/vim"
   symlink nvim  "$XDG_CONFIG_HOME/nvim"
-  symlink vimrc "$XDG_CONFIG_HOME/vim/vimrc"
-  for file in `ls -1 "$DOTDIR/vim"`; do
+  symlink vim/raw_vimrc "$HOME/.vimrc"
+  for file in `ls -1 "$DOTDIR/vim" | grep -v 'raw_vimrc'`; do
     symlink "vim/$file" "$XDG_CONFIG_HOME/vim/$file"
   done
 
