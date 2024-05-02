@@ -1,8 +1,6 @@
 ---@diagnostic disable-next-line: undefined-global
 if vim.loader then vim.loader.enable() end
 vim.api.nvim_create_augroup('MyAutoCmd', { clear = true })
-vim.cmd [[filetype off]]
-vim.cmd [[filetype plugin indent off]]
 
 vim.scriptencoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
@@ -70,6 +68,3 @@ vim.opt.visualbell = true
 
 -- " 対応するhtmlタグに % で移動できるようにする
 vim.cmd [[packadd! matchit]]
---
-vim.cmd [[filetype plugin indent on]]
-
