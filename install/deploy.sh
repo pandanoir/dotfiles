@@ -29,7 +29,7 @@ deploy() {
   done
   symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile "$ZDOTDIR/.zprofile"
-  symlink zshenv       "$HOME/.zshenv"
+  symlink zsh/zshenv       "$HOME/.zshenv"
   symlink zsh/zprofile     "$HOME/.bash_profile"
 
   # other
