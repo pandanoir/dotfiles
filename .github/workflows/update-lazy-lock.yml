@@ -1,0 +1,29 @@
+name: update lazy-lock.json
+
+on:
+  push:
+    branches:
+      - test/**
+  schedule:
+    - cron: "0 0 * * *" # 毎日 0:00 (UTC) に実行する
+
+env:
+  TERM: xterm-256color
+
+jobs:
+  neovim-setup-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: sudo snap install --beta nvim --classic
+    - name: Run install.sh
+      run: |
+        ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
+        ${GITHUB_WORKSPACE}/install.sh
+    - uses: fregante/setup-git-user@v2
+    - name: update lazy-lock.json
+      run: |
+        nvim --headless "+lua require('lazy').update({wait = true, show = false})" +q
+        git diff nvim
+        git add nvim/lazy-lock.json
+        git commit -m '[bot] update lazy-lock.json' && git push || true
