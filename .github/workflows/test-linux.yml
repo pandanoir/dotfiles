@@ -64,11 +64,10 @@ jobs:
         cat map.log
         echo
         # 最低限 fd は使いたいのでチェックする
-        if ! cat map.log | grep -q 'i \+fd \+<esc>'; then
+        if ! cat map.log | grep -q -i 'i \+fd \+<esc>'; then
           echo 'imap fd <ESC> is not available'
           false
         fi
-
 
   zsh-setup-test:
     runs-on: ubuntu-latest
