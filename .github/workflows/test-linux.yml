@@ -1,4 +1,4 @@
-name: linux
+name: test dotfiles in linux
 
 on:
   push:
@@ -56,8 +56,19 @@ jobs:
         fi
     - name: check mapping of vim
       run: |
-        vim +'redir > map.log' +'map' +'redir END' +'qa!'
+        vim +'redir > map.log' \
+          +'silent map' \
+          +'silent map!' \
+          +'redir END' \
+          +'qa!'
         cat map.log
+        echo
+        # 最低限 fd は使いたいのでチェックする
+        if ! cat map.log | grep -q 'i \+fd \+<esc>'; then
+          echo 'imap fd <ESC> is not available'
+          false
+        fi
+
 
   zsh-setup-test:
     runs-on: ubuntu-latest
