@@ -1,9 +1,6 @@
 name: update lazy-lock.json
 
 on:
-  push:
-    branches:
-      - test/**
   schedule:
     - cron: "0 0 * * *" # 毎日 0:00 (UTC) に実行する
 
