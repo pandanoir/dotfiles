@@ -48,6 +48,7 @@ return {
 
       local ensure_installed_ls = {
         'eslint',
+        'biome',
         'html',
         'jsonls',
         'tsserver',
