@@ -3,7 +3,12 @@ return {
   opts = { float = { padding = 4, max_width = 150 } },
   init = function()
     vim.keymap.set('n', '<leader>s', ':<C-u>Oil --float<CR>')
-    vim.cmd [[autocmd FileType oil nnoremap <buffer> <leader><cr> :w<CR>]]
+    vim.api.nvim_create_autocmd({ 'FileType' }, {
+      pattern = 'oil',
+      callback = function()
+        vim.keymap.set('n', '<leader><cr>', ':w<CR>', { buffer = true })
+      end
+    })
   end,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }

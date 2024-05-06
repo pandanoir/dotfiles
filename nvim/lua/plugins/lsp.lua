@@ -6,20 +6,24 @@ return {
       local mason = require 'mason'
       local mason_lspconfig = require 'mason-lspconfig'
 
-      vim.cmd [[autocmd FileType qf nnoremap <buffer> <CR> :<C-u>.cc<CR>:ccl<CR>]]
-
-      local opts = { noremap = true, silent = true }
       local map = vim.keymap.set
-      map('n', '<leader>e', vim.diagnostic.open_float, opts)
-      map('n', '[d', vim.diagnostic.goto_prev, opts)
-      map('n', ']d', vim.diagnostic.goto_next, opts)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'qf',
+        callback = function()
+          map('n', '<CR>', ':<C-u>.cc<CR>:ccl<CR>', { buffer = true })
+        end
+      })
+
+      map('n', '<leader>e', vim.diagnostic.open_float, { silent = true })
+      map('n', '[d', vim.diagnostic.goto_prev, { silent = true })
+      map('n', ']d', vim.diagnostic.goto_next, { silent = true })
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-          local bufopts = { noremap = true, silent = true, buffer = ev.buf }
+          local bufopts = { silent = true, buffer = ev.buf }
           map('n', 'gD', vim.lsp.buf.declaration, bufopts)
           map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
           map('n', 'gt', vim.lsp.buf.type_definition, bufopts)
@@ -36,12 +40,9 @@ return {
           map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
           map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
           map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
-          map('n', '<leader>F', function()
-            vim.lsp.buf.format { async = true }
-          end, bufopts)
           map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
           vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-          vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+            vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
           )
         end
       })
@@ -95,7 +96,10 @@ return {
     end,
     event = 'BufRead',
     dependencies = {
-      { 'folke/neodev.nvim', config = true, },
+      {
+        'folke/neodev.nvim',
+        config = true,
+      },
       {
         'glepnir/lspsaga.nvim',
         event = 'BufRead',
@@ -109,7 +113,11 @@ return {
         },
       },
       'hrsh7th/nvim-cmp',
-      { 'williamboman/mason.nvim', config = true, build = ':MasonUpdate' },
+      {
+        'williamboman/mason.nvim',
+        config = true,
+        build = ':MasonUpdate'
+      },
       'williamboman/mason-lspconfig.nvim'
     },
   },
