@@ -14,4 +14,4 @@ vim.opt.rtp:prepend(lazypath)
 vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
 
 -- Any lua file in ~/.config/nvim/lua/plugins/*.lua will be automatically merged in the main plugin spec
-require 'lazy'.setup 'plugins'
+require 'lazy'.setup('plugins', { change_detection = { notify = false } })
