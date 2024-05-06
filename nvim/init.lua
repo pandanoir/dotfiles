@@ -16,7 +16,7 @@ require('userautoload.filetype')
 vim.opt.completeopt:append({ insert = false, select = false })
 vim.opt.completeopt:remove({ preview = true })
 
-vim.opt.bg='dark'
+vim.opt.bg = 'dark'
 vim.opt.signcolumn = 'yes:3'
 vim.opt.mouse = ''
 vim.opt.whichwrap = 'b,s,[,],,~'
@@ -36,24 +36,12 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   end
 })
 vim.opt.foldenable = false
-vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-  group = 'MyAutoCmd',
-  pattern = '*',
-  command = "if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif"
-})
-vim.api.nvim_create_autocmd({ 'BufRead' }, {
-  group = 'MyAutoCmd',
-  pattern = '*',
-  command = "if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif"
-})
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   group = 'MyAutoCmd',
-  pattern = '*',
   command = "set timeoutlen=200"
 })
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   group = 'MyAutoCmd',
-  pattern = '*',
   command = "set timeoutlen&"
 })
 -- Don't save options.
