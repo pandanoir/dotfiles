@@ -1,20 +1,25 @@
 return {
   'nvim-telescope/telescope.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = { 'nvim-lua/plenary.nvim', 'folke/which-key.nvim' },
   cmd = { 'Telescope' },
   keys = {
-    { '<leader>ff', '<cmd>Telescope find_files<cr>' },
-    { '<leader>fg', '<cmd>Telescope live_grep<cr>' },
-    { '<leader>fb', '<cmd>Telescope buffers<cr>' },
-    { '<leader>fr', '<cmd>Telescope oldfiles<cr>' },
-    { '<leader>;',  '<cmd>Telescope resume<cr>' },
-    {
-      '<leader>fG',
-      function()
-        require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') }
-      end
-    }
+    { '<leader>;', '<cmd>Telescope resume<cr>' },
   },
+  init = function()
+    require('which-key').register({
+      f = {
+        name = 'fuzzy finder',
+        f = { '<cmd>Telescope find_files<cr>', 'Find File' },
+        g = { '<cmd>Telescope live_grep<cr>', 'Grep' },
+        b = { '<cmd>Telescope buffers<cr>', 'Buffers' },
+        r = { '<cmd>Telescope oldfiles<cr>', 'Old files' },
+        G = {
+          function() require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') } end,
+          'Grep with current word'
+        },
+      },
+    }, { prefix = '<leader>' })
+  end,
   opts = {
     defaults = {
       mappings = {

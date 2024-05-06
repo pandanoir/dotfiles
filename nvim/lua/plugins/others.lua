@@ -18,7 +18,8 @@ return {
     opts = {
       options = {
         custom_commentstring = function()
-          return require 'ts_context_commentstring'.calculate_commentstring() or vim.bo.commentstring
+          return require 'ts_context_commentstring'.calculate_commentstring() or
+              vim.bo.commentstring
         end,
       }
     }
@@ -60,6 +61,15 @@ return {
       vim.keymap.set('n', 't', '<Plug>Sneak_t', { remap = true })
       vim.keymap.set('n', 'T', '<Plug>Sneak_T', { remap = true })
     end,
+  },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    config = true,
   },
 
   -- others
