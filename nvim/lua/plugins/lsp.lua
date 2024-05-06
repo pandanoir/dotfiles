@@ -23,6 +23,13 @@ return {
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+          vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+            group = 'MyAutoCmd',
+            callback = function()
+              vim.lsp.buf.format()
+            end
+          })
+
           local bufopts = { silent = true, buffer = ev.buf }
           map('n', 'gD', vim.lsp.buf.declaration, bufopts)
           map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
@@ -39,6 +46,7 @@ return {
           map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
           map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
           map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
+          map('n', '<leader>F', vim.lsp.buf.format, bufopts)
           map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
           map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
           vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
