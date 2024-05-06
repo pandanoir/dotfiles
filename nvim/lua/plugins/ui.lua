@@ -83,5 +83,19 @@ return {
   {
     'j-hui/fidget.nvim',
     config = true,
+  },
+  {
+    'kevinhwang91/nvim-hlslens',
+    init = function()
+      local map = vim.keymap.set
+      local kopts = { silent = true }
+      map('n', 'n', [[<Cmd>execute('normal! '.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', 'N', [[<Cmd>execute('normal! '.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    end,
+    config = true,
   }
 }
