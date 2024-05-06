@@ -52,16 +52,9 @@ return {
     },
   },
   {
-    'nathanaelkane/vim-indent-guides',
-    event = 'VimEnter',
-    init = function()
-      vim.g.indent_guides_enable_on_vim_startup = 1
-      vim.g.indent_guides_auto_colors = 0
-      vim.g.indent_guides_exclude_filetypes = { 'alpha' }
-      vim.api.nvim_create_autocmd({ "VimEnter", 'Colorscheme' }, {
-        command = ':hi IndentGuidesEven guibg=#2e3248 ctermbg=0',
-      })
-    end
+    'shellRaining/hlchunk.nvim',
+    event = 'UIEnter',
+    config = true,
   },
   {
     'nvim-lualine/lualine.nvim',
