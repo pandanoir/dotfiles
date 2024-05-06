@@ -79,5 +79,9 @@ return {
     opts = {
       style = 'night',
     },
+  },
+  {
+    'j-hui/fidget.nvim',
+    config = true,
   }
 }

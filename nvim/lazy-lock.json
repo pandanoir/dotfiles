@@ -6,6 +6,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "context_filetype.vim": { "branch": "master", "commit": "7ff5b43fc8d5b274aa19ade5af11e9fa57577ed6" },
+  "fidget.nvim": { "branch": "main", "commit": "1ba38e4cbb24683973e00c2e36f53ae64da38ef5" },
   "fold-preview.nvim": { "branch": "main", "commit": "b7920cb0aba2b48a6b679bff45f98c3ebc0f0b89" },
   "gitsigns.nvim": { "branch": "main", "commit": "bc933d24a669608968ff4791b14d2d9554813a65" },
   "hlchunk.nvim": { "branch": "main", "commit": "882d1bc86d459fa8884398223c841fd09ea61b6b" },
