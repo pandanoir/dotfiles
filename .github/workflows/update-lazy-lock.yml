@@ -2,7 +2,7 @@ name: update lazy-lock.json
 
 on:
   schedule:
-    - cron: "0 0 * * *" # 毎日 0:00 (UTC) に実行する
+    - cron: "0 0 * * 1" # 毎週月曜 9:00 (JST) に実行する
 
 env:
   TERM: xterm-256color
