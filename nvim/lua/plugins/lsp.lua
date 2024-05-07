@@ -23,13 +23,6 @@ return {
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-          vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-            group = 'MyAutoCmd',
-            callback = function()
-              vim.lsp.buf.format()
-            end
-          })
-
           local bufopts = { silent = true, buffer = ev.buf }
           map('n', 'gD', vim.lsp.buf.declaration, bufopts)
           map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
@@ -46,7 +39,10 @@ return {
           map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
           map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
           map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
-          map('n', '<leader>F', vim.lsp.buf.format, bufopts)
+          map('n', '<leader>F',
+            function()
+              require 'conform'.format { lsp_fallback = true, }
+            end, bufopts)
           map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
           map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
           vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -57,7 +53,6 @@ return {
 
       local ensure_installed_ls = {
         'eslint',
-        'biome',
         'html',
         'jsonls',
         'tsserver',
@@ -73,6 +68,11 @@ return {
         automatic_installation = true,
         ensure_installed = ensure_installed_ls,
       }
+
+      local disable_formatting = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end
       mason_lspconfig.setup_handlers {
         function(server_name)
           nvim_lsp[server_name].setup {}
@@ -80,6 +80,7 @@ return {
         tsserver = function()
           nvim_lsp.tsserver.setup {
             root_dir = nvim_lsp.util.root_pattern('package.json'),
+            on_attach = disable_formatting
           }
         end,
         denols = function()
@@ -126,7 +127,22 @@ return {
         config = true,
         build = ':MasonUpdate'
       },
-      'williamboman/mason-lspconfig.nvim'
+      'williamboman/mason-lspconfig.nvim',
+      {
+        'stevearc/conform.nvim',
+        opts = {
+          formatters_by_ft = {
+            javascript = { 'prettier', 'biome' },
+            typescript = { 'prettier', 'biome' },
+            typescriptreact = { 'prettier', 'biome' },
+            vue = { 'prettier', 'biome' },
+            lua = { 'stylua' }
+          },
+          format_on_save = {
+            lsp_fallback = true,
+          },
+        },
+      }
     },
   },
 }
