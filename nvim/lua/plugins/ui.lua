@@ -32,16 +32,6 @@ return {
     config = true,
   },
   {
-    'romgrk/barbar.nvim',
-    event = 'BufRead',
-    dependencies = {
-      'lewis6991/gitsigns.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    init = function() vim.g.barbar_auto_setup = false end,
-    opts = {},
-  },
-  {
     'kevinhwang91/nvim-ufo',
     event = 'BufRead',
     dependencies = 'kevinhwang91/promise-async',
