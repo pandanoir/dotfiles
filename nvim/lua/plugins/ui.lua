@@ -79,8 +79,12 @@ return {
     init = function()
       local map = vim.keymap.set
       local kopts = { silent = true }
-      map('n', 'n', [[<Cmd>execute('normal! '.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-      map('n', 'N', [[<Cmd>execute('normal! '.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+      map('n', 'n',
+        [[<Cmd>execute('normal! '.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+        kopts)
+      map('n', 'N',
+        [[<Cmd>execute('normal! '.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+        kopts)
       map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
       map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
       map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
@@ -94,6 +98,7 @@ return {
       window = {
         padding = 0,
         margin = { horizontal = 0 },
+        options = { winblend = 50 },
       },
       render = function(props)
         local helpers = require 'incline.helpers'
@@ -104,21 +109,36 @@ return {
         end
 
         local ft_icon, ft_color = devicons.get_icon_color(filename)
-        local modified = vim.bo[props.buf].modified
         if not ft_icon then
           return {
-            { '', guibg = 'none', guifg = '#44406e' },
-            { ' ', filename, ' ', gui = modified and 'bold,italic' or 'bold', guibg = '#44406e' },
+            {
+              { ' ', filename, ' ' },
+              gui = 'bold',
+              guibg = '#44406e',
+              blend = props.focused and 0 or 50,
+            },
           }
         end
 
         return {
-          { '', guibg = 'none', guifg = ft_color },
-          { ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) },
-          { ' ', filename, ' ', gui = modified and 'bold,italic' or 'bold', guibg = '#44406e' },
+          {
+            { ' ', ft_icon, ' ' },
+            guibg = ft_color,
+            guifg = helpers.contrast_color(ft_color),
+            blend = props.focused and 0 or 50,
+          },
+          {
+            { ' ', filename, ' ' },
+            guibg = '#44406e',
+            blend = props.focused and 0 or 50,
+            gui = 'bold',
+          },
         }
       end,
     },
+    init = function()
+      vim.o.laststatus = 3
+    end,
     event = 'VeryLazy',
   },
 }
