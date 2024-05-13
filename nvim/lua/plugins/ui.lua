@@ -62,12 +62,12 @@ return {
     },
   },
   {
-    'folke/tokyonight.nvim',
+    'navarasu/onedark.nvim',
     init = function()
-      vim.cmd [[colorscheme tokyonight]]
+      vim.cmd.colorscheme 'onedark'
     end,
     opts = {
-      style = 'night',
+      style = 'cool'
     },
   },
   {
