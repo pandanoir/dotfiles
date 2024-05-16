@@ -1,8 +1,5 @@
 local keymap = vim.keymap.set
 
-keymap('n', '[space]', '<nop>')
-keymap('n', '<Space>', '[space]', { remap = true })
-
 keymap('n', 'J', 'gJ')
 
 keymap('n', '<CR>', ':<C-u>w<CR>')
@@ -15,11 +12,6 @@ keymap('n', 'Q', 'q')
 
 keymap('n', 'gy', '"+y')
 keymap('n', '<leader>d', '"_d')
-
-keymap('n', 'j', 'gj')
-keymap('n', 'k', 'gk')
-keymap('n', 'gj', 'j')
-keymap('n', 'gk', 'k')
 
 -- クリップボードへコピー
 keymap('n', '<leader>y', '"+y')
