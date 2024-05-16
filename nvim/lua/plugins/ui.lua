@@ -72,6 +72,7 @@ return {
   },
   {
     'j-hui/fidget.nvim',
+    event = 'VeryLazy',
     config = true,
   },
   {
@@ -90,6 +91,7 @@ return {
       map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
       map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
     end,
+    event = 'FilterWritePre',
     config = true,
   },
   {

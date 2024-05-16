@@ -121,7 +121,6 @@ return {
           },
         },
       },
-      'hrsh7th/nvim-cmp',
       {
         'williamboman/mason.nvim',
         config = true,
