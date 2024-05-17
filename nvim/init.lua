@@ -10,7 +10,6 @@ vim.g.mapleader = ' '
 
 require('lazynvim')
 require('keymappings')
-require('fixDefaultColorScheme')
 require('userautoload.indent')
 require('userautoload.filetype')
 

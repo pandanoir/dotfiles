@@ -64,10 +64,7 @@ return {
   {
     'navarasu/onedark.nvim',
     init = function()
-      -- 0.10.0 以降だったらデフォルトのカラースキームを使う
-      if vim.version.lt(vim.version(), { 0, 9, 99 }) then
-        vim.cmd.colorscheme 'onedark'
-      end
+      vim.cmd.colorscheme 'onedark'
     end,
     opts = {
       style = 'cool'
