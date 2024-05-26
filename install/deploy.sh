@@ -32,6 +32,9 @@ deploy() {
   symlink zsh/zshenv       "$HOME/.zshenv"
   symlink zsh/zprofile     "$HOME/.bash_profile"
 
+  # zellij
+  symlink zellij "$XDG_CONFIG_HOME/zellij"
+
   # other
   mkdir -p "$XDG_CONFIG_HOME/"{tmux,npm,readline} \
     "$XDG_CACHE_HOME/npm" \
