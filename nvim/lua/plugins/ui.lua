@@ -23,7 +23,7 @@ return {
     event = 'BufRead',
     opts = {
       builtin_marks = { '.', '^' },
-      excluded_buftypes = { 'nofile' },
+      excluded_buftypes = { 'nofile', 'terminal' },
     },
   },
   {
@@ -143,4 +143,19 @@ return {
     end,
     event = 'VeryLazy',
   },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
+    init = function()
+      local Terminal = require 'toggleterm.terminal'.Terminal
+      local lazygit = Terminal:new({
+        cmd = 'lazygit',
+        direction = 'float',
+        hidden = true
+      })
+
+      vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true })
+    end
+  }
 }
