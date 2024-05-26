@@ -3,12 +3,13 @@ return {
     'bronson/vim-trailing-whitespace',
     event = 'BufRead',
   },
-  {
-    'rbtnn/vim-ambiwidth',
-    init = function()
-      vim.g.ambiwidth_cica_enabled = false
-    end
-  },
+  -- lazygit と組み合わせると崩れるのでコメントアウト
+  -- {
+  --   'rbtnn/vim-ambiwidth',
+  --   init = function()
+  --     vim.g.ambiwidth_cica_enabled = false
+  --   end
+  -- },
   {
     'anuvyklack/pretty-fold.nvim',
     config = true,
