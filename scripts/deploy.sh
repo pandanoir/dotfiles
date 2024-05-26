@@ -22,13 +22,8 @@ deploy() {
   done
 
   # zsh
-  mkdir -p "$XDG_CONFIG_HOME/zsh/functions" "$XDG_DATA_HOME/zsh"
-
   for file in `ls -1 "$DOTDIR/zsh/" | grep '.zsh$'`; do
     symlink "zsh/$file" "$ZDOTDIR/$file"
-  done
-  for file in `ls -1 "$DOTDIR/zsh/functions"`; do
-    symlink "zsh/functions/$file" "$ZDOTDIR/functions/$file"
   done
   symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile "$ZDOTDIR/.zprofile"

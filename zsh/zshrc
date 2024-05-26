@@ -6,9 +6,6 @@ command_exists() { type "$1" >/dev/null 2>&1; }
 
 bindkey -e
 
-# 自作関数の読み込み
-autoload -Uz tinify estart
-
 autoload -U colors
 colors
 
