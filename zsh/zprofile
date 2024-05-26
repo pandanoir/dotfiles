@@ -11,8 +11,6 @@ path=(
   "/sbin"
 )
 
-fpath=($XDG_CONFIG_HOME/zsh/functions/*(N-/) $fpath)
-
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
