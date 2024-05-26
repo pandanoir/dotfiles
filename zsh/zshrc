@@ -88,7 +88,7 @@ fi
 if command_exists starship; then
   eval "$(starship init zsh)"
 fi
-if [[ -z "$ZELLIJ" ]]; then
+if command_exists zellij && [[ -z "$ZELLIJ" ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
         exec zellij attach -c
     else
