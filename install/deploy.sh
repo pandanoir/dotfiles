@@ -43,6 +43,7 @@ deploy() {
   symlink npmrc     "$XDG_CONFIG_HOME/npm/npmrc"
   symlink inputrc   "$XDG_CONFIG_HOME/readline/inputrc"
   symlink ranger    "$XDG_CONFIG_HOME/ranger"
+  symlink wezterm.lua "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
 
   if has ranger && ! dir_exists "$DOTDIR/ranger/plugins/ranger_devicons"; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons "$DOTDIR/ranger/plugins/ranger_devicons"
