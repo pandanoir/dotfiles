@@ -4,6 +4,9 @@ symlink() {
     return
   fi
   info "create symlink from $DOTDIR/$1 to $2"
+  if ! [ -d `dirname $2` ]; then
+    mkdir -p `dirname $2`
+  fi
   ln -sf "$DOTDIR/$1" "$2"
 }
 
@@ -36,15 +39,14 @@ deploy() {
   symlink zellij "$XDG_CONFIG_HOME/zellij"
 
   # other
-  mkdir -p "$XDG_CONFIG_HOME/"{tmux,npm,readline} \
-    "$XDG_CACHE_HOME/npm" \
-    "$XDG_DATA_HOME/"{npm,rustup}
   symlink tmux.conf "$XDG_CONFIG_HOME/tmux/tmux.conf"
+  mkdir -p {$XDG_CACHE_HOME,$XDG_DATA_HOME}"/npm"
   symlink npmrc     "$XDG_CONFIG_HOME/npm/npmrc"
   symlink inputrc   "$XDG_CONFIG_HOME/readline/inputrc"
   symlink ranger    "$XDG_CONFIG_HOME/ranger"
   symlink wezterm.lua "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
   symlink starship.toml "$XDG_CONFIG_HOME/starship.toml"
+  mkdir -p "$XDG_DATA_HOME/rustup"
 
   if has ranger && ! dir_exists "$DOTDIR/ranger/plugins/ranger_devicons"; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons "$DOTDIR/ranger/plugins/ranger_devicons"
