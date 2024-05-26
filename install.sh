@@ -28,8 +28,8 @@ if ! dir_exists "$DOTDIR"; then
   git clone https://github.com/pandanoir/dotfiles "$DOTDIR"
 fi
 
-source "$DOTDIR/install/deploy.sh"
-source "$DOTDIR/install/init.sh"
+source "$DOTDIR/scripts/deploy.sh"
+source "$DOTDIR/scripts/init.sh"
 
 # check the requirements
 if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
