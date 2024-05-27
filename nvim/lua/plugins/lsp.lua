@@ -15,8 +15,6 @@ return {
       })
 
       map('n', '<leader>e', vim.diagnostic.open_float, { silent = true })
-      map('n', '[d', vim.diagnostic.goto_prev, { silent = true })
-      map('n', ']d', vim.diagnostic.goto_next, { silent = true })
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
