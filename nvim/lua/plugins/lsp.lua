@@ -129,10 +129,10 @@ return {
         'stevearc/conform.nvim',
         opts = {
           formatters_by_ft = {
-            javascript = { 'prettier', 'biome' },
-            typescript = { 'prettier', 'biome' },
-            typescriptreact = { 'prettier', 'biome' },
-            vue = { 'prettier', 'biome' },
+            javascript = { { 'prettier', 'biome' } },
+            typescript = { { 'prettier', 'biome' } },
+            typescriptreact = { { 'prettier', 'biome' } },
+            vue = { { 'prettier', 'biome' } },
             lua = { 'stylua' }
           },
           format_on_save = {
