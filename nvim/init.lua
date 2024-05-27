@@ -2,11 +2,16 @@
 if vim.loader then vim.loader.enable() end
 vim.api.nvim_create_augroup('MyAutoCmd', { clear = true })
 
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
 vim.scriptencoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.opt.fileencodings = 'ucs-boms,utf-8,euc-jp,cp932' -- 読み込み時の文字コードの自動判別。左ほど優先される
 vim.opt.fileformats = 'unix,dos,mac'                  -- 改行コードの自動判別。左ほど優先
 vim.g.mapleader = ' '
+vim.opt.cursorline = true
 
 require('lazynvim')
 require('keymappings')
@@ -32,10 +37,10 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   callback = function()
     -- 自動でコメントが入るのを防ぐ
     vim.opt_local.formatoptions:remove('ro')
-    vim.opt_local.foldmethod = 'indent'
+    -- vim.opt_local.foldmethod = 'indent'
   end
 })
-vim.opt.foldenable = false
+-- vim.opt.foldenable = false
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   group = 'MyAutoCmd',
   command = "set timeoutlen=200"
