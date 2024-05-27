@@ -37,10 +37,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
   callback = function()
     -- 自動でコメントが入るのを防ぐ
     vim.opt_local.formatoptions:remove('ro')
-    -- vim.opt_local.foldmethod = 'indent'
   end
 })
--- vim.opt.foldenable = false
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   group = 'MyAutoCmd',
   command = "set timeoutlen=200"
