@@ -49,7 +49,7 @@ HISTFILE=$HOME/.zsh_history
 
 # 補完
 autoload -U compinit
-if compinit; then
+if compinit -C; then
   zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
   zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
   zstyle ':completion:*:default' menu select=1
