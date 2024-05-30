@@ -66,8 +66,18 @@ return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     init = function()
+      local timeoutlen = 400
       vim.o.timeout = true
-      vim.o.timeoutlen = 300
+      vim.o.timeoutlen = timeoutlen
+      local group = vim.api.nvim_create_augroup('which-key', {})
+      vim.api.nvim_create_autocmd('InsertEnter', {
+        group = group,
+        callback = function() vim.o.timeoutlen = 200 end,
+      })
+      vim.api.nvim_create_autocmd('InsertLeave', {
+        group = group,
+        callback = function() vim.o.timeoutlen = timeoutlen end,
+      })
     end,
     opts = {
       triggers_blacklist = {

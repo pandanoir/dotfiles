@@ -39,14 +39,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
     vim.opt_local.formatoptions:remove('ro')
   end
 })
-vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-  group = 'MyAutoCmd',
-  command = "set timeoutlen=200"
-})
-vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-  group = 'MyAutoCmd',
-  command = "set timeoutlen&"
-})
 -- Don't save options.
 vim.opt.viewoptions:remove({ options = true })
 
