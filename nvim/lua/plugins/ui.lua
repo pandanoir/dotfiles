@@ -45,7 +45,10 @@ return {
   {
     'shellRaining/hlchunk.nvim',
     event = 'UIEnter',
-    config = true,
+    opts = {
+      chunk = { enable = true },
+      indent = { enable = true },
+    },
   },
   {
     'nvim-lualine/lualine.nvim',
