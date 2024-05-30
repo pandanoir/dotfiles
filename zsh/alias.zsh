@@ -7,6 +7,9 @@ else
   alias copy='xsel --clipboard --input'
 fi
 alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
+if command_exists nvim; then
+  alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh"
+fi
 
 alias reitou='tar -zcvf'
 alias kaitou='tar -xvf'
@@ -102,7 +105,7 @@ function s() {
 
 alias -g A='| awk'
 alias -g C='| copy'
-alias -g L="| $VIM/runtime/macros/less.sh -R"
+alias -g L="| less"
 alias -g S='| sort'
 alias -g U='| uniq'
 alias -g X='| xargs'
