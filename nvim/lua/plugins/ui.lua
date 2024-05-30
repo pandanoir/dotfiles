@@ -131,7 +131,11 @@ return {
   {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
-    config = true,
+    config = function()
+      if not vim.bo.readonly then
+        require 'fidget'.setup {}
+      end
+    end,
   },
   {
     'kevinhwang91/nvim-hlslens',
