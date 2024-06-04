@@ -143,4 +143,6 @@ else
 fi
 
 export COMMANDLINE_EDITOR="vi -c 'setf shell'"
+export DISABLE_LAUNCHING_TMUX="true"
+export ZELLIJ_AUTO_ATTACH="true"
 file_exists "$ZDOTDIR/.zprofile.local" && source "$ZDOTDIR/.zprofile.local"
