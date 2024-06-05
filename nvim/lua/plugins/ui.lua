@@ -132,11 +132,13 @@ return {
   {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
-    config = function()
-      if not vim.bo.readonly then
-        require 'fidget'.setup {}
-      end
+    cond = function()
+      local args = vim.api.nvim_get_vvar("argv")
+      local set = {}
+      for _, l in ipairs(args) do set[l] = true end
+      return not vim.bo.readonly and not set['runtime! macros/less.vim']
     end,
+    config = true,
   },
   {
     'kevinhwang91/nvim-hlslens',
