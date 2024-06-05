@@ -133,10 +133,12 @@ return {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
     cond = function()
-      local args = vim.api.nvim_get_vvar("argv")
-      local set = {}
-      for _, l in ipairs(args) do set[l] = true end
-      return not vim.bo.readonly and not set['runtime! macros/less.vim']
+      for _, l in ipairs(vim.api.nvim_get_vvar("argv")) do
+        if l == 'runtime! macros/less.vim' then
+          return false
+        end
+      end
+      return not vim.bo.readonly
     end,
     config = true,
   },
