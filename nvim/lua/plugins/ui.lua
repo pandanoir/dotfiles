@@ -133,12 +133,8 @@ return {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
     cond = function()
-      for _, l in ipairs(vim.api.nvim_get_vvar("argv")) do
-        if l == 'runtime! macros/less.vim' then
-          return false
-        end
-      end
-      return not vim.bo.readonly
+      -- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
+      return not vim.bo.readonly and vim.g.no_plugin_maps ~= 1
     end,
     config = true,
   },
