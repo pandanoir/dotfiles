@@ -48,5 +48,12 @@ vim.opt.writebackup = false
 -- エラー時のビープ音をミュート
 vim.opt.visualbell = true
 
+
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+  group = 'MyAutoCmd',
+  pattern = '*',
+  callback = require 'improve-default-scheme'.improve
+})
+
 -- " 対応するhtmlタグに % で移動できるようにする
 vim.cmd [[packadd! matchit]]
