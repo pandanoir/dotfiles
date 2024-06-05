@@ -87,14 +87,13 @@ return {
   },
   {
     'Wansmer/treesj',
-    keys = { '<leader>m', '<leader>j', '<leader>J' },
+    keys = {
+      { '<leader>m', '<cmd>TSJToggle<cr>' },
+      { '<leader>j', '<cmd>TSJJoin<cr>' },
+      { '<leader>J', '<cmd>TSJSplit<cr>' },
+    },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = { use_default_keymaps = false },
-    init = function()
-      vim.keymap.set('n', '<leader>m', require 'treesj'.toggle)
-      vim.keymap.set('n', '<leader>j', require 'treesj'.join)
-      vim.keymap.set('n', '<leader>J', require 'treesj'.split)
-    end,
   },
 
   -- others

@@ -40,5 +40,5 @@ return {
   end,
   dependencies = {
     'RRethy/nvim-treesitter-textsubjects',
-  }
+  },
 }
