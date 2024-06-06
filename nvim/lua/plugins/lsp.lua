@@ -37,10 +37,6 @@ return {
           map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
           map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
           map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
-          map('n', '<leader>F',
-            function()
-              require 'conform'.format { lsp_fallback = true, }
-            end, bufopts)
           map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
           map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
           vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -125,41 +121,6 @@ return {
         build = ':MasonUpdate'
       },
       'williamboman/mason-lspconfig.nvim',
-      {
-        'stevearc/conform.nvim',
-        opts = function()
-          return {
-            formatters = {
-              -- config working directory に prettierrc がある場合に利用可能とみなす
-              -- cf. https://github.com/stevearc/conform.nvim/issues/407#issuecomment-2120988992
-              prettier = {
-                require_cwd = true,
-                cwd = require('conform.util').root_file({
-                  '.prettierrc',
-                  '.prettierrc.json',
-                  '.prettierrc.js',
-                  '.prettierrc.cjs',
-                  '.prettierrc.mjs',
-                  'prettier.config.js',
-                  'prettier.config.cjs',
-                  'prettier.config.mjs',
-                }),
-              },
-              biome = { require_cwd = true },
-            },
-            formatters_by_ft = {
-              javascript = { { 'prettier', 'biome' } },
-              typescript = { { 'prettier', 'biome' } },
-              typescriptreact = { { 'prettier', 'biome' } },
-              vue = { { 'prettier', 'biome' } },
-              lua = { 'stylua' },
-            },
-            format_on_save = {
-              lsp_fallback = true,
-            },
-          }
-        end,
-      }
     },
   },
 }

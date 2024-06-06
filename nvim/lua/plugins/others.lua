@@ -95,6 +95,49 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = { use_default_keymaps = false },
   },
+  {
+    'stevearc/conform.nvim',
+    init = function()
+      vim.keymap.set(
+        'n',
+        '<leader>F',
+        function() require 'conform'.format { lsp_fallback = true } end,
+        { silent = true }
+      )
+    end,
+    opts = function()
+      return {
+        formatters = {
+          -- config working directory に prettierrc がある場合に利用可能とみなす
+          -- cf. https://github.com/stevearc/conform.nvim/issues/407#issuecomment-2120988992
+          prettier = {
+            require_cwd = true,
+            cwd = require('conform.util').root_file({
+              '.prettierrc',
+              '.prettierrc.json',
+              '.prettierrc.js',
+              '.prettierrc.cjs',
+              '.prettierrc.mjs',
+              'prettier.config.js',
+              'prettier.config.cjs',
+              'prettier.config.mjs',
+            }),
+          },
+          biome = { require_cwd = true },
+        },
+        formatters_by_ft = {
+          javascript = { { 'prettier', 'biome' } },
+          typescript = { { 'prettier', 'biome' } },
+          typescriptreact = { { 'prettier', 'biome' } },
+          vue = { { 'prettier', 'biome' } },
+          lua = { 'stylua' },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+        },
+      }
+    end,
+  },
 
   -- others
   'Shougo/context_filetype.vim',
