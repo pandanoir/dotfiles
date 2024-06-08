@@ -6,8 +6,8 @@ keymap('n', '<CR>', ':<C-u>w<CR>')
 
 keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
 
--- qでウインドウを閉じて Qでマクロ
-keymap('n', 'q', ':<C-u>q<CR>')
+-- qで終了、Qでマクロ
+keymap('n', 'q', ':<C-u>qa<CR>')
 keymap('n', 'Q', 'q')
 
 keymap('n', 'gy', '"+y')
