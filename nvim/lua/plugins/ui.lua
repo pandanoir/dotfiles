@@ -218,5 +218,30 @@ return {
 
       vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true })
     end
-  }
+  },
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+    init = function()
+      vim.api.nvim_create_augroup('neotree', {})
+      vim.api.nvim_create_autocmd('UiEnter', {
+        group = 'neotree',
+        callback = function()
+          local win_width = vim.api.nvim_win_get_width(0)
+          if win_width < 100 then
+            return
+          end
+
+          local current_win = vim.api.nvim_get_current_win()
+          vim.cmd [[Neotree reveal toggle]]
+          vim.api.nvim_set_current_win(current_win)
+        end,
+      })
+    end,
+  },
 }
