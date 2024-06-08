@@ -233,7 +233,7 @@ return {
         group = 'neotree',
         callback = function()
           local win_width = vim.api.nvim_win_get_width(0)
-          if win_width < 100 then
+          if win_width < 100 or vim.fn.argc() == 0 then
             return
           end
 
