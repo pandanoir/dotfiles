@@ -45,7 +45,7 @@ return {
   },
   {
     'shellRaining/hlchunk.nvim',
-    event = 'UIEnter',
+    event = 'BufRead',
     opts = {
       chunk = { enable = true },
       indent = { enable = true },
@@ -131,7 +131,7 @@ return {
   },
   {
     'j-hui/fidget.nvim',
-    event = 'VeryLazy',
+    event = 'BufRead',
     -- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
     cond = not vim.bo.readonly and vim.g.no_plugin_maps ~= 1,
     config = true,
