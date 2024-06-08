@@ -132,10 +132,8 @@ return {
   {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
-    cond = function()
-      -- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
-      return not vim.bo.readonly and vim.g.no_plugin_maps ~= 1
-    end,
+    -- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
+    cond = not vim.bo.readonly and vim.g.no_plugin_maps ~= 1,
     config = true,
   },
   {
