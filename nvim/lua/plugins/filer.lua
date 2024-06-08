@@ -3,6 +3,9 @@ return {
   opts = {
     float = { padding = 4, max_width = 150 },
     view_options = { show_hidden = true },
+    keymaps = {
+      ['q'] = 'actions.close',
+    },
   },
   init = function()
     vim.keymap.set('n', '<leader>s', ':<C-u>Oil --float<CR>')
