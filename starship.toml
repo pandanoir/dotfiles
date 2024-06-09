@@ -9,8 +9,16 @@ $git_branch\
 $nodejs\
 $rust\
 $golang\
-[](fg:#212736)\
+[](fg:#212736 bg:#1d2230)\
+$status\
+[ ](fg:#1d2230)\
 \n$character"""
+
+[status]
+disabled = false
+format = '[ $symbol$status ]($style)'
+map_symbol = true
+style = "bold red bg:#1d2230"
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
