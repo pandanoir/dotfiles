@@ -227,6 +227,14 @@ return {
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
+    opts = {
+      window = {
+        width = 32,
+        mappings = {
+          ['<leader>t'] = 'close_window',
+        },
+      },
+    },
     init = function()
       vim.keymap.set('n', '<leader>t', '<cmd>Neotree reveal<cr>')
       vim.api.nvim_create_augroup('neotree', {})
