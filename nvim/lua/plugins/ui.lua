@@ -255,7 +255,7 @@ return {
           end
 
           local current_win = vim.api.nvim_get_current_win()
-          vim.cmd [[Neotree reveal]]
+          vim.cmd [[Neotree reveal_force_cwd]]
           vim.api.nvim_set_current_win(current_win)
         end,
       })
