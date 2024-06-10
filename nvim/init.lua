@@ -1,6 +1,5 @@
 ---@diagnostic disable-next-line: undefined-global
 if vim.loader then vim.loader.enable() end
-vim.api.nvim_create_augroup('MyAutoCmd', { clear = true })
 
 vim.scriptencoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
@@ -26,20 +25,19 @@ vim.opt.writebackup = false
 -- エラー時のビープ音をミュート
 vim.opt.visualbell = true
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
-  group = 'MyAutoCmd',
-  pattern = '*',
-  callback = function()
-    -- 自動でコメントが入るのを防ぐ
-    vim.opt_local.formatoptions:remove('ro')
-  end
-})
-
-vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-  group = 'MyAutoCmd',
-  pattern = '*',
-  callback = require 'improve-default-scheme'.improve
-})
+require 'easy-setup-autocmd'.setup_autocmd {
+  ['BufEnter,FileType'] = {
+    pattern = '*',
+    callback = function()
+      -- 自動でコメントが入るのを防ぐ
+      vim.opt_local.formatoptions:remove('ro')
+    end
+  },
+  ['ColorScheme'] = {
+    pattern = '*',
+    callback = require 'improve-default-scheme'.improve
+  }
+}
 
 -- " 対応するhtmlタグに % で移動できるようにする
 vim.cmd [[packadd! matchit]]

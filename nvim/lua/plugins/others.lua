@@ -69,15 +69,15 @@ return {
       local timeoutlen = 400
       vim.o.timeout = true
       vim.o.timeoutlen = timeoutlen
-      local group = vim.api.nvim_create_augroup('which-key', {})
-      vim.api.nvim_create_autocmd('InsertEnter', {
-        group = group,
-        callback = function() vim.o.timeoutlen = 200 end,
-      })
-      vim.api.nvim_create_autocmd('InsertLeave', {
-        group = group,
-        callback = function() vim.o.timeoutlen = timeoutlen end,
-      })
+
+      require 'easy-setup-autocmd'.setup_autocmd {
+        ['InsertEnter'] = {
+          callback = function() vim.o.timeoutlen = 200 end,
+        },
+        ['InsertLeave'] = {
+          callback = function() vim.o.timeoutlen = timeoutlen end,
+        }
+      }
     end,
     opts = {
       triggers_blacklist = {

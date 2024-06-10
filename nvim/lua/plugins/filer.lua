@@ -9,12 +9,14 @@ return {
   },
   init = function()
     vim.keymap.set('n', '<leader>s', ':<C-u>Oil --float<CR>')
-    vim.api.nvim_create_autocmd({ 'FileType' }, {
-      pattern = 'oil',
-      callback = function()
-        vim.keymap.set('n', '<leader><cr>', ':w<CR>', { buffer = true })
-      end
-    })
+    require 'easy-setup-autocmd'.setup_autocmd {
+      ['FileType'] = {
+        pattern = 'oil',
+        callback = function()
+          vim.keymap.set('n', '<leader><cr>', ':w<CR>', { buffer = true })
+        end
+      }
+    }
   end,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }

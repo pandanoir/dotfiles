@@ -237,28 +237,28 @@ return {
     },
     init = function()
       vim.keymap.set('n', '<leader>t', '<cmd>Neotree reveal<cr>')
-      vim.api.nvim_create_augroup('neotree', {})
-      vim.api.nvim_create_autocmd('UiEnter', {
-        group = 'neotree',
-        callback = function()
-          local win_width = vim.api.nvim_win_get_width(0)
+      require 'easy-setup-autocmd'.setup_autocmd {
+        ['UiEnter'] = {
+          callback = function()
+            local win_width = vim.api.nvim_win_get_width(0)
 
-          -- git commit --amend のときは表示しない
-          for _, arg in ipairs(vim.v.argv) do
-            if arg:match('%.git/COMMIT_EDITMSG$') then
+            -- git commit --amend のときは表示しない
+            for _, arg in ipairs(vim.v.argv) do
+              if arg:match('%.git/COMMIT_EDITMSG$') then
+                return
+              end
+            end
+
+            if win_width < 100 or vim.fn.argc() == 0 then
               return
             end
-          end
 
-          if win_width < 100 or vim.fn.argc() == 0 then
-            return
-          end
-
-          local current_win = vim.api.nvim_get_current_win()
-          vim.cmd [[Neotree reveal_force_cwd]]
-          vim.api.nvim_set_current_win(current_win)
-        end,
-      })
+            local current_win = vim.api.nvim_get_current_win()
+            vim.cmd [[Neotree reveal_force_cwd]]
+            vim.api.nvim_set_current_win(current_win)
+          end,
+        }
+      }
     end,
   },
   {

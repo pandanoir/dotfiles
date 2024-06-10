@@ -1,9 +1,11 @@
+local easy_setup_autocmd = require 'easy-setup-autocmd'
 local function add_filetype_autocmd(pattern, command)
-  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    group = 'MyAutoCmd',
-    pattern = pattern,
-    command = command
-  })
+  easy_setup_autocmd.setup_autocmd {
+    ['BufRead,BufNewFile'] = {
+      pattern = pattern,
+      command = command
+    }
+  }
 end
 
 add_filetype_autocmd('nginx.conf', 'setf nginx')

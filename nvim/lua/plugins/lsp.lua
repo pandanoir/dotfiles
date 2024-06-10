@@ -7,43 +7,43 @@ return {
       local mason_lspconfig = require 'mason-lspconfig'
 
       local map = vim.keymap.set
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'qf',
-        callback = function()
-          map('n', '<CR>', ':<C-u>.cc<CR>:ccl<CR>', { buffer = true })
-        end
-      })
-
       map('n', '<leader>e', vim.diagnostic.open_float, { silent = true })
 
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-        callback = function(ev)
-          vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+      require 'easy-setup-autocmd'.setup_autocmd {
+        ['FileType'] = {
+          pattern = 'qf',
+          callback = function()
+            map('n', '<CR>', ':<C-u>.cc<CR>:ccl<CR>', { buffer = true })
+          end
+        },
+        ['LspAttach'] = {
+          callback = function(ev)
+            vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-          local bufopts = { silent = true, buffer = ev.buf }
-          map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-          map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
-          map('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-          map('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', bufopts)
-          map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
-          map('n', 'gi', vim.lsp.buf.implementation, bufopts)
-          map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-          map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-          map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-          map('n', '<leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, bufopts)
-          map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-          map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
-          map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
-          map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
-          map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
-          vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
-          )
-        end
-      })
+            local bufopts = { silent = true, buffer = ev.buf }
+            map('n', 'gD', vim.lsp.buf.declaration, bufopts)
+            map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
+            map('n', 'gt', vim.lsp.buf.type_definition, bufopts)
+            map('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', bufopts)
+            map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
+            map('n', 'gi', vim.lsp.buf.implementation, bufopts)
+            map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+            map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+            map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+            map('n', '<leader>wl', function()
+              print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end, bufopts)
+            map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+            map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
+            map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
+            map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
+            map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
+            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+              vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+            )
+          end
+        }
+      }
 
       local ensure_installed_ls = {
         'eslint',
