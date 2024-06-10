@@ -9,6 +9,14 @@ keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
 -- qで終了、Qでマクロ
 keymap('n', 'q', ':<C-u>qa<CR>')
 keymap('n', 'Q', 'q')
+vim.api.nvim_create_autocmd('CmdWinEnter', {
+  group = 'MyAutoCmd',
+  pattern = '*',
+  callback = function()
+    keymap('n', 'q', ':<C-u>q<CR>', { buffer = true })
+  end
+})
+
 
 keymap('n', 'gy', '"+y')
 keymap('n', '<leader>d', '"_d')
