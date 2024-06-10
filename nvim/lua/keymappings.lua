@@ -35,7 +35,7 @@ keymap('n', '<C-n>', ':bnext<CR>')
 keymap('n', '<C-p>', ':bprev<CR>')
 
 keymap('', '<leader>c', ':<C-u>enew<CR>')
-keymap('', '<leader>q', ':<C-u>bd<CR>')
+keymap('', '<leader>q', ':<C-u>BufDel<CR>')
 keymap('', '<leader><Space>', '<C-v>')
 
 keymap('', 'gv', '`[v`]') -- 貼り付けたテキストを素早く選択する

@@ -138,6 +138,7 @@ return {
       }
     end,
   },
+  'ojroques/nvim-bufdel',
 
   -- others
   'Shougo/context_filetype.vim',
