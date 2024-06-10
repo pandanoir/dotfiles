@@ -18,7 +18,9 @@ git-prompt() {
   echo "%{${fg[magenta]}%}${branchname}%{${reset_color}%}"
 }
 prompt-set() {
-  PROMPT="%F{074}[%n@%m]%f# "
+  local user_host='%F{074}[%n@%m]'
+  local last_status='%F{red}$([[ $? -ne 0 && $? -ne 130 ]] && echo "[%?]")' # 異常終了のとき(Ctrl-cを除く)にステータスを表示する
+  PROMPT="$user_host$last_status%f# "
   RPROMPT='`git-prompt`%F{048}[%~]%f'
 }
 prompt-reset() {
