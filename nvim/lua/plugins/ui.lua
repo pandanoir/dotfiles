@@ -139,21 +139,25 @@ return {
   {
     'kevinhwang91/nvim-hlslens',
     init = function()
-      local map = vim.keymap.set
-      local kopts = { silent = true }
-      map('n', 'n',
-        [[<Cmd>execute('normal! '.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-        kopts)
-      map('n', 'N',
-        [[<Cmd>execute('normal! '.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-        kopts)
-      map('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      map('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      map('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-      map('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      local map = function(key, command)
+        vim.keymap.set(
+          'n',
+          key,
+          command .. "<Cmd>lua require('hlslens').start()<CR>",
+          { silent = true }
+        )
+      end
+      map('n', "<Cmd>execute('normal! '.v:count1.'n')<CR>")
+      map('N', "<Cmd>execute('normal! '.v:count1.'N')<CR>")
+      map('*', '*')
+      map('#', '#')
+      map('g*', 'g*')
+      map('g#', 'g#')
     end,
     event = 'FilterWritePre',
-    config = true,
+    opts = {
+      nearest_only = true
+    },
   },
   {
     'b0o/incline.nvim',
