@@ -53,13 +53,12 @@ return {
     event = 'VimEnter',
   },
   {
-    'justinmk/vim-sneak',
+    'rhysd/clever-f.vim',
     event = 'VimEnter',
     init = function()
-      vim.keymap.set('n', 'f', '<Plug>Sneak_f', { remap = true })
-      vim.keymap.set('n', 'F', '<Plug>Sneak_F', { remap = true })
-      vim.keymap.set('n', 't', '<Plug>Sneak_t', { remap = true })
-      vim.keymap.set('n', 'T', '<Plug>Sneak_T', { remap = true })
+      vim.g.clever_f_use_migemo = 1
+      vim.keymap.set('n', ';', '<Plug>(clever-f-repeat-forward)', { remap = true })
+      vim.keymap.set('n', ',', '<Plug>(clever-f-repeat-back)', { remap = true })
     end,
   },
   {
@@ -112,7 +111,7 @@ return {
           -- cf. https://github.com/stevearc/conform.nvim/issues/407#issuecomment-2120988992
           prettier = {
             require_cwd = true,
-            cwd = require('conform.util').root_file({
+            cwd = require 'conform.util'.root_file {
               '.prettierrc',
               '.prettierrc.json',
               '.prettierrc.js',
@@ -121,7 +120,7 @@ return {
               'prettier.config.js',
               'prettier.config.cjs',
               'prettier.config.mjs',
-            }),
+            },
           },
           biome = { require_cwd = true },
         },
