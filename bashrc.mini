@@ -1,5 +1,8 @@
 # curl pandanoir.net/bashrc -o ~/.bashrc.mini
 # echo "source ~/.bashrc.mini >> ~/.bashrc"
+command_exists() { type "$1" >/dev/null 2>&1; }
+export PATH="$PATH:$HOME/.local/bin:$HOME/local/nvim/bin:/opt/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ../'
@@ -19,6 +22,11 @@ alias gdc='git diff --cached'
 alias gs='git status'
 alias gp='git push'
 alias gc='git commit'
+
+if command_exists nvim; then
+  alias vi="\\vim"
+  alias vim="nvim"
+fi
 
 alias less=$VIM'/runtime/macros/less.sh'
 
