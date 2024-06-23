@@ -40,4 +40,12 @@ else
     alias ll='ls -la --color=auto'
 fi
 
-
+function set_bash_prompt {
+    # 左プロンプト
+    PS1="\$ "
+    # 右プロンプト
+    PS1="${PS1}\[\e[s\033[${COLUMNS}C\033[15D\]"
+    PS1="${PS1}\W"
+    PS1="${PS1}\[\e[u\] "
+}
+PROMPT_COMMAND=set_bash_prompt
