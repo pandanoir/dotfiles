@@ -41,7 +41,7 @@ bindkey '^W' fzf-file-widget
 __fsel2() {
   local item
 
-  git status --porcelain --untracked-files |
+  git status --short --untracked-files |
     fzf +s +m -e --multi --ansi --reverse --height 40% --preview='git diff --color $('"echo {} | awk '{print substr(\$0,4)}') | tail -n +5" |
     awk '{print substr($0,4)}' |
     while read item; do
