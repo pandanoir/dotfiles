@@ -32,6 +32,9 @@ alias gf='git fetch'
 alias gfs='git fetch && git switch'
 alias gfsw='git fetch && git switch'
 alias gfw='git fetch && git switch'
+gfo() {
+  git fetch origin $1:$1
+}
 alias gc='git commit'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
