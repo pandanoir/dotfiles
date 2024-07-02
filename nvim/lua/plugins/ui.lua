@@ -1,3 +1,6 @@
+-- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
+local is_readonly = vim.bo.readonly or vim.g.no_plugin_maps == 1
+
 return {
   {
     'bronson/vim-trailing-whitespace',
@@ -132,8 +135,7 @@ return {
   {
     'j-hui/fidget.nvim',
     event = 'BufRead',
-    -- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
-    cond = not vim.bo.readonly and vim.g.no_plugin_maps ~= 1,
+    cond = not is_readonly,
     config = true,
   },
   {
@@ -225,6 +227,7 @@ return {
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
+    cond = not is_readonly,
     branch = 'v3.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
