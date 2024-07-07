@@ -12,6 +12,11 @@ init() {
   if ! file_exists "$ZDOTDIR/.zshrc.local"; then
     echo 'export NVIM=/usr/share/nvim' > "$ZDOTDIR/.zshrc.local"
   fi
+
+  if ! dir_exists "$XDG_DATA_HOME/nvim/lazy-rocks"; then
+    echo "you should exec hererocks '$XDG_DATA_HOME/nvim/lazy-rocks/hererocks' -l5.1 -rlatest"
+  fi
+
   info "finish init"
 }
 
