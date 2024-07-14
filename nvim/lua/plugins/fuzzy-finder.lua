@@ -6,19 +6,18 @@ return {
     { '<leader>;', '<cmd>Telescope resume<cr>' },
   },
   init = function()
-    require('which-key').register({
-      f = {
-        name = 'fuzzy finder',
-        f = { '<cmd>Telescope find_files<cr>', 'Find File' },
-        g = { '<cmd>Telescope live_grep<cr>', 'Grep' },
-        b = { '<cmd>Telescope buffers<cr>', 'Buffers' },
-        r = { '<cmd>Telescope oldfiles<cr>', 'Old files' },
-        G = {
-          function() require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') } end,
-          'Grep with current word'
-        },
+    require 'which-key'.add {
+      { '<leader>f',  group = 'fuzzy finder', },
+      {
+        '<leader>fG',
+        function() require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') } end,
+        desc = 'Grep with current word'
       },
-    }, { prefix = '<leader>' })
+      { '<leader>fb', '<cmd>Telescope buffers<cr>',    desc = 'Buffers' },
+      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find File' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Grep' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>',   desc = 'Old files' },
+    }
   end,
   opts = {
     defaults = {
