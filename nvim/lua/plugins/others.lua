@@ -62,6 +62,32 @@ return {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
+    opts = {
+      triggers_blacklist = {
+        i = { 'f' },
+      },
+      modes = {
+        x = false,
+      },
+    },
+    config = function(_, opts)
+      require 'which-key'.setup(opts)
+      require 'which-key'.add {
+        {
+          'gf',
+          function()
+            local cfile = vim.fn.expand('<cfile>')
+            print(cfile)
+            if cfile:match('^https?://') then
+              vim.fn.system { 'open', '-a', 'google chrome', cfile }
+            else
+              vim.cmd 'normal! gF'
+            end
+          end,
+          desc = 'Go to file under cursor',
+        }
+      }
+    end,
     init = function()
       local timeoutlen = 400
       vim.o.timeout = true
@@ -76,11 +102,6 @@ return {
         }
       }
     end,
-    opts = {
-      triggers_blacklist = {
-        i = { 'f' },
-      }
-    },
   },
   {
     'Wansmer/treesj',

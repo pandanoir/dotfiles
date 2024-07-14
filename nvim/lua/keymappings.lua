@@ -50,12 +50,3 @@ vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(
 
 -- %% でアクティブなファイルが含まれているディレクトリを手早く展開
 keymap('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
-
-keymap('n', 'gf', function()
-  local cfile = vim.fn.expand('<cfile>')
-  if cfile:match('^https?://') then
-    vim.fn.system { 'open', '-a', 'google chrome', cfile }
-  else
-    vim.cmd 'normal! gF'
-  end
-end)
