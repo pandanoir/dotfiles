@@ -10,19 +10,17 @@ return {
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     event = 'VimEnter',
-    config = true,
-  },
-  {
-    'echasnovski/mini.comment',
-    event = 'VimEnter',
     opts = {
-      options = {
-        custom_commentstring = function()
-          return require 'ts_context_commentstring'.calculate_commentstring() or
-              vim.bo.commentstring
-        end,
-      }
-    }
+      enable_autocmd = false,
+    },
+    init = function()
+      local get_option = vim.filetype.get_option
+      vim.filetype.get_option = function(filetype, option)
+        return option == 'commentstring'
+            and require 'ts_context_commentstring.internal'.calculate_commentstring()
+            or get_option(filetype, option)
+      end
+    end
   },
   {
     'LunarWatcher/auto-pairs',
