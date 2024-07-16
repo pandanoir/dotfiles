@@ -8,17 +8,8 @@ keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
 keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
 
 -- qで終了、Qでマクロ
-keymap('n', 'q', ':<C-u>qa<CR>')
+keymap('n', 'q', ':<C-u>q<CR>')
 keymap('n', 'Q', 'q')
-require 'easy-setup-autocmd'.setup_autocmd {
-  ['CmdWinEnter'] = {
-    pattern = '*',
-    callback = function()
-      keymap('n', 'q', ':<C-u>q<CR>', { buffer = true })
-    end
-  }
-}
-
 
 keymap('n', 'gy', '"+y')
 keymap('n', '<leader>d', '"_d')

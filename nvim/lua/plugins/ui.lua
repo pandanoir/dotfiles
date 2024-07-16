@@ -235,6 +235,7 @@ return {
       'MunifTanjim/nui.nvim',
     },
     opts = {
+      close_if_last_window = true,
       window = {
         width = 32,
         mappings = {
@@ -260,9 +261,11 @@ return {
               return
             end
 
-            local current_win = vim.api.nvim_get_current_win()
             vim.cmd [[Neotree reveal_force_cwd]]
-            vim.api.nvim_set_current_win(current_win)
+            -- フォーカスを変更する。ただし、WinEnterイベントを発火させないとclose_if_last_windowオプションがうまく動かないためvim.scheduleを挟んでいる
+            vim.schedule(function()
+              vim.cmd [[wincmd p]]
+            end)
           end,
         }
       }
