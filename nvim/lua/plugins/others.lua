@@ -63,12 +63,9 @@ return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
-      triggers_blacklist = {
-        i = { 'f' },
-      },
-      modes = {
-        x = false,
-      },
+      defer = function(ctx)
+        return vim.list_contains({ '<C-V>', 'V', 'v' }, ctx.mode)
+      end,
     },
     config = function(_, opts)
       require 'which-key'.setup(opts)
