@@ -141,10 +141,11 @@ return {
           biome = { require_cwd = true },
         },
         formatters_by_ft = {
-          javascript = { { 'prettier', 'biome' } },
-          typescript = { { 'prettier', 'biome' } },
-          typescriptreact = { { 'prettier', 'biome' } },
-          vue = { { 'prettier', 'biome' } },
+          ['*'] = { 'injected', lsp_format = 'last' },
+          javascript = { 'prettier', 'biome', stop_after_first = true },
+          typescript = { 'prettier', 'biome', stop_after_first = true },
+          typescriptreact = { 'prettier', 'biome', stop_after_first = true },
+          vue = { 'prettier', 'biome', stop_after_first = true },
           lua = { 'stylua' },
         },
         format_on_save = {
