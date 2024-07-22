@@ -113,12 +113,7 @@ return {
   {
     'stevearc/conform.nvim',
     init = function()
-      vim.keymap.set(
-        'n',
-        '<leader>F',
-        function() require 'conform'.format { lsp_fallback = true } end,
-        { silent = true }
-      )
+      vim.keymap.set('n', '<leader>F', require 'conform'.format, { silent = true })
     end,
     opts = function()
       return {
@@ -146,10 +141,11 @@ return {
           typescript = { 'prettier', 'biome', stop_after_first = true },
           typescriptreact = { 'prettier', 'biome', stop_after_first = true },
           vue = { 'prettier', 'biome', stop_after_first = true },
-          lua = { 'stylua' },
+          lua = { 'stylua', stop_after_first = true },
         },
-        format_on_save = {
-          lsp_fallback = true,
+        format_on_save = {},
+        default_format_opts = {
+          lsp_format = 'last',
         },
       }
     end,
