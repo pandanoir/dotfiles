@@ -1,5 +1,9 @@
 local M = {}
 function M.improve()
+  if vim.api.nvim_exec('colorscheme', true) ~= 'default' then
+    return
+  end
+  vim.cmd [[highlight Normal guibg=#191919]]
   -- tsx でのみ出てくる要素のハイライトを変更
   local highlight_links = {
     { "@tag.attribute.tsx", "Identifier" },
