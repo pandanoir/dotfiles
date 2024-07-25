@@ -6,6 +6,7 @@ keymap('n', '<CR>', ':<C-u>w<CR>')
 keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
 
 keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
+keymap('n', '<leader>W', ':set wrap!<CR>')
 
 -- qで終了、Qでマクロ
 keymap('n', 'q', ':<C-u>q<CR>')
