@@ -134,9 +134,17 @@ return {
             },
           },
           biome = { require_cwd = true },
+          injected = {
+            options = {
+              lang_to_formatters = {
+                html = { 'prettier', 'biome', stop_after_first = true },
+              },
+            },
+          },
         },
         formatters_by_ft = {
-          ['*'] = { 'injected', lsp_format = 'last' },
+          html = { 'injected', lsp_format = 'first' },
+          markdown = { 'deno_fmt', 'injected' },
           javascript = { 'prettier', 'biome', stop_after_first = true },
           typescript = { 'prettier', 'biome', stop_after_first = true },
           typescriptreact = { 'prettier', 'biome', stop_after_first = true },
