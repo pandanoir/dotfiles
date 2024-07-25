@@ -45,22 +45,21 @@ return {
         }
       }
 
-      local ensure_installed_ls = {
-        'eslint',
-        'html',
-        'jsonls',
-        'tsserver',
-        'volar',
-        'vimls',
-        'rust_analyzer',
-        'lua_ls',
-      }
       mason.setup {
         log_level = vim.log.levels.DEBUG,
       }
       mason_lspconfig.setup {
         automatic_installation = true,
-        ensure_installed = ensure_installed_ls,
+        ensure_installed = {
+          'eslint',
+          'html',
+          'jsonls',
+          'tsserver',
+          'volar',
+          'vimls',
+          'rust_analyzer',
+          'lua_ls',
+        },
       }
 
       local disable_formatting = function(client)
