@@ -102,9 +102,8 @@ return {
   {
     'Wansmer/treesj',
     keys = {
-      { '<leader>m', '<cmd>TSJToggle<cr>' },
-      { '<leader>j', '<cmd>TSJJoin<cr>' },
-      { '<leader>J', '<cmd>TSJSplit<cr>' },
+      { '<leader>j', '<cmd>TSJToggle<cr>' },
+      { '<leader>J', '<cmd>TSJJoin<cr>' },
     },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = { use_default_keymaps = false },
