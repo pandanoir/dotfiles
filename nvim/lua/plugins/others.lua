@@ -114,31 +114,14 @@ return {
     'monaqa/dial.nvim',
     init = function()
       local map = vim.keymap.set
-      map('n', '<C-a>', function()
-        require 'dial.map'.manipulate('increment', 'normal')
-      end)
-      map('n', '<C-x>', function()
-        require 'dial.map'.manipulate('decrement', 'normal')
-      end)
-      map('n', 'g<C-a>', function()
-        require 'dial.map'.manipulate('increment', 'gnormal')
-      end)
-      map('n', 'g<C-x>', function()
-        require 'dial.map'.manipulate('decrement', 'gnormal')
-      end)
-
-      map('v', '<C-a>', function()
-        require 'dial.map'.manipulate('increment', 'visual')
-      end)
-      map('v', '<C-x>', function()
-        require 'dial.map'.manipulate('decrement', 'visual')
-      end)
-      map('v', 'g<C-a>', function()
-        require 'dial.map'.manipulate('increment', 'gvisual')
-      end)
-      map('v', 'g<C-x>', function()
-        require 'dial.map'.manipulate('decrement', 'gvisual')
-      end)
+      local manipulate = require 'dial.map'.manipulate
+      for _, mode in ipairs({ 'normal', 'visual' }) do
+        local m = mode:sub(1, 1)
+        map(m, '<C-a>', function() manipulate('increment', mode) end)
+        map(m, '<C-x>', function() manipulate('decrement', mode) end)
+        map(m, 'g<C-a>', function() manipulate('increment', 'g' .. mode) end)
+        map(m, 'g<C-x>', function() manipulate('decrement', 'g' .. mode) end)
+      end
     end,
     config = function()
       local augend = require 'dial.augend'
