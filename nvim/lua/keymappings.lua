@@ -37,6 +37,17 @@ keymap('v', 'y', 'y`]', { silent = true })
 keymap('v', 'p', 'p`]', { silent = true })
 keymap('n', 'p', 'p`]', { silent = true })
 
+-- <, >で連続してインデントを操作
+keymap('x', '<', '<gv')
+keymap('x', '>', '>gv')
+
+-- i<space>でWORD選択
+keymap('o', 'i<space>', 'iW')
+keymap('x', 'i<space>', 'iW')
+
+-- Uでリドゥ
+keymap('n', 'U', '<c-r>')
+
 -- :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
 vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's']]
 
