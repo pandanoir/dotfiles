@@ -141,6 +141,9 @@ return {
     config = true,
     init = function()
       local op = require 'textcase'.operator
+      local word = require 'textcase'.current_word
+      vim.keymap.set('n', 'gak', function() word('to_dash_case') end, { desc = 'to-kebab-case' })
+      vim.keymap.set('n', 'gaC', function() word('to_pascal_case') end, { desc = 'ToUpperCamelCase' })
       vim.keymap.set('n', 'gaok', function() op('to_dash_case') end, { desc = 'to-kebab-case' })
       vim.keymap.set('n', 'gaoC', function() op('to_pascal_case') end, { desc = 'ToUpperCamelCase' })
     end
