@@ -65,6 +65,7 @@ return {
       defer = function(ctx)
         return vim.list_contains({ '<C-V>', 'V', 'v' }, ctx.mode)
       end,
+      sort = { 'alphanum' },
     },
     config = function(_, opts)
       require 'which-key'.setup(opts)
