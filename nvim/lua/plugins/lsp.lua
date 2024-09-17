@@ -7,8 +7,8 @@ return {
       local mason_lspconfig = require 'mason-lspconfig'
 
       local map = vim.keymap.set
-      map('n', '<leader>e', vim.diagnostic.open_float, { silent = true })
-
+      map('n', '<leader>e', vim.diagnostic.open_float,
+        { silent = true, desc = 'show diagnostics in a floating window' })
       require 'easy-setup-autocmd'.setup_autocmd {
         ['FileType'] = {
           pattern = 'qf',
@@ -21,10 +21,14 @@ return {
             vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
             local bufopts = { silent = true, buffer = ev.buf }
+            local optWithDesc = function(desc)
+              return vim.tbl_extend('force', { desc = desc }, bufopts)
+            end
             map('n', 'gD', vim.lsp.buf.declaration, bufopts)
             map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', bufopts)
             map('n', 'gt', vim.lsp.buf.type_definition, bufopts)
             map('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', bufopts)
+            map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
             map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', bufopts)
             map('n', 'gi', vim.lsp.buf.implementation, bufopts)
             map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
@@ -33,11 +37,9 @@ return {
             map('n', '<leader>wl', function()
               print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
             end, bufopts)
-            map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-            map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', bufopts)
-            map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', bufopts)
-            map('n', 'gr', '<cmd>Lspsaga finder<CR>', bufopts)
-            map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', bufopts)
+            map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', optWithDesc('rename using LSP'))
+            map('n', '<leader>a', '<cmd>Lspsaga code_action<CR>', optWithDesc('open code action'))
+            map('n', '<leader>o', '<cmd>Lspsaga outline<CR>', optWithDesc('show outline'))
             vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
               vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
             )

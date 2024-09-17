@@ -1,7 +1,7 @@
 return {
   'stevearc/conform.nvim',
   init = function()
-    vim.keymap.set('n', '<leader>F', require 'conform'.format, { silent = true })
+    vim.keymap.set('n', '<leader>F', require 'conform'.format, { silent = true, desc = 'format' })
   end,
   opts = function()
     local js_formatter = { 'prettier', 'biome', stop_after_first = true }

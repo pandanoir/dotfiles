@@ -216,13 +216,14 @@ return {
     config = true,
     init = function()
       local Terminal = require 'toggleterm.terminal'.Terminal
-      local lazygit = Terminal:new({
+      local lazygit = Terminal:new {
         cmd = 'lazygit',
         direction = 'float',
         hidden = true
-      })
+      }
 
-      vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true })
+      vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true, desc = 'open lazygit' })
+
     end
   },
   {

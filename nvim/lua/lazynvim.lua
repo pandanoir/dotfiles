@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.keymap.set('n', '<leader>l', ':Lazy<CR>')
+vim.keymap.set('n', '<leader>l', ':Lazy<CR>', { desc = 'open lazy.nvim window' })
 
 -- Any lua file in ~/.config/nvim/lua/plugins/*.lua will be automatically merged in the main plugin spec
 require 'lazy'.setup('plugins', {
