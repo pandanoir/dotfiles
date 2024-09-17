@@ -224,6 +224,8 @@ return {
 
       vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true, desc = 'open lazygit' })
 
+      local terminal = Terminal:new { direction = 'float' }
+      vim.keymap.set('n', "<leader>'", function() terminal:toggle() end, { silent = true, desc = 'open terminal' })
     end
   },
   {

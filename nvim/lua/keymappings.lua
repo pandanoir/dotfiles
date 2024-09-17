@@ -48,6 +48,10 @@ keymap('x', 'i<space>', 'iW')
 -- Uでリドゥ
 keymap('n', 'U', '<c-r>')
 
+keymap('t', '<Esc>', [[<C-\><C-n>]])
+keymap('t', 'fd', [[<C-\><C-n>]])
+
+
 -- :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
 vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's']]
 
