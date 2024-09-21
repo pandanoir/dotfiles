@@ -1,7 +1,7 @@
 format = """
 [░▒▓](#a3aed2)\
-[  ](bg:#a3aed2 fg:#090c0c)\
-[](bg:#769ff0 fg:#a3aed2)\
+[  ](fg:#090c0c bg:#a3aed2)\
+[](fg:#a3aed2 bg:#769ff0)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
@@ -9,6 +9,7 @@ $git_branch\
 $nodejs\
 $rust\
 $golang\
+$python\
 [](fg:#212736 bg:#1d2230)\
 $status\
 [ ](fg:#1d2230)\
@@ -49,6 +50,11 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
 symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[python]
+symbol = "🐍"
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
