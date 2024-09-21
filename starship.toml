@@ -1,73 +1,58 @@
 format = """
 [░▒▓](#a3aed2)\
-$os\
+[ $os ](fg:#090c0c bg:#a3aed2)\
 [](fg:#a3aed2 bg:#769ff0)\
-$directory\
+[ $directory ](fg:#e3e5e5 bg:#769ff0)\
 [](fg:#769ff0 bg:#394260)\
-$git_branch\
+[$git_branch](fg:#769ff0 bg:#394260)\
 [](fg:#394260 bg:#212736)\
-$nodejs\
-$rust\
-$golang\
-$python\
+[$nodejs$rust$python](fg:#769ff0 bg:#212736)\
 [](fg:#212736 bg:#1d2230)\
-$status\
+[$status](bold red bg:#1d2230)\
 [ ](fg:#1d2230)\
 \n$character"""
 
 [status]
 disabled = false
-format = '[ $symbol$status ]($style)'
+format = ' $symbol$status '
 map_symbol = true
-style = "bold red bg:#1d2230"
 
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
-format = "[ $path ]($style)"
+format = '$path'
 truncation_length = 3
-truncation_symbol = "…/"
+truncation_symbol = '…/'
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+Documents = '󰈙'
+Downloads = ''
+Music = ''
+Pictures = ''
 
 [os]
 disabled = false
-format = '[ $symbol ]($style)'
-style = "fg:#090c0c bg:#a3aed2"
+format = '$symbol'
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-Macos = "󰀵"
-Linux = "󰌽"
-Alpine = ""
-Debian = "󰣚"
+Windows = '󰍲'
+Ubuntu = '󰕈'
+Macos = '󰀵'
+Linux = '󰌽'
+Alpine = ''
+Debian = '󰣚'
 
 [git_branch]
-symbol = ""
-style = "fg:#769ff0 bg:#394260"
-format = '[ $symbol $branch ]($style)'
+symbol = ''
+format = ' $symbol $branch '
 
 [nodejs]
-symbol = ""
-style = "fg:#769ff0 bg:#212736"
-format = '[ $symbol ($version) ]($style)'
+symbol = ''
+format = ' $symbol ($version) '
 
 [rust]
-symbol = ""
-style = "fg:#769ff0 bg:#212736"
-format = '[ $symbol ($version) ]($style)'
-
-[golang]
-symbol = ""
-style = "fg:#769ff0 bg:#212736"
-format = '[ $symbol ($version) ]($style)'
+symbol = ''
+format = ' $symbol ($version) '
 
 [python]
-symbol = "🐍"
-style = "fg:#769ff0 bg:#212736"
-format = '[ $symbol ($version) ]($style)'
+symbol = '🐍'
+format = ' $symbol ($version) '
 
