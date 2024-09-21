@@ -45,14 +45,12 @@ symbol = ''
 format = ' $symbol $branch '
 
 [nodejs]
-symbol = ''
-format = ' $symbol ($version) '
+format = ' $symbol($version) '
 
 [rust]
-symbol = ''
-format = ' $symbol ($version) '
+format = ' $symbol($version) '
 
 [python]
-symbol = '🐍'
-format = ' $symbol ($version) '
+symbol = ' '
+format = ' $symbol($version) '
 
