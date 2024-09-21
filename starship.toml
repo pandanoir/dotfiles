@@ -1,6 +1,6 @@
 format = """
 [░▒▓](#a3aed2)\
-[  ](fg:#090c0c bg:#a3aed2)\
+$os\
 [](fg:#a3aed2 bg:#769ff0)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
@@ -33,28 +33,41 @@ truncation_symbol = "…/"
 "Music" = " "
 "Pictures" = " "
 
+[os]
+disabled = false
+format = '[ $symbol ]($style)'
+style = "fg:#090c0c bg:#a3aed2"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+Macos = "󰀵"
+Linux = "󰌽"
+Alpine = ""
+Debian = "󰣚"
+
 [git_branch]
 symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+style = "fg:#769ff0 bg:#394260"
+format = '[ $symbol $branch ]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
 [python]
 symbol = "🐍"
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "fg:#769ff0 bg:#212736"
+format = '[ $symbol ($version) ]($style)'
 
