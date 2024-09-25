@@ -51,7 +51,7 @@ return {
           'eslint',
           'html',
           'jsonls',
-          'tsserver',
+          'ts_ls',
           'volar',
           'vimls',
           'rust_analyzer',
@@ -67,8 +67,8 @@ return {
         function(server_name)
           nvim_lsp[server_name].setup {}
         end,
-        tsserver = function()
-          nvim_lsp.tsserver.setup {
+        ts_ls = function()
+          nvim_lsp.ts_ls.setup {
             root_dir = nvim_lsp.util.root_pattern('package.json'),
             on_attach = disable_formatting
           }
