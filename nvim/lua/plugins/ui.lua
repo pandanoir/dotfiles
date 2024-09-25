@@ -222,9 +222,12 @@ return {
         hidden = true
       }
 
-      vim.keymap.set('n', '<leader>g', function() lazygit:toggle() end, { silent = true, desc = 'open lazygit' })
+      vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { silent = true, desc = 'open lazygit' })
 
-      local terminal = Terminal:new { direction = 'float' }
+      local terminal = Terminal:new {
+        direction = 'float',
+        on_open = function(term) term:set_mode('i') end,
+      }
       vim.keymap.set('n', "<leader>'", function() terminal:toggle() end, { silent = true, desc = 'open terminal' })
     end
   },
