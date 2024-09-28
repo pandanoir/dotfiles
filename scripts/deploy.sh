@@ -3,6 +3,7 @@ symlink() {
   if [ -e "$2" ]; then
     return
   fi
+
   info "create symlink from $DOTDIR/$1 to $2"
   if ! [ -d `dirname $2` ]; then
     mkdir -p `dirname $2`
@@ -14,8 +15,9 @@ deploy() {
   info "start deploy"
 
   # vim/neovim
-  mkdir -p "$XDG_CONFIG_HOME/vim" "$XDG_CACHE_HOME/vim"
-  symlink nvim  "$XDG_CONFIG_HOME/nvim"
+  mkdir -p "$XDG_CACHE_HOME/vim"
+  symlink nvim "$XDG_CONFIG_HOME/nvim"
+  symlink nvim "$XDG_CONFIG_HOME/nvim-sub"
   symlink vim/raw_vimrc "$HOME/.vimrc"
   for file in `ls -1 "$DOTDIR/vim" | grep -v 'raw_vimrc'`; do
     symlink "vim/$file" "$XDG_CONFIG_HOME/vim/$file"
@@ -27,8 +29,7 @@ deploy() {
   done
   symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile "$ZDOTDIR/.zprofile"
-  symlink zsh/zshenv       "$HOME/.zshenv"
-  symlink zsh/zprofile     "$HOME/.bash_profile"
+  symlink zsh/zshenv   "$HOME/.zshenv"
 
   # zellij
   symlink zellij "$XDG_CONFIG_HOME/zellij"
