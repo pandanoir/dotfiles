@@ -232,52 +232,6 @@ return {
     end
   },
   {
-    'nvim-neo-tree/neo-tree.nvim',
-    cond = not is_readonly,
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
-    opts = {
-      close_if_last_window = true,
-      window = {
-        width = 32,
-        mappings = {
-          ['<leader>t'] = 'close_window',
-        },
-      },
-    },
-    init = function()
-      vim.keymap.set('n', '<leader>t', '<cmd>Neotree reveal<cr>')
-      require 'easy-setup-autocmd'.setup_autocmd {
-        ['UiEnter'] = {
-          callback = function()
-            local win_width = vim.api.nvim_win_get_width(0)
-
-            -- git commit --amend のときは表示しない
-            for _, arg in ipairs(vim.v.argv) do
-              if arg:match('%.git/COMMIT_EDITMSG$') then
-                return
-              end
-            end
-
-            if win_width < 100 or vim.fn.argc() == 0 then
-              return
-            end
-
-            vim.cmd [[Neotree reveal_force_cwd]]
-            -- フォーカスを変更する。ただし、WinEnterイベントを発火させないとclose_if_last_windowオプションがうまく動かないためvim.scheduleを挟んでいる
-            vim.schedule(function()
-              vim.cmd [[wincmd p]]
-            end)
-          end,
-        }
-      }
-    end,
-  },
-  {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true,
