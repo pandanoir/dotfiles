@@ -15,13 +15,16 @@ themes {
 }
 theme "nord"
 
+default_mode "locked"
+
 keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        bind "Alt c" { Copy; }
     }
     locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
+        unbind "Ctrl g"
+        bind "Ctrl j" { SwitchToMode "Normal"; }
     }
     resize {
         unbind "Ctrl n"
@@ -37,19 +40,17 @@ keybinds {
         bind "-" { Resize "Decrease"; }
     }
     pane {
-        unbind "Ctrl p"
-        bind "Alt p" { SwitchToMode "Normal"; }
         bind "h" "Left" { MoveFocus "Left"; }
         bind "l" "Right" { MoveFocus "Right"; }
         bind "j" "Down" { MoveFocus "Down"; }
         bind "k" "Up" { MoveFocus "Up"; }
         bind "p" { SwitchFocus; }
-        bind "n" { NewPane; SwitchToMode "Normal"; }
+        bind "n" { NewPane; SwitchToMode "Locked"; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
-        bind "x" { CloseFocus; SwitchToMode "Normal"; }
-        bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
-        bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
+        bind "x" { CloseFocus; SwitchToMode "Locked"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "Locked"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "Alt w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
@@ -65,8 +66,6 @@ keybinds {
         bind "l" "Right" { MovePane "Right"; }
     }
     tab {
-        unbind "Ctrl t"
-        bind "Alt t" { SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "Left" "Up" "k" { GoToPreviousTab; }
         bind "l" "Right" "Down" "j" { GoToNextTab; }
@@ -164,7 +163,8 @@ keybinds {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        bind "Ctrl g" { SwitchToMode "Locked"; }
+        unbind "Ctrl g"
+        bind "Ctrl j" { SwitchToMode "Locked"; }
         bind "Ctrl q" { Detach; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
@@ -177,11 +177,10 @@ keybinds {
         bind "Alt ]" { NextSwapLayout; }
     }
     shared_except "normal" "locked" {
-        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+        bind "Enter" "Esc" { SwitchToMode "Locked"; }
     }
     shared_except "pane" "locked" {
-        unbind "Ctrl p"
-        bind "Alt p" { SwitchToMode "Pane"; }
+        bind "Ctrl p" { SwitchToMode "Pane"; }
     }
     shared_except "resize" "locked" {
         unbind "Ctrl n"
@@ -193,8 +192,7 @@ keybinds {
         unbind "Ctrl o" { SwitchToMode "Session"; }
     }
     shared_except "tab" "locked" {
-        unbind "Ctrl t"
-        bind "Alt t" { SwitchToMode "Tab"; }
+        bind "Ctrl t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
         bind "Ctrl h" { SwitchToMode "Move"; }
