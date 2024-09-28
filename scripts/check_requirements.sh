@@ -48,7 +48,7 @@ check_requirements() {
     fi
   fi
 
-  if [ "${is_every_requirement_met}" ]; then
+  if $is_every_requirement_met; then
     info "required tools are installed."
   else
     warn "required tools are not installed"
