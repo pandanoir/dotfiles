@@ -15,7 +15,6 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.scrolloff = 10
-vim.opt.guifont = 'Migu 1m:h12'
 -- Don't save options.
 vim.opt.viewoptions:remove({ options = true })
 
