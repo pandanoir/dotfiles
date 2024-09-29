@@ -23,7 +23,7 @@ set incsearch ignorecase smartcase hlsearch
 "自動でコメントが入るのを防ぐ
 autocmd MyAutoCmd BufEnter * setlocal formatoptions-=ro
 
-set clipboard=unnamed,autoselect backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
+set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
 " 未保存でもバッファを切り替えられるように
 set hidden
