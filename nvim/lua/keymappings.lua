@@ -57,3 +57,26 @@ vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(
 
 -- %% でアクティブなファイルが含まれているディレクトリを手早く展開
 keymap('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
+
+-- todoリストを簡単に入力する
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'MyAutoCmd',
+  pattern = 'markdown',
+  callback = function()
+    vim.cmd 'iabbrev <buffer> tl - [ ]'
+
+    local function ToggleCheckbox()
+      local line = vim.api.nvim_get_current_line()
+      if string.match(line, '%-%s%[%s%]') then
+        local result = string.gsub(line, '%-%s%[%s%]', '- [x]')
+        vim.api.nvim_set_current_line(result)
+      elseif string.match(line, '%-%s%[x%]') then
+        local result = string.gsub(line, '%-%s%[x%]', '- [ ]')
+        vim.api.nvim_set_current_line(result)
+      end
+    end
+
+    vim.keymap.set('n', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+    vim.keymap.set('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+  end
+})
