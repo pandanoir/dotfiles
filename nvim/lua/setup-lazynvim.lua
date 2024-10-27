@@ -1,3 +1,5 @@
+require 'install-lazynvim'
+
 -- Any lua file in ~/.config/nvim/lua/plugins/*.lua will be automatically merged in the main plugin spec
 require 'lazy'.setup('plugins', {
   change_detection = { notify = false },
