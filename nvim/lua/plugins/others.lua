@@ -151,7 +151,7 @@ return {
   },
   {
     'ysmb-wtsg/in-and-out.nvim',
-    config = true,
+    commit = '2f3bf83654790e458cf387fa6f37f9b9d9e4f7fa',
     init = function()
       vim.keymap.set(
         'i',
