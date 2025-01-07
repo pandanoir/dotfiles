@@ -148,5 +148,16 @@ return {
       vim.keymap.set('n', 'gaok', function() op('to_dash_case') end, { desc = 'to-kebab-case' })
       vim.keymap.set('n', 'gaoC', function() op('to_pascal_case') end, { desc = 'ToUpperCamelCase' })
     end
-  }
+  },
+  {
+    'ysmb-wtsg/in-and-out.nvim',
+    config = true,
+    init = function()
+      vim.keymap.set(
+        'i',
+        '<c-l>',
+        require('in-and-out').in_and_out
+      )
+    end,
+  },
 }
