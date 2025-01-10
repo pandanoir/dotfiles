@@ -158,7 +158,7 @@ return {
     end,
     event = 'FilterWritePre',
     opts = {
-      nearest_only = true
+      nearest_only = true,
     },
   },
   {
@@ -235,5 +235,11 @@ return {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true,
+  },
+  {
+    'unblevable/quick-scope',
+    init = function()
+      vim.keymap.set('n', '<leader>tq', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
+    end,
   },
 }
