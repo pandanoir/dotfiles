@@ -13,3 +13,9 @@ is_empty_string() {
 is_mac() {
   [ "$(uname)" = 'Darwin' ]
 }
+add_to_path_if_not_exists() {
+    local dir=$1
+    if [[ ":$PATH:" != *":$dir:"* ]]; then
+        export PATH="$PATH:$dir"
+    fi
+}

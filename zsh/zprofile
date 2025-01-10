@@ -1,15 +1,12 @@
 source "$ZDOTDIR/utils.zsh"
-path=(
-  $path
-  "$HOME/.local/bin"
-  "$HOME/local/nvim/bin"
-  "/opt/local/bin"
-  "/usr/local/bin"
-  "/usr/bin"
-  "/bin"
-  "/usr/sbin"
-  "/sbin"
-)
+add_to_path_if_not_exists "$HOME/.local/bin"
+add_to_path_if_not_exists "$HOME/local/nvim/bin"
+add_to_path_if_not_exists /opt/local/bin
+add_to_path_if_not_exists /usr/local/bin
+add_to_path_if_not_exists /usr/bin
+add_to_path_if_not_exists /bin
+add_to_path_if_not_exists /usr/sbin
+add_to_path_if_not_exists /sbin
 
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
@@ -19,19 +16,19 @@ export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
 if dir_exists /usr/bin/javac; then
   JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
   export JAVA_HOME
-  export PATH="$PATH:${JAVA_HOME}/bin"
+  add_to_path_if_not_exists "${JAVA_HOME}/bin"
 fi
 if dir_exists /usr/bin/java; then
   JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
   export JAVA_HOME
-  export PATH="$PATH:${JAVA_HOME}"
+  add_to_path_if_not_exists "$JAVA_HOME"
 fi
 
 # go
 GOPATH="$HOME/go"
 if dir_exists "$GOPATH"; then
   export GOPATH
-  export PATH="$PATH:$GOPATH/bin"
+  add_to_path_if_not_exists "$GOPATH/bin"
 fi
 
 # rust
@@ -49,61 +46,62 @@ export CPLUS_INCLUDE_PATH=/opt/local/include
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+add_to_path_if_not_exists "$DENO_INSTALL/bin"
 
 # node_modules
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export PATH="$PATH:/usr/local/share/npm/bin"
+add_to_path_if_not_exists /usr/local/share/npm/bin
 export LC_ALL=ja_JP.UTF-8
 
 if has plenv; then
   export PLENV_ROOT="$HOME/.plenv"
-  export PATH="${PLENV_ROOT}/shims:${PATH}"
+  add_to_path_if_not_exists "${PLENV_ROOT}/shims"
   eval "$(plenv init -)"
 fi
 
 RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 if file_exists "$RBENV_ROOT/bin/rbenv"; then
   export RBENV_ROOT
-  export PATH="$RBENV_ROOT/bin:$PATH"
+  add_to_path_if_not_exists "$RBENV_ROOT/bin"
   eval "$(rbenv init -)"
 fi
 
 VOLTA_HOME="$HOME/.volta"
 if dir_exists "$VOLTA_HOME"; then
   export VOLTA_HOME
-  export PATH="$VOLTA_HOME/bin:$PATH"
+  add_to_path_if_not_exists "$VOLTA_HOME/bin"
 fi
+
 if dir_exists $HOME/.nodebrew; then
   export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
-  export PATH="$PATH:$HOME/.nodebrew/current/bin"
+  add_to_path_if_not_exists "$HOME/.nodebrew/current/bin"
 fi
-export PATH="$PATH:$XDG_DATA_HOME/npm/bin"
+add_to_path_if_not_exists "$XDG_DATA_HOME/npm/bin"
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 if dir_exists $HOME/.yarn; then
-  export PATH="$HOME/.yarn/bin:$PATH"
+  add_to_path_if_not_exists "$HOME/.yarn/bin"
 fi
 if dir_exists $HOME/.config/yarn; then
-  export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  add_to_path_if_not_exists "$HOME/.config/yarn/global/node_modules/.bin"
 fi
 
 if dir_exists $HOME/.cargo; then
-  export PATH="$HOME/.cargo/bin:$PATH"
+  add_to_path_if_not_exists "$HOME/.cargo/bin"
   source "$HOME/.cargo/env"
   . "$HOME/.cargo/env"
 fi
 if dir_exists $XDG_DATA_HOME/cargo; then
   CARGO_HOME="$XDG_DATA_HOME"/cargo
   export CARGO_HOME=$CARGO_HOME
-  export PATH="$CARGO_HOME/bin:$PATH"
+  add_to_path_if_not_exists "$CARGO_HOME/bin"
 fi
 if dir_exists $XDG_CACHE_HOME/fzf/bin; then
-  export PATH="$XDG_CACHE_HOME/fzf/bin:$PATH"
+  add_to_path_if_not_exists "$XDG_CACHE_HOME/fzf/bin"
 fi
 
 export LANG=ja_JP.UTF-8
@@ -112,7 +110,6 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
-export PATH=$(echo -n $PATH | tr : '\n' | awk '!a[$0]++' | xargs | tr ' ' :)
 export FZF_DEFAULT_OPTS="--reverse -m --color"
 # export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
