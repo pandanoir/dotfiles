@@ -70,6 +70,7 @@ return {
     config = function(_, opts)
       require 'which-key'.setup(opts)
       require 'which-key'.add {
+        { '<leader>t', group = 'toggle', },
         {
           'gf',
           function()

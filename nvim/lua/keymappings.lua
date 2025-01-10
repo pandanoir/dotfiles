@@ -5,8 +5,8 @@ keymap('n', 'J', 'gJ')
 keymap('n', '<CR>', ':<C-u>w<CR>')
 keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
 
-keymap('n', '<C-k><C-k>', ':set nohlsearch!<CR><Esc>')
-keymap('n', '<leader>W', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
+keymap('n', '<leader>th', ':set nohlsearch!<CR><Esc>', { desc = 'toggle search highlight' })
+keymap('n', '<leader>tw', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
 
 -- qで終了、Qでマクロ
 keymap('n', 'q', ':<C-u>q<CR>')
