@@ -5,7 +5,6 @@ return {
   opts = function()
     local dashboard = require 'alpha.themes.dashboard'
 
-
     vim.cmd [[command! EditTempFile lua EditTempFile()]]
     function EditTempFile()
       local handle = io.popen('date +%Y-%m-%d')
@@ -26,6 +25,7 @@ return {
       dashboard.button('h', ' ' .. ' Check health', '<cmd> checkhealth <cr>'),
       dashboard.button('q', ' ' .. ' Quit', '<cmd> qa <cr>'),
     }
+    dashboard.section.header.val = require 'ascii'.art.text.neovim.sharp
 
     local function footer()
       local total_plugins = #vim.tbl_keys(require 'lazy'.plugins())
@@ -37,5 +37,9 @@ return {
     dashboard.section.footer.val = footer()
 
     return dashboard.opts
-  end
+  end,
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    'MaximilianLloyd/ascii.nvim'
+  },
 }
