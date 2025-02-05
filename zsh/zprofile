@@ -24,28 +24,6 @@ export TMUX_AUTO_LAUNCH="true"
 export ZELLIJ_AUTO_ATTACH="true"
 export ZELLIJ_AUTO_EXIT="true"
 
-# Java ============================
-if dir_exists /usr/bin/javac; then
-  JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-  export JAVA_HOME
-  add_to_path_if_not_exists "${JAVA_HOME}/bin"
-fi
-if dir_exists /usr/bin/java; then
-  JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
-  export JAVA_HOME
-  add_to_path_if_not_exists "$JAVA_HOME"
-fi
-
-# go ============================
-GOPATH="$HOME/go"
-if dir_exists "$GOPATH"; then
-  export GOPATH
-  add_to_path_if_not_exists "$GOPATH/bin"
-fi
-
-# rust ============================
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-
 if command_exists nvim; then
   export MANPAGER="col -b -x | $(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh -c 'setf man'"
   export EDITOR=$(which nvim)
@@ -53,31 +31,14 @@ else
   export EDITOR=$(which vim)
 fi
 
-# cpp ============================
-export CPLUS_INCLUDE_PATH=/opt/local/include
-
-# deno ============================
+# javascript ============================
 export DENO_INSTALL="$HOME/.deno"
 add_to_path_if_not_exists "$DENO_INSTALL/bin"
 
-# node_modules ============================
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 add_to_path_if_not_exists /usr/local/share/npm/bin
 export LC_ALL=ja_JP.UTF-8
-
-if command_exists plenv; then
-  export PLENV_ROOT="$HOME/.plenv"
-  add_to_path_if_not_exists "${PLENV_ROOT}/shims"
-  eval "$(plenv init -)"
-fi
-
-RBENV_ROOT="$XDG_DATA_HOME/rbenv"
-if file_exists "$RBENV_ROOT/bin/rbenv"; then
-  export RBENV_ROOT
-  add_to_path_if_not_exists "$RBENV_ROOT/bin"
-  eval "$(rbenv init -)"
-fi
 
 VOLTA_HOME="$HOME/.volta"
 if dir_exists "$VOLTA_HOME"; then
@@ -102,6 +63,28 @@ if dir_exists $HOME/.config/yarn; then
   add_to_path_if_not_exists "$HOME/.config/yarn/global/node_modules/.bin"
 fi
 
+# java ============================
+if dir_exists /usr/bin/javac; then
+  JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+  export JAVA_HOME
+  add_to_path_if_not_exists "${JAVA_HOME}/bin"
+fi
+if dir_exists /usr/bin/java; then
+  JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
+  export JAVA_HOME
+  add_to_path_if_not_exists "$JAVA_HOME"
+fi
+
+# go ============================
+GOPATH="$HOME/go"
+if dir_exists "$GOPATH"; then
+  export GOPATH
+  add_to_path_if_not_exists "$GOPATH/bin"
+fi
+
+# rust ============================
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
 if dir_exists $HOME/.cargo; then
   add_to_path_if_not_exists "$HOME/.cargo/bin"
   source "$HOME/.cargo/env"
@@ -111,6 +94,24 @@ if dir_exists $XDG_DATA_HOME/cargo; then
   CARGO_HOME="$XDG_DATA_HOME"/cargo
   export CARGO_HOME=$CARGO_HOME
   add_to_path_if_not_exists "$CARGO_HOME/bin"
+fi
+
+# cpp ============================
+export CPLUS_INCLUDE_PATH=/opt/local/include
+
+# perl ============================
+if command_exists plenv; then
+  export PLENV_ROOT="$HOME/.plenv"
+  add_to_path_if_not_exists "${PLENV_ROOT}/shims"
+  eval "$(plenv init -)"
+fi
+
+# ruby ============================
+RBENV_ROOT="$XDG_DATA_HOME/rbenv"
+if file_exists "$RBENV_ROOT/bin/rbenv"; then
+  export RBENV_ROOT
+  add_to_path_if_not_exists "$RBENV_ROOT/bin"
+  eval "$(rbenv init -)"
 fi
 
 # fzf ============================
