@@ -2,22 +2,11 @@ source "$ZDOTDIR/utils.zsh"
 
 source "$ZDOTDIR/launch_multiplexer.zsh"
 
-# 補完
 source "$ZDOTDIR/init_completion.zsh"
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 source "$ZDOTDIR/set_prompt.zsh"
 source "$ZDOTDIR/set_options.zsh"
-
-setopt auto_cd
-function chpwd() {
-  if is_mac; then
-    ls -G
-  else
-    ls --color=auto
-  fi
-}
-
 source "$ZDOTDIR/zinit.zsh"
 
 # ローカルファイルの読み込み

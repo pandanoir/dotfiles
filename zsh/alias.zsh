@@ -131,11 +131,12 @@ else
   if is_mac; then
     alias ls='ls -G'
     alias ll='ls -l -G'
+    function chpwd() { ls -G }
   else
     alias ls='ls --color=always'
     alias ll='ls -l --color=always'
+    function chpwd() { ls --color=auto }
   fi
-  alias lg='exa --git-ignore'
 fi
 if command_exists bat; then alias cat='bat'; fi
 if command_exists ranger; then
