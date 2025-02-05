@@ -24,12 +24,12 @@ deploy() {
   done
 
   # zsh
-  for file in `ls -1 "$DOTDIR/zsh/" | grep '.zsh$'`; do
+  for file in `ls -1 "$DOTDIR/zsh/" | grep '.zsh$' | grep -v 'zshrc' | grep -v 'zprofile'`; do
     symlink "zsh/$file" "$ZDOTDIR/$file"
   done
-  symlink zsh/zshrc    "$ZDOTDIR/.zshrc"
-  symlink zsh/zprofile "$ZDOTDIR/.zprofile"
-  symlink zsh/zshenv   "$HOME/.zshenv"
+  symlink zsh/zshrc.zsh "$ZDOTDIR/.zshrc"
+  symlink zsh/zprofile.zsh "$ZDOTDIR/.zprofile"
+  symlink zsh/zshenv "$HOME/.zshenv"
 
   # zellij
   symlink zellij "$XDG_CONFIG_HOME/zellij"
