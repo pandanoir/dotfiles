@@ -145,4 +145,4 @@ export TMUX_AUTO_LAUNCH="true"
 export ZELLIJ_AUTO_ATTACH="true"
 export ZELLIJ_AUTO_EXIT="true"
 
-file_exists "$ZDOTDIR/.zprofile.local" && source "$ZDOTDIR/.zprofile.local"
+source_if_exists "$ZDOTDIR/.zprofile.local"

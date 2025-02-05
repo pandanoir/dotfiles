@@ -21,9 +21,9 @@ function chpwd() {
 source "$ZDOTDIR/zinit.zsh"
 
 # ローカルファイルの読み込み
-file_exists "$XDG_CACHE_HOME/fzf/shell/completion.zsh" && source "$XDG_CACHE_HOME/fzf/shell/completion.zsh"
-file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh"
-file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
+source_if_exists "$XDG_CACHE_HOME/fzf/shell/completion.zsh"
+source_if_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh"
+source_if_exists "$ZDOTDIR/.zshrc.local"
 
 if command_exists starship; then
   eval "$(starship init zsh)"

@@ -19,3 +19,6 @@ add_to_path_if_not_exists() {
         export PATH="$PATH:$dir"
     fi
 }
+source_if_exists() {
+  file_exists "$1" && source "$1"
+}
