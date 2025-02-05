@@ -1,28 +1,6 @@
 source "$ZDOTDIR/utils.zsh"
 
-if [[ "$MULTIPLEXERS" == "tmux" ]] &&
-  command_exists tmux &&
-  [ $(whoami) != 'root' ] &&
-  [[ "$TMUX_AUTO_LAUNCH" == "true" ]] &&
-  is_empty_string "$TMUX" &&
-  is_empty_string "$STY" &&
-  is_empty_string $IS_VSCODE &&
-  is_empty_string $GITHUB_ACTIONS; then
-  source "$ZDOTDIR/launch_tmux.zsh"
-  exit
-fi
-
-if [[ "$MULTIPLEXERS" == "zellij" ]] && command_exists zellij && [[ -z "$ZELLIJ" ]]; then
-  if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-    zellij attach -c main
-  else
-    zellij
-  fi
-
-  if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-    exit
-  fi
-fi
+source "$ZDOTDIR/launch_multiplexer.zsh"
 
 # emacsのtrampがタイムアウトするのに対応
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
