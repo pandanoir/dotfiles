@@ -1,4 +1,4 @@
-if [[ "$MULTIPLEXERS" == "tmux" ]] &&
+if [[ "$MULTIPLEXER" == "tmux" ]] &&
   command_exists tmux &&
   [ $(whoami) != "root" ] &&
   [[ "$TMUX_AUTO_LAUNCH" == "true" ]] &&
@@ -18,7 +18,7 @@ if [[ "$MULTIPLEXERS" == "tmux" ]] &&
   exit
 fi
 
-if [[ "$MULTIPLEXERS" == "zellij" ]] && command_exists zellij && [[ -z "$ZELLIJ" ]]; then
+if [[ "$MULTIPLEXER" == "zellij" ]] && command_exists zellij && [[ -z "$ZELLIJ" ]]; then
   if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
     zellij attach -c main
   else
