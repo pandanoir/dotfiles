@@ -1,7 +1,7 @@
 alias mv='mv -i'
 alias cp='cp -i'
 alias cdb='cd-bookmark'
-if has pbcopy; then
+if command_exists pbcopy; then
   alias copy="pbcopy"
 else
   alias copy='xsel --clipboard --input'

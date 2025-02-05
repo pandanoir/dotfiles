@@ -1,5 +1,4 @@
 source "$ZDOTDIR/utils.zsh"
-command_exists() { type "$1" >/dev/null 2>&1; }
 
 # emacsのtrampがタイムアウトするのに対応
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
@@ -80,7 +79,7 @@ file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_H
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
-if has tmux && [ $(whoami) != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMUX" && is_empty_string "$TMUX" && is_empty_string "$STY" && is_empty_string $IS_VSCODE && is_empty_string $GITHUB_ACTIONS; then
+if command_exists tmux && [ $(whoami) != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMUX" && is_empty_string "$TMUX" && is_empty_string "$STY" && is_empty_string $IS_VSCODE && is_empty_string $GITHUB_ACTIONS; then
   source "$ZDOTDIR/launch_tmux.zsh"
 fi
 
