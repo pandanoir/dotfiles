@@ -8,11 +8,23 @@ add_to_path_if_not_exists /bin
 add_to_path_if_not_exists /usr/sbin
 add_to_path_if_not_exists /sbin
 
+export LANG=ja_JP.UTF-8
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export CD_BOOKMARK_FILE="$XDG_DATA_HOME/zsh/cdbookmark"
 
-# Java
+export COMMANDLINE_EDITOR="vi -c 'setf shell'"
+export MULTIPLEXERS="tmux"
+export TMUX_AUTO_LAUNCH="true"
+export ZELLIJ_AUTO_ATTACH="true"
+export ZELLIJ_AUTO_EXIT="true"
+
+# Java ============================
 if dir_exists /usr/bin/javac; then
   JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
   export JAVA_HOME
@@ -24,14 +36,14 @@ if dir_exists /usr/bin/java; then
   add_to_path_if_not_exists "$JAVA_HOME"
 fi
 
-# go
+# go ============================
 GOPATH="$HOME/go"
 if dir_exists "$GOPATH"; then
   export GOPATH
   add_to_path_if_not_exists "$GOPATH/bin"
 fi
 
-# rust
+# rust ============================
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 if command_exists nvim; then
@@ -41,14 +53,14 @@ else
   export EDITOR=$(which vim)
 fi
 
-# cpp
+# cpp ============================
 export CPLUS_INCLUDE_PATH=/opt/local/include
 
-# deno
+# deno ============================
 export DENO_INSTALL="$HOME/.deno"
 add_to_path_if_not_exists "$DENO_INSTALL/bin"
 
-# node_modules
+# node_modules ============================
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 add_to_path_if_not_exists /usr/local/share/npm/bin
@@ -100,19 +112,15 @@ if dir_exists $XDG_DATA_HOME/cargo; then
   export CARGO_HOME=$CARGO_HOME
   add_to_path_if_not_exists "$CARGO_HOME/bin"
 fi
+
+# fzf ============================
 if dir_exists $XDG_CACHE_HOME/fzf/bin; then
   add_to_path_if_not_exists "$XDG_CACHE_HOME/fzf/bin"
 fi
 
-export LANG=ja_JP.UTF-8
-
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
 export FZF_DEFAULT_OPTS="--reverse -m --color"
-# export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS fg:#D8DEE9,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
+export FZF_COMPLETION_TRIGGER=",,"
 
 if command_exists rg; then
   if command_exists bat; then
@@ -128,7 +136,6 @@ elif command_exists ag; then
 else
   FZF_DEFAULT_COMMAND=
 fi
-export FZF_COMPLETION_TRIGGER=",,"
 
 if ! is_empty_string "$FZF_DEFAULT_COMMAND"; then
   FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND; (echo '$ZDOTDIR/.zshrc' ;echo '$ZDOTDIR/.zprofile')"
@@ -138,11 +145,5 @@ else
   unset FZF_DEFAULT_COMMAND
   unset FZF_CTRL_T_COMMAND
 fi
-
-export COMMANDLINE_EDITOR="vi -c 'setf shell'"
-export MULTIPLEXERS="tmux"
-export TMUX_AUTO_LAUNCH="true"
-export ZELLIJ_AUTO_ATTACH="true"
-export ZELLIJ_AUTO_EXIT="true"
 
 source_if_exists "$ZDOTDIR/.zprofile.local"
