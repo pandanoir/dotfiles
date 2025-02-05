@@ -2,18 +2,12 @@ source "$ZDOTDIR/utils.zsh"
 
 source "$ZDOTDIR/launch_multiplexer.zsh"
 
-# emacsのtrampがタイムアウトするのに対応
-[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
-
-bindkey -e
-
-autoload -U colors
-colors
-
+# 補完
+source "$ZDOTDIR/init_completion.zsh"
+source "$ZDOTDIR/alias.zsh"
+source "$ZDOTDIR/keybind.zsh"
 source "$ZDOTDIR/set_prompt.zsh"
-
-setopt no_beep  # ビープ音を消す
-setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
+source "$ZDOTDIR/set_options.zsh"
 
 setopt auto_cd
 function chpwd() {
@@ -24,27 +18,11 @@ function chpwd() {
   fi
 }
 
-# コマンド履歴関連
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt share_history
-SAVEHIST=100
-HISTFILE=$HOME/.zsh_history
-
-# 補完
-source "$ZDOTDIR/init_completion.zsh"
-
-if command_exists fasd; then
-  eval "$(fasd --init auto)"
-fi
-
 source "$ZDOTDIR/zinit.zsh"
 
 # ローカルファイルの読み込み
 file_exists "$XDG_CACHE_HOME/fzf/shell/completion.zsh" && source "$XDG_CACHE_HOME/fzf/shell/completion.zsh"
 file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh"
-source "$ZDOTDIR/alias.zsh"
-source "$ZDOTDIR/keybind.zsh"
 file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
 
 if command_exists starship; then
