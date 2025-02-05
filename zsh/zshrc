@@ -8,26 +8,7 @@ bindkey -e
 autoload -U colors
 colors
 
-git-prompt() {
-  local branchname
-  branchname=$(git symbolic-ref --short HEAD 2>/dev/null)
-  if [ -z $branchname ]; then
-    return
-  fi
-  echo "%{${fg[magenta]}%}${branchname}%{${reset_color}%}"
-}
-prompt-set() {
-  local user_host='%F{074}[%n@%m]'
-  local last_status='%F{red}$([[ $? -ne 0 && $? -ne 130 ]] && echo "[%?]")' # 異常終了のとき(Ctrl-cを除く)にステータスを表示する
-  PROMPT="$user_host$last_status%f# "
-  RPROMPT='`git-prompt`%F{048}[%~]%f'
-}
-prompt-reset() {
-  PROMPT="# "
-  RPROMPT=''
-}
-prompt-set
-setopt prompt_subst #表示毎にPROMPTで設定されている文字列を評価する
+source "$ZDOTDIR/set_prompt.zsh"
 
 setopt no_beep  # ビープ音を消す
 setopt globdots # 明確なドットの指定なしで.から始まるファイルをマッチ
@@ -49,23 +30,7 @@ SAVEHIST=100
 HISTFILE=$HOME/.zsh_history
 
 # 補完
-autoload -U compinit
-if compinit -C; then
-  zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-  zstyle ':completion:*:default' menu select=1
-  zstyle ':completion:*' menu select
-  zstyle ':completion:*' use-cache true
-  zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/cache
-  setopt auto_list
-  setopt IGNOREEOF
-  setopt auto_menu
-  _ssh() {
-    compadd $(grep '^Host ' ~/.ssh/config | awk '$0=$2' | sort)
-  }
-  compdef _ssh ssh
-fi
-# setopt menu_complete
+source "$ZDOTDIR/init_completion.zsh"
 
 if command_exists fasd; then
   eval "$(fasd --init auto)"
