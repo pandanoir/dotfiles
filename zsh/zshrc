@@ -1,5 +1,29 @@
 source "$ZDOTDIR/utils.zsh"
 
+if [[ "$MULTIPLEXERS" == "tmux" ]] &&
+  command_exists tmux &&
+  [ $(whoami) != 'root' ] &&
+  [[ "$TMUX_AUTO_LAUNCH" == "true" ]] &&
+  is_empty_string "$TMUX" &&
+  is_empty_string "$STY" &&
+  is_empty_string $IS_VSCODE &&
+  is_empty_string $GITHUB_ACTIONS; then
+  source "$ZDOTDIR/launch_tmux.zsh"
+  exit
+fi
+
+if [[ "$MULTIPLEXERS" == "zellij" ]] && command_exists zellij && [[ -z "$ZELLIJ" ]]; then
+  if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+    zellij attach -c main
+  else
+    zellij
+  fi
+
+  if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+    exit
+  fi
+fi
+
 # emacsのtrampがタイムアウトするのに対応
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
 
@@ -44,21 +68,7 @@ file_exists "$XDG_CACHE_HOME/fzf/shell/key-bindings.zsh" && source "$XDG_CACHE_H
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 file_exists "$ZDOTDIR/.zshrc.local" && source "$ZDOTDIR/.zshrc.local"
-if command_exists tmux && [ $(whoami) != 'root' ] && is_empty_string "$DISABLE_LAUNCHING_TMUX" && is_empty_string "$TMUX" && is_empty_string "$STY" && is_empty_string $IS_VSCODE && is_empty_string $GITHUB_ACTIONS; then
-  source "$ZDOTDIR/launch_tmux.zsh"
-fi
 
 if command_exists starship; then
   eval "$(starship init zsh)"
-fi
-if command_exists zellij && [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c
-    else
-        zellij
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
 fi
