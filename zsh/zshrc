@@ -3,7 +3,6 @@ source "$ZDOTDIR/utils.zsh"
 source "$ZDOTDIR/launch_multiplexer.zsh"
 
 source "$ZDOTDIR/set_options.zsh"
-source "$ZDOTDIR/set_prompt.zsh"
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/keybind.zsh"
 source "$ZDOTDIR/init_completion.zsh"
