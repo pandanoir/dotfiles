@@ -28,3 +28,7 @@ source_if_exists "$ZDOTDIR/.zshrc.local"
 if command_exists starship; then
   eval "$(starship init zsh)"
 fi
+
+if (which zprof >/dev/null 2>&1);then
+  zprof
+fi
