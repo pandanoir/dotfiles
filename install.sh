@@ -14,10 +14,10 @@ info() { echo -e "\033[0;34m[INFO]\033[0;39m $1"; }
 warn() { echo -e "\033[0;33m[WARN]\033[0;39m $1"; }
 
 DOTDIR="$HOME/dotfiles"
-[ "${XDG_CONFIG_HOME:+defined}" ] || XDG_CONFIG_HOME="$HOME/.config"
-[ "${XDG_CACHE_HOME:+defined}" ] || XDG_CACHE_HOME="$HOME/.cache"
-[ "${XDG_DATA_HOME:+defined}" ] || XDG_DATA_HOME="$HOME/.local/share"
-[ "${ZDOTDIR:+defined}" ] || ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+: "${XDG_CONFIG_HOME:="$HOME/.config"}"
+: "${XDG_CACHE_HOME:="$HOME/.cache"}"
+: "${XDG_DATA_HOME:="$HOME/.local/share"}"
+: "${ZDOTDIR:="$XDG_CONFIG_HOME/zsh"}"
 
 if ! has git; then
   warn "you must install git!"
