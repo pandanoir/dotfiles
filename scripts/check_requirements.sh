@@ -2,7 +2,7 @@ check_requirements() {
   info "check requirements..."
 
   local is_every_requirement_met=true
-  if ! has nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
+  if ! command_exists nvim && ! file_exists "$HOME/local/nvim/bin/nvim"; then
     warn "you must install neovim! please see installing-neovim : https://github.com/neovim/neovim/wiki/Installing-Neovim"
     is_every_requirement_met=false
   fi
@@ -18,7 +18,7 @@ check_requirements() {
     cd -
   fi
 
-  if ! has zsh; then
+  if ! command_exists zsh; then
     warn "zsh isn't installed"
     is_every_requirement_met=false
   else
@@ -33,7 +33,7 @@ check_requirements() {
     fi
   fi
 
-  if ! has tmux; then
+  if ! command_exists tmux; then
     warn "tmux isn't installed"
     is_every_requirement_met=false
   else

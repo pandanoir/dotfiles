@@ -44,7 +44,7 @@ deploy() {
   symlink starship.toml "$XDG_CONFIG_HOME/starship.toml"
   mkdir -p "$XDG_DATA_HOME/rustup"
 
-  if has ranger && ! dir_exists "$DOTDIR/ranger/plugins/ranger_devicons"; then
+  if command_exists ranger && ! dir_exists "$DOTDIR/ranger/plugins/ranger_devicons"; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons "$DOTDIR/ranger/plugins/ranger_devicons"
     cd "$DOTDIR/ranger/plugins/ranger_devicons"
     make install

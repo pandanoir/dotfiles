@@ -6,7 +6,7 @@
 set -eu
 
 ARG1="$([ $# -eq 1 ] && echo "$1" || echo "")"
-has() { type "$1" > /dev/null 2>&1; }
+command_exists() { type "$1" >/dev/null 2>&1; }
 file_exists() { [ -f $1 ]; }
 dir_exists() { [ -d $1 ]; }
 is_update_mode() { [ "$ARG1" = "update" ] || [ "$ARG1" = "-u" ]; }
@@ -19,7 +19,7 @@ DOTDIR="$HOME/dotfiles"
 : "${XDG_DATA_HOME:="$HOME/.local/share"}"
 : "${ZDOTDIR:="$XDG_CONFIG_HOME/zsh"}"
 
-if ! has git; then
+if ! command_exists git; then
   warn "you must install git!"
   exit 1
 fi
