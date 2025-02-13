@@ -1,5 +1,7 @@
-init() {
-  info "start init"
+source "$DOTDIR/scripts/utils.sh"
+
+init_config() {
+  info "start to initialize config"
   git config --global alias.s status
   git config --global alias.d diff
   git config --global alias.co checkout
@@ -17,6 +19,6 @@ init() {
     echo "you should exec hererocks '$XDG_DATA_HOME/nvim/lazy-rocks/hererocks' -l5.1 -rlatest"
   fi
 
-  info "finish init"
+  info "finish initializing config"
 }
 

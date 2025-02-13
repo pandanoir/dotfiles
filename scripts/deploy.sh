@@ -1,3 +1,5 @@
+source "$DOTDIR/scripts/utils.sh"
+
 symlink() {
   # すでにシンボリックリンクが存在する場合は作成しない
   if [ -e "$2" ]; then
@@ -12,7 +14,7 @@ symlink() {
 }
 
 deploy() {
-  info "start deploy"
+  info "start to deploy"
 
   # vim/neovim
   mkdir -p "$XDG_CACHE_HOME/vim"
@@ -49,6 +51,6 @@ deploy() {
     cd "$DOTDIR/ranger/plugins/ranger_devicons"
     make install
   fi
-  info "finish deploy"
+  info "finish deploying"
 }
 

@@ -1,3 +1,5 @@
+source "$DOTDIR/scripts/utils.sh"
+
 check_requirements() {
   info "check requirements..."
 
