@@ -39,7 +39,6 @@ return {
     return dashboard.opts
   end,
   dependencies = {
-    'MunifTanjim/nui.nvim',
     'MaximilianLloyd/ascii.nvim'
   },
 }
