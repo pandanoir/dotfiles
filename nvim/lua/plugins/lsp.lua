@@ -6,6 +6,10 @@ return {
       local mason = require 'mason'
       local mason_lspconfig = require 'mason-lspconfig'
 
+      -- カーソル行のdiagnosticだけ表示する
+      vim.diagnostic.config({
+        virtual_text = { current_line = true }
+      })
       local map = vim.keymap.set
       map('n', '<leader>e', vim.diagnostic.open_float,
         { silent = true, desc = 'show diagnostics in a floating window' })
