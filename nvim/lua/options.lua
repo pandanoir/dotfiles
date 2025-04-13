@@ -21,6 +21,11 @@ vim.opt.writebackup = false
 -- エラー時のビープ音をミュート
 vim.opt.visualbell = true
 
+-- カーソル行のdiagnosticだけ表示する
+vim.diagnostic.config({
+  virtual_text = { current_line = true }
+})
+
 require 'easy-setup-autocmd'.setup_autocmd {
   ['BufEnter,FileType'] = {
     pattern = '*',

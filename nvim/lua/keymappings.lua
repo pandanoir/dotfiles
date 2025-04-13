@@ -8,6 +8,8 @@ keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
 keymap('n', '<leader>th', ':set nohlsearch!<CR><Esc>', { desc = 'toggle search highlight' })
 keymap('n', '<leader>tw', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
 
+keymap('n', '<leader>e', vim.diagnostic.open_float, { silent = true, desc = 'show diagnostics in a floating window' })
+
 -- qで終了、Qでマクロ
 keymap('n', 'q', ':<C-u>q<CR>')
 keymap('n', 'Q', 'q')
@@ -59,24 +61,34 @@ vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(
 keymap('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
 
 -- todoリストを簡単に入力する
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'MyAutoCmd',
-  pattern = 'markdown',
-  callback = function()
-    vim.cmd 'iabbrev <buffer> tl - [ ]'
+require 'easy-setup-autocmd'.setup_autocmd {
+  ['FileType'] = {
+    pattern = 'markdown',
+    callback = function()
+      vim.cmd 'iabbrev <buffer> tl - [ ]'
 
-    local function ToggleCheckbox()
-      local line = vim.api.nvim_get_current_line()
-      if string.match(line, '%-%s%[%s%]') then
-        local result = string.gsub(line, '%-%s%[%s%]', '- [x]')
-        vim.api.nvim_set_current_line(result)
-      elseif string.match(line, '%-%s%[x%]') then
-        local result = string.gsub(line, '%-%s%[x%]', '- [ ]')
-        vim.api.nvim_set_current_line(result)
+      local function ToggleCheckbox()
+        local line = vim.api.nvim_get_current_line()
+        if string.match(line, '%-%s%[%s%]') then
+          local result = string.gsub(line, '%-%s%[%s%]', '- [x]')
+          vim.api.nvim_set_current_line(result)
+        elseif string.match(line, '%-%s%[x%]') then
+          local result = string.gsub(line, '%-%s%[x%]', '- [ ]')
+          vim.api.nvim_set_current_line(result)
+        end
       end
-    end
 
-    vim.keymap.set('n', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
-    vim.keymap.set('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
-  end
-})
+      keymap('n', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+      keymap('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+    end
+  },
+  ['LspAttach'] = {
+    callback = function(ev)
+      local opt = function(desc)
+        return { silent = true, buffer = ev.buf, desc = desc }
+      end
+      keymap('n', 'gD', vim.lsp.buf.declaration, opt())
+      keymap('n', 'gt', vim.lsp.buf.type_definition, opt('type definition'))
+    end
+  }
+}
