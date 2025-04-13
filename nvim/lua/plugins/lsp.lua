@@ -13,6 +13,11 @@ local ensure_installed = {
 return {
   -- language serverのインストールと設定を行う
   {
+    'williamboman/mason.nvim',
+    config = true,
+    build = ':MasonUpdate',
+  },
+  {
     'williamboman/mason-lspconfig.nvim',
     opts = {
       automatic_installation = true,
@@ -49,14 +54,11 @@ return {
       vim.lsp.enable(ensure_installed)
     end,
     dependencies = {
-      {
-        'williamboman/mason.nvim',
-        config = true,
-        build = ':MasonUpdate',
-      },
+      'williamboman/mason.nvim',
       'neovim/nvim-lspconfig',
     }
   },
+
   {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
