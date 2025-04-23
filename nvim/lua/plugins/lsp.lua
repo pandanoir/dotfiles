@@ -1,15 +1,3 @@
-local ensure_installed = {
-  'denols',
-  'eslint',
-  'html',
-  'jsonls',
-  'lua_ls',
-  'rust_analyzer',
-  'ts_ls',
-  'vimls',
-  'volar',
-}
-
 return {
   -- language serverのインストールと設定を行う
   {
@@ -21,37 +9,20 @@ return {
     'williamboman/mason-lspconfig.nvim',
     opts = {
       automatic_installation = true,
-      ensure_installed = ensure_installed,
+      ensure_installed = {
+        'denols',
+        'eslint',
+        'html',
+        'jsonls',
+        'lua_ls',
+        'rust_analyzer',
+        'ts_ls',
+        'vimls',
+        'volar',
+      },
     },
     init = function()
-      vim.lsp.config('ts_ls', {
-        on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end
-      })
-
-      -- typescript-language-serverとdeno-lspの競合を回避する
-      local nvim_lsp = require 'lspconfig'
-      local is_node_dir = function()
-        return nvim_lsp.util.root_pattern('package.json')(vim.fn.getcwd())
-      end
-      vim.lsp.config('ts_ls', {
-        on_attach = function(client)
-          if not is_node_dir() then
-            client.stop(true)
-          end
-        end
-      })
-      vim.lsp.config('denols', {
-        on_attach = function(client)
-          if is_node_dir() then
-            client.stop(true)
-          end
-        end
-      })
-
-      vim.lsp.enable(ensure_installed)
+      vim.lsp.enable(require 'mason-lspconfig'.get_installed_servers())
     end,
     dependencies = {
       'williamboman/mason.nvim',
