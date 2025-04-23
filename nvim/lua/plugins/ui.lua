@@ -239,7 +239,7 @@ return {
   {
     'unblevable/quick-scope',
     init = function()
-      vim.keymap.set('n', '<leader>tq', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
+      vim.keymap.set('n', '<leader><tab>q', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
     end,
   },
 }

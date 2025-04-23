@@ -5,8 +5,8 @@ keymap('n', 'J', 'gJ')
 keymap('n', '<CR>', ':<C-u>w<CR>')
 keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
 
-keymap('n', '<leader>th', ':set nohlsearch!<CR><Esc>', { desc = 'toggle search highlight' })
-keymap('n', '<leader>tw', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
+keymap('n', '<leader><tab>h', ':set nohlsearch!<CR><Esc>', { desc = 'toggle search highlight' })
+keymap('n', '<leader><tab>w', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
 
 keymap('n', '<leader>e', vim.diagnostic.open_float, { silent = true, desc = 'show diagnostics in a floating window' })
 

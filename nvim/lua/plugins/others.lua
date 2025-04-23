@@ -24,7 +24,7 @@ return {
     config = function(_, opts)
       require 'which-key'.setup(opts)
       require 'which-key'.add {
-        { '<leader>t', group = 'toggle', },
+        { '<leader><tab>', group = 'toggle', },
         {
           'gf',
           function()
