@@ -20,6 +20,7 @@ reitou() {
   fi
 }
 alias kaitou='tar -xvf'
+alias sourcez="source $ZDOTDIR/.zprofile; source $ZDOTDIR/.zshrc"
 
 alias ts-node-esm='TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\"}" npx ts-node'
 
