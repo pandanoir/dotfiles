@@ -28,3 +28,16 @@ debug() {
 
     echo -e "${YELLOW}[DEBUG]${RESET} $1"
 }
+notify() {
+  blue="\033[34m"
+  reset="\033[0m"
+  echo -ne "\033[1K\r${blue}[INFO]${reset} $1"
+}
+source_notify() {
+  notify "loading $1..."
+  source "$1"
+}
+source_notify_if_exists() {
+  notify "loading $1..."
+  source_if_exists "$1"
+}
