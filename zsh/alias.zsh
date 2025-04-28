@@ -12,11 +12,11 @@ if command_exists nvim; then
 fi
 
 reitou() {
-  if [ "$#" -eq 0 ] || [ "$1" = "--help" ]; then
-    echo "Usage: reitou [tarファイル名] [対象ディレクトリ/ファイル]"
-    echo "Example: reitou archive.tar.gz /path/to/directory"
+  if [ "$#" -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: reitou [対象ディレクトリ/ファイル] [tarファイル名]"
+    echo "Example: reitou /path/to/directory archive.tar.gz"
   else
-    tar -zcvf "$@"
+    tar -zcvf "$2" "$1"
   fi
 }
 alias kaitou='tar -xvf'
