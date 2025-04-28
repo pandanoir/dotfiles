@@ -1,7 +1,7 @@
 # zinit
 # mkdir -p "$ZDOTDIR/.zinit/completions"
 
-declare -A ZINIT
+declare -A -g ZINIT
 ZINIT[BIN_DIR]="$XDG_CACHE_HOME/zinit/bin"
 ZINIT[HOME_DIR]="$XDG_CACHE_HOME/zinit"
 ZINIT[PLUGINS_DIR]="$ZDOTDIR/.zinit/plugins"
