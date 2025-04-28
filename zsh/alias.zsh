@@ -11,7 +11,14 @@ if command_exists nvim; then
   alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh"
 fi
 
-alias reitou='tar -zcvf'
+reitou() {
+  if [ "$#" -eq 0 ] || [ "$1" = "--help" ]; then
+    echo "Usage: reitou [tarファイル名] [対象ディレクトリ/ファイル]"
+    echo "Example: reitou archive.tar.gz /path/to/directory"
+  else
+    tar -zcvf "$@"
+  fi
+}
 alias kaitou='tar -xvf'
 
 alias ts-node-esm='TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\"}" npx ts-node'
