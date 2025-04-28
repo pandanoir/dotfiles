@@ -25,6 +25,7 @@ export ZELLIJ_AUTO_ATTACH="true"
 export ZELLIJ_AUTO_EXIT="true"
 
 if command_exists nvim; then
+  notify "setup nvim..."
   export MANPAGER="col -b -x | $(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh -c 'setf man'"
   export EDITOR=$(which nvim)
 else
@@ -32,10 +33,12 @@ else
 fi
 
 if file_exists /opt/homebrew/bin/brew; then
+  notify "setup brew..."
   eval "$(/opt/homebrew/bin/brew shellenv)" # homebrew関連の環境変数をセット
 fi
 
 # javascript ============================
+notify "setup javascript..."
 export DENO_INSTALL="$HOME/.deno"
 add_to_path_if_not_exists "$DENO_INSTALL/bin"
 
@@ -68,6 +71,7 @@ if dir_exists $HOME/.config/yarn; then
 fi
 
 # java ============================
+notify "setup java..."
 if dir_exists /usr/bin/javac; then
   JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
   export JAVA_HOME
@@ -80,6 +84,7 @@ if dir_exists /usr/bin/java; then
 fi
 
 # go ============================
+notify "setup go..."
 GOPATH="$HOME/go"
 if dir_exists "$GOPATH"; then
   export GOPATH
@@ -87,6 +92,7 @@ if dir_exists "$GOPATH"; then
 fi
 
 # rust ============================
+notify "setup rust..."
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 
 if dir_exists $HOME/.cargo; then
@@ -111,6 +117,7 @@ if command_exists plenv; then
 fi
 
 # ruby ============================
+notify "setup ruby..."
 RBENV_ROOT="$XDG_DATA_HOME/rbenv"
 if file_exists "$RBENV_ROOT/bin/rbenv"; then
   export RBENV_ROOT
@@ -119,6 +126,7 @@ if file_exists "$RBENV_ROOT/bin/rbenv"; then
 fi
 
 # fzf ============================
+notify "setup fzf..."
 if dir_exists $XDG_CACHE_HOME/fzf/bin; then
   add_to_path_if_not_exists "$XDG_CACHE_HOME/fzf/bin"
 fi
@@ -152,3 +160,4 @@ else
 fi
 
 source_if_exists "$ZDOTDIR/.zprofile.local"
+notify "loaded zprofile"; echo
