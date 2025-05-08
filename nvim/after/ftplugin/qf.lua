@@ -17,3 +17,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
     vim.cmd('q')
   end,
 })
+
+-- Quickfixウィンドウでは<CR>をデフォルトの挙動に戻す
+vim.keymap.set('n', '<CR>', '<CR>', { buffer = true })
