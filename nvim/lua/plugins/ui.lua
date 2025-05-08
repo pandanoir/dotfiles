@@ -242,4 +242,11 @@ return {
       vim.keymap.set('n', '<leader><tab>q', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
     end,
   },
+  {
+    'stevearc/quicker.nvim',
+    ft = 'qf',
+    ---@module 'quicker'
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
 }
