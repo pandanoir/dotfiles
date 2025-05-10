@@ -40,6 +40,9 @@ return {
           quit = { 'q', '<ESC>' },
         },
       },
+      symbol_in_winbar = {
+        enable = false
+      },
     },
     init = function()
       require 'easy-setup-autocmd'.setup_autocmd {
