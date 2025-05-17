@@ -124,15 +124,6 @@ return {
     end,
   },
   {
-    'navarasu/onedark.nvim',
-    init = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-    opts = {
-      style = 'cool'
-    },
-  },
-  {
     'j-hui/fidget.nvim',
     event = 'BufRead',
     cond = not is_readonly,
