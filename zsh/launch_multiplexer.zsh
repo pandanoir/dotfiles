@@ -1,11 +1,15 @@
-if [[ "$MULTIPLEXER" == "tmux" ]] &&
-  command_exists tmux &&
+is_terminal_app() {
   [ $(whoami) != "root" ] &&
-  [[ "$TMUX_AUTO_LAUNCH" == "true" ]] &&
-  is_empty_string "$TMUX" &&
+  [[ "$TERM_PROGRAM" == "WezTerm" ]] &&
   is_empty_string "$STY" &&
-  is_empty_string $IS_VSCODE &&
-  is_empty_string $GITHUB_ACTIONS; then
+  is_empty_string $GITHUB_ACTIONS
+}
+
+if is_terminal_app &&
+  [[ "$MULTIPLEXER" == "tmux" ]] &&
+  command_exists tmux &&
+  is_empty_string "$TMUX" &&
+  [[ "$TMUX_AUTO_LAUNCH" == "true" ]]; then
   # アタッチされていないセッションがあったらアタッチする
   if ! is_empty_string "$(tmux list-sessions | grep -v popup | grep -v '(attached)')"; then
     exec tmux attach
@@ -18,7 +22,10 @@ if [[ "$MULTIPLEXER" == "tmux" ]] &&
   exit
 fi
 
-if [[ "$MULTIPLEXER" == "zellij" ]] && command_exists zellij && [[ -z "$ZELLIJ" ]]; then
+if is_terminal_app &&
+  [[ "$MULTIPLEXER" == "zellij" ]] &&
+  command_exists zellij &&
+  is_empty_string "$ZELLIJ"; then
   if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
     zellij attach -c main
   else
