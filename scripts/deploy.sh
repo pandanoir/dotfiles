@@ -37,7 +37,7 @@ deploy() {
   symlink zellij "$XDG_CONFIG_HOME/zellij"
 
   # other
-  symlink tmux.conf "$XDG_CONFIG_HOME/tmux/tmux.conf"
+  symlink tmux/tmux.conf "$XDG_CONFIG_HOME/tmux/tmux.conf"
   mkdir -p {$XDG_CACHE_HOME,$XDG_DATA_HOME}"/npm"
   symlink npmrc     "$XDG_CONFIG_HOME/npm/npmrc"
   symlink inputrc   "$XDG_CONFIG_HOME/readline/inputrc"
