@@ -24,6 +24,8 @@ export TMUX_AUTO_LAUNCH="true"
 export ZELLIJ_AUTO_ATTACH="true"
 export ZELLIJ_AUTO_EXIT="true"
 
+export DOTDIR="$HOME/dotfiles"
+
 if command_exists nvim; then
   notify "setup nvim..."
   export MANPAGER="col -b -x | $(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh -c 'setf man'"
