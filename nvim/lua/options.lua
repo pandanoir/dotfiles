@@ -26,6 +26,14 @@ vim.diagnostic.config({
   virtual_text = { current_line = true }
 })
 
+vim.g.markdown_recommended_style = 0 -- デフォルトだとshiftwidth=4などが設定されるので無効にする
+
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.cmd [[filetype plugin on]]
+
 require 'easy-setup-autocmd'.setup_autocmd {
   ['BufEnter,FileType'] = {
     pattern = '*',
