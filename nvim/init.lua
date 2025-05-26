@@ -5,7 +5,6 @@ require 'options'
 require 'disable-providers'
 require 'keymappings'
 require 'setup-lazynvim'
-require 'userautoload.filetype'
 
 vim.cmd.colorscheme 'onedark'
 
