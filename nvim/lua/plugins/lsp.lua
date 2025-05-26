@@ -18,7 +18,7 @@ return {
         'rust_analyzer',
         'ts_ls',
         'vimls',
-        'volar',
+        'vue_ls',
       },
     },
     init = function()
