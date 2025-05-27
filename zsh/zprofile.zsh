@@ -133,8 +133,20 @@ if dir_exists $XDG_CACHE_HOME/fzf/bin; then
   add_to_path_if_not_exists "$XDG_CACHE_HOME/fzf/bin"
 fi
 
-export FZF_DEFAULT_OPTS="--reverse -m --color"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#1e2132,spinner:#84a0c6,hl:#6b7089,fg:#c6c8d1,header:#6b7089,info:#b4be82,pointer:#84a0c6,marker:#84a0c6,fg+:#c6c8d1,prompt:#84a0c6,hl+:#84a0c6"
+# fzfをtmux popupで開く (https://zenn.dev/eetann/articles/2022-03-19-fzf-tmux-popup)
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 80%"
+
+export FZF_DEFAULT_OPTS="--reverse -m --color='
+  bg+:#1e2132 fg:#c6c8d1 fg+:#c6c8d1
+  header:#6b7089
+  hl:#6b7089 hl+:#84a0c6
+  info:#b4be82
+  marker:#84a0c6
+  pointer:#84a0c6
+  prompt:#84a0c6
+  spinner:#84a0c6
+'"
 export FZF_COMPLETION_TRIGGER=",,"
 
 if command_exists rg; then
