@@ -76,7 +76,7 @@ fbr() {
 }
 __fsel3() {
   local item
-  git branch | fzf +s +m -e --ansi --reverse --height 40% | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
+  git branch | $(__fzfcmd) +s +m -e --ansi --reverse --height 40% | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
     echo -n "${(q)item} "
   done
   local ret=$?
