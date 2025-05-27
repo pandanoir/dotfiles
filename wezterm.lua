@@ -15,4 +15,6 @@ config.keys = {
 config.initial_rows = 60
 config.initial_cols = 160
 
+config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+
 return config
