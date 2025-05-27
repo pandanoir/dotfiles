@@ -17,6 +17,7 @@ check_requirements() {
     info "update fzf"
     cd "$XDG_CACHE_HOME/fzf"
     git pull
+    bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
     cd -
   fi
 
