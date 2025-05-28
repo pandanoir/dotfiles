@@ -44,6 +44,7 @@ gfo() {
   git fetch origin $1:$1
 }
 alias gc='git commit'
+alias gcam='git commit --amend'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 alias gb='git branch'
