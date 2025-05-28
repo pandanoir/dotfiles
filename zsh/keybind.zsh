@@ -42,7 +42,7 @@ __fsel2() {
   local item
 
   git status --short --untracked-files |
-    $(__fzfcmd) +s +m -e --multi --ansi --reverse --height 40% --preview='git diff --color $('"echo {} | awk '{print substr(\$0,4)}') | tail -n +5" |
+    $(__fzfcmd) +s +m -e --multi --ansi --reverse --preview='git diff --color $('"echo {} | awk '{print substr(\$0,4)}') | tail -n +5" |
     awk '{print substr($0,4)}' |
     while read item; do
       echo -n "${(q)item} "
@@ -59,3 +59,23 @@ fzf-git-edited-widget() {
 }
 zle -N fzf-git-edited-widget
 bindkey '^X^W' fzf-git-edited-widget
+
+__fsel3() {
+  local item
+  git branch | $(__fzfcmd) +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+fzf-branch-widget() {
+  LBUFFER="${LBUFFER}$(__fsel3)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle -N fzf-branch-widget
+bindkey -M emacs '^S' fzf-branch-widget
+bindkey -M vicmd '^S' fzf-branch-widget
+bindkey -M viins '^S' fzf-branch-widget
