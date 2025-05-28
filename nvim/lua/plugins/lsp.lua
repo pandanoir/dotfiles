@@ -1,14 +1,8 @@
 return {
   -- language serverのインストールと設定を行う
   {
-    'williamboman/mason.nvim',
-    config = true,
-    build = ':MasonUpdate',
-  },
-  {
     'williamboman/mason-lspconfig.nvim',
     opts = {
-      automatic_installation = true,
       ensure_installed = {
         'denols',
         'eslint',
@@ -21,11 +15,8 @@ return {
         'vue_ls',
       },
     },
-    init = function()
-      vim.lsp.enable(require 'mason-lspconfig'.get_installed_servers())
-    end,
     dependencies = {
-      'williamboman/mason.nvim',
+      { 'williamboman/mason.nvim', opts = {} },
       'neovim/nvim-lspconfig',
     }
   },
