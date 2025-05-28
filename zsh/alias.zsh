@@ -46,12 +46,10 @@ gfo() {
 alias gc='git commit'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
-alias gsw='git switch'
 alias gb='git branch'
 alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 alias gsw='git switch'
-alias gswm='git switch master'
 alias gre='git restore'
 alias git-soft-reset="git reset --soft HEAD^"
 alias git-hard-reset="git reset --hard HEAD^"
