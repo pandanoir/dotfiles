@@ -8,7 +8,7 @@ else
 fi
 alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 if command_exists nvim; then
-  alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/macros/less.sh"
+  alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/scripts/less.sh"
 fi
 
 reitou() {
