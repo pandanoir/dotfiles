@@ -61,11 +61,30 @@ return {
       }
     }
   end,
-  opts = {
-    defaults = {
-      mappings = {
-        n = { q = 'close' },
-      },
-    },
-  },
+  config = function()
+    local actions = require('telescope.actions')
+    local function repeat_action(action, times)
+      return function(...)
+        for _ = 1, times do
+          action(...)
+        end
+      end
+    end
+
+    require 'telescope'.setup {
+      defaults = {
+        mappings = {
+          n = {
+            q = 'close',
+            ['<C-u>'] = repeat_action(actions.move_selection_previous, 8),
+            ['<C-d>'] = repeat_action(actions.move_selection_next, 8),
+          },
+          i = {
+            ['<C-u>'] = repeat_action(actions.move_selection_previous, 8),
+            ['<C-d>'] = repeat_action(actions.move_selection_next, 8),
+          }
+        },
+      }
+    }
+  end
 }
