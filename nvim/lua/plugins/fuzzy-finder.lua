@@ -13,10 +13,22 @@ return {
         function() require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') } end,
         desc = 'Grep with current word'
       },
-      { '<leader>fb', '<cmd>Telescope buffers<cr>',    desc = 'Buffers' },
-      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find File' },
-      { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Grep' },
-      { '<leader>fr', '<cmd>Telescope oldfiles<cr>',   desc = 'Old files' },
+      { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
+      {
+        '<leader>ff',
+        function()
+          local telescope = require 'telescope.builtin'
+          local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+          if git_root and git_root ~= '' then
+            telescope.find_files({ cwd = git_root })
+          else
+            telescope.find_files()
+          end
+        end,
+        desc = 'Find files at git root'
+      },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Grep' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>',  desc = 'Old files' },
     }
 
     -- add backdrop
