@@ -5,6 +5,6 @@ require 'options'
 require 'disable-providers'
 require 'keymappings'
 require 'setup-lazynvim'
+require 'use-extui'
 
 vim.cmd.colorscheme 'onedark'
-
