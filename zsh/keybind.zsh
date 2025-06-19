@@ -79,3 +79,12 @@ zle -N fzf-branch-widget
 bindkey -M emacs '^S' fzf-branch-widget
 bindkey -M vicmd '^S' fzf-branch-widget
 bindkey -M viins '^S' fzf-branch-widget
+
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+  fi
+  zle self-insert
+}
+zle -N globalias
+bindkey " " globalias

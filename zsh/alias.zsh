@@ -79,15 +79,6 @@ fbr() {
   git branch | fzf +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //'
 }
 
-globalias() {
-  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
-    zle _expand_alias
-  fi
-  zle self-insert
-}
-zle -N globalias
-bindkey " " globalias
-
 # start development server
 function s() {
   if command_exists jq && jq '.scripts|keys[]' -r <package.json | grep dev$; then
@@ -114,11 +105,6 @@ if command_exists eza; then
   alias ll='eza --group-directories-first --icons=always -algh --git'
   alias lg='eza --group-directories-first --icons=always --git-ignore'
   function chpwd() { eza --group-directories-first --icons=always }
-elif command_exists exa; then
-  alias ls='exa --group-directories-first'
-  alias ll='exa --group-directories-first -algh --git'
-  alias lg='exa --group-directories-first --git-ignore'
-  function chpwd() { exa --group-directories-first }
 else
   if is_mac; then
     alias ls='ls -G'
