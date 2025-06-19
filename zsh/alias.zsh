@@ -21,36 +21,44 @@ alias sourcez="source $ZDOTDIR/.zprofile; source $ZDOTDIR/.zshrc"
 
 alias ts-node-esm='TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\"}" npx ts-node'
 
+# Git 基本操作
 alias g='git'
-alias ga='git add'
-alias gbr='git branch'
+alias gs='git status'
 alias gd='git diff'
 alias gdw='git diff -w'
 alias gdc='git diff --cached'
 alias gdcw='git diff --cached -w'
-alias gs='git status'
-alias gsp='git status --porcelain'
+alias gl='git log --graph --oneline --abbrev-commit'
+alias gtr='git log --color=always --graph --abbrev-commit --oneline'
+
+# ブランチ操作
+alias gbr='git branch'
+alias gco='git checkout'
+alias gsw='git switch'
+alias gfw='git fetch && git switch'
+fbr() {
+  git branch | fzf +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //'
+}
+
+# コミット関連
+alias ga='git add'
+alias gc='git commit'
+alias gcam='git commit --amend'
+alias gcp='git cherry-pick'
+alias git-soft-reset='git reset --soft HEAD^'
+alias git-hard-reset='git reset --hard HEAD^'
+
+# リモート操作
 alias gp='git push'
 alias gpo='git push origin HEAD -u'
 alias gpl='git pull'
 alias gf='git fetch'
-alias gfs='git fetch && git switch'
-alias gfsw='git fetch && git switch'
-alias gfw='git fetch && git switch'
 gfo() {
-  git fetch origin $1:$1
+  git fetch origin "$1:$1"
 }
-alias gc='git commit'
-alias gcam='git commit --amend'
-alias gco='git checkout'
-alias gcp='git cherry-pick'
-alias gb='git branch'
-alias gl='git log --graph --oneline --abbrev-commit'
-alias gtr='git log --color=always --graph --abbrev-commit --oneline'
-alias gsw='git switch'
+
+# Git その他操作
 alias gre='git restore'
-alias git-soft-reset='git reset --soft HEAD^'
-alias git-hard-reset='git reset --hard HEAD^'
 gro() {
   git rebase origin/$(git symbolic-ref --short HEAD)
 }
