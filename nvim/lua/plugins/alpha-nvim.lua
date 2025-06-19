@@ -16,10 +16,12 @@ return {
 
     local function footer()
       local total_plugins = #vim.tbl_keys(require 'lazy'.plugins())
-      local datetime = os.date(' %Y-%m-%d   %H:%M:%S')
       local version = vim.version()
-      local version_info = '   v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
-      return datetime .. '  ⚡' .. total_plugins .. ' plugins' .. version_info
+      local version_info = version.major .. '.' .. version.minor .. '.' .. version.patch
+      if version.prerelease and #version.prerelease > 0 then
+        version_info = version_info .. "-" .. version.prerelease
+      end
+      return '⚡' .. total_plugins .. ' plugins   v' .. version_info
     end
     dashboard.section.footer.val = footer()
 
