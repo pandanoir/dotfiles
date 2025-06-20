@@ -58,7 +58,7 @@ fzf-git-edited-widget() {
   return $ret
 }
 zle -N fzf-git-edited-widget
-bindkey '^X^W' fzf-git-edited-widget
+bindkey '^G' fzf-git-edited-widget
 
 __fsel3() {
   local item
@@ -79,6 +79,8 @@ zle -N fzf-branch-widget
 bindkey -M emacs '^S' fzf-branch-widget
 bindkey -M vicmd '^S' fzf-branch-widget
 bindkey -M viins '^S' fzf-branch-widget
+# フロー制御を無効化して ^S を使えるようにする
+stty -ixon
 
 globalias() {
   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
