@@ -98,6 +98,8 @@ if command_exists nvim; then
   alias vi="\\vim"
   alias vim='nvim'
   alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/scripts/less.sh"
+  alias memo='NVIM_APPNAME=nvim-memo nvim'
+  alias mo='memo'
 fi
 
 if command_exists eza; then
