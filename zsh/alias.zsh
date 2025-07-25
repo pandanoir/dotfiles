@@ -93,6 +93,7 @@ alias -g C='| copy'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g SU='| sort -u'
+alias -g V='| xargs vim'
 
 if command_exists nvim; then
   alias vi="\\vim"
@@ -100,6 +101,7 @@ if command_exists nvim; then
   alias less="$(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/scripts/less.sh"
   alias memo='NVIM_APPNAME=nvim-memo nvim'
   alias mo='memo'
+  alias -g V='| xargs nvim'
 fi
 
 if command_exists eza; then
