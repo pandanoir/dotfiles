@@ -29,9 +29,9 @@ export DOTDIR="$HOME/dotfiles"
 if command_exists nvim; then
   notify "setup nvim..."
   export MANPAGER="col -b -x | $(nvim --headless +'echo $VIMRUNTIME' +q 2>&1)/scripts/less.sh -c 'setf man'"
-  export EDITOR=$(which nvim)
+  export EDITOR="nvim"
 else
-  export EDITOR=$(which vim)
+  export EDITOR="vim"
 fi
 
 if file_exists /opt/homebrew/bin/brew; then
