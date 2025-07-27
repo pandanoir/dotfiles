@@ -93,7 +93,7 @@ alias -g C='| copy'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g SU='| sort -u'
-alias -g V='| xargs vim'
+alias -g E="| xargs $EDITOR"
 
 if command_exists nvim; then
   alias vi="\\vim"
