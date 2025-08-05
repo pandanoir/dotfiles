@@ -96,6 +96,7 @@ return {
             ['<C-d>'] = repeat_action(actions.move_selection_next, 8),
           }
         },
+        path_display = { 'filename_first' },
       }
     }
   end
