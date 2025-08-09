@@ -14,8 +14,7 @@ keymap('n', '<leader>e', vim.diagnostic.open_float, { silent = true, desc = 'sho
 keymap('n', 'q', ':<C-u>q<CR>')
 keymap('n', 'Q', 'q')
 
-keymap('n', 'gy', '"+y')
-keymap('n', '<leader>d', '"_d', { desc = 'delete without saving it in a register' })
+keymap('n', '-', '"_')
 
 -- クリップボードへコピー
 keymap('n', '<leader>y', '"+y', { desc = 'copy to clipboard' })
