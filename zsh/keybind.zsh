@@ -36,7 +36,6 @@ fancy-ctrl-z() {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-bindkey '^W' fzf-file-widget
 
 __fsel2() {
   local item
@@ -81,6 +80,32 @@ bindkey -M vicmd '^S' fzf-branch-widget
 bindkey -M viins '^S' fzf-branch-widget
 # フロー制御を無効化して ^S を使えるようにする
 stty -ixon
+
+
+__fsel4() {
+  local item
+
+  rg --files --hidden --follow --glob '!.git/*' |
+    awk -F/ 'OFS="/"{file=$NF; $NF=""; dir=$0; print file "  \033[90m" $0 "\033[0m"}' |
+    $(__fzfcmd) +s +m -e --multi --ansi --reverse --with-nth=1.. --preview="bat --color=always --style=header,grid --line-range :100 {2..}{1}" |
+    awk -F"  " 'OFS=" "{file=$1; $1=""; print $0 file}' |
+    sed 's/^ //' |
+    while read item; do
+      echo -n "${(q)item} "
+    done
+    local ret=$?
+  echo
+  return $ret
+}
+fzf-filename-first-widget() {
+  LBUFFER="${LBUFFER}$(__fsel4)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle -N fzf-filename-first-widget
+bindkey '^T' fzf-filename-first-widget
+bindkey '^W' fzf-filename-first-widget
 
 globalias() {
   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
