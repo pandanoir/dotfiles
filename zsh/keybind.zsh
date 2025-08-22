@@ -42,9 +42,8 @@ __fsel2() {
 
   git status --short --untracked-files |
     awk -F/ 'OFS="/"{file=$NF; $NF=""; dir=substr($0,4); status=substr($0,0,3); print status file "  \033[90m" dir "\033[0m"}' |
-    $(__fzfcmd) +s +m -e --multi --ansi --reverse --preview='git diff --color $('"echo {} | awk -F '  ' 'OFS=\" \"{file=substr(\$1,4); \$1=\"\"; print \$0 file}') | tail -n +5" |
-    awk -F"  " 'OFS=" "{file=substr($1,4); $1=""; print $0 file}' |
-    sed 's/^ //' |
+    $(__fzfcmd) +s +m -e --multi --ansi --reverse --preview='git diff --color $('"echo {} | awk -F '  ' 'OFS=\"  \"{dir=\$NF; \$NF=\"\"; print dir substr(\$0,4)}') | tail -n +5" |
+    awk -F"  " 'OFS="  "{dir=$NF; $NF=""; print dir substr($0,4)}' |
     while read item; do
       echo -n "${(q)item} "
     done
