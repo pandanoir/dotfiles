@@ -27,8 +27,9 @@ return {
         end,
         desc = 'Find files at git root'
       },
-      { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Grep' },
-      { '<leader>fr', '<cmd>Telescope oldfiles<cr>',  desc = 'Old files' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Grep' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>',   desc = 'Old files' },
+      { '<leader>gs', '<cmd>Telescope git_status<cr>', desc = 'Git status' },
     }
 
     -- add backdrop
