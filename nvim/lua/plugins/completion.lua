@@ -59,6 +59,9 @@ return {
       formatting = {
         fields = { 'abbr', 'kind', 'menu' },
       },
+      experimental = {
+        ghost_text = true
+      },
     }
   end
 }
