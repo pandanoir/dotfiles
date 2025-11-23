@@ -17,6 +17,14 @@ install_mac() {
     info "install packages from Brewfile"
     brew bundle --file "$DOTDIR/Brewfile"
   fi
+}
+
+install_tools() {
+  info "install tools..."
+  OS=$(detect_os)
+  if [[ "$OS" == "macOS" ]]; then
+    install_mac
+  fi
 
   if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
     info "install fzf"
@@ -28,12 +36,5 @@ install_mac() {
     git pull
     bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
     cd -
-  fi
-}
-
-install_tools() {
-  OS=$(detect_os)
-  if [[ "$OS" == "macOS" ]]; then
-    install_mac
   fi
 }
