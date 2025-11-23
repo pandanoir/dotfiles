@@ -7,3 +7,8 @@ $ curl -sL dot.pandanoir.net | bash
 $ http -F dot.pandanoir.net | bash
 ```
 
+# preview using docker
+
+```
+docker run -it ghcr.io/pandanoir/dotfiles-preview
+```
