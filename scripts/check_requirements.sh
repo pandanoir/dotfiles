@@ -16,19 +16,6 @@ check_requirements() {
     gunzip -f "$SKK_DIR/SKK-JISYO.L.gz"
   fi
 
-
-  if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
-    info "install fzf"
-    git clone https://github.com/junegunn/fzf "$XDG_CACHE_HOME/fzf"
-    bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
-  elif is_update_mode; then
-    info "update fzf"
-    cd "$XDG_CACHE_HOME/fzf"
-    git pull
-    bash "$XDG_CACHE_HOME/fzf/install" --xdg --no-key-bindings --completion --no-update-rc --no-bash
-    cd -
-  fi
-
   if ! command_exists zsh; then
     warn "zsh isn't installed"
     is_every_requirement_met=false

@@ -19,9 +19,11 @@ if ! dir_exists "$DOTDIR"; then
 fi
 
 source "$DOTDIR/scripts/check_requirements.sh"
+source "$DOTDIR/scripts/install_tools.sh"
 source "$DOTDIR/scripts/deploy.sh"
 source "$DOTDIR/scripts/init_config.sh"
 
+install_tools
 check_requirements
 
 if [ $# -eq 0 ]; then

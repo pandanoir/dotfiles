@@ -1,7 +1,7 @@
 FROM node:24-slim
 
 RUN apt update && \
-    apt install -y zsh git curl fzf unzip gcc && \
+    apt install -y zsh git curl unzip gcc && \
     rm -rf /var/lib/apt/lists/*
 RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
