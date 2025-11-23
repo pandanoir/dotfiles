@@ -1,0 +1,7 @@
+.git/
+.github/
+include/
+.DS_Store
+.gitignore
+README.md
+preview.dockerfile
