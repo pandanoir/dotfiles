@@ -9,6 +9,14 @@ check_requirements() {
     is_every_requirement_met=false
   fi
 
+  SKK_DIR="$HOME/.local/share/skk"
+  if ! file_exists "$SKK_DIR/SKK-JISYO.L"; then
+    mkdir -p "$SKK_DIR"
+    curl -L https://skk-dev.github.io/dict/SKK-JISYO.L.gz -o "$SKK_DIR/SKK-JISYO.L.gz"
+    gunzip -f "$SKK_DIR/SKK-JISYO.L.gz"
+  fi
+
+
   if ! dir_exists "$XDG_CACHE_HOME/fzf"; then
     info "install fzf"
     git clone https://github.com/junegunn/fzf "$XDG_CACHE_HOME/fzf"
