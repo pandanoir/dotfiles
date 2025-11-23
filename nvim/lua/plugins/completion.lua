@@ -78,11 +78,13 @@ return {
     dependencies = { 'vim-denops/denops.vim' },
     config = function()
       vim.fn['skkeleton#config']({
-        globalDictionaries = { '~/.local/share/skk/SKK-JISYO.L' },
+        globalDictionaries = { os.getenv("XDG_DATA_HOME") .. '/skk/SKK-JISYO.L' },
         kanaTable = 'rom',
         eggLikeNewline = true,
         showCandidatesCount = 2,
       })
+      vim.fn['skkeleton#register_keymap']('input', ';', 'henkanPoint')
+      vim.fn['skkeleton#register_keymap']('input', '@', 'escape')
 
       vim.keymap.set('i', 'jj', '<Plug>(skkeleton-enable)')
       vim.keymap.set('c', 'jj', '<Plug>(skkeleton-enable)')
