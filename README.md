@@ -10,5 +10,5 @@ $ http -F dot.pandanoir.net | bash
 # preview using docker
 
 ```
-docker run -it ghcr.io/pandanoir/dotfiles-preview
+docker run -it --rm ghcr.io/pandanoir/dotfiles-preview
 ```
