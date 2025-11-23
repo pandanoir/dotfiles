@@ -40,7 +40,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install neovim
       run: sudo snap install --beta nvim --classic
-    - run: curl -fsSL https://deno.land/x/install/install.sh | sh
+    - run: |
+        curl -fsSL https://deno.land/x/install/install.sh | sh
+        echo "$PATH:$HOME/.deno/bin" >> $GITHUB_PATH
     - run: nvim --version
     - name: Run install.sh
       run: |
