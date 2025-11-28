@@ -74,12 +74,11 @@ return {
   },
   {
     'vim-skk/skkeleton',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = { 'vim-denops/denops.vim' },
     config = function()
       vim.fn['skkeleton#config']({
         globalDictionaries = { os.getenv("XDG_DATA_HOME") .. '/skk/SKK-JISYO.L' },
-        kanaTable = 'rom',
         eggLikeNewline = true,
         showCandidatesCount = 2,
       })
