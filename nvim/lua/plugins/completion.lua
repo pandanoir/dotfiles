@@ -83,11 +83,15 @@ return {
         eggLikeNewline = true,
         showCandidatesCount = 2,
       })
-      vim.fn['skkeleton#register_keymap']('input', ';', 'henkanPoint')
-      vim.fn['skkeleton#register_keymap']('input', '@', 'escape')
-
       vim.keymap.set('i', 'jj', '<Plug>(skkeleton-enable)')
       vim.keymap.set('c', 'jj', '<Plug>(skkeleton-enable)')
+
+      vim.keymap.set('i', '<c-l>', '<Plug>(skkeleton-enable)')
+      vim.keymap.set('c', '<c-l>', '<Plug>(skkeleton-enable)')
+
+      vim.fn['skkeleton#register_kanatable']('rom', {
+        ['fd'] = 'escape',
+      })
     end,
   }
 }
