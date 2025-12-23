@@ -127,6 +127,6 @@ if command_exists ranger; then
   alias rang='ranger'
 fi
 if command_exists rg; then
-  alias rgf='rg --files | sort | rg'
+  alias rgf='rg --files --sort=path | rg'
   alias -g R='| xargs rg'
 fi
