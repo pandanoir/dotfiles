@@ -90,6 +90,7 @@ function s() {
 
 alias -g A='| awk'
 alias -g C='| copy'
+alias -g F='| fzf'
 alias -g L='| less'
 alias -g S='| sort'
 alias -g SU='| sort -u'
