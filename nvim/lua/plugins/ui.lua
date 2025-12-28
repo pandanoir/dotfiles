@@ -6,6 +6,19 @@ return {
     'bronson/vim-trailing-whitespace',
     event = 'BufRead',
   },
+  {
+    'mvllow/modes.nvim',
+    opts = function()
+      return {
+        line_opacity = {
+          copy = 0.4,
+          delete = 0.4,
+          insert = 0.2,
+          visual = 0.4,
+        },
+      }
+    end,
+  },
   -- lazygit と組み合わせると崩れるのでコメントアウト
   -- {
   --   'rbtnn/vim-ambiwidth',
