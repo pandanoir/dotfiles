@@ -2,11 +2,11 @@
 local is_readonly = vim.bo.readonly or vim.g.no_plugin_maps == 1
 
 return {
-  {
+  { -- 行末の空白をハイライト
     'bronson/vim-trailing-whitespace',
     event = 'BufRead',
   },
-  {
+  { -- カーソル行をモードに応じて装飾する
     'mvllow/modes.nvim',
     opts = function()
       return {
@@ -26,7 +26,7 @@ return {
   --     vim.g.ambiwidth_cica_enabled = false
   --   end
   -- },
-  {
+  { -- マーク機能の拡張
     'chentoast/marks.nvim',
     event = 'BufRead',
     opts = {
@@ -34,12 +34,12 @@ return {
       excluded_buftypes = { 'nofile', 'terminal' },
     },
   },
-  {
+  { -- Gitの変更を表示
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
     config = true,
   },
-  {
+  { -- 折りたたみ行をシンタックスハイライトしたり、LSPのfolding rangeを利用して折り畳めるようにするプラグイン
     'kevinhwang91/nvim-ufo',
     event = 'BufRead',
     dependencies = 'kevinhwang91/promise-async',
@@ -59,7 +59,7 @@ return {
       vim.keymap.set('n', 'zM', require 'ufo'.closeAllFolds)
     end
   },
-  {
+  { -- チャンクとインデントの可視化
     'shellRaining/hlchunk.nvim',
     event = 'BufRead',
     opts = {
@@ -67,7 +67,7 @@ return {
       indent = { enable = true },
     },
   },
-  {
+  { -- ステータスライン
     'nvim-lualine/lualine.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -136,13 +136,13 @@ return {
       }
     end,
   },
-  {
+  { -- LSPの進捗表示
     'j-hui/fidget.nvim',
     event = 'BufRead',
     cond = not is_readonly,
     config = true,
   },
-  {
+  { -- 何件マッチしたか、マッチしたインスタンスが全体の何番目かをカーソル位置に表示
     'kevinhwang91/nvim-hlslens',
     init = function()
       local map = function(key, command)
@@ -165,7 +165,7 @@ return {
       nearest_only = true,
     },
   },
-  {
+  { -- ウィンドウ上部にファイル名を表示
     'b0o/incline.nvim',
     opts = {
       window = {
@@ -214,7 +214,7 @@ return {
     end,
     event = 'VeryLazy',
   },
-  {
+  { -- ターミナル統合
     'akinsho/toggleterm.nvim',
     version = '*',
     config = true,
@@ -235,25 +235,25 @@ return {
       vim.keymap.set('n', "<leader>'", function() terminal:toggle() end, { silent = true, desc = 'open terminal' })
     end
   },
-  {
+  { -- TODOコメントのハイライトと検索
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true,
   },
-  {
+  { -- カーソル行のすべての単語の一意な文字をハイライトして、fやFなどで素早く移動できるようにするプラグイン
     'unblevable/quick-scope',
     init = function()
       vim.keymap.set('n', '<leader><tab>q', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
     end,
   },
-  {
+  { -- quickfixのUIを改善
     'stevearc/quicker.nvim',
     ft = 'qf',
     ---@module 'quicker'
     ---@type quicker.SetupOptions
     opts = {},
   },
-  {
+  { -- 対応する括弧のマッチング強化
     'andymass/vim-matchup',
     init = function()
       vim.opt.matchpairs:append {

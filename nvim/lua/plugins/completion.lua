@@ -1,5 +1,5 @@
 return {
-  {
+  { -- 自動補完エンジン
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
@@ -67,12 +67,12 @@ return {
       }
     end,
   },
-  {
+  { -- skkeleton用のcmpソース
     'rinx/cmp-skkeleton',
     dependencies = { 'hrsh7th/nvim-cmp', 'vim-skk/skkeleton' },
     event = 'InsertEnter',
   },
-  {
+  { -- 日本語入力（SKK）
     'vim-skk/skkeleton',
     event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = { 'vim-denops/denops.vim' },

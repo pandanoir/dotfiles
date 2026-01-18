@@ -1,12 +1,12 @@
 return {
-  {
+  { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
     'vim-scripts/surround.vim',
     event = 'VimEnter',
     init = function()
       vim.keymap.set('n', 's', 'ys', { remap = true })
     end
   },
-  {
+  { -- コンテキストに応じたコメント文字列の設定
     'JoosepAlviste/nvim-ts-context-commentstring',
     event = 'VimEnter',
     opts = {
@@ -21,7 +21,7 @@ return {
       end
     end
   },
-  {
+  { -- 自動で括弧を補完
     'LunarWatcher/auto-pairs',
     init = function()
       vim.api.nvim_set_var('AutoPairsCompleteOnlyOnSpace', 1)
@@ -31,7 +31,7 @@ return {
       vim.g.AutoPairsShortcutToggleMultilineClose = ''
     end
   },
-  {
+  { -- テキストオブジェクトの拡張基盤
     'kana/vim-textobj-user',
     event = 'VimEnter',
     config = function()
@@ -45,7 +45,7 @@ return {
       })
     end
   },
-  {
+  { -- コードブロックの結合と分割
     'Wansmer/treesj',
     keys = {
       { '<leader>j', '<cmd>TSJToggle<cr>', desc = 'join with treesj' },
@@ -54,7 +54,7 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = { use_default_keymaps = false },
   },
-  {
+  { -- インクリメント/デクリメントで日付やboolean値を操作
     'monaqa/dial.nvim',
     init = function()
       local map = vim.keymap.set
@@ -79,7 +79,7 @@ return {
       }
     end
   },
-  {
+  { -- 文字列のケース変換(snake_case、kebab-caseなど)
     'johmsalas/text-case.nvim',
     config = true,
     init = function()

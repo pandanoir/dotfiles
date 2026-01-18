@@ -1,6 +1,5 @@
 return {
-  -- language serverのインストールと設定を行う
-  {
+  { -- nvim-lspconfig の設定を利用してlanguage serverの起動、セットアップをする、masonを介してlanguage serverの自動インストールもする
     'williamboman/mason-lspconfig.nvim',
     opts = {
       ensure_installed = {
@@ -16,12 +15,16 @@ return {
       },
     },
     dependencies = {
-      { 'williamboman/mason.nvim', opts = {} },
-      'neovim/nvim-lspconfig',
+      { -- エディタツールを管理するパッケージマネージャー
+        'williamboman/mason.nvim',
+        opts = {}
+      },
+      { -- コンフィグ集
+        'neovim/nvim-lspconfig',
+      },
     }
   },
-
-  {
+  { -- LSPのUI拡張（定義ジャンプ、ホバー、リネームなど）
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
     opts = {
@@ -55,7 +58,7 @@ return {
       }
     end
   },
-  {
+  { -- Lua開発用のLSP補助
     'folke/lazydev.nvim',
     ft = 'lua',
     config = true,
