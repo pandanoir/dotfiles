@@ -4,6 +4,19 @@ return {
     event = 'VimEnter',
     init = function()
       vim.keymap.set('n', 's', 'ys', { remap = true })
+  },
+  { -- テキストオブジェクトの拡張基盤
+    'kana/vim-textobj-user',
+    event = 'VimEnter',
+    config = function()
+      ---@diagnostic disable-next-line: param-type-mismatch
+      vim.call('textobj#user#plugin', 'braces', {
+        angle = {
+          pattern = { "\\[", "\\]" },
+          ['select-a'] = 'ar',
+          ['select-i'] = 'ir',
+        },
+      })
     end
   },
   { -- コンテキストに応じたコメント文字列の設定
@@ -29,20 +42,6 @@ return {
       vim.g.AutoPairsShortcutJump = ''
       vim.g.AutoPairsShortcutToggle = ''
       vim.g.AutoPairsShortcutToggleMultilineClose = ''
-    end
-  },
-  { -- テキストオブジェクトの拡張基盤
-    'kana/vim-textobj-user',
-    event = 'VimEnter',
-    config = function()
-      ---@diagnostic disable-next-line: param-type-mismatch
-      vim.call('textobj#user#plugin', 'braces', {
-        angle = {
-          pattern = { "\\[", "\\]" },
-          ['select-a'] = 'ar',
-          ['select-i'] = 'ir',
-        },
-      })
     end
   },
   { -- コードブロックの結合と分割
