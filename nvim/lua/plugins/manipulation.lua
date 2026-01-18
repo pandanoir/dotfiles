@@ -7,7 +7,6 @@ return {
     'kana/vim-textobj-user',
     event = 'VimEnter',
     config = function()
-      ---@diagnostic disable-next-line: param-type-mismatch
       vim.call('textobj#user#plugin', 'braces', {
         angle = {
           pattern = { "\\[", "\\]" },

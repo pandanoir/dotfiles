@@ -8,16 +8,14 @@ return {
   },
   { -- カーソル行をモードに応じて装飾する
     'mvllow/modes.nvim',
-    opts = function()
-      return {
-        line_opacity = {
-          copy = 0.4,
-          delete = 0.4,
-          insert = 0.2,
-          visual = 0.4,
-        },
-      }
-    end,
+    opts = {
+      line_opacity = {
+        copy = 0.4,
+        delete = 0.4,
+        insert = 0.2,
+        visual = 0.4,
+      },
+    },
   },
   -- lazygit と組み合わせると崩れるのでコメントアウト
   -- {
@@ -142,7 +140,7 @@ return {
     cond = not is_readonly,
     config = true,
   },
-  { -- 何件マッチしたか、マッチしたインスタンスが全体の何番目かをカーソル位置に表示
+  { -- 検索時に全何件マッチしたか、何番目のマッチかをカーソル位置に表示
     'kevinhwang91/nvim-hlslens',
     init = function()
       local map = function(key, command)
