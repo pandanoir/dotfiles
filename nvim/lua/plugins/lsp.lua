@@ -24,9 +24,17 @@ return {
       },
     }
   },
+  { -- TypeScript用のLSP拡張
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {
+      settings = {
+        expose_as_code_action = { 'add_missing_imports', 'remove_unused_imports' },
+      },
+    },
+  },
   { -- LSPのUI拡張（定義ジャンプ、ホバー、リネームなど）
     'glepnir/lspsaga.nvim',
-    event = 'BufRead',
     opts = {
       finder = {
         keys = {
