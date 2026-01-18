@@ -1,8 +1,4 @@
 return {
-  { -- .コマンドでプラグインの操作を繰り返せるようにする
-    'tpope/vim-repeat',
-    event = 'VimEnter',
-  },
   { -- キーバインドの候補を表示
     'folke/which-key.nvim',
     event = 'VeryLazy',

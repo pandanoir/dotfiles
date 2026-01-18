@@ -1,9 +1,7 @@
 return {
-  { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
-    'vim-scripts/surround.vim',
+  { -- .コマンドでプラグインの操作を繰り返せるようにする
+    'tpope/vim-repeat',
     event = 'VimEnter',
-    init = function()
-      vim.keymap.set('n', 's', 'ys', { remap = true })
   },
   { -- テキストオブジェクトの拡張基盤
     'kana/vim-textobj-user',
@@ -17,6 +15,13 @@ return {
           ['select-i'] = 'ir',
         },
       })
+    end
+  },
+  { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
+    'vim-scripts/surround.vim',
+    event = 'VimEnter',
+    init = function()
+      vim.keymap.set('n', 's', 'ys', { remap = true })
     end
   },
   { -- 自動で括弧を補完
