@@ -3,15 +3,6 @@ return {
     'tpope/vim-repeat',
     event = 'VimEnter',
   },
-  { -- f/t/F/Tの検索を強化（migemo対応）
-    'rhysd/clever-f.vim',
-    event = 'VimEnter',
-    init = function()
-      vim.g.clever_f_use_migemo = 1
-      vim.keymap.set('n', ';', '<Plug>(clever-f-repeat-forward)', { remap = true })
-      vim.keymap.set('n', ',', '<Plug>(clever-f-repeat-back)', { remap = true })
-    end,
-  },
   { -- キーバインドの候補を表示
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -60,20 +51,5 @@ return {
   },
   { -- コンテキストに応じたファイルタイプ判定
     'Shougo/context_filetype.vim',
-  },
-  { -- ビジュアルモードで*検索を改善
-    'bronson/vim-visual-star-search',
-    event = 'VeryLazy',
-  },
-  { -- 括弧の内外を移動
-    'ysmb-wtsg/in-and-out.nvim',
-    commit = '2f3bf83654790e458cf387fa6f37f9b9d9e4f7fa',
-    init = function()
-      vim.keymap.set(
-        'i',
-        '<c-l>',
-        require('in-and-out').in_and_out
-      )
-    end,
   },
 }
