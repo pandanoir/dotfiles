@@ -19,21 +19,6 @@ return {
       })
     end
   },
-  { -- コンテキストに応じたコメント文字列の設定
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    event = 'VimEnter',
-    opts = {
-      enable_autocmd = false,
-    },
-    init = function()
-      local get_option = vim.filetype.get_option
-      vim.filetype.get_option = function(filetype, option)
-        return option == 'commentstring'
-            and require 'ts_context_commentstring.internal'.calculate_commentstring()
-            or get_option(filetype, option)
-      end
-    end
-  },
   { -- 自動で括弧を補完
     'LunarWatcher/auto-pairs',
     init = function()
