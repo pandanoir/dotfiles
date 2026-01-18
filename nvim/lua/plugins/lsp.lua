@@ -54,8 +54,9 @@ return {
             local opt = function(desc)
               return { silent = true, buffer = ev.buf, desc = desc }
             end
-            map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', opt())
-            map('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', opt())
+            map('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', opt('go to definition'))
+            map('n', 'gt', '<cmd>Lspsaga goto_type_definition<CR>', opt('go to type definition'))
+            map('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', opt('peek definition'))
             map('n', 'grr', '<cmd>Lspsaga finder<CR>', opt())
             map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', opt())
             map('n', 'grn', '<cmd>Lspsaga rename<CR>', opt('rename using LSP'))

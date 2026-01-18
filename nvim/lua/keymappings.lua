@@ -81,13 +81,4 @@ require 'easy-setup-autocmd'.setup_autocmd {
       keymap('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
     end
   },
-  ['LspAttach'] = {
-    callback = function(ev)
-      local opt = function(desc)
-        return { silent = true, buffer = ev.buf, desc = desc }
-      end
-      keymap('n', 'gD', vim.lsp.buf.declaration, opt())
-      keymap('n', 'gt', vim.lsp.buf.type_definition, opt('type definition'))
-    end
-  }
 }
