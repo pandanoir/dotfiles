@@ -6,7 +6,14 @@ return {
       defer = function(ctx)
         return vim.list_contains({ '<C-V>', 'V', 'v' }, ctx.mode)
       end,
-      sort = { 'alphanum', 'case', },
+      sort = {
+        -- descの先頭についている[xxx]を元にソート
+        function(item)
+          local group = item.desc:match('^%[(.*)%]')
+          return group and '0:' .. group or '1:'
+        end,
+        'local', 'order', 'group', 'alphanum', 'mod',
+      },
       spec = {
         { '<leader>g', icon = { icon = '', color = 'red', }, group = 'git', },
         { '<leader><tab>', group = 'toggle', },
@@ -28,72 +35,61 @@ return {
         },
 
         -- ウィンドウ関連のキーマップ
-        { '<c-w>h', icon = '󰜱', desc = 'Go to the left window', },
-        { '<c-w>j', icon = '󰜮', desc = 'Go to the down window', },
-        { '<c-w>k', icon = '󰜷', desc = 'Go to the up window', },
-        { '<c-w>l', icon = '󰜴', desc = 'Go to the right window', },
-
-        { '<c-w>H', icon = '', desc = 'Move window to far left' },
-        { '<c-w>J', icon = '', desc = 'Move window to far bottom' },
-        { '<c-w>K', icon = '', desc = 'Move window to far top' },
-        { '<c-w>L', icon = '', desc = 'Move window to far right' },
-
-        { '<c-w>s', icon = { icon = '󰤻', color = 'yellow' }, desc = 'Split window' },
-        { '<c-w>v', icon = { icon = '󰤼', color = 'yellow' }, desc = 'Split window vertically' },
-        { '<c-w>T', icon = { icon = '󰓩', color = 'yellow' }, desc = 'Break out into a new tab' },
-
-        { '<c-w>w', icon = '', desc = 'Switch windows' },
-        { '<c-w>x', icon = '󰓡', desc = 'Swap current with next' },
-
-        { '<c-w>q', icon = { icon = '󰅖', color = 'red' }, desc = 'Quit a window' },
-        { '<c-w>o', icon = { icon = '󰅗', color = 'red' }, desc = 'Close all other windows' },
-
-        { '<c-w>+', icon = { icon = '󰡏', color = 'purple' }, desc = 'Increase height' },
-        { '<c-w>-', icon = { icon = '󰡍', color = 'purple' }, desc = 'Decrease height' },
-        { '<c-w>_', icon = { icon = '󰁌', color = 'purple' }, desc = 'Max out the height' },
-
-        { '<c-w>>', icon = { icon = '󰡎', color = 'purple' }, desc = 'Increase width' },
-        { '<c-w><', icon = { icon = '󰡌', color = 'purple' }, desc = 'Decrease width' },
-        { '<c-w>|', icon = { icon = '󰁌', color = 'purple' }, desc = 'Max out the width' },
-
-        { '<c-w>d', icon = '', desc = 'Show diagnostics under the cursor', },
-        { '<c-w>=', icon = '', desc = 'Equally high and wide' },
+        { '<c-w>h', desc = '[focus] Go to the left window', icon = '󰜱', },
+        { '<c-w>j', desc = '[focus] Go to the down window', icon = '󰜮', },
+        { '<c-w>k', desc = '[focus] Go to the up window', icon = '󰜷', },
+        { '<c-w>l', desc = '[focus] Go to the right window', icon = '󰜴', },
+        { '<c-w>w', desc = '[focus] Switch windows', icon = '', },
+        { '<c-w>H', desc = '[move] Move window to far left', icon = { icon = '', color = 'green' }, },
+        { '<c-w>J', desc = '[move] Move window to far bottom', icon = { icon = '', color = 'green' }, },
+        { '<c-w>K', desc = '[move] Move window to far top', icon = { icon = '', color = 'green' }, },
+        { '<c-w>L', desc = '[move] Move window to far right', icon = { icon = '', color = 'green' }, },
+        { '<c-w>s', desc = '[split] Split window', icon = { icon = '󰤻', color = 'yellow' }, },
+        { '<c-w>v', desc = '[split] Split window vertically', icon = { icon = '󰤼', color = 'yellow' }, },
+        { '<c-w>q', desc = '[close] Quit a window', icon = { icon = '󰅖', color = 'red' }, },
+        { '<c-w>o', desc = '[close] Close all other windows', icon = { icon = '󰅗', color = 'red' }, },
+        { '<c-w>+', desc = '[size-h] Increase height', icon = { icon = '󰡏', color = 'purple' }, },
+        { '<c-w>-', desc = '[size-h] Decrease height', icon = { icon = '󰡍', color = 'purple' }, },
+        { '<c-w>_', desc = '[size-h] Max out the height', icon = { icon = '', color = 'purple' }, },
+        { '<c-w>>', desc = '[size-w] Increase width', icon = { icon = '󰡎', color = 'purple' }, },
+        { '<c-w><', desc = '[size-w] Decrease width', icon = { icon = '󰡌', color = 'purple' }, },
+        { '<c-w>|', desc = '[size-w] Max out the width', icon = { icon = '', color = 'purple' }, },
+        { '<c-w>T', desc = 'Break out into a new tab', icon = '󰓩', },
+        { '<c-w>x', desc = 'Swap current with next', icon = '󰓡', },
+        { '<c-w>d', desc = 'Show diagnostics under the cursor', icon = '', },
+        { '<c-w>=', desc = 'Equally high and wide', icon = '', },
 
         -- z系
-        { 'za', icon = { icon = '', color = 'yellow', }, desc = 'Toggle fold under cursor', },
-        { 'zA', icon = { icon = '', color = 'yellow', }, desc = 'Toggle all folds under cursor', },
-        { 'zi', icon = { icon = '', color = 'yellow', }, desc = 'Toggle folding', },
-
-        { 'zc', icon = { icon = '󰘕', color = 'yellow', }, desc = 'Close fold under cursor', },
-        { 'zo', icon = { icon = '󰘖', color = 'yellow', }, desc = 'Open fold under cursor', },
-        { 'zd', icon = { icon = '󰁮', color = 'red', }, desc = 'Delete fold under cursor', },
-        { 'zf', icon = { icon = '󰐕', color = 'red', }, desc = 'Create fold', },
-
-        { 'zC', icon = { icon = '󰘕', color = 'yellow', }, desc = 'Close all folds under cursor', },
-        { 'zO', icon = { icon = '󰘖', color = 'yellow', }, desc = 'Open all folds under cursor', },
-        { 'zD', icon = { icon = '󰁮', color = 'red', }, desc = 'Delete all folds under cursor', },
-        { 'zE', icon = { icon = '󰁮', color = 'red', }, desc = 'Delete all folds in file', },
-        { 'zR', icon = { icon = '󰘖', color = 'yellow', }, desc = 'Open all folds', },
-        { 'zM', icon = { icon = '󰘕', color = 'yellow', }, desc = 'Close all folds', },
-
-        { 'zr', icon = { icon = '󰝠', color = 'yellow', }, desc = 'Fold less', },
-        { 'zm', icon = { icon = '󰝡', color = 'yellow', }, desc = 'Fold more', },
-        { 'zx', icon = { icon = '󰑐', color = 'yellow', }, desc = 'Update folds', },
-
-        { 'zb', icon = { icon = '󰝓', color = 'purple' }, desc = 'Bottom this line', },
-        { 'zt', icon = { icon = '󰝕', color = 'purple' }, desc = 'Top this line', },
-        { 'zz', icon = { icon = '󰝔', color = 'purple' }, desc = 'Center this line', },
+        { 'za', desc = '[fold] Toggle fold under cursor', icon = { icon = '', color = 'yellow' } },
+        { 'zA', desc = '[fold] Toggle all folds under cursor', icon = { icon = '', color = 'yellow' } },
+        { 'zi', desc = '[fold] Toggle folding', icon = { icon = '', color = 'yellow' } },
+        { 'zc', desc = '[fold] Close fold under cursor', icon = { icon = '󰘕', color = 'red' } },
+        { 'zo', desc = '[fold] Open fold under cursor', icon = { icon = '󰘖', color = 'cyan' } },
+        { 'zd', desc = '[fold] Delete fold under cursor', icon = { icon = '󰁮', color = 'gray' } },
+        { 'zf', desc = '[fold] Create fold', icon = { icon = '󰐕', color = 'gray' } },
+        { 'zC', desc = '[fold] Close all folds under cursor', icon = { icon = '󰘕', color = 'red' } },
+        { 'zO', desc = '[fold] Open all folds under cursor', icon = { icon = '󰘖', color = 'cyan' } },
+        { 'zD', desc = '[fold] Delete all folds under cursor', icon = { icon = '󰁮', color = 'gray' } },
+        { 'zE', desc = '[fold] Delete all folds in file', icon = { icon = '󰁮', color = 'gray' } },
+        { 'zR', desc = '[foldlevel] Open all folds (set foldlevel=max)', icon = { icon = '󰘖', color = 'cyan' } },
+        { 'zM', desc = '[foldlevel] Close all folds (set foldlevel=0)', icon = { icon = '󰘕', color = 'red' } },
+        { 'zr', desc = '[foldlevel] Fold less (foldlevel +1)', icon = { icon = '󰝡', color = 'cyan' } },
+        { 'zm', desc = '[foldlevel] Fold more (foldlevel -1)', icon = { icon = '󰝠', color = 'red' } },
+        { 'zx', desc = '[foldlevel] Reapply folds (reset to foldlevel)', icon = { icon = '󰑐', color = 'yellow' } },
+        { 'zb', desc = '[cursor] Bottom this line', icon = { icon = '󰝓', color = 'purple' } },
+        { 'zt', desc = '[cursor] Top this line', icon = { icon = '󰝕', color = 'purple' } },
+        { 'zz', desc = '[cursor] Center this line', icon = { icon = '󰝔', color = 'purple' } },
 
         -- g系
-        { 'ga', icon = '󰊄', group = 'converting text case' },
-        { 'gd', icon = '󰅬', desc = 'go to definition' },
+        { 'ga', icon = '󰊄', group = '[case] converting text case' },
+        { 'gd', icon = '󰅬', desc = '[lsp] go to definition' },
         { 'gg', icon = '󰘀', desc = 'First line' },
-        { 'gO', icon = '󰅬', desc = 'Lists all symbols in current buffer in location-list' },
-        { 'gp', icon = '󰅬', desc = 'peek definition' },
-        { 'gr', icon = '󰅬', group = 'LSP' },
-        { 'gt', icon = '󰅬', desc = 'go to type definition' },
-        { 'gu', icon = '󰊄', desc = 'Lowercase' },
-        { 'gU', icon = '󰊄', desc = 'Uppercase' },
+        { 'gO', icon = '󰅬', desc = '[lsp] Lists all symbols in current buffer in location-list' },
+        { 'gp', icon = '󰅬', desc = '[lsp] peek definition' },
+        { 'gr', icon = '󰅬', group = '[lsp] LSP' },
+        { 'gt', icon = '󰅬', desc = '[lsp] go to type definition' },
+        { 'gu', icon = '󰊄', desc = '[case] Lowercase' },
+        { 'gU', icon = '󰊄', desc = '[case] Uppercase' },
         { 'gv', icon = '󰒉', desc = 'Last visual selection' },
         {
           'gf',
