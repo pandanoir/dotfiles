@@ -14,7 +14,8 @@ setopt auto_cd # cdでディレクトリ移動時にlsを実行する
 setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt share_history
-SAVEHIST=100
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=$HOME/.zsh_history
 
 # プロンプト
