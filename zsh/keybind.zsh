@@ -1,27 +1,4 @@
-# コマンドラインをエディタで編集する関数
-edit-command-line() {
-  # 現在のコマンドラインを一時ファイルに書き出す
-  local tmpfile=$(mktemp)
-  print -rl -- $BUFFER > $tmpfile
-
-  local EDITOR_CMD=$EDITOR
-
-  # Check if $COMMANDLINE_EDITOR is set
-  if [[ -n $COMMANDLINE_EDITOR ]]; then
-    EDITOR_CMD=$COMMANDLINE_EDITOR
-  fi
-
-  eval $EDITOR_CMD $tmpfile < /dev/tty
-
-  # エディタが正常に終了した場合、一時ファイルの内容でコマンドラインを置き換え
-  if [[ $? -eq 0 ]]; then
-    BUFFER=$(<$tmpfile)
-    zle reset-prompt
-  fi
-
-  rm -f $tmpfile
-}
-
+autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey "^O" edit-command-line
 
