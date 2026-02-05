@@ -165,6 +165,7 @@ return {
   },
   { -- ウィンドウ上部にファイル名を表示
     'b0o/incline.nvim',
+    cond = not require('env').from_claude,
     opts = {
       window = {
         padding = 0,
