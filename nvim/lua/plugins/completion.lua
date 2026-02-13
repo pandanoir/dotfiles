@@ -84,6 +84,8 @@ return {
       })
       vim.keymap.set('i', 'jj', '<Plug>(skkeleton-enable)')
       vim.keymap.set('c', 'jj', '<Plug>(skkeleton-enable)')
+      vim.keymap.set('i', 'kl', '<Plug>(skkeleton-enable)')
+      vim.keymap.set('c', 'kl', '<Plug>(skkeleton-enable)')
 
       vim.keymap.set('i', '<c-l>', '<Plug>(skkeleton-enable)')
       vim.keymap.set('c', '<c-l>', '<Plug>(skkeleton-enable)')
