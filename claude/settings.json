@@ -1,0 +1,132 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat *)",
+      "Bash(cd:*)",
+      "Bash(date*)",
+      "Bash(df *)",
+      "Bash(diff *)",
+      "Bash(du *)",
+      "Bash(echo *)",
+      "Bash(find:*)",
+      "Bash(env)",
+      "Bash(file *)",
+      "Bash(gh issue list *)",
+      "Bash(gh issue view *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr view *)",
+      "Bash(gh run list *)",
+      "Bash(gh run view *)",
+      "Bash(gh search:*)",
+      "Bash(gh api search/code *)",
+      "Bash(git add:*)",
+      "Bash(git branch*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git describe *)",
+      "Bash(git diff*)",
+      "Bash(git fetch*)",
+      "Bash(git grep:*)",
+      "Bash(git log:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git pull:*)",
+      "Bash(git remote *)",
+      "Bash(git rev-parse *)",
+      "Bash(git show *)",
+      "Bash(git stash list*)",
+      "Bash(git status*)",
+      "Bash(git tag *)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(jq *)",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(node -e:*)",
+      "Bash(node:*)",
+      "Bash(node --version)",
+      "Bash(node -v)",
+      "Bash(npm --version)",
+      "Bash(npx eslint:*)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm -F desktop format:files:*)",
+      "Bash(pnpm -F desktop typecheck:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm format:files:*)",
+      "Bash(pnpm gen:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(printenv*)",
+      "Bash(printf *)",
+      "Bash(printf:*)",
+      "Bash(psql:*)",
+      "Bash(python3:*)",
+      "Bash(pwd)",
+      "Bash(tail *)",
+      "Bash(tree *)",
+      "Bash(uname *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(whoami)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:speakerdeck.com)",
+      "WebFetch(domain:www.notion.so)",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -f *)",
+      "Bash(sudo *)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Codeが入力を待っています\" with title \"Claude Code\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"タスクが完了しました\" with title \"Claude Code\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/validate-bash.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "slack@claude-plugins-official": true
+  },
+  "language": "japanese",
+  "skipDangerousModePermissionPrompt": true
+}

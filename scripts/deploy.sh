@@ -13,6 +13,19 @@ symlink() {
   ln -sf "$DOTDIR/$1" "$2"
 }
 
+# テンプレートとして初回のみコピー (既に存在すればスキップ)
+copy_template() {
+  if [ -e "$2" ]; then
+    return
+  fi
+
+  info "copy template from $DOTDIR/$1 to $2"
+  if ! [ -d `dirname $2` ]; then
+    mkdir -p `dirname $2`
+  fi
+  cp "$DOTDIR/$1" "$2"
+}
+
 deploy() {
   info "start to deploy"
 
@@ -45,6 +58,15 @@ deploy() {
   symlink wezterm.lua "$XDG_CONFIG_HOME/wezterm/wezterm.lua"
   symlink starship.toml "$XDG_CONFIG_HOME/starship.toml"
   mkdir -p "$XDG_DATA_HOME/rustup"
+
+  # claude code
+  copy_template claude/settings.json "$HOME/.claude/settings.json"
+  symlink claude/hooks/validate-bash.sh "$HOME/.claude/hooks/validate-bash.sh"
+  symlink claude/agents/reviewer.md "$HOME/.claude/agents/reviewer.md"
+  symlink claude/statusline-command.sh "$HOME/.claude/statusline-command.sh"
+
+  # cage
+  symlink cage/presets.yml "$XDG_CONFIG_HOME/cage/presets.yml"
 
   if command_exists ranger && ! dir_exists "$DOTDIR/ranger/plugins/ranger_devicons"; then
     git clone https://github.com/alexanderjeurissen/ranger_devicons "$DOTDIR/ranger/plugins/ranger_devicons"
