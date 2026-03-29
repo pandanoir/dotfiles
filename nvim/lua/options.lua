@@ -34,6 +34,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.cmd [[filetype plugin on]]
 
+-- 大きいファイル(1MB以上)のパフォーマンス対策。
 require 'easy-setup-autocmd'.setup_autocmd {
   ['BufReadPre'] = {
     pattern = '*',
@@ -48,17 +49,32 @@ require 'easy-setup-autocmd'.setup_autocmd {
       end
     end
   },
-  -- ファイルサイズが大きい場合はシンタックスハイライトをオフ
   ['FileType,BufReadPost'] = {
     pattern = '*',
-    callback = function()
+    callback = function(args)
       if vim.b.large_file then
         vim.cmd 'syntax clear'
         vim.bo.syntax = ''
-        vim.treesitter.stop(0)
+        vim.treesitter.stop(0) -- highlight.disableでも制御しているが、タイミング次第でTSEnable highlightに上書きされるのでここでも止める
+
+        if vim.bo[args.buf].filetype ~= '' then
+          vim.bo[args.buf].filetype = '' -- ts_ls等がattachされないようにfiletypeを空にする
+        end
       end
     end
   },
+  ['LspAttach'] = {
+    callback = function(args)
+      if vim.b[args.buf].large_file then
+        vim.schedule(function()
+          vim.lsp.buf_detach_client(args.buf, args.data.client_id) -- filetypeクリアをすり抜けた場合のフォールバック。基本的にあまり発動しない想定
+        end)
+      end
+    end
+  },
+}
+
+require 'easy-setup-autocmd'.setup_autocmd {
   ['BufEnter,FileType'] = {
     pattern = '*',
     callback = function()

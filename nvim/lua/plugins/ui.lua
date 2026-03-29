@@ -60,10 +60,15 @@ return {
   { -- チャンクとインデントの可視化
     'shellRaining/hlchunk.nvim',
     event = 'BufRead',
-    opts = {
-      chunk = { enable = true },
-      indent = { enable = true },
-    },
+    opts = function()
+      local filter = function()
+        return not vim.b.large_file
+      end
+      return {
+        chunk = { enable = true, filter = filter },
+        indent = { enable = true, filter = filter },
+      }
+    end,
   },
   { -- ステータスライン
     'nvim-lualine/lualine.nvim',
