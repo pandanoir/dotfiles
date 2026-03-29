@@ -11,7 +11,11 @@ return {
         { '<leader>f',  group = 'fuzzy finder', },
         {
           '<leader>fG',
-          function() require('telescope.builtin').live_grep { default_text = vim.fn.expand('<cword>') } end,
+          function()
+            local opts = { default_text = vim.fn.expand('<cword>') }
+            if require('env').from_claude then opts.cwd = vim.fn.getcwd() end
+            require('telescope.builtin').live_grep(opts)
+          end,
           desc = 'Grep with current word'
         },
         { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
@@ -19,16 +23,28 @@ return {
           '<leader>ff',
           function()
             local telescope = require 'telescope.builtin'
-            local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
-            if git_root and git_root ~= '' then
-              telescope.find_files({ cwd = git_root })
+            if require('env').from_claude then
+              telescope.find_files({ cwd = vim.fn.getcwd() })
             else
-              telescope.find_files()
+              local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+              if git_root and git_root ~= '' then
+                telescope.find_files({ cwd = git_root })
+              else
+                telescope.find_files()
+              end
             end
           end,
           desc = 'Find files at git root'
         },
-        { '<leader>fg', '<cmd>Telescope live_grep<cr>',  desc = 'Grep' },
+        {
+          '<leader>fg',
+          function()
+            local opts = {}
+            if require('env').from_claude then opts.cwd = vim.fn.getcwd() end
+            require('telescope.builtin').live_grep(opts)
+          end,
+          desc = 'Grep'
+        },
         { '<leader>fr', '<cmd>Telescope oldfiles<cr>',   desc = 'Old files' },
         { '<leader>gs', '<cmd>Telescope git_status<cr>', desc = 'Git status' },
       }
