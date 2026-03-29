@@ -23,7 +23,13 @@ return {
         'vimdoc'
       },
       additional_vim_regex_highlighting = false,
-      highlight = { enable = false },
+      highlight = {
+        enable = false,
+        -- ファイルサイズが大きい場合はシンタックスハイライトをオフ
+        disable = function(_, buf)
+          return vim.b[buf].large_file == true
+        end,
+      },
       textsubjects = {
         enable = true,
         prev_selection = ',',

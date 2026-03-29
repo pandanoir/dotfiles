@@ -35,6 +35,30 @@ vim.opt.softtabstop = 2
 vim.cmd [[filetype plugin on]]
 
 require 'easy-setup-autocmd'.setup_autocmd {
+  ['BufReadPre'] = {
+    pattern = '*',
+    callback = function()
+      local max_filesize = 1024 * 1024 -- 1MB
+      local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(0))
+      if ok and stats and stats.size > max_filesize then
+        vim.b.large_file = true
+        vim.opt_local.foldmethod = 'manual'
+        vim.opt_local.undofile = false
+        vim.opt_local.swapfile = false
+      end
+    end
+  },
+  -- ファイルサイズが大きい場合はシンタックスハイライトをオフ
+  ['FileType,BufReadPost'] = {
+    pattern = '*',
+    callback = function()
+      if vim.b.large_file then
+        vim.cmd 'syntax clear'
+        vim.bo.syntax = ''
+        vim.treesitter.stop(0)
+      end
+    end
+  },
   ['BufEnter,FileType'] = {
     pattern = '*',
     callback = function()
