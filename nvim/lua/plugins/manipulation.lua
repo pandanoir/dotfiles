@@ -17,9 +17,10 @@ return {
     end
   },
   { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
-    'vim-scripts/surround.vim',
+    'kylechui/nvim-surround',
     event = 'VimEnter',
-    init = function()
+    config = function()
+      require('nvim-surround').setup()
       vim.keymap.set('n', 's', 'ys', { remap = true })
     end
   },
