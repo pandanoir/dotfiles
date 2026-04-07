@@ -1,11 +1,16 @@
 return {
   { -- f/t/F/Tの検索を強化（migemo対応）
     'rhysd/clever-f.vim',
-    event = 'VimEnter',
+    keys = {
+      { 'f', mode = { 'n', 'x', 'o' } },
+      { 'F', mode = { 'n', 'x', 'o' } },
+      { 't', mode = { 'n', 'x', 'o' } },
+      { 'T', mode = { 'n', 'x', 'o' } },
+      { ';', '<Plug>(clever-f-repeat-forward)', remap = true },
+      { ',', '<Plug>(clever-f-repeat-back)',    remap = true },
+    },
     init = function()
       vim.g.clever_f_use_migemo = 1
-      vim.keymap.set('n', ';', '<Plug>(clever-f-repeat-forward)', { remap = true })
-      vim.keymap.set('n', ',', '<Plug>(clever-f-repeat-back)', { remap = true })
     end,
   },
   { -- ビジュアルモードで*検索を改善
@@ -24,11 +29,7 @@ return {
       },
     },
     init = function()
-      vim.keymap.set(
-        'i',
-        '<c-l>',
-        require('in-and-out').in_and_out
-      )
+      vim.keymap.set('i', '<c-l>', function() require('in-and-out').in_and_out() end)
     end,
   },
 }

@@ -72,7 +72,7 @@ return {
   },
   { -- ステータスライン
     'nvim-lualine/lualine.nvim',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
     opts = function()
       local empty = require('lualine.component'):extend()
@@ -246,7 +246,7 @@ return {
   },
   { -- コンテキストに応じたコメント文字列の設定
     'JoosepAlviste/nvim-ts-context-commentstring',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     opts = {
       enable_autocmd = false,
     },

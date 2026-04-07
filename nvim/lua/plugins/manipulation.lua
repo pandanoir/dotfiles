@@ -1,7 +1,7 @@
 return {
   { -- テキストオブジェクトの拡張(ar/irで[ ]を選択など)
     'echasnovski/mini.ai',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     opts = {
       custom_textobjects = {
         r = { '%b[]', '^.().*().$' },
@@ -10,7 +10,7 @@ return {
   },
   { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
     'kylechui/nvim-surround',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     config = function()
       require('nvim-surround').setup()
       vim.keymap.set('n', 's', 'ys', { remap = true })
@@ -38,13 +38,12 @@ return {
     'monaqa/dial.nvim',
     init = function()
       local map = vim.keymap.set
-      local manipulate = require 'dial.map'.manipulate
       for _, mode in ipairs({ 'normal', 'visual' }) do
         local m = mode:sub(1, 1)
-        map(m, '<C-a>', function() manipulate('increment', mode) end)
-        map(m, '<C-x>', function() manipulate('decrement', mode) end)
-        map(m, 'g<C-a>', function() manipulate('increment', 'g' .. mode) end)
-        map(m, 'g<C-x>', function() manipulate('decrement', 'g' .. mode) end)
+        map(m, '<C-a>', function() require 'dial.map'.manipulate('increment', mode) end)
+        map(m, '<C-x>', function() require 'dial.map'.manipulate('decrement', mode) end)
+        map(m, 'g<C-a>', function() require 'dial.map'.manipulate('increment', 'g' .. mode) end)
+        map(m, 'g<C-x>', function() require 'dial.map'.manipulate('decrement', 'g' .. mode) end)
       end
     end,
     config = function()
@@ -63,18 +62,18 @@ return {
     'johmsalas/text-case.nvim',
     config = true,
     init = function()
-      local op = require 'textcase'.operator
-      local word = require 'textcase'.current_word
-      vim.keymap.set('n', 'gak', function() word('to_dash_case') end, { desc = 'to-kebab-case' })
-      vim.keymap.set('n', 'ga-', function() word('to_dash_case') end, { desc = 'to-kebab-case' })
+      local word = function(case) return function() require 'textcase'.current_word(case) end end
+      local op = function(case) return function() require 'textcase'.operator(case) end end
+      vim.keymap.set('n', 'gak', word('to_dash_case'), { desc = 'to-kebab-case' })
+      vim.keymap.set('n', 'ga-', word('to_dash_case'), { desc = 'to-kebab-case' })
       vim.keymap.set('v', 'ga-', 'gad', { remap = true, desc = 'to-kebab-case' })
-      vim.keymap.set('n', 'ga_', function() word('to_snake_case') end, { desc = 'to_snake_case' })
+      vim.keymap.set('n', 'ga_', word('to_snake_case'), { desc = 'to_snake_case' })
       vim.keymap.set('v', 'ga_', 'gas', { remap = true, desc = 'to_snake_case' })
-      vim.keymap.set('n', 'gaC', function() word('to_pascal_case') end, { desc = 'ToUpperCamelCase' })
-      vim.keymap.set('n', 'gaok', function() op('to_dash_case') end, { desc = 'to-kebab-case' })
-      vim.keymap.set('n', 'gao-', function() op('to_dash_case') end, { desc = 'to-kebab-case' })
-      vim.keymap.set('n', 'gao_', function() op('to_snake_case') end, { desc = 'to_snake_case' })
-      vim.keymap.set('n', 'gaoC', function() op('to_pascal_case') end, { desc = 'ToUpperCamelCase' })
+      vim.keymap.set('n', 'gaC', word('to_pascal_case'), { desc = 'ToUpperCamelCase' })
+      vim.keymap.set('n', 'gaok', op('to_dash_case'), { desc = 'to-kebab-case' })
+      vim.keymap.set('n', 'gao-', op('to_dash_case'), { desc = 'to-kebab-case' })
+      vim.keymap.set('n', 'gao_', op('to_snake_case'), { desc = 'to_snake_case' })
+      vim.keymap.set('n', 'gaoC', op('to_pascal_case'), { desc = 'ToUpperCamelCase' })
     end
   },
 }
