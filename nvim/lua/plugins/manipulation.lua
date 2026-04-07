@@ -1,20 +1,12 @@
 return {
-  { -- .コマンドでプラグインの操作を繰り返せるようにする
-    'tpope/vim-repeat',
+  { -- テキストオブジェクトの拡張(ar/irで[ ]を選択など)
+    'echasnovski/mini.ai',
     event = 'VimEnter',
-  },
-  { -- テキストオブジェクトの拡張基盤
-    'kana/vim-textobj-user',
-    event = 'VimEnter',
-    config = function()
-      vim.call('textobj#user#plugin', 'braces', {
-        angle = {
-          pattern = { "\\[", "\\]" },
-          ['select-a'] = 'ar',
-          ['select-i'] = 'ir',
-        },
-      })
-    end
+    opts = {
+      custom_textobjects = {
+        r = { '%b[]', '^.().*().$' },
+      },
+    },
   },
   { -- 囲み構造を意味単位として追加・変更・削除操作をできるようにする
     'kylechui/nvim-surround',
@@ -27,7 +19,6 @@ return {
   { -- 自動で括弧を補完
     'LunarWatcher/auto-pairs',
     init = function()
-      vim.api.nvim_set_var('AutoPairsCompleteOnlyOnSpace', 1)
       vim.g.AutoPairsCompleteOnlyOnSpace = 1
       vim.g.AutoPairsShortcutJump = ''
       vim.g.AutoPairsShortcutToggle = ''
