@@ -106,6 +106,35 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require('which-key').setup(opts)
+
+      -- :checkhealth で既知の無害overlap警告を抑制する
+      local ignore_patterns = {
+        '<c> overlaps with',  -- nvim-surround
+        '<ys> overlaps with', -- nvim-surround
+        '<yS> overlaps with', -- nvim-surround
+        '<gc> overlaps with', -- 標準コメント
+        '<i> overlaps with',  -- mini.ai
+        '<a> overlaps with',  -- mini.ai
+      }
+      -- health.luaの冒頭で `local warn = vim.health.warn` として
+      -- ローカルキャプチャされているため、debug.setupvalueで直接upvalueを差し替える
+      local health = require('which-key.health')
+      for i = 1, math.huge do
+        local name, val = debug.getupvalue(health.check, i)
+        if not name then break end
+        if name == 'warn' then
+          debug.setupvalue(health.check, i, function(msg, ...)
+            for _, p in ipairs(ignore_patterns) do
+              if type(msg) == 'string' and msg:find(p, 1, true) then return end
+            end
+            return val(msg, ...)
+          end)
+          break
+        end
+      end
+    end,
     init = function()
       local timeoutlen = 400
       vim.o.timeout = true
