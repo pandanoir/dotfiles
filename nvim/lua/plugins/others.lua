@@ -81,7 +81,6 @@ return {
         { 'zz', desc = '[cursor] Center this line', icon = { icon = '󰝔', color = 'purple' } },
 
         -- g系
-        { 'ga', icon = '󰊄', group = '[case] converting text case' },
         { 'gd', icon = '󰅬', desc = '[lsp] go to definition' },
         { 'gg', icon = '󰘀', desc = 'First line' },
         { 'gO', icon = '󰅬', desc = '[lsp] Lists all symbols in current buffer in location-list' },
