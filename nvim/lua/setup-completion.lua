@@ -81,7 +81,7 @@ end
 require 'easy-setup-autocmd'.setup_autocmd {
   ['CompleteChanged'] = {
     callback = function()
-      vim.defer_fn(function style_info_popup()
+      vim.defer_fn(function()
         local winid = find_preview()
         if winid then
           local ok, cfg = pcall(vim.api.nvim_win_get_config, winid)
