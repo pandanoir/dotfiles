@@ -1,6 +1,10 @@
+-- 0.12+ ではネイティブ補完(setup-completion.lua)を使うので nvim-cmp 系は無効化
+local use_cmp = not require('env').has_native_completion
+
 return {
   { -- 自動補完エンジン
     'hrsh7th/nvim-cmp',
+    cond = use_cmp,
     event = 'InsertEnter',
     dependencies = {
       { 'L3MON4D3/LuaSnip', dependencies = { 'rafamadriz/friendly-snippets' } },
@@ -69,6 +73,7 @@ return {
   },
   { -- skkeleton用のcmpソース
     'rinx/cmp-skkeleton',
+    cond = use_cmp,
     dependencies = { 'hrsh7th/nvim-cmp', 'vim-skk/skkeleton' },
     event = 'InsertEnter',
   },
