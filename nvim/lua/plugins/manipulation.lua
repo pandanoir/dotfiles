@@ -23,6 +23,9 @@ return {
       vim.g.AutoPairsShortcutJump = ''
       vim.g.AutoPairsShortcutToggle = ''
       vim.g.AutoPairsShortcutToggleMultilineClose = ''
+      -- 0.12+ で maparg の互換性問題により <CR> マッピングがエラーになるため無効化
+      -- (nvim-cmp 等で <CR> は別途扱うのでautopairsに任せる必要はない)
+      vim.g.AutoPairsMapCR = 0
     end
   },
   { -- コードブロックの結合と分割
