@@ -4,6 +4,9 @@ if not require('env').has_native_completion then return end
 
 -- popup menuのborder（0.12 で追加）
 vim.o.pumborder = 'rounded'
+vim.o.pumblend = 10
+vim.o.pumheight = 15
+vim.opt.autocomplete = true
 -- fuzzy: 曖昧マッチ / popup: 候補の説明をpopupで表示
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 
@@ -19,7 +22,16 @@ require 'easy-setup-autocmd'.setup_autocmd {
   },
 }
 
--- 候補をkindごとにシンタックスハイライト（PmenuKind* を上書き）
+-- ポップアップメニューの基本ハイライト（カラースキームを尊重）
+local function set_pum_highlights()
+  local opts = { default = true }
+  vim.api.nvim_set_hl(0, 'PmenuSbar', vim.tbl_extend('force', opts, { bg = '#313244' }))
+  vim.api.nvim_set_hl(0, 'PmenuThumb', vim.tbl_extend('force', opts, { bg = '#585b70' }))
+  vim.api.nvim_set_hl(0, 'PmenuMatch', vim.tbl_extend('force', opts, { fg = '#f9e2af', bold = true }))
+  vim.api.nvim_set_hl(0, 'PmenuMatchSel', vim.tbl_extend('force', opts, { fg = '#f9e2af', bold = true }))
+end
+
+-- 候補をkindごとにシンタックスハイライト（カラースキームを尊重）
 local function set_kind_highlights()
   local kind_colors = {
     Function    = '#82AAFF',
@@ -46,56 +58,32 @@ local function set_kind_highlights()
     vim.api.nvim_set_hl(0, 'PmenuKind' .. kind, { fg = color, default = true })
   end
 end
+
+set_pum_highlights()
 set_kind_highlights()
 require 'easy-setup-autocmd'.setup_autocmd {
   ['ColorScheme'] = {
     pattern = '*',
-    callback = set_kind_highlights,
-  },
-}
-
--- 候補の説明popupはネイティブだとborderが付かないので、CompleteChanged時に
--- window configを直接書き換えてborderを付ける
-local function find_preview()
-  local info = vim.fn.complete_info { 'preview_winid' }
-  local winid = info.preview_winid
-  if winid and winid > 0 and vim.api.nvim_win_is_valid(winid) then
-    return winid
-  end
-  -- complete_info が preview_winid を返さない環境向けのフォールバック
-  -- pumに紐づく無名の浮動windowを探す
-  for _, w in ipairs(vim.api.nvim_list_wins()) do
-    local config = vim.api.nvim_win_get_config(w)
-    if config.relative ~= '' then
-      local b = vim.api.nvim_win_get_buf(w)
-      if vim.api.nvim_buf_get_name(b) == '' and vim.bo[b].buftype == 'nofile' then
-        return w
-      end
-    end
-  end
-end
-
--- CompleteChangedの直後(vim.schedule)にset_configしても、その後Neovim内部が
--- popup configを再適用してborderをnone等に戻してしまう。
--- 300ms待ってNeovim内部のpopup config適用が落ち着いてから border を付ける
-require 'easy-setup-autocmd'.setup_autocmd {
-  ['CompleteChanged'] = {
     callback = function()
-      vim.defer_fn(function()
-        local winid = find_preview()
-        if winid then
-          local ok, cfg = pcall(vim.api.nvim_win_get_config, winid)
-          if ok then
-            cfg.border = 'rounded'
-            pcall(vim.api.nvim_win_set_config, winid, cfg)
-          end
-          vim.wo[winid].conceallevel = 2
-          vim.wo[winid].concealcursor = 'n'
-        end
-      end, 300)
+      set_pum_highlights()
+      set_kind_highlights()
     end,
   },
 }
+
+-- HACK: ドキュメントポップアップに無理やりボーダーを付ける
+-- 現状 winborder や completeopt=popup だけではドキュメントfloatのボーダーを制御できない
+-- https://github.com/neovim/neovim/issues/38248
+-- 将来的に completepopup オプション等が実装されればこのワークアラウンドは不要になる
+-- (この手法は deathbeam/autocomplete.nvim や neovim/neovim#29225 でも使われている)
+local orig_complete_set = vim.api.nvim__complete_set
+vim.api.nvim__complete_set = function(...)
+  local result = orig_complete_set(...)
+  if result and result.winid and vim.api.nvim_win_is_valid(result.winid) then
+    pcall(vim.api.nvim_win_set_config, result.winid, { border = 'rounded' })
+  end
+  return result
+end
 
 -- 補完メニュー操作キーマップ（既存のnvim-cmp設定に合わせる）
 local function expr_pum(pum_action, fallback)
