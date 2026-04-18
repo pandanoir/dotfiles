@@ -140,14 +140,12 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = timeoutlen
 
-      require 'easy-setup-autocmd'.setup_autocmd {
-        ['InsertEnter'] = {
-          callback = function() vim.o.timeoutlen = 200 end,
-        },
-        ['InsertLeave'] = {
-          callback = function() vim.o.timeoutlen = timeoutlen end,
-        }
-      }
+      vim.api.nvim_create_autocmd('InsertEnter', {
+        callback = function() vim.o.timeoutlen = 200 end,
+      })
+      vim.api.nvim_create_autocmd('InsertLeave', {
+        callback = function() vim.o.timeoutlen = timeoutlen end,
+      })
     end,
   },
   { -- バッファ削除を改善

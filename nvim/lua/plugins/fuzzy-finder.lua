@@ -50,10 +50,9 @@ return {
       }
 
       -- add backdrop
-      require 'easy-setup-autocmd'.setup_autocmd {
-        ['FileType'] = {
-          pattern = 'TelescopePrompt',
-          callback = function(ctx)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'TelescopePrompt',
+        callback = function(ctx)
             local backdropName = 'TelescopeBackdrop'
             -- `Telescope` does not set a zindex, so it uses the default value
             -- of `nvim_open_win`, which is 50: https://neovim.io/doc/user/api.html#nvim_open_win()
@@ -88,8 +87,7 @@ return {
               end,
             })
           end,
-        }
-      }
+      })
     end,
     config = function()
       local actions = require('telescope.actions')

@@ -11,16 +11,14 @@ vim.opt.autocomplete = true
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 
 -- LSPの補完を自動で有効化
-require 'easy-setup-autocmd'.setup_autocmd {
-  ['LspAttach'] = {
-    callback = function(ev)
-      local client = vim.lsp.get_client_by_id(ev.data.client_id)
-      if client and client:supports_method('textDocument/completion') then
-        vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-      end
-    end,
-  },
-}
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+  end,
+})
 
 -- ポップアップメニューの基本ハイライト（カラースキームを尊重）
 local function set_pum_highlights()
@@ -61,15 +59,13 @@ end
 
 set_pum_highlights()
 set_kind_highlights()
-require 'easy-setup-autocmd'.setup_autocmd {
-  ['ColorScheme'] = {
-    pattern = '*',
-    callback = function()
-      set_pum_highlights()
-      set_kind_highlights()
-    end,
-  },
-}
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+    set_pum_highlights()
+    set_kind_highlights()
+  end,
+})
 
 -- HACK: ドキュメントポップアップに無理やりボーダーを付ける
 -- 現状 winborder や completeopt=popup だけではドキュメントfloatのボーダーを制御できない

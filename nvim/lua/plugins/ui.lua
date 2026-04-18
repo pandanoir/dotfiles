@@ -280,17 +280,15 @@ return {
         '〈:〉', '｛:｝', '［:］', '‘:’', '“:”',
       }
 
-      require 'easy-setup-autocmd'.setup_autocmd {
-        ['ColorScheme'] = {
-          pattern = '*',
-          callback = function()
-            vim.cmd [[
-              hi MatchParen  guifg=#b58900
-              hi MatchWord  guifg=#b58900
-            ]]
-          end
-        }
-      }
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        pattern = '*',
+        callback = function()
+          vim.cmd [[
+            hi MatchParen  guifg=#b58900
+            hi MatchWord  guifg=#b58900
+          ]]
+        end
+      })
     end,
     opts = {
       treesitter = {
