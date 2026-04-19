@@ -1,13 +1,11 @@
--- Neovim 0.12+ のネイティブ補完設定
+-- Neovim 0.12+ のネイティブ補完の設定
 -- 0.11以下では何もしない（plugins/completion.lua の nvim-cmp が動作する）
 if not require('env').has_native_completion then return end
 
--- popup menuのborder（0.12 で追加）
 vim.o.pumborder = 'rounded'
 vim.o.pumblend = 10
 vim.o.pumheight = 15
 vim.opt.autocomplete = true
--- fuzzy: 曖昧マッチ / popup: 候補の説明をpopupで表示
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 
 -- LSPの補完を自動で有効化
@@ -73,10 +71,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- 将来的に completepopup オプション等が実装されればこのワークアラウンドは不要になる
 -- (この手法は deathbeam/autocomplete.nvim や neovim/neovim#29225 でも使われている)
 local orig_complete_set = vim.api.nvim__complete_set
+---@diagnostic disable-next-line: duplicate-set-field
 vim.api.nvim__complete_set = function(...)
   local result = orig_complete_set(...)
-  if result and result.winid and vim.api.nvim_win_is_valid(result.winid) then
+  if result and result.winid then
     pcall(vim.api.nvim_win_set_config, result.winid, { border = 'rounded' })
+    pcall(vim.api.nvim_set_option_value, 'winblend', 10, { win = result.winid })
   end
   return result
 end
