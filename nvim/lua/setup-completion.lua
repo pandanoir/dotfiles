@@ -2,9 +2,22 @@
 -- 0.11以下では何もしない（plugins/completion.lua の nvim-cmp が動作する）
 if not require('env').has_native_completion then return end
 
-vim.o.pumborder = 'rounded'
-vim.o.pumblend = 10
-vim.o.pumheight = 15
+local function set_default_pumstyle()
+  vim.o.pumborder = 'rounded'
+  vim.o.pumblend = 10
+  vim.o.pumheight = 15
+end
+set_default_pumstyle()
+-- コマンドラインではpopup menuのボーダーを消す
+vim.api.nvim_create_autocmd('CmdlineEnter', {
+  callback = function()
+    vim.o.pumborder = 'none'
+    vim.o.pumblend = 0
+  end,
+})
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  callback = set_default_pumstyle,
+})
 vim.opt.autocomplete = true
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect', 'fuzzy', 'popup' }
 
