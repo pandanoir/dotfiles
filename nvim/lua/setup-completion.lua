@@ -27,32 +27,50 @@ local function set_pum_highlights()
   vim.api.nvim_set_hl(0, 'PmenuMatchSel', vim.tbl_extend('force', opts, { fg = '#f9e2af', bold = true }))
 end
 
--- 候補をkindごとにシンタックスハイライト（カラースキームを尊重）
+-- 候補をkindごとにシンタックスハイライト
+local kind_colors = {
+  Function    = '#82AAFF',
+  Method      = '#82AAFF',
+  Constructor = '#82AAFF',
+  Variable    = '#C792EA',
+  Field       = '#F78C6C',
+  Property    = '#F78C6C',
+  Constant    = '#F78C6C',
+  EnumMember  = '#F78C6C',
+  Class       = '#FFCB6B',
+  Interface   = '#FFCB6B',
+  Struct      = '#FFCB6B',
+  Enum        = '#FFCB6B',
+  Module      = '#89DDFF',
+  File        = '#89DDFF',
+  Folder      = '#FFCB6B',
+  Keyword     = '#FF5370',
+  Operator    = '#FF5370',
+  Snippet     = '#C3E88D',
+  Text        = '#EEFFFF',
+}
 local function set_kind_highlights()
-  local kind_colors = {
-    Function    = '#82AAFF',
-    Method      = '#82AAFF',
-    Constructor = '#82AAFF',
-    Variable    = '#C792EA',
-    Field       = '#F78C6C',
-    Property    = '#F78C6C',
-    Constant    = '#F78C6C',
-    EnumMember  = '#F78C6C',
-    Class       = '#FFCB6B',
-    Interface   = '#FFCB6B',
-    Struct      = '#FFCB6B',
-    Enum        = '#FFCB6B',
-    Module      = '#89DDFF',
-    File        = '#89DDFF',
-    Folder      = '#FFCB6B',
-    Keyword     = '#FF5370',
-    Operator    = '#FF5370',
-    Snippet     = '#C3E88D',
-    Text        = '#EEFFFF',
-  }
   for kind, color in pairs(kind_colors) do
     vim.api.nvim_set_hl(0, 'PmenuKind' .. kind, { fg = color, default = true })
   end
+end
+
+-- HACK: vim.lsp.completion が kind_hlgroup を Color 以外で設定しないため、
+-- vim.fn.complete をラップして kind_hlgroup を自動注入する
+local orig_complete = vim.fn.complete
+---@diagnostic disable-next-line: duplicate-set-field
+vim.fn.complete = function(startcol, items)
+  if type(items) == 'table' then
+    for _, item in ipairs(items) do
+      if type(item) == 'table' and item.kind and not item.kind_hlgroup then
+        local hl = 'PmenuKind' .. item.kind
+        if kind_colors[item.kind] then
+          item.kind_hlgroup = hl
+        end
+      end
+    end
+  end
+  return orig_complete(startcol, items)
 end
 
 set_pum_highlights()
