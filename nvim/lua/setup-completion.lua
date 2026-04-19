@@ -70,15 +70,21 @@ end
 
 -- HACK: vim.lsp.completion が kind_hlgroup を Color 以外で設定しないため、
 -- vim.fn.complete をラップして kind_hlgroup を自動注入する
+-- また、abbr が長すぎる場合は切り詰めて kind カラムが見切れないようにする
+local pum_abbr_max = 30
 local orig_complete = vim.fn.complete
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.fn.complete = function(startcol, items)
   if type(items) == 'table' then
     for _, item in ipairs(items) do
-      if type(item) == 'table' and item.kind and not item.kind_hlgroup then
-        local hl = 'PmenuKind' .. item.kind
-        if kind_colors[item.kind] then
-          item.kind_hlgroup = hl
+      if type(item) == 'table' then
+        if item.kind and not item.kind_hlgroup and kind_colors[item.kind] then
+          item.kind_hlgroup = 'PmenuKind' .. item.kind
+        end
+        -- abbr（表示テキスト）を切り詰める（word はそのまま）
+        local display = item.abbr or item.word
+        if display and vim.fn.strcharlen(display) > pum_abbr_max then
+          item.abbr = vim.fn.strcharpart(display, 0, pum_abbr_max - 1) .. '…'
         end
       end
     end
