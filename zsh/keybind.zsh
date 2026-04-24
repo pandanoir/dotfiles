@@ -68,6 +68,33 @@ bindkey '^S' fzf-local-branch-widget
 # フロー制御を無効化して ^S を使えるようにする
 stty -ixon
 
+# M-s: リモートブランチをfzfで選択してカーソル位置に挿入
+# 表示: "ブランチ名  最終コミット日時  コミットメッセージ" (新しい順)
+# preview: そのブランチの直近コミット履歴
+__fzf_remote_branch() {
+  local item
+  git for-each-ref --sort=-committerdate refs/remotes/origin/ \
+    --format=$'%(refname:lstrip=3)\t%(committerdate:relative)\t%(subject)' |
+    grep -v '^HEAD$' |
+    awk -F'\t' '{printf "%s  \033[33m%s\033[0m  \033[90m%s\033[0m\n", $1, $2, $3}' |
+    $(__fzfcmd) +s +m -e --ansi --reverse \
+    --preview='git log --oneline --graph --decorate --color -20 origin/{1}' \
+    --preview-window=right:50% |
+    awk '{print $1}' | while read item; do
+    echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
+  return $ret
+}
+fzf-remote-widget() {
+  LBUFFER="${LBUFFER}$(__fzf_remote_branch)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle -N fzf-remote-widget
+bindkey '\es' fzf-remote-widget
 
 # ^T/^W: ファイルをfzfで選択してカーソル位置に挿入
 # 表示: "ファイル名  ディレクトリ" (ファイル名先頭で検索しやすい) / preview: bat
