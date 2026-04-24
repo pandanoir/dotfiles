@@ -14,7 +14,9 @@ fancy-ctrl-z() {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-__fsel2() {
+# ^G: git変更ファイルをfzfで選択してカーソル位置に挿入
+# 表示: "ステータス ファイル名  ディレクトリ" / preview: git diff
+__fzf_git_files() {
   local item
 
   git status --short --untracked-files |
@@ -28,16 +30,19 @@ __fsel2() {
   echo
   return $ret
 }
-fzf-git-edited-widget() {
-  LBUFFER="${LBUFFER}$(__fsel2)"
+fzf-git-files-widget() {
+  LBUFFER="${LBUFFER}$(__fzf_git_files)"
   local ret=$?
   zle reset-prompt
   return $ret
 }
-zle -N fzf-git-edited-widget
-bindkey '^G' fzf-git-edited-widget
+zle -N fzf-git-files-widget
+bindkey '^G' fzf-git-files-widget
 
-__fsel3() {
+# ^S: ブランチをfzfで選択してカーソル位置に挿入
+# 表示: "ブランチ名  最終コミット日時  コミットメッセージ" (新しい順)
+# preview: そのブランチの直近コミット履歴
+__fzf_local_branch() {
   local item
   git branch | $(__fzfcmd) +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
     echo -n "${(q)item} "
@@ -46,21 +51,21 @@ __fsel3() {
   echo
   return $ret
 }
-fzf-branch-widget() {
-  LBUFFER="${LBUFFER}$(__fsel3)"
+fzf-local-branch-widget() {
+  LBUFFER="${LBUFFER}$(__fzf_local_branch)"
   local ret=$?
   zle reset-prompt
   return $ret
 }
-zle -N fzf-branch-widget
-bindkey -M emacs '^S' fzf-branch-widget
-bindkey -M vicmd '^S' fzf-branch-widget
-bindkey -M viins '^S' fzf-branch-widget
+zle -N fzf-local-branch-widget
+bindkey '^S' fzf-local-branch-widget
 # フロー制御を無効化して ^S を使えるようにする
 stty -ixon
 
 
-__fsel4() {
+# ^T/^W: ファイルをfzfで選択してカーソル位置に挿入
+# 表示: "ファイル名  ディレクトリ" (ファイル名先頭で検索しやすい) / preview: bat
+__fzf_files() {
   local item
 
   rg --files --hidden --follow --glob '!.git/*' |
@@ -75,16 +80,17 @@ __fsel4() {
   echo
   return $ret
 }
-fzf-filename-first-widget() {
-  LBUFFER="${LBUFFER}$(__fsel4)"
+fzf-files-widget() {
+  LBUFFER="${LBUFFER}$(__fzf_files)"
   local ret=$?
   zle reset-prompt
   return $ret
 }
-zle -N fzf-filename-first-widget
-bindkey '^T' fzf-filename-first-widget
-bindkey '^W' fzf-filename-first-widget
+zle -N fzf-files-widget
+bindkey '^T' fzf-files-widget
+bindkey '^W' fzf-files-widget
 
+# スペース: 大文字エイリアスをその場で展開 (例: "git L" → "git log ...")
 globalias() {
   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
     zle _expand_alias
