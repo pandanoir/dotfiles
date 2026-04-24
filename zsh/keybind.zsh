@@ -44,9 +44,15 @@ bindkey '^G' fzf-git-files-widget
 # preview: そのブランチの直近コミット履歴
 __fzf_local_branch() {
   local item
-  git branch | $(__fzfcmd) +s +m -e --ansi --reverse | sed -e 's/^ *//' -e 's/^\* //' | while read item; do
-    echo -n "${(q)item} "
-  done
+  git for-each-ref --sort=-committerdate refs/heads/ \
+    --format=$'%(refname:short)\t%(committerdate:relative)\t%(subject)' |
+    awk -F'\t' '{printf "%s  \033[33m%s\033[0m  \033[90m%s\033[0m\n", $1, $2, $3}' |
+    $(__fzfcmd) +s +m -e --ansi --reverse \
+      --preview='git log --oneline --graph --decorate --color -20 {1}' \
+      --preview-window=right:50% |
+    awk '{print $1}' | while read item; do
+      echo -n "${(q)item} "
+    done
   local ret=$?
   echo
   return $ret
