@@ -22,9 +22,7 @@ local c = {
   delimiter = '#9b9ea4', -- NvimLightGrey4 → コメントと同程度
 }
 
-----------------------------------------------------------------------
--- シンタックスの核: 被りを分離
-----------------------------------------------------------------------
+-- デフォルトの色数が少なすぎるので追加
 local hi = vim.api.nvim_set_hl
 hi(0, 'Comment', { fg = c.comment, italic = true })
 hi(0, 'Constant', { fg = c.constant })
@@ -41,3 +39,11 @@ hi(0, 'Todo', { fg = c.keyword, bold = true })
 hi(0, 'Underlined', { fg = c.ident, underline = true })
 hi(0, 'Error', { fg = '#eef1f8', bg = '#590008' })
 hi(0, 'Ignore', { link = 'Normal' })
+
+-- Treesitter系
+-- tsx
+hi(0, '@tag.attribute.tsx', { link = 'Identifier' })
+hi(0, '@tag.delimiter.tsx', { link = 'Delimiter' })
+hi(0, '@keyword.operator.tsx', { link = 'Identifier' })
+-- typescript
+hi(0, '@keyword.operator.typescript', { link = 'Identifier' })

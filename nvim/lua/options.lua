@@ -79,7 +79,3 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FileType' }, {
     vim.opt_local.formatoptions:remove('ro')
   end
 })
-vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = '*',
-  callback = require 'improve-default-scheme'.improve
-})

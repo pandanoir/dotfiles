@@ -56,11 +56,6 @@ return {
           return orig(node, source, opts)
         end
       end
-
-      vim.uv.new_timer():start(300, 0, vim.schedule_wrap(function()
-        vim.cmd 'TSEnable highlight'
-        require 'improve-default-scheme'.improve()
-      end))
     end,
     dependencies = {
       { -- treesitterベースのテキストオブジェクト拡張
