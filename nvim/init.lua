@@ -7,3 +7,5 @@ require 'keymappings'
 require 'setup-lazynvim'
 require 'setup-completion'
 require 'use-extui'
+
+vim.cmd.colorscheme 'mydefault'
