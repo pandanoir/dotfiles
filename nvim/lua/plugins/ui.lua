@@ -324,6 +324,7 @@ return {
           vim.health[k] = function(msg, ...)
             if suppressing then return end
             if type(msg) == 'string' and (msg:find("'fd'", 1, true) or msg:find("'fdfind'", 1, true)) then return end
+            if k == 'error' and type(msg) == 'string' and msg:find('{lazygit}', 1, true) then return end
             -- headlessモードではUIEnterが発火せずvim.ui.input/selectが設定されないため抑制
             if k == 'error' and type(msg) == 'string' and msg:find('is not set to', 1, true) and #vim.api.nvim_list_uis() == 0 then return end
             return orig[k](msg, ...)
