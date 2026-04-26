@@ -265,6 +265,11 @@ return {
       vim.keymap.set('n', '<leader><tab>q', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
     end,
   },
+  { -- vim.ui.input / vim.ui.select をfloating windowにする
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
   { -- quickfixのUIを改善
     'stevearc/quicker.nvim',
     ft = 'qf',

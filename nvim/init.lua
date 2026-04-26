@@ -6,6 +6,7 @@ require 'disable-providers'
 require 'keymappings'
 require 'setup-lazynvim'
 require 'setup-completion'
+require 'setup-lsp'
 require 'use-extui'
 
 vim.cmd.colorscheme 'mydefault'
