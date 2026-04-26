@@ -118,6 +118,14 @@ vim.api.nvim__complete_set = function(...)
   return result
 end
 
+-- snacks.nvim input や Telescope prompt では自動補完を無効化
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'snacks_input', 'snacks_picker_input' },
+  callback = function()
+    vim.opt_local.autocomplete = false
+  end,
+})
+
 -- 補完メニュー操作キーマップ（既存のnvim-cmp設定に合わせる）
 local function expr_pum(pum_action, fallback)
   return function()

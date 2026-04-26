@@ -265,10 +265,32 @@ return {
       vim.keymap.set('n', '<leader><tab>q', '<cmd>QuickScopeToggle<cr>', { desc = 'toggle quick-scope' })
     end,
   },
-  { -- vim.ui.input / vim.ui.select をfloating windowにする
-    'stevearc/dressing.nvim',
-    event = 'VeryLazy',
-    opts = {},
+  { -- 小規模なUI改善プラグイン集。vim.ui.input/selectに使用
+    'folke/snacks.nvim',
+    lazy = false,
+    priority = 1000,
+    ---@type snacks.Config
+    opts = {
+      input = {
+        enabled = true,
+        win = {
+          relative = 'cursor',
+          row = -3,
+          col = 0,
+          keys = {
+            fd = {
+              'fd',
+              function() vim.cmd('stopinsert') end,
+              mode = 'i',
+            },
+          },
+        },
+      },
+      picker = {
+        enabled = true,
+        ui_select = true,
+      },
+    },
   },
   { -- quickfixのUIを改善
     'stevearc/quicker.nvim',
