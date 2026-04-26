@@ -43,6 +43,7 @@ jobs:
     - uses: denoland/setup-deno@v2
       with:
         deno-version: v2.x
+    - run: sudo apt update; sudo apt install ripgrep
     - run: nvim --version
     - name: Run install.sh
       run: |
@@ -50,7 +51,7 @@ jobs:
         ${GITHUB_WORKSPACE}/install.sh
     - name: check health of neovim
       run: |
-        nvim --headless "+TSUpdateSync" "+lua require('mason-registry').refresh()" +q
+        nvim --headless "+TSUpdateSync" "+lua require('mason-registry').refresh()" +q 2>&1 >/dev/null
         nvim --headless "+checkhealth" "+w!health.log" +qa
         cat health.log
         echo '=============================='
