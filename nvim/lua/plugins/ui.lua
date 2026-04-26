@@ -290,10 +290,13 @@ return {
     opts = {
       input = {
         enabled = true,
+        icon = '',
         win = {
+          title_pos = 'left',
           relative = 'cursor',
           row = -3,
           col = 0,
+          width = 20,
           keys = {
             fd = {
               'fd',
