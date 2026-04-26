@@ -309,6 +309,15 @@ return {
       picker = {
         enabled = true,
         ui_select = true,
+        layouts = {
+          select = {
+            layout = {
+              relative = 'cursor',
+              width = 70,
+              row = 1,
+            },
+          },
+        },
       },
     },
     config = function(_, opts)
