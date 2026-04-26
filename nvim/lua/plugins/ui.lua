@@ -35,7 +35,24 @@ return {
   { -- sign columnにGitの変更状況を表示
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
-    config = true,
+    opts = {
+      preview_config = {
+        border = 'rounded',
+      },
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+        local map = function(mode, l, r)
+          vim.keymap.set(mode, l, r, { buffer = bufnr })
+        end
+
+        map('n', '<leader>hs', gs.stage_hunk)
+        map('n', '<leader>hr', gs.reset_hunk)
+        map('n', '<leader>hp', gs.preview_hunk)
+        map('v', '<leader>hs', function()
+          gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+        end)
+      end,
+    }
   },
   { -- 折りたたみ行をシンタックスハイライトしたり、LSPのfolding rangeを利用して折り畳めるようにするプラグイン
     'kevinhwang91/nvim-ufo',
