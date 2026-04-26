@@ -33,27 +33,15 @@ vim.api.nvim_create_autocmd('WinEnter', {
 
 -- HACK: :checkhealth vim.lsp の "Unknown filetype" 警告を抑制
 -- (nvim-lspconfigが未登録のfiletypeを多数含んでおりノイズになるため)
+-- M.checkのupvalueにあるサブ関数それぞれの report_warn をパッチする
 do
+  local suppress = require('suppress-health')
   local lsp_health = require 'vim.lsp.health'
-  local function patch(fn)
-    for i = 1, math.huge do
-      local name, val = debug.getupvalue(fn, i)
-      if not name then return end
-      if name == 'report_warn' and type(val) == 'function' then
-        debug.setupvalue(fn, i, function(msg, ...)
-          if type(msg) == 'string' and msg:find("Unknown filetype '", 1, true) then
-            return
-          end
-          return val(msg, ...)
-        end)
-        return
-      end
-    end
-  end
-  -- M.checkのupvalueからサブ関数を取り出してパッチ
   for i = 1, math.huge do
     local name, val = debug.getupvalue(lsp_health.check, i)
     if not name then break end
-    if type(val) == 'function' then patch(val) end
+    if type(val) == 'function' then
+      suppress.suppress({ "Unknown filetype '" }, val)
+    end
   end
 end

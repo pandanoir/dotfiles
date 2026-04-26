@@ -291,6 +291,48 @@ return {
         ui_select = true,
       },
     },
+    config = function(_, opts)
+      require('snacks').setup(opts)
+
+      -- HACK: :checkhealth snacks の不要なエラーを抑制する
+      -- 1. disabledなプラグインは "setup {disabled}" だけ表示してhealth()をスキップ
+      -- 2. picker の fd 関連エラーを抑制（fdを使わないため）
+      local snacks_health = require('snacks.health')
+      local orig_check = snacks_health.check
+      snacks_health.check = function()
+        local Snacks = require('snacks')
+        local disabled = {}
+        for _, p in ipairs(Snacks.meta.get()) do
+          if p.meta.needs_setup and not (Snacks.config[p.name] or {}).enabled then
+            disabled['Snacks.' .. p.name] = true
+          end
+        end
+
+        local suppressing = false
+        local orig = {}
+        for _, k in ipairs({ 'start', 'ok', 'warn', 'error', 'info' }) do
+          orig[k] = vim.health[k]
+        end
+
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.health.start = function(name, ...)
+          suppressing = disabled[name] or false
+          orig.start(name, ...)
+          if suppressing then orig.warn('setup {disabled}') end
+        end
+        for _, k in ipairs({ 'ok', 'warn', 'error', 'info' }) do
+          vim.health[k] = function(msg, ...)
+            if suppressing then return end
+            if type(msg) == 'string' and (msg:find("'fd'", 1, true) or msg:find("'fdfind'", 1, true)) then return end
+            return orig[k](msg, ...)
+          end
+        end
+
+        orig_check()
+
+        for k, fn in pairs(orig) do vim.health[k] = fn end
+      end
+    end,
   },
   { -- quickfixのUIを改善
     'stevearc/quicker.nvim',
