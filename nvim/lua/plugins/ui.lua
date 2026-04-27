@@ -156,12 +156,6 @@ return {
       }
     end,
   },
-  { -- LSPの進捗表示
-    'j-hui/fidget.nvim',
-    event = 'BufRead',
-    cond = not is_readonly,
-    config = true,
-  },
   { -- 検索時に全何件マッチしたか、何番目のマッチかをカーソル位置に表示
     'kevinhwang91/nvim-hlslens',
     init = function()
