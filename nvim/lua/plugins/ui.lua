@@ -1,6 +1,3 @@
--- no_plugin_maps = 1 の場合 macros/less.sh で起動したとみなす
-local is_readonly = vim.bo.readonly or vim.g.no_plugin_maps == 1
-
 return {
   { -- 行末の空白をハイライト
     'bronson/vim-trailing-whitespace',
