@@ -102,7 +102,25 @@ if command_exists nvim; then
   alias less="$(nvim --noplugin --headless +'echo $VIMRUNTIME' +q 2>&1)/scripts/less.sh"
   alias memo='NVIM_APPNAME=nvim-memo nvim'
   alias mo='memo'
-  alias -g V='| xargs nvim'
+
+  if [ -n "$NVIM" ]; then
+    # Neovim内のターミナル (toggleterm等) から親Neovimを操作する
+    nvopen() {
+      nvr -cc 'ToggleTermToggleAll' --remote-wait +'lua require("nvr-setup").setup_buf()' "$@"
+    }
+    nvyank() {
+      local tmpfile=$(mktemp)
+      cat > "$tmpfile"
+      nvim --server "$NVIM" --remote-expr "setreg('\"', readfile('$tmpfile'))"
+      rm -f "$tmpfile"
+    }
+    alias -g V='| xargs nvr --remote'
+    alias -g Y='| nvyank'
+    alias vim='nvopen'
+    export EDITOR='nvopen'
+  else
+    alias -g V='| xargs nvim'
+  fi
 fi
 
 if command_exists eza; then
