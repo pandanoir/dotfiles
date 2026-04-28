@@ -2,7 +2,7 @@ vim.pack.add({
   { src = 'https://github.com/folke/lazy.nvim.git', version = 'stable' },
 }, { load = true })
 
-vim.keymap.set('n', '<leader>l', ':Lazy<CR>', { desc = 'open lazy.nvim window' })
+vim.keymap.set('n', '<leader>l', '<cmd>Lazy<CR>', { desc = 'open lazy.nvim window' })
 
 -- Any lua file in ~/.config/nvim/lua/plugins/*.lua will be automatically merged in the main plugin spec
 require 'lazy'.setup {

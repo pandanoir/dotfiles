@@ -2,16 +2,22 @@ local keymap = vim.keymap.set
 
 keymap('n', 'J', 'gJ')
 
-keymap('n', '<CR>', ':<C-u>w<CR>')
-keymap('n', '<leader><CR>', ':<C-u>noa w<CR>')
+keymap('n', '<CR>', '<cmd>w<CR>')
+keymap('n', '<leader><CR>', '<cmd>noa w<CR>')
 
-keymap('n', '<leader><tab>h', ':set nohlsearch!<CR><Esc>', { desc = 'toggle search highlight' })
-keymap('n', '<leader><tab>w', ':set wrap!<CR>', { desc = 'toggle wrap opt' })
+keymap('n', '<leader><tab>h', function()
+  vim.o.hlsearch = not vim.o.hlsearch
+  vim.notify(('Search highlight %s'):format(vim.o.hlsearch and 'enabled' or 'disabled'))
+end, { desc = 'toggle search highlight' })
+keymap('n', '<leader><tab>w', function()
+  vim.o.wrap = not vim.o.wrap
+  vim.notify(('Line wrap %s'):format(vim.o.wrap and 'enabled' or 'disabled'))
+end, { desc = 'toggle wrap opt' })
 
 keymap('n', '<leader>e', vim.diagnostic.open_float, { silent = true, desc = 'show diagnostics in a floating window' })
 
 -- qで終了、Qでマクロ
-keymap('n', 'q', ':<C-u>q<CR>')
+keymap('n', 'q', '<cmd>q<CR>')
 keymap('n', 'Q', 'q')
 
 keymap('n', '-', '"_')
@@ -26,11 +32,11 @@ keymap('i', 'fd', '<Esc>', { remap = true, silent = true })
 keymap('i', '<C-f>', '<Right>', { silent = true })
 keymap('i', '<C-b>', '<Left>', { silent = true })
 
-keymap('n', '<C-n>', ':bnext<CR>')
-keymap('n', '<C-p>', ':bprev<CR>')
+keymap('n', '<C-n>', '<cmd>bnext<CR>')
+keymap('n', '<C-p>', '<cmd>bprev<CR>')
 
-keymap('n', '<leader>c', ':<C-u>enew<CR>', { desc = 'open a new buffer' })
-keymap('n', '<leader>q', ':<C-u>BufDel<CR>', { desc = 'quit' })
+keymap('n', '<leader>c', '<cmd>enew<CR>', { desc = 'open a new buffer' })
+keymap('n', '<leader>q', '<cmd>BufDel<CR>', { desc = 'quit' })
 keymap('n', '<leader><Space>', '<C-v>')
 
 -- 貼り付けたテキストの末尾へ自動的に移動する

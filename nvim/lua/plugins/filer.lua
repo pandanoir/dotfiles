@@ -4,7 +4,7 @@ return {
     opts = {
       float = {
         padding = 4,
-        max_width = 150,
+        max_width = 100,
         border = 'rounded',
         get_win_title = function() return '' end, -- タイトルはwinbarで表示するのでボーダー上は消す
         override = function(conf)
@@ -36,7 +36,7 @@ return {
         return vim.fn.fnamemodify(dir, ':~')
       end
 
-      vim.keymap.set('n', '<leader>s', ':<C-u>Oil --float<CR>')
+      vim.keymap.set('n', '<leader>s', '<cmd>Oil --float<CR>')
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'oil',
         callback = function()
