@@ -1,6 +1,7 @@
 return {
   { -- コードフォーマッター統合
     'stevearc/conform.nvim',
+    cond = not require 'env'.from_claude,
     init = function()
       vim.keymap.set('n', '<leader>F', require 'conform'.format, { silent = true, desc = 'format' })
     end,
