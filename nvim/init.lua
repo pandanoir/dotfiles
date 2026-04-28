@@ -3,6 +3,8 @@ if vim.loader then vim.loader.enable() end
 vim.cmd.colorscheme 'mydefault'
 
 require 'options'
+require 'indent'
+require 'largefile'
 require 'disable-providers'
 require 'keymappings'
 require 'setup-lazynvim'
