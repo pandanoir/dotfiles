@@ -1,15 +1,14 @@
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
-    local map = vim.keymap.set
-    local opt = function(desc)
-      return { silent = true, buffer = ev.buf, desc = desc }
+    local map = function(mode, lhs, rhs, desc)
+      vim.keymap.set(mode, lhs, rhs, { silent = true, buffer = ev.buf, desc = desc })
     end
-    map('n', 'gd', vim.lsp.buf.definition, opt('go to definition'))
-    map('n', 'gt', vim.lsp.buf.type_definition, opt('go to type definition'))
-    map('n', 'grr', '<cmd>Telescope lsp_references<CR>', opt('find references'))
-    map('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, opt())
-    map('n', 'grn', vim.lsp.buf.rename, opt('rename using LSP'))
-    map('n', 'gra', vim.lsp.buf.code_action, opt('open code action'))
+    map('n', 'gd', vim.lsp.buf.definition, 'go to definition')
+    map('n', 'gt', vim.lsp.buf.type_definition, 'go to type definition')
+    map('n', 'grr', require 'telescope.builtin'.lsp_references, 'find references')
+    map('n', 'grn', vim.lsp.buf.rename, 'rename using LSP')
+    map('n', 'gra', vim.lsp.buf.code_action, 'open code action')
+    map('n', 'K', function() vim.lsp.buf.hover { border = 'rounded' } end)
   end
 })
 
