@@ -98,4 +98,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- ステータスバーを削除
 vim.o.cmdheight = 0
+vim.o.laststatus = 0
+vim.o.showmode = false
+vim.o.ruler = false
