@@ -152,9 +152,6 @@ return {
         }
       end,
     },
-    init = function()
-      vim.o.laststatus = 3
-    end,
     event = 'VeryLazy',
   },
   { -- ターミナル統合
