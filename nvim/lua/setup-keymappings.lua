@@ -1,69 +1,68 @@
-local keymap = vim.keymap.set
+vim.keymap.set('n', 'J', 'gJ')
 
-keymap('n', 'J', 'gJ')
+vim.keymap.set('n', '<CR>', '<cmd>w<CR>')
+vim.keymap.set('n', '<leader><CR>', '<cmd>noa w<CR>')
 
-keymap('n', '<CR>', '<cmd>w<CR>')
-keymap('n', '<leader><CR>', '<cmd>noa w<CR>')
-
-keymap('n', '<leader><tab>h', function()
+-- オプショントグル系
+vim.keymap.set('n', '<leader><tab>h', function()
   vim.o.hlsearch = not vim.o.hlsearch
   vim.notify(('Search highlight %s'):format(vim.o.hlsearch and 'enabled' or 'disabled'))
 end, { desc = 'toggle search highlight' })
-keymap('n', '<leader><tab>w', function()
+vim.keymap.set('n', '<leader><tab>w', function()
   vim.o.wrap = not vim.o.wrap
   vim.notify(('Line wrap %s'):format(vim.o.wrap and 'enabled' or 'disabled'))
 end, { desc = 'toggle wrap opt' })
 
-keymap('n', '<leader>e', vim.diagnostic.open_float, { silent = true, desc = 'show diagnostics in a floating window' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,
+  { silent = true, desc = 'show diagnostics in a floating window' })
 
 -- qで終了、Qでマクロ
-keymap('n', 'q', '<cmd>q<CR>')
-keymap('n', 'Q', 'q')
+vim.keymap.set('n', 'q', '<cmd>q<CR>')
+vim.keymap.set('n', 'Q', 'q')
 
-keymap('n', '-', '"_')
+
+-- ブラックホールレジスタ
+vim.keymap.set('n', '-', '"_')
 
 -- クリップボードへコピー
-keymap('n', '<leader>y', '"+y', { desc = 'copy to clipboard' })
-keymap('v', '<leader>y', '"+y', { desc = 'copy to clipboard' })
-keymap('n', '<leader>p', '"0p', { desc = 'paste from yank register' })
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'copy to clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'copy to clipboard' })
+vim.keymap.set('n', '<leader>p', '"0p', { desc = 'paste from yank register' })
 
-keymap('i', 'fd', '<Esc>', { remap = true, silent = true })
+vim.keymap.set('i', 'fd', '<Esc>', { remap = true, silent = true })
 
-keymap('i', '<C-f>', '<Right>', { silent = true })
-keymap('i', '<C-b>', '<Left>', { silent = true })
+vim.keymap.set('n', '<C-n>', '<cmd>bnext<CR>')
+vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>')
 
-keymap('n', '<C-n>', '<cmd>bnext<CR>')
-keymap('n', '<C-p>', '<cmd>bprev<CR>')
-
-keymap('n', '<leader>c', '<cmd>enew<CR>', { desc = 'open a new buffer' })
-keymap('n', '<leader>q', '<cmd>BufDel<CR>', { desc = 'quit' })
-keymap('n', '<leader><Space>', '<C-v>')
+vim.keymap.set('n', '<leader>c', '<cmd>enew<CR>', { desc = 'open a new buffer' })
+vim.keymap.set('n', '<leader>q', '<cmd>BufDel<CR>', { desc = 'quit' })
+vim.keymap.set({ 'n', 'v' }, '<leader><Space>', '<C-v>')
 
 -- 貼り付けたテキストの末尾へ自動的に移動する
-keymap('v', 'y', 'y`]', { silent = true })
-keymap('v', 'p', 'p`]', { silent = true })
-keymap('n', 'p', 'p`]', { silent = true })
+vim.keymap.set('v', 'y', 'y`]', { silent = true })
+vim.keymap.set('v', 'p', 'p`]', { silent = true })
+vim.keymap.set('n', 'p', 'p`]', { silent = true })
 
 -- <, >で連続してインデントを操作
-keymap('x', '<', '<gv')
-keymap('x', '>', '>gv')
+vim.keymap.set('x', '<', '<gv')
+vim.keymap.set('x', '>', '>gv')
 
 -- i<space>でWORD選択
-keymap('o', 'i<space>', 'iW')
-keymap('x', 'i<space>', 'iW')
+vim.keymap.set('o', 'i<space>', 'iW')
+vim.keymap.set('x', 'i<space>', 'iW')
 
 -- Uでリドゥ
-keymap('n', 'U', '<c-r>')
+vim.keymap.set('n', 'U', '<c-r>')
 
-keymap('t', '<Esc>', [[<C-\><C-n>]])
-keymap('t', 'fd', [[<C-\><C-n>]])
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]])
+vim.keymap.set('t', 'fd', [[<C-\><C-n>]])
 
 
 -- :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
 vim.cmd [[cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's']]
 
 -- %% でアクティブなファイルが含まれているディレクトリを手早く展開
-keymap('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
+vim.keymap.set('c', '%%', 'getcmdtype() == ":" ? expand("%:h")."/" : "%%"', { expr = true })
 
 -- todoリストを簡単に入力する
 vim.api.nvim_create_autocmd('FileType', {
@@ -82,7 +81,7 @@ vim.api.nvim_create_autocmd('FileType', {
       end
     end
 
-    keymap('n', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
-    keymap('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+    vim.keymap.set('n', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
+    vim.keymap.set('v', '<leader>x', ToggleCheckbox, { buffer = true, silent = true })
   end
 })
