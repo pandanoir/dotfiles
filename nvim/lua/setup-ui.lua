@@ -1,3 +1,7 @@
+vim.opt.cursorline = true
+vim.opt.bg = 'dark'
+vim.opt.signcolumn = 'yes:3'
+
 -- extuiが使えたら設定する
 local ok, extui = pcall(require, 'vim._core.ui2')
 if not ok then return end

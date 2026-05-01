@@ -1,3 +1,8 @@
+-- カーソル行のdiagnosticだけ表示する
+vim.diagnostic.config {
+  virtual_text = { current_line = true }
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local map = function(mode, lhs, rhs, desc)
