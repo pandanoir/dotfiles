@@ -29,15 +29,6 @@ return {
           return vim.b[buf].large_file == true
         end,
       },
-      textsubjects = {
-        enable = true,
-        prev_selection = ',',
-        keymaps = {
-          ['.'] = 'textsubjects-smart',
-          [';'] = 'textsubjects-container-outer',
-          ['i;'] = 'textsubjects-container-inner',
-        },
-      },
     },
     init = function()
       -- nvim-treesitter master ブランチ(archived)互換パッチ:
@@ -56,10 +47,5 @@ return {
         end
       end
     end,
-    dependencies = {
-      { -- treesitterベースのテキストオブジェクト拡張
-        'RRethy/nvim-treesitter-textsubjects',
-      },
-    },
   },
 }
