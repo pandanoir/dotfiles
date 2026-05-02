@@ -1,0 +1,63 @@
+name: Update Neovim Screenshot
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "nvim/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: sudo apt update && sudo apt install -y ripgrep
+      - name: Install Nerd Font
+        run: |
+          mkdir -p ~/.local/share/fonts
+          curl -fLo /tmp/HackNerdFont.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
+          unzip /tmp/HackNerdFont.zip -d ~/.local/share/fonts
+          fc-cache -fv
+      - name: Setup dotfiles
+        run: |
+          ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
+          ${GITHUB_WORKSPACE}/install.sh
+          nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
+          nvim --headless "+TSUpdateSync" "+lua require('mason-registry').refresh()" +qa 2>/dev/null || true
+      - name: Save old screenshots
+        run: |
+          cp assets/nvim-startup.png /tmp/nvim-startup-old.png
+          cp assets/nvim-screenshot.png /tmp/nvim-screenshot-old.png
+      - uses: charmbracelet/vhs-action@v2
+      - name: Resize screenshots
+        run: |
+          mogrify -resize 1200x assets/nvim-startup.png assets/nvim-screenshot.png
+      - name: Check for visual changes
+        id: check
+        run: |
+          for img in nvim-startup nvim-screenshot; do
+            diff=$(compare -metric AE "assets/${img}.png" "/tmp/${img}-old.png" /dev/null 2>&1) || true
+            if [ "$diff" != "0" ]; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "Screenshots unchanged, skipping commit."
+      - name: Commit and push
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/nvim-startup.png assets/nvim-screenshot.png
+          git commit -m "docs: update neovim screenshot" && git push
