@@ -4,6 +4,7 @@ Set FontSize 42
 Set Width 2400
 Set Height 1600
 Set Theme "Molokai"
+Set Env "TERM" "xterm-256color"
 
 Type "nvim"
 Enter
