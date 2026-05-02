@@ -25,6 +25,9 @@ return {
             },
           },
           biome = { require_cwd = true },
+          deno_fmt = {
+            append_args = { '--line-width', '120' },
+          },
           injected = {
             options = {
               lang_to_formatters = {
