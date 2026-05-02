@@ -47,25 +47,19 @@ jobs:
           vhs .github/nvim-screenshot.tape
       - name: Resize screenshots
         run: mogrify -resize 1200x assets/nvim-startup.png assets/nvim-screenshot.png
-      - name: Check for visual changes
-        id: check
+      - name: Commit and push changed screenshots
         run: |
+          changed=()
           for img in nvim-startup nvim-screenshot; do
-            if [ ! -f "/tmp/${img}-old.png" ]; then
-              echo "changed=true" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            diff=$(compare -metric AE "assets/${img}.png" "/tmp/${img}-old.png" /dev/null 2>&1) || true
-            if [ "$diff" != "0" ]; then
-              echo "changed=true" >> "$GITHUB_OUTPUT"
-              exit 0
+            if ! compare -metric AE "assets/${img}.png" "/tmp/${img}-old.png" /dev/null 2>/dev/null; then
+              changed+=("assets/${img}.png")
             fi
           done
-          echo "Screenshots unchanged, skipping commit."
-      - name: Commit and push
-        if: steps.check.outputs.changed == 'true'
-        run: |
+          if [ ${#changed[@]} -eq 0 ]; then
+            echo "Screenshots unchanged, skipping commit."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/nvim-startup.png assets/nvim-screenshot.png
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${changed[@]}"
           git commit -m "docs: update neovim screenshot" && git push
