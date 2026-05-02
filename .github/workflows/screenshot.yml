@@ -34,7 +34,7 @@ jobs:
           ${GITHUB_WORKSPACE}/install.sh
           nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
           nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
-          nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa') end, 15000)" 2>/dev/null || true
+          nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa') end, 30000)" 2>/dev/null || true
       - name: Save old screenshots
         run: |
           cp assets/nvim-startup.png /tmp/nvim-startup-old.png 2>/dev/null || true
