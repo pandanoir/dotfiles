@@ -20,10 +20,6 @@ source "$DOTDIR/_scripts/init_config.sh"
 
 install_tools
 check_requirements
-
-if [ $# -eq 0 ] || [ "$1" = "deploy" ] || [ "$1" = "-d" ]; then
-  deploy
-fi
-if [ $# -eq 0 ] || [ "$1" = "init" ] || [ "$1" = "-i" ]; then
-  init_config
-fi
+cmd=${1:-}
+[[ -z $cmd || $cmd == deploy || $cmd == -d ]] && deploy
+[[ -z $cmd || $cmd == init   || $cmd == -i ]] && init_config

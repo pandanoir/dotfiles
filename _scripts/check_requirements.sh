@@ -31,19 +31,15 @@ check_requirements() {
     fi
   fi
 
-  if ! command_exists tmux; then
-    warn "tmux isn't installed"
-    is_every_requirement_met=false
-  else
-    if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
-      info "install tpm"
-      git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
-    elif is_update_mode; then
-      info "update tpm"
-      cd "$XDG_CONFIG_HOME/tmux/plugins/tpm"
-      git pull
-      cd -
-    fi
+  # tmux
+  if ! dir_exists "$XDG_CONFIG_HOME/tmux/plugins/tpm"; then
+    info "install tpm"
+    git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME/tmux/plugins/tpm"
+  elif is_update_mode; then
+    info "update tpm"
+    cd "$XDG_CONFIG_HOME/tmux/plugins/tpm"
+    git pull
+    cd -
   fi
 
   if $is_every_requirement_met; then
