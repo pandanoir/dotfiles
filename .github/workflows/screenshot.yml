@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feat/screenshot
     paths:
       - "nvim/**"
   workflow_dispatch:
