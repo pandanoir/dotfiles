@@ -1,9 +1,8 @@
 return {
   { -- シンタックスハイライトとテキストオブジェクト
     'nvim-treesitter/nvim-treesitter',
-    event = 'VeryLazy',
+    lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
     opts = {
       ensure_installed = {
         'javascript',
