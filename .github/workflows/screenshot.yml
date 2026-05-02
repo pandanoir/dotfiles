@@ -38,8 +38,8 @@ jobs:
           nvim --headless "+TSUpdateSync" "+lua require('mason-registry').refresh()" +qa 2>/dev/null || true
       - name: Save old screenshots
         run: |
-          cp assets/nvim-startup.png /tmp/nvim-startup-old.png
-          cp assets/nvim-screenshot.png /tmp/nvim-screenshot-old.png
+          cp assets/nvim-startup.png /tmp/nvim-startup-old.png 2>/dev/null || true
+          cp assets/nvim-screenshot.png /tmp/nvim-screenshot-old.png 2>/dev/null || true
       - uses: charmbracelet/vhs-action@v2
       - name: Resize screenshots
         run: |
@@ -48,6 +48,10 @@ jobs:
         id: check
         run: |
           for img in nvim-startup nvim-screenshot; do
+            if [ ! -f "/tmp/${img}-old.png" ]; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             diff=$(compare -metric AE "assets/${img}.png" "/tmp/${img}-old.png" /dev/null 2>&1) || true
             if [ "$diff" != "0" ]; then
               echo "changed=true" >> "$GITHUB_OUTPUT"
