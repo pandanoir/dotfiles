@@ -34,7 +34,7 @@ jobs:
           ${GITHUB_WORKSPACE}/install.sh
           nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
           nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
-          nvim --headless "+lua vim.defer_fn(function() vim.cmd('qa') end, 30000)" 2>/dev/null || true
+          nvim --headless "+lua local r=require('mason-registry') local m=require('mason-lspconfig.mappings').lspconfig_to_package local s=require('lazy.core.config').plugins['mason-lspconfig'].opts.ensure_installed local function check() for _,v in ipairs(s) do if m[v] and not r.is_installed(m[v]) then vim.defer_fn(check,2000) return end end vim.cmd('qa') end vim.defer_fn(check,5000)" 2>/dev/null || true
       - name: Save old screenshots
         run: |
           cp assets/nvim-startup.png /tmp/nvim-startup-old.png 2>/dev/null || true
