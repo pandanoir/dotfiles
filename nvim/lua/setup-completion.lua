@@ -2,6 +2,9 @@
 -- 0.11以下では何もしない（plugins/completion.lua の nvim-cmp が動作する）
 if not require('env').has_native_completion then return end
 
+-- 日報ファイルでもオフにする
+if vim.env.NVIM_APPNAME == 'nvim-memo' then return end
+
 local function set_default_pumstyle()
   vim.o.pumborder = 'rounded'
   vim.o.pumblend = 10
