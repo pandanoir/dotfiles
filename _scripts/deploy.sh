@@ -1,4 +1,4 @@
-source "$DOTDIR/scripts/utils.sh"
+source "$DOTDIR/_scripts/utils.sh"
 
 symlink() {
   # すでにシンボリックリンクが存在する場合は作成しない

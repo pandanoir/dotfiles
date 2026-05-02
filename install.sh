@@ -18,10 +18,10 @@ if ! dir_exists "$DOTDIR"; then
   git clone https://github.com/pandanoir/dotfiles "$DOTDIR"
 fi
 
-source "$DOTDIR/scripts/check_requirements.sh"
-source "$DOTDIR/scripts/install_tools.sh"
-source "$DOTDIR/scripts/deploy.sh"
-source "$DOTDIR/scripts/init_config.sh"
+source "$DOTDIR/_scripts/check_requirements.sh"
+source "$DOTDIR/_scripts/install_tools.sh"
+source "$DOTDIR/_scripts/deploy.sh"
+source "$DOTDIR/_scripts/init_config.sh"
 
 install_tools
 check_requirements

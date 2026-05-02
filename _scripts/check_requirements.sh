@@ -1,4 +1,4 @@
-source "$DOTDIR/scripts/utils.sh"
+source "$DOTDIR/_scripts/utils.sh"
 
 check_requirements() {
   info "check requirements..."

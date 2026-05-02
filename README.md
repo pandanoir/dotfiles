@@ -1,6 +1,6 @@
 [![linux](https://github.com/pandanoir/dotfiles/actions/workflows/test-linux.yml/badge.svg?branch=master)](https://github.com/pandanoir/dotfiles/actions/workflows/test-linux.yml)
 
-![Neovim Screenshot](assets/nvim-startup.png)
+![Neovim Screenshot](_assets/nvim-startup.png)
 
 # setup
 

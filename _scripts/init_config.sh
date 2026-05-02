@@ -1,4 +1,4 @@
-source "$DOTDIR/scripts/utils.sh"
+source "$DOTDIR/_scripts/utils.sh"
 
 init_config() {
   info "start to initialize config"
