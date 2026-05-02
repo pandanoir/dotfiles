@@ -5,8 +5,6 @@ on:
     branches:
       - master
       - feat/screenshot
-    paths:
-      - "nvim/**"
   workflow_dispatch:
 
 permissions:
@@ -23,7 +21,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg
+      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg imagemagick
       - name: Install Nerd Font
         run: |
           mkdir -p ~/.local/share/fonts
