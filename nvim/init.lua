@@ -2,6 +2,8 @@
 if vim.loader then vim.loader.enable() end
 vim.cmd.colorscheme 'mydefault'
 
+--test
+
 require 'disable-providers'
 require 'options'
 require 'optimize-largefile'
