@@ -1,6 +1,7 @@
 return {
   { -- nvim-lspconfig の設定を利用してlanguage serverの起動、セットアップをする、masonを介してlanguage serverの自動インストールもする
     'williamboman/mason-lspconfig.nvim',
+    cond = not require('env').is_ci,
     opts = {
       ensure_installed = {
         'denols',
