@@ -9,6 +9,8 @@ init_config() {
   git config --global alias.b branch
   git config --global alias.unstage "reset HEAD"
   git config --global alias.un "reset HEAD"
+  git config --global alias.slog "log --pretty=format:'%C(yellow)commit %H %C(auto)%d%C(reset) %C(dim blue)%GK%C(reset)%n%C(blue)Author:%C(reset) %an <%ae>%n%C(blue)Date:%C(reset)   %ad%n%n    %s%n%b'"
+  git config --global alias.sl '!git slog'
   git config --global rebase.autostash true
 
   if ! file_exists "$ZDOTDIR/.zshrc.local"; then
