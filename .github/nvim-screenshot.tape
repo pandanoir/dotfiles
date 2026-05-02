@@ -5,6 +5,7 @@ Set Width 2400
 Set Height 1600
 Set Theme "Molokai"
 Env TERM "xterm-256color"
+Env COLORTERM "truecolor"
 
 Type "nvim"
 Enter
