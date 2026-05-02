@@ -23,7 +23,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: sudo apt update && sudo apt install -y ripgrep
+      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg
       - name: Install Nerd Font
         run: |
           mkdir -p ~/.local/share/fonts
@@ -40,7 +40,14 @@ jobs:
         run: |
           cp assets/nvim-startup.png /tmp/nvim-startup-old.png 2>/dev/null || true
           cp assets/nvim-screenshot.png /tmp/nvim-screenshot-old.png 2>/dev/null || true
-      - uses: charmbracelet/vhs-action@v2
+      - name: Install VHS
+        run: |
+          sudo apt install -y ttyd
+          go install github.com/charmbracelet/vhs@latest
+      - name: Run VHS
+        run: |
+          export PATH="$HOME/go/bin:$PATH"
+          vhs .github/nvim-screenshot.tape
       - name: Resize screenshots
         run: |
           mogrify -resize 1200x assets/nvim-startup.png assets/nvim-screenshot.png
