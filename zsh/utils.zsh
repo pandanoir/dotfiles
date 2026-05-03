@@ -38,15 +38,18 @@ notify() {
   if is_claude; then
     return
   fi
-  blue="\033[34m"
-  reset="\033[0m"
-  echo -ne "\033[1K\r${blue}[INFO]${reset} $1"
+  local blue="\033[34m"
+  local reset="\033[0m"
+  local cols=${COLUMNS:-80}
+  # cols - [INFO]の文字数(7) が1行の最大文字数になるよう切り詰め
+  local max_len=$((cols - 7))
+  echo -ne "\033[1K\r${blue}[INFO]${reset} ${1:0:$max_len}"
 }
 source_notify() {
-  notify "loading $1..."
+  notify "loading ${1/#$HOME/~}..."
   source "$1"
 }
 source_notify_if_exists() {
-  notify "loading $1..."
+  notify "loading ${1/#$HOME/~}..."
   source_if_exists "$1"
 }
