@@ -44,6 +44,7 @@ deploy() {
   done
   symlink zsh/zshrc.zsh "$ZDOTDIR/.zshrc"
   symlink zsh/zprofile.zsh "$ZDOTDIR/.zprofile"
+  symlink zsh/profile.d "$ZDOTDIR/profile.d"
   symlink zsh/zshenv "$HOME/.zshenv"
 
   # zellij
