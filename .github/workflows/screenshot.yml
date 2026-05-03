@@ -22,7 +22,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg ttyd
+      - run: sudo apt update && sudo apt install -y ripgrep
       - name: Install Nerd Font
         run: |
           mkdir -p ~/.local/share/fonts
@@ -35,19 +35,12 @@ jobs:
           ${GITHUB_WORKSPACE}/install.sh
           CI=true nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
           CI=true nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
-      - name: Run VHS
-        run: |
-          go install github.com/charmbracelet/vhs@latest
-          export PATH="$HOME/go/bin:$PATH"
-          vhs .github/nvim-screenshot.tape
-      - name: Resize screenshots
-        run: |
-          for img in assets/nvim-startup.png assets/nvim-screenshot.png; do
-            ffmpeg -i "$img" -vf scale=1200:-1 -map_metadata -1 /tmp/resized.png -y
-            mv /tmp/resized.png "$img"
-          done
+      - uses: pandanoir/terminal-screenshot-action@v1
+        with:
+          vhs-tape: .github/nvim-screenshot.tape
+          resize-width: "1200"
       - uses: fregante/setup-git-user@v2
       - name: Commit and push changed screenshots
         run: |
-          git add assets/nvim-startup.png assets/nvim-screenshot.png
+          git add _assets
           git commit -m "docs: update neovim screenshot" && git push || echo "Screenshots unchanged, skipping commit."
