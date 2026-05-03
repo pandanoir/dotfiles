@@ -22,7 +22,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg imagemagick ttyd
+      - run: sudo apt update && sudo apt install -y ripgrep ffmpeg ttyd
       - name: Install Nerd Font
         run: |
           mkdir -p ~/.local/share/fonts
@@ -35,31 +35,19 @@ jobs:
           ${GITHUB_WORKSPACE}/install.sh
           CI=true nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
           CI=true nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
-      - name: Save old screenshots
-        run: |
-          cp assets/nvim-startup.png /tmp/nvim-startup-old.png 2>/dev/null || true
-          cp assets/nvim-screenshot.png /tmp/nvim-screenshot-old.png 2>/dev/null || true
-      - name: Install VHS
-        run: go install github.com/charmbracelet/vhs@latest
       - name: Run VHS
         run: |
+          go install github.com/charmbracelet/vhs@latest
           export PATH="$HOME/go/bin:$PATH"
           vhs .github/nvim-screenshot.tape
       - name: Resize screenshots
-        run: mogrify -resize 1200x assets/nvim-startup.png assets/nvim-screenshot.png
+        run: |
+          for img in assets/nvim-startup.png assets/nvim-screenshot.png; do
+            ffmpeg -i "$img" -vf scale=1200:-1 -map_metadata -1 /tmp/resized.png -y
+            mv /tmp/resized.png "$img"
+          done
+      - uses: fregante/setup-git-user@v2
       - name: Commit and push changed screenshots
         run: |
-          changed=()
-          for img in nvim-startup nvim-screenshot; do
-            if ! compare -metric AE "assets/${img}.png" "/tmp/${img}-old.png" /dev/null 2>/dev/null; then
-              changed+=("assets/${img}.png")
-            fi
-          done
-          if [ ${#changed[@]} -eq 0 ]; then
-            echo "Screenshots unchanged, skipping commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "${changed[@]}"
-          git commit -m "docs: update neovim screenshot" && git push
+          git add assets/nvim-startup.png assets/nvim-screenshot.png
+          git commit -m "docs: update neovim screenshot" && git push || echo "Screenshots unchanged, skipping commit."
