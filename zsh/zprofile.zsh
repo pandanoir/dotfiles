@@ -120,10 +120,10 @@ fi
 
 # ruby ============================
 notify "setup ruby..."
-RBENV_ROOT="$XDG_DATA_HOME/rbenv"
-if file_exists "$RBENV_ROOT/bin/rbenv"; then
+RBENV_ROOT="$HOME/.rbenv"
+if dir_exists $RBENV_ROOT; then
   export RBENV_ROOT
-  add_to_path_if_not_exists "$RBENV_ROOT/bin"
+  add_to_path_if_not_exists "$RBENV_ROOT/shims"
   eval "$(rbenv init -)"
 fi
 
