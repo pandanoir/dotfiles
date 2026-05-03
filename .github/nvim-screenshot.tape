@@ -10,11 +10,11 @@ Env COLORTERM "truecolor"
 Type "nvim"
 Enter
 Sleep 3s
-Screenshot assets/nvim-startup.png
+Screenshot _assets/nvim-startup.png
 
 Type ":e nvim/init.lua"
 Enter
 Sleep 2s
-Screenshot assets/nvim-screenshot.png
+Screenshot _assets/nvim-screenshot.png
 Type ":qa!"
 Enter
