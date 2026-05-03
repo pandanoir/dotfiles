@@ -2,7 +2,7 @@
 if vim.loader then vim.loader.enable() end
 vim.cmd.colorscheme 'mydefault'
 
--- test 1
+-- test 2
 
 require 'disable-providers'
 require 'register-filetype'
