@@ -41,5 +41,5 @@ jobs:
       - uses: fregante/setup-git-user@v2
       - name: Commit and push changed screenshots
         run: |
-          git add assets/nvim-startup.png assets/nvim-screenshot.png
+          git add _assets
           git commit -m "docs: update neovim screenshot" && git push || echo "Screenshots unchanged, skipping commit."
