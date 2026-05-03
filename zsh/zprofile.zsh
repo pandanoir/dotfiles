@@ -55,6 +55,10 @@ if dir_exists "$VOLTA_HOME"; then
   add_to_path_if_not_exists "$VOLTA_HOME/bin"
 fi
 
+if command_exists mise; then
+  eval "$(mise activate zsh)"
+fi
+
 if dir_exists $HOME/.nodebrew; then
   export NODE_PATH="$HOME/.nodebrew/current/lib/node_modules"
   add_to_path_if_not_exists "$HOME/.nodebrew/current/bin"
