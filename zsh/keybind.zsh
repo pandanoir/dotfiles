@@ -18,10 +18,11 @@ bindkey '^Z' fancy-ctrl-z
 # 表示: "ステータス ファイル名  ディレクトリ" / preview: git diff
 __fzf_git_files() {
   local item
+  local preview_cmd=$'git diff --color $(echo {} | awk -F "  " \'{dir=$NF; $NF=""; print dir substr($0,4)}\') | tail -n +5'
 
   git status --short --untracked-files |
     awk -F/ 'OFS="/"{file=$NF; $NF=""; dir=substr($0,4); status=substr($0,0,3); print status file "  \033[90m" dir "\033[0m"}' |
-    $(__fzfcmd) +s +m -e --multi --ansi --reverse --preview='git diff --color $('"echo {} | awk -F '  ' 'OFS=\"  \"{dir=\$NF; \$NF=\"\"; print dir substr(\$0,4)}') | tail -n +5" |
+    $(__fzfcmd) +s -e --preview="$preview_cmd" |
     awk -F"  " 'OFS="  "{dir=$NF; $NF=""; print dir substr($0,4)}' |
     while read item; do
       echo -n "${(q)item} "
@@ -47,9 +48,7 @@ __fzf_local_branch() {
   git for-each-ref --sort=-committerdate refs/heads/ \
     --format=$'%(refname:short)\t%(committerdate:relative)\t%(subject)' |
     awk -F'\t' '{printf "%s  \033[33m%s\033[0m  \033[90m%s\033[0m\n", $1, $2, $3}' |
-    $(__fzfcmd) +s +m -e --ansi --reverse \
-      --preview='git log --oneline --graph --decorate --color -20 {1}' \
-      --preview-window=right:50% |
+    $(__fzfcmd) +s +m -e --preview='git log --oneline --graph --decorate --color -20 {1}' --preview-window=right:50% |
     awk '{print $1}' | while read item; do
       echo -n "${(q)item} "
     done
@@ -77,9 +76,7 @@ __fzf_remote_branch() {
     --format=$'%(refname:lstrip=3)\t%(committerdate:relative)\t%(subject)' |
     grep -v '^HEAD$' |
     awk -F'\t' '{printf "%s  \033[33m%s\033[0m  \033[90m%s\033[0m\n", $1, $2, $3}' |
-    $(__fzfcmd) +s +m -e --ansi --reverse \
-    --preview='git log --oneline --graph --decorate --color -20 origin/{1}' \
-    --preview-window=right:50% |
+    $(__fzfcmd) +s +m -e --preview='git log --oneline --graph --decorate --color -20 origin/{1}' --preview-window=right:50% |
     awk '{print $1}' | while read item; do
     echo -n "${(q)item} "
   done
@@ -99,11 +96,25 @@ bindkey '\es' fzf-remote-widget
 # ^T/^W: ファイルをfzfで選択してカーソル位置に挿入
 # 表示: "ファイル名  ディレクトリ" (ファイル名先頭で検索しやすい) / preview: bat
 __fzf_files() {
-  local item
+  local item file_candidates_cmd preview_cmd
 
-  rg --files --hidden --follow --glob '!.git/*' |
+  if command_exists rg; then
+    file_candidates_cmd='rg --files --hidden --follow --glob "!.git/*"'
+  elif command_exists ag; then
+    file_candidates_cmd="ag -g ''"
+  else
+    file_candidates_cmd="find -L . -type f -not -path './.git/*' | cut -c3-"
+  fi
+
+  if command_exists bat; then
+    preview_cmd='bat --color=always --style=header,grid --line-range :100 {2..}{1}'
+  else
+    preview_cmd='cat {2..}{1}'
+  fi
+
+  eval "$file_candidates_cmd" |
     awk -F/ 'OFS="/"{file=$NF; $NF=""; dir=$0; print file "  \033[90m" $0 "\033[0m"}' |
-    $(__fzfcmd) +s +m -e --multi --ansi --reverse --with-nth=1.. --preview="bat --color=always --style=header,grid --line-range :100 {2..}{1}" |
+    $(__fzfcmd) +s -e --with-nth=1.. --bind="alt-p:toggle-preview" --preview="$preview_cmd" |
     awk -F"  " 'OFS=" "{file=$1; $1=""; print $0 file}' |
     sed 's/^ //' |
     while read item; do
