@@ -15,6 +15,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
     - uses: actions/checkout@v2
+    - run: npm install -g tree-sitter-cli
     - run: curl -sL dot.pandanoir.net | bash
     - name: exists $HOME/dotfiles?
       run: |
@@ -28,6 +29,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
     - uses: actions/checkout@v2
+    - run: npm install -g tree-sitter-cli
     - run: curl -sL dot.pandanoir.net | bash
     - run: rm ~/.config/zsh/.zshrc
     - run: curl -sL dot.pandanoir.net | bash
@@ -81,6 +83,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: install zsh
       run: sudo apt update; sudo apt install zsh
+    - run: npm install -g tree-sitter-cli
     - name: Run install.sh
       run: |
         ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
