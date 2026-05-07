@@ -13,6 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: sudo snap install --beta nvim --classic
+    - run: npm install -g tree-sitter-cli
     - name: Run install.sh
       run: |
         ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles

@@ -23,6 +23,7 @@ jobs:
         with:
           deno-version: v2.x
       - run: sudo apt update && sudo apt install -y ripgrep
+      - run: npm install -g tree-sitter-cli
       - name: Install Nerd Font
         run: |
           mkdir -p ~/.local/share/fonts

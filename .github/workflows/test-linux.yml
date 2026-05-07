@@ -45,6 +45,7 @@ jobs:
       with:
         deno-version: v2.x
     - run: sudo apt update; sudo apt install ripgrep
+    - run: npm install -g tree-sitter-cli
     - run: nvim --version
     - name: Run install.sh
       run: |
