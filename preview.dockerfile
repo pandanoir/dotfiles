@@ -5,6 +5,7 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+RUN npm install -g tree-sitter-cli
 
 # 最新ビルドのneovimをインストール
 RUN if [ "$(uname -m)" = "x86_64" ]; then ARCH="linux-x86_64"; else ARCH="linux-arm64"; fi && \

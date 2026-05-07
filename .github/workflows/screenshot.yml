@@ -35,7 +35,6 @@ jobs:
           ln -sf ${GITHUB_WORKSPACE} $HOME/dotfiles
           ${GITHUB_WORKSPACE}/install.sh
           CI=true nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
-          CI=true nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
       - uses: pandanoir/terminal-screenshot-action@v1
         with:
           vhs-tape: .github/nvim-screenshot.tape

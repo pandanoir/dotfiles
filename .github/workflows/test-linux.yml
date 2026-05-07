@@ -55,7 +55,7 @@ jobs:
         ${GITHUB_WORKSPACE}/install.sh
     - name: check health of neovim
       run: |
-        nvim --headless "+TSUpdateSync" "+lua require('mason-registry').refresh()" +q 2>&1 >/dev/null
+        nvim --headless "+lua require('mason-registry').refresh()" +q 2>&1 >/dev/null
         nvim --headless "+checkhealth" "+w!health.log" +qa
         cat health.log
         echo '=============================='
