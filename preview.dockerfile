@@ -5,7 +5,10 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh
-RUN npm install -g tree-sitter-cli
+RUN curl -L -o /usr/local/bin/tree-sitter.gz \
+  https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-x64.gz \
+  && gunzip /usr/local/bin/tree-sitter.gz \
+  && chmod +x /usr/local/bin/tree-sitter
 
 # 最新ビルドのneovimをインストール
 RUN if [ "$(uname -m)" = "x86_64" ]; then ARCH="linux-x86_64"; else ARCH="linux-arm64"; fi && \
