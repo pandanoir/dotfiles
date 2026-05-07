@@ -34,7 +34,6 @@ return {
       { '<leader>j', '<cmd>TSJToggle<cr>', desc = 'join or split using treesj' },
       { '<leader>J', '<cmd>TSJJoin<cr>',   desc = 'join using treesj' },
     },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = { use_default_keymaps = false },
   },
   { -- インクリメント/デクリメントで日付やboolean値を操作

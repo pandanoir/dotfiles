@@ -16,6 +16,11 @@ check_requirements() {
     gunzip -f "$SKK_DIR/SKK-JISYO.L.gz"
   fi
 
+  if ! command_exists tree-sitter; then
+    warn "tree-sitter-cli isn't installed"
+    is_every_requirement_met=false
+  fi
+
   if ! command_exists zsh; then
     warn "zsh isn't installed"
     is_every_requirement_met=false

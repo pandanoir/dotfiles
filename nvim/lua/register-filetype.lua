@@ -9,3 +9,5 @@ vim.filetype.add {
     ['Procfile%..*'] = 'procfile',
   },
 }
+
+vim.treesitter.language.register('tsx', 'typescriptreact')

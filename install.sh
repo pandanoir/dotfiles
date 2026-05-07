@@ -23,3 +23,4 @@ check_requirements
 cmd=${1:-}
 [[ -z $cmd || $cmd == deploy || $cmd == -d ]] && deploy
 [[ -z $cmd || $cmd == init   || $cmd == -i ]] && init_config
+[[ -z $cmd || $cmd == init   || $cmd == -i ]] && bash "$DOTDIR/_scripts/install_treesitter_parsers.sh"
