@@ -17,7 +17,7 @@ return {
       spec = {
         { '<leader>g', icon = { icon = '', color = 'red', }, group = 'git', },
         { '<leader><tab>', group = 'toggle', },
-        { '<leader>c', icon = '', },
+        { '<leader>b', icon = '󰢙', group = 'buffer', },
         { '<leader>e', icon = '', },
         { '<leader>l', icon = '', },
         { '<leader>o', icon = '󰠶', },

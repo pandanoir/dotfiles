@@ -34,7 +34,8 @@ vim.keymap.set('i', 'fd', '<Esc>', { remap = true, silent = true })
 vim.keymap.set('n', '<C-n>', '<cmd>bnext<CR>')
 vim.keymap.set('n', '<C-p>', '<cmd>bprev<CR>')
 
-vim.keymap.set('n', '<leader>c', '<cmd>enew<CR>', { desc = 'open a new buffer' })
+vim.keymap.set('n', '<leader>bn', '<cmd>enew<CR>', { desc = 'new buffer' })
+vim.keymap.set('n', '<leader>bd', '<cmd>BufDel<CR>', { desc = 'delete buffer' })
 vim.keymap.set('n', '<leader>q', '<cmd>BufDel<CR>', { desc = 'quit' })
 vim.keymap.set({ 'n', 'v' }, '<leader><Space>', '<C-v>')
 

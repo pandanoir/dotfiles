@@ -38,16 +38,16 @@ return {
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-        local map = function(mode, l, r)
-          vim.keymap.set(mode, l, r, { buffer = bufnr })
+        local map = function(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
 
-        map('n', '<leader>hs', gs.stage_hunk)
-        map('n', '<leader>hr', gs.reset_hunk)
-        map('n', '<leader>hp', gs.preview_hunk)
-        map('v', '<leader>hs', function()
+        map('n', '<leader>ga', gs.stage_hunk, "stage hunk")
+        map('n', '<leader>gr', gs.reset_hunk, "reset hunk")
+        map('n', '<leader>gp', gs.preview_hunk, "preview hunk")
+        map('v', '<leader>ga', function()
           gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end)
+        end, "stage hunk")
       end,
     }
   },
