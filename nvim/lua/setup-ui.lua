@@ -79,9 +79,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(ev)
     local win = vim.fn.bufwinid(ev.buf)
     if win == -1 then return end
-    pcall(vim.api.nvim_win_set_config, win, {
-      border = 'rounded', -- 'single' | 'double' | 'rounded' | 'solid' | 'shadow'
-    })
+    pcall(vim.api.nvim_win_set_config, win, { border = 'rounded' })
     vim.wo[win].winhighlight = table.concat({
       'Normal:NormalFloat',
       'FloatBorder:DiagnosticInfo', -- border に色
@@ -107,3 +105,7 @@ vim.o.cmdheight = 0
 vim.o.laststatus = 0
 vim.o.showmode = false
 vim.o.ruler = false
+vim.opt.statusline = '─'
+vim.opt.fillchars:append { stl = '─', stlnc = '─' }
+vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = 'NONE' })
