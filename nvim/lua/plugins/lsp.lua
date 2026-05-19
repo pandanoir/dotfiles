@@ -10,7 +10,7 @@ return {
         'jsonls',
         'lua_ls',
         'rust_analyzer',
-        'ts_ls',
+        'vtsls',
         'vimls',
         'vue_ls',
       },
@@ -24,15 +24,6 @@ return {
         'neovim/nvim-lspconfig',
       },
     }
-  },
-  { -- TypeScript用のLSP拡張
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {
-      settings = {
-        expose_as_code_action = { 'add_missing_imports', 'remove_unused_imports' },
-      },
-    },
   },
   { -- Lua開発用のLSP補助
     'folke/lazydev.nvim',

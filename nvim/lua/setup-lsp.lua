@@ -11,6 +11,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gd', vim.lsp.buf.definition, 'go to definition')
     map('n', 'gt', vim.lsp.buf.type_definition, 'go to type definition')
     map('n', 'grr', require 'telescope.builtin'.lsp_references, 'find references')
+    map({ 'n', 'v' }, 'gra', function()
+      vim.lsp.buf.code_action {
+        context = { only = { 'quickfix', 'refactor', 'source' } },
+      }
+    end, 'code action (incl. source actions)')
     map('n', 'K', function() vim.lsp.buf.hover { border = 'rounded' } end)
   end
 })
