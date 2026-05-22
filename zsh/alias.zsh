@@ -19,6 +19,11 @@ reitou() {
 alias kaitou='tar -xvf'
 alias sourcez="source $ZDOTDIR/.zprofile; source $ZDOTDIR/.zshrc"
 
+if command_exists nkf; then
+  alias to-shift-jis='nkf -s --overwrite'
+  alias to-utf-8='nkf -w --overwrite'
+fi
+
 alias ts-node-esm='TS_NODE_COMPILER_OPTIONS="{\"module\":\"commonjs\"}" npx ts-node'
 
 # Git 基本操作
