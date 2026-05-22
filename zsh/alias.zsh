@@ -28,6 +28,10 @@ alias gd='git diff'
 alias gdw='git diff -w'
 alias gdc='git diff --cached'
 alias gdcw='git diff --cached -w'
+if command_exists delta; then
+  alias gds='git -c delta.side-by-side=true diff'
+  alias gdsw='git -c delta.side-by-side=true diff -w'
+fi
 alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 
