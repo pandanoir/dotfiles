@@ -100,6 +100,27 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- pagerの見た目調整
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'pager',
+  callback = function(args)
+    local win = vim.fn.bufwinid(args.buf)
+    if win == -1 then return end
+    vim.api.nvim_set_option_value('winblend', 10, { scope = 'local', win = win })
+  end,
+})
+local messages = require('vim._core.ui2.messages')
+-- HACK: set_posを上書きしてpagerに無理矢理ボーダーをつける
+local orig_set_pos = messages.set_pos
+messages.set_pos = function(tgt)
+  orig_set_pos(tgt)
+  local pager = extui.wins.pager
+  if vim.api.nvim_win_is_valid(pager)
+      and not vim.api.nvim_win_get_config(pager).hide then
+    pcall(vim.api.nvim_win_set_config, pager, { border = 'rounded' })
+  end
+end
+
 -- ステータスバーを削除
 vim.o.cmdheight = 0
 vim.o.laststatus = 0
