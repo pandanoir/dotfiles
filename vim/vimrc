@@ -1,34 +1,94 @@
-augroup MyAutoCmd
-  autocmd!
-augroup END
-
+" ===== パス / ファイル =====
+" runtimepath: 元は2行あったが後者は前者のサブセットなので1行に統合
 set runtimepath+=~/.vim/,$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-runtime! userautoload/*.vim
-
 set directory=$XDG_CACHE_HOME/vim,~/,/tmp
 set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
 set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
-set runtimepath+=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
-
-set fileencoding=utf-8
-set ambiwidth=double "◻︎や◯がくずれるのを対処
-set backspace=start,eol,indent whichwrap=b,s,[,],,~
-
-colorscheme darkblue
-set wildmenu wildmode=list:full autoindent scrolloff=10
-syntax on
-
-set incsearch ignorecase smartcase hlsearch
-
-"自動でコメントが入るのを防ぐ
-autocmd MyAutoCmd BufEnter * setlocal formatoptions-=ro
-
 set backupskip=/tmp/*,/private/tmp/*,/tmp/crontab.* nowritebackup
 
-" 未保存でもバッファを切り替えられるように
-set hidden
-
-" エラー時のビープ音をミュート
-set visualbell t_vb= noerrorbells
-
+" ===== 基本オプション =====
+" 検索
+set incsearch ignorecase smartcase hlsearch
+" インデント
+set autoindent expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType * setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" 補完 / スクロール
+set wildmenu wildmode=list:full scrolloff=10
+" 編集・操作まわり
+set backspace=start,eol,indent whichwrap=b,s,[,],,~
+set hidden " 未保存でもバッファを切り替えられるように
+set visualbell t_vb= noerrorbells " エラー時のビープ音をミュート
+autocmd BufEnter * setlocal formatoptions-=ro " 自動でコメントが入るのを防ぐ
 filetype plugin indent on
+
+" ===== ステータスライン =====
+set laststatus=2
+" %f:ファイル名 %m:変更 %r:読み込み専用 %h:[HELP] %w:[Preview]
+" %=:以降右寄せ  ENC:file encoding  LOW:現在行/全行
+set statusline=%f%m%r%h%w%=[ENC=%{&fileencoding}][LOW=%l/%L]
+
+" ===== 表示・配色 =====
+" ※ColorScheme の hi 上書きは colorscheme より前に定義する必要あり
+set fileencoding=utf-8
+set ambiwidth=double "◻︎や◯がくずれるのを対処
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 前景色
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
+autocmd ColorScheme * hi statusline gui=None guibg=#3B4252 guifg=#E5E9F0 cterm=None ctermbg=0 ctermfg=15
+autocmd ColorScheme * hi Normal guibg=NONE cterm=None ctermbg=none
+autocmd ColorScheme * hi NonText guibg=NONE cterm=None ctermbg=none
+syntax on
+colorscheme darkblue
+
+" ===== キーマッピング =====
+" --- leader / プレフィックス ---
+let mapleader = " "
+noremap [space] <nop>
+nmap <Space> [space]
+noremap <leader><Space> <C-v>
+
+nnoremap <CR> :<C-u>w<CR>
+
+" --- オプショントグル系 (nvim: <leader><tab>h/w に揃える) ---
+nnoremap <leader><Tab>h :set hlsearch!<CR>
+nnoremap <leader><Tab>w :set wrap!<CR>
+
+" --- バッファ操作 ---
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprev<CR>
+noremap <leader>c :<C-u>enew<CR>
+noremap <leader>q :<C-u>bd<CR>
+
+" --- ウィンドウ / マクロ (qで閉じる, Qでマクロ) ---
+nnoremap q :<C-u>q<CR>
+nnoremap Q q
+
+" --- ヤンク・ペースト・レジスタ ---
+nnoremap gy "+y
+nnoremap <leader>d "_d
+nnoremap <leader>y "*y
+vnoremap <leader>y "*y
+nnoremap <leader>p "0p
+" 貼り付けたテキストの末尾へ自動的に移動する
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+" --- ビジュアル / テキストオブジェクト ---
+" <, >で連続してインデントを操作
+xnoremap < <gv
+xnoremap > >gv
+" i<space>でWORD選択
+onoremap i<space> iW
+xnoremap i<space> iW
+
+" --- コマンドライン ---
+" :s<Space> で:%s//|/g にする cf. https://zenn.dev/vim_jp/articles/2023-06-30-vim-substitute-tips
+cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's'
+" %% でアクティブなファイルが含まれているディレクトリを手早く展開
+cnoremap <expr> %% getcmdtype() == ":" ? expand("%:h")."/" : "%%"
+
+" --- その他 ---
+nnoremap J gJ
+nnoremap U <c-r>
+imap <silent> fd <Esc>
