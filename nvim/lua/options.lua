@@ -11,7 +11,7 @@ vim.opt.smartcase = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.scrolloff = 10
 -- Don't save options.
-vim.opt.viewoptions:remove { options = true }
+vim.opt.viewoptions:remove('options')
 
 vim.opt.backupskip = '/tmp/*,/private/tmp/*,/tmp/crontab.*'
 vim.opt.writebackup = false
