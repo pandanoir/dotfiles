@@ -41,7 +41,7 @@ alias gl='git log --graph --oneline --abbrev-commit'
 alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 
 # ブランチ操作
-alias gbr='git branch'
+alias gbr='git branch --sort=-committerdate --color=always --format="%(color:green bold)%(HEAD)%(color:reset) %(refname:short)  %(color:yellow)%(committerdate:relative)%(color:reset)"'
 alias gco='git checkout'
 alias gsw='git switch'
 alias gfw='git fetch && git switch'
@@ -60,7 +60,9 @@ alias git-hard-reset='git reset --hard HEAD^'
 # リモート操作
 alias gp='git push'
 alias gpo='git push origin HEAD -u'
-alias gpl='git pull'
+gpl() {
+  git pull origin $(git symbolic-ref --short HEAD) "$@"
+}
 alias gf='git fetch'
 gfo() {
   git fetch origin "$1:$1"
@@ -72,7 +74,11 @@ gro() {
   git rebase origin/$(git symbolic-ref --short HEAD)
 }
 git-rm-merged-branch() {
-  git branch --merged | grep -v '^*' | grep -v 'master' | xargs git branch -d
+  git branch --merged |
+    grep -v '^\*' |
+    grep -v '^\+' | # 別のworktreeで使用中のブランチを除外
+    grep -v 'master' |
+    xargs git branch -d
 }
 git-set-upstream-branch() {
   git branch --set-upstream-to="origin/$(git branch --show-current)"
