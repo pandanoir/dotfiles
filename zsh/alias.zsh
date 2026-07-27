@@ -42,6 +42,7 @@ alias gtr='git log --color=always --graph --abbrev-commit --oneline'
 
 # ブランチ操作
 alias gbr='git branch --sort=-committerdate --color=always --format="%(color:green bold)%(HEAD)%(color:reset) %(refname:short)  %(color:yellow)%(committerdate:relative)%(color:reset)"'
+alias gmb='git merge-base'
 alias gco='git checkout'
 alias gsw='git switch'
 alias gfw='git fetch && git switch'
