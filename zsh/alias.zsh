@@ -83,6 +83,13 @@ git-rm-merged-branch() {
 git-set-upstream-branch() {
   git branch --set-upstream-to="origin/$(git branch --show-current)"
 }
+git-ex() {
+  # git pathspec の :(exclude) を生成する。使い方: gds -- $(git-ex Test graphql)
+  echo -n ". "
+  for pattern in "$@"; do
+    echo -n ":(exclude)*$pattern* "
+  done
+}
 
 fcs() {
   local commits commit
